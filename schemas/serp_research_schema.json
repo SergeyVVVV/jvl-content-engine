@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "keyword",
+    "topic",
+    "serp_status",
+    "top_results",
+    "dominant_search_intent",
+    "common_angles",
+    "common_sections",
+    "competitor_strengths",
+    "competitor_weaknesses",
+    "content_gaps",
+    "differentiation_opportunities",
+    "paa_answered",
+    "paa_missed",
+    "risks_to_avoid",
+    "notes_for_writer"
+  ],
+  "properties": {
+    "keyword": {
+      "type": "string",
+      "minLength": 1
+    },
+    "topic": {
+      "type": "string",
+      "minLength": 1
+    },
+    "serp_status": {
+      "type": "string",
+      "enum": ["live", "mock", "unavailable"]
+    },
+    "top_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["position", "title", "url", "summary"],
+        "properties": {
+          "position": { "type": "integer", "minimum": 1 },
+          "title": { "type": "string" },
+          "url": { "type": "string" },
+          "snippet": { "type": "string" },
+          "summary": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "dominant_search_intent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "common_angles": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "common_sections": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "competitor_strengths": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "competitor_weaknesses": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "content_gaps": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "differentiation_opportunities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "paa_answered": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "paa_missed": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "risks_to_avoid": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "notes_for_writer": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}
