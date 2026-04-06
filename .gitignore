@@ -22,3 +22,6 @@ data/runs/*
 # Keep folders
 !data/outputs/.gitkeep
 !data/runs/.gitkeep
+
+# Generated brief outputs (tracked separately after review)
+outputs/briefs/*.json
