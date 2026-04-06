@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "properties": {
+    "h1": { "type": "string" },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "level": { "type": "string", "enum": ["h2", "h3"] },
+          "heading": { "type": "string" },
+          "body_markdown": { "type": "string" }
+        },
+        "required": ["level", "heading", "body_markdown"]
+      }
+    },
+    "internal_links_used": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "todos": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["h1", "sections", "internal_links_used"]
+}

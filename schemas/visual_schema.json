@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "slot": { "type": "string" },
+          "type": { "type": "string", "enum": ["hero", "inline", "detail", "lifestyle", "diagram"] },
+          "description": { "type": "string" },
+          "alt_text": { "type": "string" },
+          "caption": { "type": "string" }
+        },
+        "required": ["slot", "type", "description", "alt_text"]
+      }
+    },
+    "todos": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": ["assets"]
+}

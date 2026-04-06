@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "properties": {
+    "overall_status": { "type": "string", "enum": ["pass", "fix", "block"] },
+    "helpfulness_notes": { "type": "string" },
+    "originality_notes": { "type": "string" },
+    "brand_voice_notes": { "type": "string" },
+    "persona_fit_notes": { "type": "string" },
+    "seo_checks": {
+      "type": "object",
+      "properties": {
+        "single_h1": { "type": "boolean" },
+        "title_length_ok": { "type": "boolean" },
+        "meta_description_length_ok": { "type": "boolean" },
+        "slug_format_ok": { "type": "boolean" },
+        "primary_keyword_in_title": { "type": "boolean" },
+        "echo_link_present": { "type": "boolean" },
+        "faq_count_ok": { "type": "boolean" }
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "severity": { "type": "string", "enum": ["info", "warn", "block"] },
+          "location": { "type": "string" },
+          "message": { "type": "string" }
+        },
+        "required": ["severity", "message"]
+      }
+    },
+    "todos": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["overall_status", "issues"]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "properties": {
+    "grounded_claims": { "type": "array", "items": { "type": "string" } },
+    "unsupported_claims": { "type": "array", "items": { "type": "string" } },
+    "forbidden_claims": { "type": "array", "items": { "type": "string" } },
+    "todos": { "type": "array", "items": { "type": "string" } },
+    "publish_blocking": { "type": "boolean" }
+  },
+  "required": [
+    "grounded_claims",
+    "unsupported_claims",
+    "forbidden_claims",
+    "publish_blocking"
+  ]
+}
