@@ -6,21 +6,43 @@ for downstream writing. Outputs structured JSON to outputs/company_insight/<slug
 
 No live internet access required — all output is grounded in knowledge files.
 
+Arguments:
+  Required:
+    --topic           Article topic description
+
+  Optional:
+    --brief           Path to brief JSON from Brief Agent.
+                      When omitted the agent runs on topic alone. Passing
+                      the brief focuses the output on the brief's angle and
+                      surfaces the most relevant claims and risks.
+    --serp-research   Path to SERP research JSON from SERP Research Agent.
+                      When provided, content gaps and differentiation
+                      opportunities are passed as prioritisation context only.
+                      SERP context does not add JVL facts — all factual
+                      claims still come from the internal knowledge files.
+                      When omitted the agent runs on knowledge files + brief.
+    --output-dir      Save location (default: outputs/company_insight)
+
 Usage examples:
-  # Basic usage:
-  python run_company_insight.py \\
-    --topic "how to choose a home arcade machine"
+  # Full recommended pipeline for "no wifi arcade machine":
+  python main.py \\
+    --topic "no wifi arcade machine" \\
+    --primary-keyword "no wifi arcade machine" \\
+    --funnel-stage mid
 
-  # With a brief JSON file from Brief Agent:
-  python run_company_insight.py \\
-    --topic "best bartop arcade machine for home bar" \\
-    --brief outputs/briefs/bartop-arcade-machine-for-home-bar.json
+  python run_serp_research.py \\
+    --keyword "no wifi arcade machine" \\
+    --topic "Arcade machines that work without Wi-Fi" \\
+    --brief outputs/briefs/no-wifi-arcade-machine.json
 
-  # Chaining: pass SERP research summary as extra context:
   python run_company_insight.py \\
     --topic "no wifi arcade machine" \\
     --brief outputs/briefs/no-wifi-arcade-machine.json \\
     --serp-research outputs/serp_research/no-wifi-arcade-machine.json
+
+  # Minimal usage — topic only, no chaining:
+  python run_company_insight.py \\
+    --topic "how to choose a home arcade machine"
 
 Output is saved to: outputs/company_insight/<topic-slug>.json
 """

@@ -7,22 +7,47 @@ structured research package to outputs/serp_research/<slug>.json.
 Works in mock mode (default — no live internet required) or live mode
 when SERP_PROVIDER=serpapi and SERPAPI_KEY are set.
 
+Arguments:
+  Required:
+    --keyword     Primary SEO keyword to research
+    --topic       Article topic description
+
+  Optional:
+    --brief       Path to brief JSON from Brief Agent.
+                  When omitted the agent runs without brief context and
+                  PAA questions default to none. Output is still valid.
+    --country     Target country code (default: us)
+    --language    Language code (default: en)
+    --top-n       Number of SERP results to analyse (default: 5)
+    --output-dir  Save location (default: outputs/serp_research)
+
+Mock mode note:
+  When no live SERP provider is configured (the default), output is a
+  clearly-labeled illustrative competitive pattern — not confirmed rankings.
+  All analysis strings are prefixed [MOCK] and serp_status is "mock".
+  To use live data set SERP_PROVIDER=serpapi and SERPAPI_KEY in .env.
+
 Usage examples:
-  # Mock mode (default — no API keys needed):
+  # Mock mode — generate brief first, then chain it in:
+  python main.py \\
+    --topic "how to choose a home arcade machine" \\
+    --primary-keyword "how to choose a home arcade machine"
+
   python run_serp_research.py \\
     --keyword "how to choose a home arcade machine" \\
-    --topic "How to choose a home arcade machine"
+    --topic "How to choose a home arcade machine" \\
+    --brief outputs/briefs/how-to-choose-a-home-arcade-machine.json
 
-  # With a brief JSON file from Brief Agent:
+  # Without a brief (runs on keyword + topic alone):
+  python run_serp_research.py \\
+    --keyword "no wifi arcade machine" \\
+    --topic "Arcade machines that work without Wi-Fi"
+
+  # Live SERP mode (requires SERP_PROVIDER=serpapi + SERPAPI_KEY in .env):
   python run_serp_research.py \\
     --keyword "bartop arcade machine for home bar" \\
     --topic "Best bartop arcade machine for home bar" \\
     --brief outputs/briefs/bartop-arcade-machine-for-home-bar.json
-
-  # Live SERP mode (requires SERP_PROVIDER=serpapi + SERPAPI_KEY in .env):
-  python run_serp_research.py \\
-    --keyword "no wifi arcade machine" \\
-    --topic "Arcade machines that work without Wi-Fi"
 
 Output is saved to: outputs/serp_research/<keyword-slug>.json
 """
