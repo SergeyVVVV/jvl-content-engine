@@ -1,0 +1,43 @@
+{
+    "type": "object",
+    "properties": {
+      "topic": { "type": "string" },
+      "article_type": { "type": "string" },
+      "search_intent": { "type": "string" },
+      "persona": { "type": "string" },
+      "primary_keyword": { "type": "string" },
+      "secondary_keywords": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "article_angle": { "type": "string" },
+      "cta_goal": { "type": "string" },
+      "product_fit": { "type": "string" },
+      "required_sections": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "internal_link_targets": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "risks_to_avoid": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": [
+      "topic",
+      "article_type",
+      "search_intent",
+      "persona",
+      "primary_keyword",
+      "secondary_keywords",
+      "article_angle",
+      "cta_goal",
+      "product_fit",
+      "required_sections",
+      "internal_link_targets",
+      "risks_to_avoid"
+    ]
+  }
