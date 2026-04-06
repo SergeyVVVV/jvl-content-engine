@@ -1,43 +1,79 @@
 {
-    "type": "object",
-    "properties": {
-      "topic": { "type": "string" },
-      "article_type": { "type": "string" },
-      "search_intent": { "type": "string" },
-      "persona": { "type": "string" },
-      "primary_keyword": { "type": "string" },
-      "secondary_keywords": {
-        "type": "array",
-        "items": { "type": "string" }
-      },
-      "article_angle": { "type": "string" },
-      "cta_goal": { "type": "string" },
-      "product_fit": { "type": "string" },
-      "required_sections": {
-        "type": "array",
-        "items": { "type": "string" }
-      },
-      "internal_link_targets": {
-        "type": "array",
-        "items": { "type": "string" }
-      },
-      "risks_to_avoid": {
-        "type": "array",
-        "items": { "type": "string" }
-      }
+  "type": "object",
+  "properties": {
+    "topic": { "type": "string" },
+    "working_title": { "type": "string" },
+    "article_type": {
+      "type": "string",
+      "enum": [
+        "informational",
+        "informational_with_commercial_support",
+        "commercial_investigation",
+        "comparison",
+        "buyer_guide",
+        "lifestyle_inspiration"
+      ]
     },
-    "required": [
-      "topic",
-      "article_type",
-      "search_intent",
-      "persona",
-      "primary_keyword",
-      "secondary_keywords",
-      "article_angle",
-      "cta_goal",
-      "product_fit",
-      "required_sections",
-      "internal_link_targets",
-      "risks_to_avoid"
-    ]
-  }
+    "search_intent": {
+      "type": "string",
+      "enum": [
+        "informational",
+        "inspiration",
+        "decision_support",
+        "comparison",
+        "purchase_research"
+      ]
+    },
+    "persona": { "type": "string" },
+    "primary_keyword": { "type": "string" },
+    "secondary_keywords": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "audience_summary": { "type": "string" },
+    "article_angle": { "type": "string" },
+    "cta_goal": { "type": "string" },
+    "product_fit": {
+      "type": "string",
+      "enum": ["high", "medium", "low"]
+    },
+    "required_sections": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "questions_to_answer": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "internal_link_targets": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "claims_to_verify": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "risks_to_avoid": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "topic",
+    "working_title",
+    "article_type",
+    "search_intent",
+    "persona",
+    "primary_keyword",
+    "secondary_keywords",
+    "audience_summary",
+    "article_angle",
+    "cta_goal",
+    "product_fit",
+    "required_sections",
+    "questions_to_answer",
+    "internal_link_targets",
+    "claims_to_verify",
+    "risks_to_avoid"
+  ]
+}
