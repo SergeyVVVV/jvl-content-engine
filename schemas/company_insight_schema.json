@@ -1,27 +1,102 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
+  "required": [
+    "topic",
+    "brief_alignment",
+    "relevant_jvl_angles",
+    "relevant_product_facts",
+    "natural_product_injection_points",
+    "unique_brand_perspective",
+    "eeat_signals",
+    "persona_hooks",
+    "trust_signals",
+    "claims_to_verify",
+    "forbidden_claims",
+    "risks_to_avoid",
+    "notes_for_writer"
+  ],
   "properties": {
-    "topic": { "type": "string" },
-    "relevant_facts": {
-      "type": "array",
-      "items": { "type": "string" }
+    "topic": {
+      "type": "string",
+      "minLength": 1
     },
-    "allowed_claims": {
+    "brief_alignment": {
+      "type": "string",
+      "minLength": 1,
+      "description": "How well the topic aligns with JVL Echo Home priorities and persona."
+    },
+    "relevant_jvl_angles": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "JVL-specific angles that fit naturally for this topic."
+    },
+    "relevant_product_facts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Grounded facts from product_echo_home.md relevant to this topic. No invented specs."
+    },
+    "natural_product_injection_points": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Specific article sections or contexts where JVL Echo Home fits naturally."
+    },
+    "unique_brand_perspective": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Framing or positioning that is uniquely JVL's to own for this topic."
+    },
+    "eeat_signals": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Experience, expertise, authority, or trust signals available from knowledge files."
+    },
+    "persona_hooks": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Emotional or practical hooks from persona_echo_home.md relevant to this topic."
+    },
+    "trust_signals": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Proof points from knowledge files that support reader trust for this topic."
+    },
+    "claims_to_verify": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Claims that would be useful but need business confirmation before publishing."
     },
     "forbidden_claims": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Claims that must be avoided per claims_constraints.md."
+    },
+    "risks_to_avoid": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Tone, framing, or content risks specific to this topic for JVL."
+    },
+    "notes_for_writer": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Directly actionable notes for the Writer Agent."
     },
     "internal_link_targets": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": { "type": "string" },
+      "description": "Internal URLs appropriate for this topic."
     },
     "todos": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": { "type": "string" },
+      "description": "Unresolved items that need sourcing or business confirmation."
     }
   },
-  "required": ["topic", "relevant_facts", "allowed_claims", "forbidden_claims"]
+  "additionalProperties": false
 }

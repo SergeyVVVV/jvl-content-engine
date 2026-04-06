@@ -1,3 +1,7 @@
 anthropic>=0.40.0
 python-dotenv>=1.0.1
 jsonschema>=4.0.0
+
+# Required for live SERP mode (SERP_PROVIDER=serpapi).
+# Not needed for mock mode (default).
+requests>=2.31.0
