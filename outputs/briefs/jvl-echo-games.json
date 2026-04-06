@@ -1,0 +1,64 @@
+{
+  "topic": "JVL ECHO games and features - what games and features come with the Echo Home",
+  "working_title": "What Games Come with the JVL Echo Home? The Full List and Features",
+  "article_type": "commercial_investigation",
+  "search_intent": "purchase_research",
+  "persona": "Mark & Linda Reynolds",
+  "primary_keyword": "JVL ECHO games",
+  "secondary_keywords": [
+    "JVL ECHO game list",
+    "JVL ECHO Home features",
+    "what games are on the JVL ECHO",
+    "JVL ECHO built-in games",
+    "JVL ECHO Home arcade games",
+    "bartop arcade with built-in games",
+    "home arcade game list",
+    "JVL ECHO touchscreen games",
+    "149 game arcade machine",
+    "JVL ECHO Home review"
+  ],
+  "audience_summary": "This article is for mature homeowners actively considering the JVL Echo Home who want to know exactly what they are getting before they buy - specifically which games are included, how they play, and whether the feature set justifies a premium home arcade purchase.",
+  "article_angle": "Rather than a generic feature dump, this article walks a serious buyer through the Echo Home experience game by game and feature by feature - answering the practical 'what will I actually play?' question that sits between interest and purchase. It frames the 149-game library not as a spec number but as a curated collection of familiar classics worth coming back to, and positions the features around ease of ownership and real home use.",
+  "cta_goal": "Drive the reader to the Echo Home product page (/en/echo) with enough confidence in the game library and feature set to take the next step toward purchase",
+  "product_fit": "high",
+  "required_sections": [
+    "What Games Come with the JVL Echo Home",
+    "How the Games Are Organized and How You Play",
+    "Games Worth Revisiting with Family and Guests",
+    "Key Features Beyond the Game Library",
+    "Setup, Size, and What to Expect Out of the Box",
+    "Frequently Asked Questions"
+  ],
+  "questions_to_answer": [
+    "What games are included with the JVL ECHO Home?",
+    "How many games does the JVL ECHO Home have?",
+    "Does the JVL ECHO Home need Wi-Fi or downloads to play?",
+    "Is the JVL ECHO Home easy to set up?",
+    "Can two people play at the same time on the JVL ECHO?",
+    "What kind of games are on a bartop arcade machine?",
+    "Is the JVL ECHO Home worth it for a home bar or game room?",
+    "How big is the JVL ECHO Home and where does it fit?"
+  ],
+  "internal_link_targets": [
+    "/en/echo",
+    "/en/home"
+  ],
+  "claims_to_verify": [
+    "TODO: source not confirmed - full list of all 149 built-in game titles needs to be provided by JVL",
+    "TODO: source not confirmed - whether two-player simultaneous play is supported and on which games",
+    "TODO: source not confirmed - specific product dimensions and weight",
+    "TODO: source not confirmed - what is included in the box (power cable, manual, etc.)",
+    "TODO: source not confirmed - warranty details and duration",
+    "TODO: source not confirmed - how games are organized on screen (categories, menus, favorites)",
+    "TODO: source not confirmed - touchscreen vs physical controls or both"
+  ],
+  "risks_to_avoid": [
+    "Listing game titles that are not actually included - every title mentioned must be verified against the real game library",
+    "Describing controls, screen size, or hardware specs without confirmed product data",
+    "Using gamer jargon like 'retro gaming rig' or 'arcade cabinet setup' - keep language grounded in home leisure",
+    "Overpromising the game variety or comparing favorably to competitors without evidence",
+    "Making the article feel like a spec sheet rather than a warm, useful buying guide",
+    "Framing the 149-game count as the primary selling point instead of the quality and familiarity of the games themselves",
+    "Using flashy or novelty-gadget language that undermines the premium adult-home positioning"
+  ]
+}
