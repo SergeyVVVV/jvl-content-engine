@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "slug": { "type": "string" },
+    "title": { "type": "string", "maxLength": 70 },
+    "h1": { "type": "string" },
+    "meta_description": { "type": "string", "minLength": 100, "maxLength": 160 },
+    "primary_keyword": { "type": "string" },
+    "secondary_keywords": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "heading_map": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "level": { "type": "string", "enum": ["h1", "h2", "h3", "h4"] },
+          "text": { "type": "string" }
+        },
+        "required": ["level", "text"]
+      }
+    }
+  },
+  "required": [
+    "slug",
+    "title",
+    "h1",
+    "meta_description",
+    "primary_keyword",
+    "heading_map"
+  ]
+}

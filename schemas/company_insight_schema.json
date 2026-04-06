@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "properties": {
+    "topic": { "type": "string" },
+    "relevant_facts": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "allowed_claims": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "forbidden_claims": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "internal_link_targets": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "todos": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["topic", "relevant_facts", "allowed_claims", "forbidden_claims"]
+}

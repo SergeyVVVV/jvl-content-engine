@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "h1": { "type": "string" },
+    "slug": { "type": "string" },
+    "primary_keyword": { "type": "string" },
+    "secondary_keywords": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "search_intent": { "type": "string" },
+    "outline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "level": { "type": "string", "enum": ["h2", "h3"] },
+          "heading": { "type": "string" },
+          "purpose": { "type": "string" },
+          "keywords_to_use": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["level", "heading", "purpose"]
+      }
+    },
+    "internal_link_targets": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "todos": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "h1",
+    "slug",
+    "primary_keyword",
+    "secondary_keywords",
+    "search_intent",
+    "outline",
+    "internal_link_targets"
+  ]
+}
