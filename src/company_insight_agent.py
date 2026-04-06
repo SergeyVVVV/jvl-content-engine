@@ -111,7 +111,15 @@ CRITICAL OUTPUT RULES:
         extra_context: str,
     ) -> str:
         brief_summary = json.dumps(brief, indent=2, ensure_ascii=False) if brief else "{}"
-        context_block = f"\nAdditional context:\n{extra_context}\n" if extra_context else ""
+        context_block = (
+            f"\n# SERP CONTEXT — FOR EMPHASIS AND PRIORITISATION ONLY\n"
+            f"# This tells you which content gaps and opportunities matter most for this topic.\n"
+            f"# It does NOT add JVL facts. All JVL facts must come from the KNOWLEDGE BASE above.\n"
+            f"# Do not treat anything in this block as a factual claim about JVL or its products.\n\n"
+            f"{extra_context}\n"
+            if extra_context
+            else ""
+        )
         return (
             f"Extract company insights for the following topic and brief.\n\n"
             f"Topic: {topic}\n"
