@@ -123,6 +123,57 @@ class MetadataCopyAgent:
         return json.loads(raw)
 
     @staticmethod
+    def _trim_to_limit(text: str, limit: int, min_length: int = 120) -> str:
+        """Trim text to at most `limit` chars at a clean word boundary.
+
+        Tries to end on a sentence boundary ('. ') first, only if the result
+        would still be >= min_length. Falls back to the last space within the
+        limit. Appends '…' only if text was actually cut.
+        """
+        if len(text) <= limit:
+            return text
+        candidate = text[:limit]
+        # prefer ending at a sentence boundary, but only if long enough
+        dot_pos = candidate.rfind(". ")
+        if dot_pos >= min_length:
+            return candidate[: dot_pos + 1]
+        # fall back to word boundary
+        space_pos = candidate.rfind(" ")
+        if space_pos > 0:
+            return candidate[:space_pos].rstrip(".,;:") + "…"
+        return candidate[:limit]
+
+    @classmethod
+    def _enforce_limits(cls, out: dict) -> dict:
+        """Hard-enforce character limits as a deterministic post-processing step.
+
+        The model reliably overshoots meta_description and occasionally h1.
+        This mirrors the QA agent's _normalize() pattern: make the final value
+        a pure function of content, not a guess.
+        """
+        md = out.get("meta_description", "")
+        if len(md) > 155:
+            trimmed = cls._trim_to_limit(md, 152)
+            print(
+                f"Metadata Copy Agent enforcing meta_description limit: "
+                f"{len(md)} → {len(trimmed)} chars",
+                file=sys.stderr,
+            )
+            out["meta_description"] = trimmed
+
+        h1 = out.get("h1", "")
+        if len(h1) > 70:
+            trimmed = cls._trim_to_limit(h1, 68)
+            print(
+                f"Metadata Copy Agent enforcing h1 limit: "
+                f"{len(h1)} → {len(trimmed)} chars",
+                file=sys.stderr,
+            )
+            out["h1"] = trimmed
+
+        return out
+
+    @staticmethod
     def _sanity_check(out: dict) -> list[str]:
         warnings: list[str] = []
         if len(out.get("meta_title", "")) > 60:
@@ -263,6 +314,9 @@ class MetadataCopyAgent:
 
         for key in EXPECTED_KEYS:
             out.setdefault(key, "" if key not in {"image_alt_texts", "notes", "todos"} else [])
+
+        # Hard limits — deterministic post-processing, never throws.
+        out = self._enforce_limits(out)
 
         # Soft sanity check — never throws, just logs.
         warnings = self._sanity_check(out)

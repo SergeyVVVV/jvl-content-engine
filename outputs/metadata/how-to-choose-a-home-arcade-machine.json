@@ -1,25 +1,25 @@
 {
   "topic": "how to choose a home arcade machine",
-  "meta_title": "How to Choose a Home Arcade Machine Worth Keeping",
+  "meta_title": "How to Choose a Home Arcade Machine for Your Space",
   "h1": "How to Choose a Home Arcade Machine Worth Keeping",
-  "meta_description": "A practical guide for homeowners choosing a home arcade machine. Compare formats, build quality, game libraries, and ease of use to find one that fits your space and lasts.",
+  "meta_description": "A practical guide to choosing a home arcade machine that fits your space, looks right in the room, and stays enjoyable long after the novelty fades.",
   "slug": "how-to-choose-home-arcade-machine",
-  "og_title": "How to Choose a Home Arcade Machine Worth Keeping",
-  "og_description": "Formats, build quality, game libraries, and setup — what actually matters when choosing a home arcade machine for your bar, basement, or game room.",
+  "og_title": "How to Choose a Home Arcade Machine for Your Space",
+  "og_description": "Formats, build quality, game libraries, and setup — what mature homeowners should actually look for in a home arcade machine.",
   "image_alt_texts": [
-    "Countertop arcade machine sitting on a wooden home bar surface",
-    "Side-by-side comparison of full-size cabinet, bartop, and countertop arcade formats",
-    "Close-up of arcade machine control panel with joystick and buttons",
-    "Home basement lounge with an arcade machine among other furnishings",
-    "JVL Echo Home countertop arcade on a bar counter in a modern living space"
+    "Countertop arcade machine on a wooden home bar surface",
+    "Full-size arcade cabinet, bartop, and countertop formats side by side",
+    "Close-up of arcade machine controls and screen in a home setting",
+    "Home basement lounge with an arcade machine among other furniture",
+    "Two guests playing a bartop arcade machine at a home bar"
   ],
-  "excerpt": "A homeowner's guide to choosing a home arcade machine that fits your space, looks right in the room, and still feels like a good decision a year from now.",
+  "excerpt": "A straightforward guide for homeowners choosing a home arcade machine — covering cabinet formats, build quality, game libraries, and what actually matters for long-term enjoyment in a real living space.",
   "notes": [
-    "H1 and meta_title kept identical — the working title is clear, accurate, and within limits.",
-    "Slug trimmed to five words for cleanliness; 'a' dropped as a stop word.",
-    "Meta description stays under 155 chars and focuses on the practical, non-hype angle matching the draft's tone.",
-    "Image alt texts inferred from article sections — no specific product images confirmed, so descriptions stay generic and descriptive.",
-    "Avoided any mention of specific game counts, specs, or 'best' claims in metadata to stay within hard rules."
+    "meta_title uses 'for Your Space' to differentiate from the h1's 'Worth Keeping' framing",
+    "Avoided year references since the draft is evergreen",
+    "Kept all copy grounded in homeowner language per brief — no gaming-culture jargon",
+    "Slug kept to five words for clean URL without redundancy",
+    "Did not reference 149 built-in games or Echo Home specs in metadata since those are product-page details and the article is informational-first"
   ],
   "source_inputs_used": {
     "draft": "outputs/drafts/how-to-choose-a-home-arcade-machine.json",
@@ -27,8 +27,8 @@
     "qa_report": "outputs/qa/how-to-choose-a-home-arcade-machine.json"
   },
   "todos": [
-    "Verify the 149 built-in games claim is still accurate before publishing — if confirmed, consider whether excerpt or meta_description should reference it.",
-    "Confirm whether Echo Home has volume controls or headphone output before any metadata references those features.",
-    "Review final image assets and update alt texts to match actual images used in the published article."
+    "Verify the 149 built-in games count is still accurate before any metadata references the number",
+    "Confirm whether Echo Home volume controls or headphone jack exist before adding to alt text or descriptions",
+    "If an FAQ section is added per QA recommendation, consider whether meta_description should reference common questions for snippet eligibility"
   ]
 }

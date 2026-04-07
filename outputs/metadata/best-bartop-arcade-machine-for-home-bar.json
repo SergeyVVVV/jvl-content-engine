@@ -1,25 +1,25 @@
 {
   "topic": "best bartop arcade machine for home bar",
-  "meta_title": "Best Bartop Arcade Machines for Your Home Bar (2026)",
-  "h1": "Best Bartop Arcade Machines for Your Home Bar in 2026",
-  "meta_description": "A practical guide to choosing a bartop arcade machine that fits a home bar. Covers size, build quality, plug-and-play simplicity, and what to look for in 2026.",
-  "slug": "best-bartop-arcade-machine-home-bar",
-  "og_title": "Bartop Arcade Machines That Belong in a Home Bar",
-  "og_description": "How to choose a bartop arcade that fits your counter, looks right next to quality barware, and works the moment guests arrive.",
+  "meta_title": "Bartop Arcade Machines for Your Home Bar — A Buyer's Guide",
+  "h1": "How to Choose the Right Bartop Arcade Machine for Your Home Bar",
+  "meta_description": "A practical guide to choosing a bartop arcade machine that fits a home bar. Covers size, build quality, plug-and-play simplicity, and what to look for…",
+  "slug": "bartop-arcade-machine-home-bar",
+  "og_title": "Bartop Arcade Machines for Your Home Bar — A Buyer's Guide",
+  "og_description": "What to look for in a bartop arcade that earns its place on your bar counter. Size, build quality, game selection, and setup tips.",
   "image_alt_texts": [
-    "Bartop arcade machine sitting on a home bar counter beside glassware",
-    "Two guests playing a countertop arcade game at a home bar",
-    "Close-up of arcade controls and screen on a wooden bar surface",
-    "Home bar layout showing arcade machine positioned at the end of the counter",
-    "JVL Echo Home countertop arcade in a modern home bar setting"
+    "Bartop arcade machine sitting on a wooden home bar counter next to glassware",
+    "Two guests playing a countertop arcade machine at a home bar",
+    "Close-up of arcade controls and screen on a bar counter surface",
+    "Compact bartop arcade positioned at the end of an L-shaped home bar",
+    "Home bar setup with ambient lighting and a bartop arcade in the background"
   ],
-  "excerpt": "A guide to finding a bartop arcade machine that earns its place on a home bar counter — covering fit, finish, plug-and-play ease, and which options suit an adult social space in 2026.",
+  "excerpt": "A practical guide to finding a bartop arcade machine that fits your home bar — covering size, build quality, plug-and-play convenience, and what makes a machine worth its counter space.",
   "notes": [
-    "Meta title kept under 60 chars by abbreviating year in parentheses rather than repeating full phrasing.",
-    "Slug uses 6 words to capture the core query without unnecessary filler.",
-    "OG title uses a warmer, social-friendly framing rather than repeating 'best' to avoid clickbait feel.",
-    "Image alt texts inferred from article content — no specific photos exist yet so alts describe likely editorial shots.",
-    "Avoided all unverified claims (dimensions, 2-player support, volume control) in metadata copy per QA cautions."
+    "Meta title omits 'best' to avoid ranking implication the article doesn't fully support with named competitors.",
+    "H1 reframed as a 'how to choose' to better match the article's advisory structure versus a pure roundup.",
+    "Slug kept to four words for clarity and keyword alignment without over-specificity.",
+    "No year included in meta_title or h1 — the draft uses 2026 but the brief doesn't require it in metadata, and dateless copy ages better.",
+    "Image alt texts inferred from article scenarios: counter placement, social play, controls detail, layout context, and ambient bar setting."
   ],
   "source_inputs_used": {
     "draft": "outputs/drafts/best-bartop-arcade-machine-for-home-bar.json",
@@ -27,8 +27,8 @@
     "qa_report": "outputs/qa/best-bartop-arcade-machine-for-home-bar.json"
   },
   "todos": [
-    "Confirm final image selections with editorial team and update alt texts to match actual photos.",
-    "If JVL Echo Home 2-player support is confirmed, consider reflecting it in meta_description or og_description.",
-    "Verify year reference (2026) is still current at time of publication."
+    "Confirm whether the editorial team wants '2026' in the meta_title or h1 — omitted here for longevity but the draft headline includes it.",
+    "If specific competitor products are added to the draft before publication, revisit meta_description and excerpt to reflect broader product coverage.",
+    "Image alt texts are inferred from article content — update once actual images are selected."
   ]
 }

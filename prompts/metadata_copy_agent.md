@@ -16,8 +16,10 @@ Return ONE good version for each of these fields — no variants, no alternative
 
 - `topic` — echo back the topic string
 - `meta_title` — ≤ 60 chars, natural, reflects the article, not clickbait
-- `h1` — the on-page H1 title; may differ slightly from meta_title; ≤ 70 chars
-- `meta_description` — 120–155 chars, useful and honest, no keyword stuffing
+- `h1` — the on-page H1 title; should differ from meta_title (longer or slightly
+  reframed); target ≤ 65 chars (hard ceiling 70)
+- `meta_description` — target 120–150 chars (hard ceiling 155), useful and honest,
+  no keyword stuffing
 - `slug` — 3–6 words, lowercase, hyphenated, ASCII only
 - `og_title` — ≤ 60 chars, can equal meta_title or a slightly warmer variant
 - `og_description` — 100–150 chars, social-friendly, still understated
@@ -34,6 +36,8 @@ Return ONE good version for each of these fields — no variants, no alternative
 - aligned with what the draft actually says
 - no clickbait, no superlatives without support
 - no keyword stuffing
+- `meta_title` and `h1` should not be identical — differentiate them even if subtly
+- do not include a year (e.g. "2026") unless the draft or brief clearly requires it
 
 ## Hard rules — DO NOT invent
 - specs, model numbers, dimensions
