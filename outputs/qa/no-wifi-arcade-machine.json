@@ -1,0 +1,167 @@
+{
+  "topic": "no wifi arcade machine",
+  "qa_status": "revise",
+  "overall_verdict": "A well-structured, tonally appropriate draft with no blocking factual issues, but several medium-severity quality and grounding concerns that need attention before publishing.",
+  "summary": "The draft hits the right tone for the JVL Echo Home audience — understated premium, homeowner-focused, nostalgia-forward without being gamer-affiliate. The two product mentions are natural and non-pushy. However, the piece suffers from repetitive phrasing and structure across sections, some AI-filler transitions, and a few soft claims that should be hedged or verified. The absence of brief, SERP research, and company insight means alignment with editorial strategy, search intent coverage, and competitive differentiation cannot be confirmed.",
+  "severity_counts": {
+    "high": 0,
+    "medium": 5,
+    "low": 4
+  },
+  "blocking_issues": [],
+  "major_issues": [
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "Multiple sections",
+      "problem": "Repetitive phrasing: 'plug it in and play / plug and play / plug it in and it's ready' appears in at least five places. The phrase 'no WiFi' or 'without WiFi' appears excessively, often restating the same benefit without adding new information.",
+      "why_it_matters": "Repetition signals AI-generated content to readers and undermines the premium, editorial tone JVL targets.",
+      "recommended_fix": "Consolidate the core 'just works' message into two or three strong instances max. Vary language in other spots — e.g., 'works independently', 'standalone operation', 'no connection needed'."
+    },
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "'The Best Spaces for a No-WiFi Arcade Machine' section",
+      "problem": "The four sub-sections (home bars, cabins, dens, guest rooms) follow an identical pattern: name the space, state why it's good, end with a 'no WiFi means…' sentence. This creates a listicle feel that reads as filler.",
+      "why_it_matters": "A premium editorial piece should vary paragraph structure to hold reader attention and feel authored, not templated.",
+      "recommended_fix": "Merge the four sub-spaces into two or three groupings with more varied narrative flow. Add a specific scenario or sensory detail to at least one to break the pattern."
+    },
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "Opening paragraph",
+      "problem": "The 'your coffee maker doesn't need an app / your bookshelf doesn't need a firmware update' trope is a well-worn internet cliché that risks feeling generic rather than fresh.",
+      "why_it_matters": "The intro sets the tone for the whole piece. A cliché opening undermines the editorial credibility JVL wants to project.",
+      "recommended_fix": "Open with a more specific, concrete scenario — e.g., the moment guests arrive at a lake house and someone walks over to the arcade machine without asking for the WiFi password."
+    },
+    {
+      "severity": "medium",
+      "category": "serp",
+      "location": "Whole article",
+      "problem": "Without SERP research, it's impossible to confirm whether key search-intent subtopics are covered — e.g., specific competitor comparisons, price ranges, retro vs. modern game expectations, physical dimensions/weight for countertop fit.",
+      "why_it_matters": "Missing search-intent coverage means the article may underperform in rankings despite good writing quality.",
+      "recommended_fix": "Run SERP research for 'no wifi arcade machine' and related queries. Verify whether buyers are searching for specs, price brackets, or specific brand comparisons, and fill any gaps."
+    },
+    {
+      "severity": "medium",
+      "category": "grounding",
+      "location": "'Offline Doesn't Mean Outdated' section",
+      "problem": "The claim 'The games people want to play on a home arcade are classics — familiar titles from the golden age of arcades' is presented as fact but is an editorial assertion without supporting evidence.",
+      "why_it_matters": "This is a core premise of the article. If unsupported, it weakens the argument for readers who might want modern indie titles or newer game styles.",
+      "recommended_fix": "Hedge slightly: 'For most home arcade buyers, the draw is classics…' or support with a reference to survey data or JVL's own customer feedback if available."
+    }
+  ],
+  "minor_issues": [
+    {
+      "severity": "low",
+      "category": "tone",
+      "location": "'Plug-and-Play Simplicity' section",
+      "problem": "The sentence 'There's something genuinely appealing about an entertainment product that needs no explanation' is slightly hollow — it tells the reader something is appealing rather than showing why.",
+      "why_it_matters": "Minor, but 'show don't tell' strengthens premium editorial voice.",
+      "recommended_fix": "Replace with a concrete moment: e.g., 'Your guests pick up the controls and start playing without a single question.'"
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "FAQ: 'Is it future-proof?'",
+      "problem": "The answer uses 'in a real sense, yes' which is a slightly hedgy opener that weakens an otherwise strong point.",
+      "why_it_matters": "Minor awkwardness that slightly undercuts confidence.",
+      "recommended_fix": "Open directly: 'Yes. A machine that doesn't depend on servers…'"
+    },
+    {
+      "severity": "low",
+      "category": "product_fit",
+      "location": "Second product mention",
+      "problem": "The link to '/en/home' with 'understanding the options available' is vague. It's unclear what 'options' means — models, configurations, accessories?",
+      "why_it_matters": "A vague CTA is a wasted CTA. The reader should know what they'll find.",
+      "recommended_fix": "Be specific: 'explore the Echo Home's design and game library' or similar."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "'Making the Right Choice for Your Space' section",
+      "problem": "The closing section is competent but generic. It could apply to almost any home product. It doesn't leave the reader with a memorable takeaway specific to arcade machines.",
+      "why_it_matters": "The outro is the last impression. A stronger close reinforces the article's unique angle.",
+      "recommended_fix": "End with a brief, vivid image — e.g., a quiet evening, a familiar game, the satisfying click of arcade controls — that ties back to the nostalgia and simplicity theme."
+    }
+  ],
+  "unsupported_claims": [
+    "The games people want to play on a home arcade are classics — familiar titles from the golden age of arcades that hold up because the gameplay was always the point",
+    "For a growing number of homeowners, an arcade machine that works without WiFi isn't a compromise. It's a feature."
+  ],
+  "brief_alignment_issues": [
+    {
+      "severity": "medium",
+      "category": "brief",
+      "location": "Whole article",
+      "problem": "No brief was provided, so alignment with intended angle, audience, funnel stage, and required sections cannot be verified.",
+      "why_it_matters": "Without a brief, the article may not serve its intended strategic purpose in the content funnel.",
+      "recommended_fix": "Generate or obtain a brief and re-evaluate section structure, intent targeting, and keyword focus."
+    }
+  ],
+  "serp_coverage_issues": [
+    {
+      "severity": "medium",
+      "category": "serp",
+      "location": "Whole article",
+      "problem": "No SERP research was provided. Cannot confirm whether the article covers the topics and questions real searchers are looking for.",
+      "why_it_matters": "SEO performance depends on matching search intent. Without SERP data, coverage gaps are invisible.",
+      "recommended_fix": "Run SERP research and cross-reference top-ranking content for 'no wifi arcade machine' to identify missing subtopics."
+    }
+  ],
+  "company_insight_issues": [
+    {
+      "severity": "medium",
+      "category": "company_insight",
+      "location": "Whole article",
+      "problem": "No company insight document was provided. Cannot verify whether forbidden claims were avoided, whether all recommended JVL angles were used, or whether EEAT signals were properly incorporated.",
+      "why_it_matters": "Company insight ensures brand-safe, strategically aligned content. Without it, the draft may miss key differentiators or include off-brand messaging.",
+      "recommended_fix": "Obtain the company insight document and re-review for alignment."
+    }
+  ],
+  "tone_persona_issues": [],
+  "product_fit_issues": [
+    {
+      "severity": "low",
+      "category": "product_fit",
+      "location": "JVL Echo Home mention",
+      "problem": "The product mention at 149 games is natural and well-placed, but the article never names a single game title, which makes the 'curated classics' claim feel abstract.",
+      "why_it_matters": "Naming even two or three iconic titles would make the library tangible and trigger nostalgia for the target persona.",
+      "recommended_fix": "If permissible per JVL guidelines, add two to three recognizable game titles when describing the built-in library."
+    }
+  ],
+  "strengths": [
+    "Tone is consistently understated premium — no gamer jargon, no affiliate hype, no flashy language",
+    "Product integration is natural and restrained; two mentions at appropriate points without hard-sell pressure",
+    "The FAQ section addresses genuine buyer concerns with honest, balanced answers (especially the 'Can I add games later?' response)",
+    "Strong thematic framing around reliability, simplicity, and adult leisure spaces",
+    "The 'what to look for' section provides genuinely useful buying criteria without being a disguised product pitch",
+    "Claims to verify section is present and the three listed claims appear confirmed"
+  ],
+  "recommended_fixes": [
+    "Reduce repetitive 'plug and play' / 'no WiFi' phrasing — consolidate to two or three strong instances",
+    "Restructure the 'Best Spaces' section to break the identical sub-section pattern",
+    "Rewrite the opening paragraph to replace the cliché internet-connectivity trope with a more specific, original scenario",
+    "Hedge or support the claim that 'the games people want are classics' — add nuance or evidence",
+    "Add two to three specific classic game titles (if brand-approved) to make the library tangible",
+    "Sharpen the second CTA link to be specific about what the reader will find",
+    "Strengthen the closing section with a vivid, nostalgia-forward image rather than generic product advice",
+    "Obtain and review against brief, SERP research, and company insight documents before final publication"
+  ],
+  "claims_to_verify_ok": true,
+  "publish_readiness": "needs_revision",
+  "source_inputs_used": {
+    "draft": "outputs/drafts/no-wifi-arcade-machine.md",
+    "brief": null,
+    "serp_research": null,
+    "company_insight": null
+  },
+  "todos": [
+    "No brief was provided — editorial angle, funnel stage, and keyword targets are unverified",
+    "No SERP research was provided — search intent coverage and competitive differentiation are unverified",
+    "No company insight was provided — brand guardrails, forbidden claims, and recommended JVL angles are unverified",
+    "Confirm whether specific game titles from the Echo Home library can be referenced in content",
+    "Consider adding a WiFi vs. no-WiFi comparison table if SERP research indicates buyers are comparing options",
+    "Human reviewer should validate that the inferred informational intent and mid-funnel positioning are correct for this topic"
+  ]
+}
