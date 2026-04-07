@@ -122,25 +122,52 @@ class MetadataCopyAgent:
             raw = match.group(0)
         return json.loads(raw)
 
-    @staticmethod
-    def _trim_to_limit(text: str, limit: int, min_length: int = 120) -> str:
-        """Trim text to at most `limit` chars at a clean word boundary.
+    # Prepositions/articles that signal a dangling fragment at cut point.
+    _DANGLING = frozenset(
+        "a an the for in of to at by on from with and or".split()
+    )
 
-        Tries to end on a sentence boundary ('. ') first, only if the result
-        would still be >= min_length. Falls back to the last space within the
-        limit. Appends '…' only if text was actually cut.
+    @classmethod
+    def _trim_to_limit(cls, text: str, limit: int, min_length: int = 120) -> str:
+        """Trim text to at most `limit` chars at the cleanest available boundary.
+
+        Priority order (each only used if the result stays >= min_length):
+          1. Sentence boundary ('. ')
+          2. Colon/em-dash boundary — avoids cutting mid-subtitle
+          3. Word boundary, with trailing dangling preposition/article phrases
+             stripped to avoid endings like "…for Home"
         """
         if len(text) <= limit:
             return text
         candidate = text[:limit]
-        # prefer ending at a sentence boundary, but only if long enough
+
+        # 1. sentence boundary
         dot_pos = candidate.rfind(". ")
         if dot_pos >= min_length:
             return candidate[: dot_pos + 1]
-        # fall back to word boundary
+
+        # 2. colon/dash boundary (common in titles like "Foo: Why Bar Matters")
+        for sep in (" — ", ": "):
+            sep_pos = candidate.rfind(sep)
+            if sep_pos >= min_length:
+                return candidate[:sep_pos].rstrip(" —:")
+
+        # 3. word boundary — strip trailing dangling fragments
         space_pos = candidate.rfind(" ")
         if space_pos > 0:
-            return candidate[:space_pos].rstrip(".,;:") + "…"
+            words = candidate[:space_pos].rstrip(".,;:").split()
+            # Strip trailing solo prepositions/articles ("…for", "…the")
+            while words and words[-1].lower().rstrip(".,;:") in cls._DANGLING:
+                words.pop()
+            # Strip trailing "prep + noun" pairs ("…for Home", "…in Place")
+            while (
+                len(words) >= 2
+                and words[-2].lower().rstrip(".,;:") in cls._DANGLING
+            ):
+                words.pop()  # noun
+                words.pop()  # preposition/article
+            base = " ".join(words)
+            return base + "…" if base else candidate[:space_pos].rstrip(".,;:") + "…"
         return candidate[:limit]
 
     @classmethod
@@ -163,7 +190,7 @@ class MetadataCopyAgent:
 
         h1 = out.get("h1", "")
         if len(h1) > 70:
-            trimmed = cls._trim_to_limit(h1, 68)
+            trimmed = cls._trim_to_limit(h1, 68, min_length=30)
             print(
                 f"Metadata Copy Agent enforcing h1 limit: "
                 f"{len(h1)} → {len(trimmed)} chars",

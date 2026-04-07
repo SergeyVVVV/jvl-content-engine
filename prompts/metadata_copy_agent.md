@@ -18,8 +18,9 @@ Return ONE good version for each of these fields — no variants, no alternative
 - `meta_title` — ≤ 60 chars, natural, reflects the article, not clickbait
 - `h1` — the on-page H1 title; should differ from meta_title (longer or slightly
   reframed); target ≤ 65 chars (hard ceiling 70)
-- `meta_description` — target 120–150 chars (hard ceiling 155), useful and honest,
-  no keyword stuffing
+- `meta_description` — one clean complete sentence, 120–150 chars (hard ceiling
+  155), useful and honest, no keyword stuffing; do not write two sentences if
+  the result would exceed 150 chars — write one good sentence instead
 - `slug` — 3–6 words, lowercase, hyphenated, ASCII only
 - `og_title` — ≤ 60 chars, can equal meta_title or a slightly warmer variant
 - `og_description` — 100–150 chars, social-friendly, still understated

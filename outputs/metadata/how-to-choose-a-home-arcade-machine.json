@@ -1,25 +1,25 @@
 {
   "topic": "how to choose a home arcade machine",
-  "meta_title": "How to Choose a Home Arcade Machine for Your Space",
+  "meta_title": "How to Choose a Home Arcade Machine | Buying Guide",
   "h1": "How to Choose a Home Arcade Machine Worth Keeping",
-  "meta_description": "A practical guide to choosing a home arcade machine that fits your space, looks right in the room, and stays enjoyable long after the novelty fades.",
+  "meta_description": "A practical guide to choosing a home arcade machine that fits your space, looks right in the room, and still feels like a good decision a year from now.",
   "slug": "how-to-choose-home-arcade-machine",
-  "og_title": "How to Choose a Home Arcade Machine for Your Space",
-  "og_description": "Formats, build quality, game libraries, and setup — what mature homeowners should actually look for in a home arcade machine.",
+  "og_title": "How to Choose a Home Arcade Machine Worth Keeping",
+  "og_description": "Formats, build quality, game libraries, and setup — what homeowners actually need to know before buying a home arcade machine.",
   "image_alt_texts": [
-    "Countertop arcade machine on a wooden home bar surface",
-    "Full-size arcade cabinet, bartop, and countertop formats side by side",
+    "Countertop arcade machine sitting on a wooden home bar surface",
+    "Side-by-side comparison of full-size cabinet, bartop, and countertop arcade formats",
     "Close-up of arcade machine controls and screen in a home setting",
-    "Home basement lounge with an arcade machine among other furniture",
-    "Two guests playing a bartop arcade machine at a home bar"
+    "Home basement lounge with an arcade machine beside a seating area",
+    "JVL Echo Home arcade machine on a bar counter in a modern home"
   ],
-  "excerpt": "A straightforward guide for homeowners choosing a home arcade machine — covering cabinet formats, build quality, game libraries, and what actually matters for long-term enjoyment in a real living space.",
+  "excerpt": "A homeowner's guide to choosing a home arcade machine — covering formats, build quality, game libraries, and ease of use so you pick one that earns its place in the room long after the novelty fades.",
   "notes": [
-    "meta_title uses 'for Your Space' to differentiate from the h1's 'Worth Keeping' framing",
-    "Avoided year references since the draft is evergreen",
-    "Kept all copy grounded in homeowner language per brief — no gaming-culture jargon",
-    "Slug kept to five words for clean URL without redundancy",
-    "Did not reference 149 built-in games or Echo Home specs in metadata since those are product-page details and the article is informational-first"
+    "meta_title uses a shorter form with 'Buying Guide' suffix for clarity in SERPs; h1 uses the draft's working title which is more evocative",
+    "Avoided year references, superlatives, and spec claims per hard rules",
+    "og_title matches h1 rather than meta_title since the warmer phrasing suits social sharing",
+    "Slug kept to five words for clean URL structure",
+    "Alt texts reflect the article's emphasis on different formats and real home settings"
   ],
   "source_inputs_used": {
     "draft": "outputs/drafts/how-to-choose-a-home-arcade-machine.json",
@@ -27,8 +27,8 @@
     "qa_report": "outputs/qa/how-to-choose-a-home-arcade-machine.json"
   },
   "todos": [
-    "Verify the 149 built-in games count is still accurate before any metadata references the number",
-    "Confirm whether Echo Home volume controls or headphone jack exist before adding to alt text or descriptions",
-    "If an FAQ section is added per QA recommendation, consider whether meta_description should reference common questions for snippet eligibility"
+    "Verify 149 built-in games count is still current before publishing",
+    "Confirm whether Echo Home has volume controls or headphone jack before finalizing alt texts or imagery that might imply those features",
+    "Review whether specific classic game titles can be named in image alt texts or social copy once game list is confirmed"
   ]
 }

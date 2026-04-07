@@ -1,25 +1,24 @@
 {
   "topic": "best bartop arcade machine for home bar",
-  "meta_title": "Bartop Arcade Machines for Your Home Bar — A Buyer's Guide",
-  "h1": "How to Choose the Right Bartop Arcade Machine for Your Home Bar",
-  "meta_description": "A practical guide to choosing a bartop arcade machine that fits a home bar. Covers size, build quality, plug-and-play simplicity, and what to look for…",
-  "slug": "bartop-arcade-machine-home-bar",
-  "og_title": "Bartop Arcade Machines for Your Home Bar — A Buyer's Guide",
-  "og_description": "What to look for in a bartop arcade that earns its place on your bar counter. Size, build quality, game selection, and setup tips.",
+  "meta_title": "Bartop Arcade Machines for Your Home Bar",
+  "h1": "How to Choose a Bartop Arcade Machine for Your Home Bar",
+  "meta_description": "A practical guide to choosing a bartop arcade machine that fits a home bar — covering size, build quality, ease of use, and what actually matters…",
+  "slug": "best-bartop-arcade-machine-home-bar",
+  "og_title": "Bartop Arcade Machines for Your Home Bar",
+  "og_description": "What to look for in a bartop arcade that earns its place on your bar counter — fit, finish, and hassle-free enjoyment for you and your guests.",
   "image_alt_texts": [
     "Bartop arcade machine sitting on a wooden home bar counter next to glassware",
     "Two guests playing a countertop arcade machine at a home bar",
-    "Close-up of arcade controls and screen on a bar counter surface",
-    "Compact bartop arcade positioned at the end of an L-shaped home bar",
-    "Home bar setup with ambient lighting and a bartop arcade in the background"
+    "Close-up of arcade controls and screen on a clean bar surface",
+    "Home bar layout with a compact arcade machine positioned at the counter end",
+    "JVL Echo Home countertop arcade machine in a modern home bar setting"
   ],
-  "excerpt": "A practical guide to finding a bartop arcade machine that fits your home bar — covering size, build quality, plug-and-play convenience, and what makes a machine worth its counter space.",
+  "excerpt": "A guide to finding a bartop arcade machine that fits your home bar — one that looks right on the counter, works without fuss, and gives guests something to enjoy together.",
   "notes": [
-    "Meta title omits 'best' to avoid ranking implication the article doesn't fully support with named competitors.",
-    "H1 reframed as a 'how to choose' to better match the article's advisory structure versus a pure roundup.",
-    "Slug kept to four words for clarity and keyword alignment without over-specificity.",
-    "No year included in meta_title or h1 — the draft uses 2026 but the brief doesn't require it in metadata, and dateless copy ages better.",
-    "Image alt texts inferred from article scenarios: counter placement, social play, controls detail, layout context, and ambient bar setting."
+    "Avoided including '2026' in metadata since the guide's value is not strictly time-bound and dateless titles age better in search",
+    "H1 uses 'How to Choose' framing to differentiate from the meta_title and better match the article's criteria-driven approach",
+    "Kept 'best' out of the meta_title to stay aligned with the understated tone and avoid superlative claims the draft itself hedges on",
+    "Slug includes 'best' for search alignment with the primary keyword despite dropping it from the title"
   ],
   "source_inputs_used": {
     "draft": "outputs/drafts/best-bartop-arcade-machine-for-home-bar.json",
@@ -27,8 +26,8 @@
     "qa_report": "outputs/qa/best-bartop-arcade-machine-for-home-bar.json"
   },
   "todos": [
-    "Confirm whether the editorial team wants '2026' in the meta_title or h1 — omitted here for longevity but the draft headline includes it.",
-    "If specific competitor products are added to the draft before publication, revisit meta_description and excerpt to reflect broader product coverage.",
-    "Image alt texts are inferred from article content — update once actual images are selected."
+    "Confirm JVL Echo Home exact dimensions and weight before finalizing image alt text referencing it on a counter",
+    "If 2-player support is confirmed for Echo Home, consider reflecting that in the excerpt or og_description",
+    "Verify that the JVL Echo Home product image is available and cleared for use as the OG image"
   ]
 }
