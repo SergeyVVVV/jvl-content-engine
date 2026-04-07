@@ -1,0 +1,32 @@
+{
+  "topic": "no wifi arcade machine",
+  "meta_title": "No WiFi Arcade Machine: Why Offline Play Still Matters",
+  "h1": "No WiFi Arcade Machine: Why Offline Play Still Matters for Home Arcades",
+  "meta_description": "A home arcade machine shouldn't need a WiFi connection to work. Learn what to look for in a plug-and-play offline arcade and why reliability beats connectivity.",
+  "slug": "no-wifi-arcade-machine",
+  "og_title": "No WiFi Arcade Machine: Why Offline Play Still Matters",
+  "og_description": "Your home arcade should work the moment you plug it in — no WiFi, no accounts, no updates. Here's what to look for in an offline arcade machine.",
+  "image_alt_texts": [
+    "Bartop arcade machine on a wooden home bar counter with no cables or routers visible",
+    "Two players standing side by side at a compact arcade cabinet in a basement lounge",
+    "Plug-and-play arcade machine set up in a lakeside cabin living room",
+    "Close-up of arcade controls with a classic game on screen, no login prompts or loading bars"
+  ],
+  "excerpt": "A home arcade machine that works without WiFi isn't a compromise — it's a feature. Here's why offline, plug-and-play arcades are a smart fit for home bars, basements, and cabins.",
+  "notes": [
+    "Kept meta_title under 60 chars by trimming 'for Home Arcades' — the H1 retains the full phrase for on-page context.",
+    "Slug matches the target keyword exactly in four words for clean URL structure.",
+    "Avoided citing the 149 game count in any metadata, per QA caution about unverified specifics.",
+    "Image alt texts reflect scenes described in the draft without naming specific products or game titles."
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/drafts/no-wifi-arcade-machine.json",
+    "brief": null,
+    "qa_report": "outputs/qa/no-wifi-arcade-machine.json"
+  },
+  "todos": [
+    "Confirm the exact built-in game count (149) before using it in any promotional copy or social shares.",
+    "Run SERP research for 'no wifi arcade machine' to verify the article covers searcher expectations — flagged by QA.",
+    "Review whether specific classic game titles can be named in social copy or image alt texts to strengthen relevance."
+  ]
+}

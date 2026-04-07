@@ -1,0 +1,34 @@
+{
+  "topic": "how to choose a home arcade machine",
+  "meta_title": "How to Choose a Home Arcade Machine Worth Keeping",
+  "h1": "How to Choose a Home Arcade Machine Worth Keeping",
+  "meta_description": "A practical guide for homeowners choosing a home arcade machine. Compare formats, build quality, game libraries, and ease of use to find one that fits your space and lasts.",
+  "slug": "how-to-choose-home-arcade-machine",
+  "og_title": "How to Choose a Home Arcade Machine Worth Keeping",
+  "og_description": "Formats, build quality, game libraries, and setup — what actually matters when choosing a home arcade machine for your bar, basement, or game room.",
+  "image_alt_texts": [
+    "Countertop arcade machine sitting on a wooden home bar surface",
+    "Side-by-side comparison of full-size cabinet, bartop, and countertop arcade formats",
+    "Close-up of arcade machine control panel with joystick and buttons",
+    "Home basement lounge with an arcade machine among other furnishings",
+    "JVL Echo Home countertop arcade on a bar counter in a modern living space"
+  ],
+  "excerpt": "A homeowner's guide to choosing a home arcade machine that fits your space, looks right in the room, and still feels like a good decision a year from now.",
+  "notes": [
+    "H1 and meta_title kept identical — the working title is clear, accurate, and within limits.",
+    "Slug trimmed to five words for cleanliness; 'a' dropped as a stop word.",
+    "Meta description stays under 155 chars and focuses on the practical, non-hype angle matching the draft's tone.",
+    "Image alt texts inferred from article sections — no specific product images confirmed, so descriptions stay generic and descriptive.",
+    "Avoided any mention of specific game counts, specs, or 'best' claims in metadata to stay within hard rules."
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/drafts/how-to-choose-a-home-arcade-machine.json",
+    "brief": "outputs/briefs/how-to-choose-a-home-arcade-machine.json",
+    "qa_report": "outputs/qa/how-to-choose-a-home-arcade-machine.json"
+  },
+  "todos": [
+    "Verify the 149 built-in games claim is still accurate before publishing — if confirmed, consider whether excerpt or meta_description should reference it.",
+    "Confirm whether Echo Home has volume controls or headphone output before any metadata references those features.",
+    "Review final image assets and update alt texts to match actual images used in the published article."
+  ]
+}

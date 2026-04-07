@@ -1,0 +1,34 @@
+{
+  "topic": "best bartop arcade machine for home bar",
+  "meta_title": "Best Bartop Arcade Machines for Your Home Bar (2026)",
+  "h1": "Best Bartop Arcade Machines for Your Home Bar in 2026",
+  "meta_description": "A practical guide to choosing a bartop arcade machine that fits a home bar. Covers size, build quality, plug-and-play simplicity, and what to look for in 2026.",
+  "slug": "best-bartop-arcade-machine-home-bar",
+  "og_title": "Bartop Arcade Machines That Belong in a Home Bar",
+  "og_description": "How to choose a bartop arcade that fits your counter, looks right next to quality barware, and works the moment guests arrive.",
+  "image_alt_texts": [
+    "Bartop arcade machine sitting on a home bar counter beside glassware",
+    "Two guests playing a countertop arcade game at a home bar",
+    "Close-up of arcade controls and screen on a wooden bar surface",
+    "Home bar layout showing arcade machine positioned at the end of the counter",
+    "JVL Echo Home countertop arcade in a modern home bar setting"
+  ],
+  "excerpt": "A guide to finding a bartop arcade machine that earns its place on a home bar counter — covering fit, finish, plug-and-play ease, and which options suit an adult social space in 2026.",
+  "notes": [
+    "Meta title kept under 60 chars by abbreviating year in parentheses rather than repeating full phrasing.",
+    "Slug uses 6 words to capture the core query without unnecessary filler.",
+    "OG title uses a warmer, social-friendly framing rather than repeating 'best' to avoid clickbait feel.",
+    "Image alt texts inferred from article content — no specific photos exist yet so alts describe likely editorial shots.",
+    "Avoided all unverified claims (dimensions, 2-player support, volume control) in metadata copy per QA cautions."
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/drafts/best-bartop-arcade-machine-for-home-bar.json",
+    "brief": "outputs/briefs/bartop-arcade-machine-for-home-bar.json",
+    "qa_report": "outputs/qa/best-bartop-arcade-machine-for-home-bar.json"
+  },
+  "todos": [
+    "Confirm final image selections with editorial team and update alt texts to match actual photos.",
+    "If JVL Echo Home 2-player support is confirmed, consider reflecting it in meta_description or og_description.",
+    "Verify year reference (2026) is still current at time of publication."
+  ]
+}
