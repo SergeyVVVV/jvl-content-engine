@@ -1,139 +1,73 @@
 {
   "topic": "how to choose a home arcade machine",
-  "qa_status": "revise",
-  "overall_verdict": "A well-written, tonally strong draft that earns credibility before introducing the product, but is missing the required FAQ section and has a few medium-severity issues around missed brief requirements and minor grounding gaps.",
-  "summary": "The draft nails the quiet-premium tone, avoids gamer jargon, and introduces the Echo Home naturally after building a credible framework. Claims discipline is strong — the writer correctly flagged uncertain claims and avoided inventing specs. However, the brief explicitly requires a 'Frequently asked questions' section that is entirely absent, several secondary keywords (touchscreen arcade, all-in-one arcade) receive no coverage, and the Echo Home section could more clearly hedge that it is 'one strong option' rather than subtly implying it is the default answer. No blocking issues were found — all forbidden claims are avoided, no specs are invented, and no fabricated social proof appears.",
+  "status": "revise",
+  "summary": "The draft is well-written, tonally on-point, and strongly aligned with the brief's homeowner-first perspective. It avoids gamer jargon, introduces the Echo Home naturally after establishing credible criteria, and addresses most key questions. However, it is missing the required FAQ section specified in the brief, and there are a few medium-severity issues around a potentially unsupported claim and missed opportunities. No high-severity issues were found — the writer was disciplined about not inventing specs, prices, or game titles, and the claims_to_verify list is honest and well-constructed.",
   "severity_counts": {
     "high": 0,
-    "medium": 4,
+    "medium": 3,
     "low": 3
   },
-  "blocking_issues": [],
-  "major_issues": [
+  "issues": [
     {
       "severity": "medium",
       "category": "brief",
-      "location": "Missing FAQ section",
-      "problem": "The brief lists 'Frequently asked questions' as a required section with eight specific questions to answer. The draft contains no FAQ section at all.",
-      "why_it_matters": "FAQs directly target PAA/featured snippet opportunities and answer the specific questions the brief identified as important for this audience. This is a structural omission of a required deliverable.",
-      "recommended_fix": "Add an FAQ section after the Echo Home section covering at least the eight questions listed in the brief's questions_to_answer field. Keep answers concise (2-4 sentences) and in the same homeowner-friendly tone."
+      "location": "End of article — missing section",
+      "problem": "The brief's required_sections list includes 'Frequently asked questions' but the draft contains no FAQ section. The brief also lists eight specific questions_to_answer, several of which (e.g. 'How much space does a home arcade machine need?', 'Is a countertop arcade machine better than a full-size cabinet for home use?') are addressed only implicitly in body text rather than as direct, scannable answers.",
+      "recommended_fix": "Add a short FAQ section at the end (before or after the Echo Home section) that directly answers 4–6 of the brief's questions_to_answer in concise Q&A format. This also improves chances of SERP featured-snippet capture."
+    },
+    {
+      "severity": "medium",
+      "category": "unsupported_claim",
+      "location": "Ease of Setup and Daily Use — 'A half-finished arcade project sitting in the basement for three weekends is nobody's idea of leisure.'",
+      "problem": "The paragraph frames DIY/kit machines as inherently negative ('assembly is not a feature. It is a barrier'). While this is editorially defensible for the target persona, the phrasing is broad enough to read as dismissive of an entire product category without evidence. The SERP notes warn against making the Echo Home the obvious winner of a rigged comparison.",
+      "recommended_fix": "Soften slightly: acknowledge that kit builds appeal to some buyers, then redirect to the target reader. E.g., 'For hobbyists who enjoy the build process, that is part of the appeal. But for most homeowners buying a machine for a shared space, assembly adds friction rather than value.'"
     },
     {
       "severity": "medium",
       "category": "serp",
-      "location": "Secondary keyword coverage",
-      "problem": "Several secondary keywords from the brief receive no meaningful coverage: 'touchscreen arcade for home' is never addressed (and it is unclear whether the Echo Home is a touchscreen unit), 'all-in-one arcade machine' as a concept is not discussed, and 'best home arcade machine' is not targeted even conversationally.",
-      "why_it_matters": "These keywords represent real search queries from the target audience. Missing them reduces the article's SERP surface area and leaves content gaps that competitors may fill.",
-      "recommended_fix": "Integrate 'all-in-one arcade machine' naturally into the plug-and-play or game library section. If the Echo Home has a touchscreen, mention it; if not, omit the keyword rather than mislead. 'Best home arcade machine' can be addressed in the FAQ."
-    },
-    {
-      "severity": "medium",
-      "category": "quality",
-      "location": "Introduction paragraph 2",
-      "problem": "The second intro paragraph ('The market is full of options that look impressive online and disappoint in person — flimsy builds dressed up with LED trim...') is a solid hook but slightly over-indexes on negative framing before establishing what the article will offer. The three-item list (flimsy builds, complicated setups, massive cabinets) reads like a setup to make the Echo Home the hero by elimination.",
-      "why_it_matters": "The brief explicitly warns against 'making the Echo Home the obvious winner in a rigged comparison.' While the draft handles this well overall, the intro's negative framing of every alternative category could feel like stacking the deck to a discerning reader.",
-      "recommended_fix": "Soften slightly by acknowledging that good options exist across formats before noting the pitfalls. One sentence of balance would suffice."
-    },
-    {
-      "severity": "medium",
-      "category": "quality",
-      "location": "Multiple sections",
-      "problem": "The phrase 'home bar' appears 11 times across the draft, and 'basement' appears 9 times. The room-matching examples become repetitive, with the same two spaces cited in nearly every section even before the dedicated room-matching section.",
-      "why_it_matters": "Repetition weakens the writing and can signal AI-generated content to both readers and search engines. It also narrows the perceived audience to only home-bar owners.",
-      "recommended_fix": "Vary the room references throughout the body sections, saving the comprehensive room-by-room breakdown for the dedicated matching section. Use 'entertainment area,' 'living space,' or 'hosting area' as alternates in earlier sections."
-    }
-  ],
-  "minor_issues": [
-    {
-      "severity": "low",
-      "category": "tone",
-      "location": "Why Home Arcades Are Making a Comeback — paragraph 1",
-      "problem": "'The arcade never really disappeared from memory. It just waited for the right moment to come back' borders on personification that feels slightly copywriter-cute for the otherwise grounded tone.",
-      "why_it_matters": "Minor tonal inconsistency — the rest of the article earns its warmth through practical language, but this line leans toward ad copy.",
-      "recommended_fix": "Consider simplifying to something like 'The arcade never really disappeared from memory — and for a generation that grew up feeding quarters into machines, the appeal is easy to understand.'"
+      "location": "Game Library section",
+      "problem": "The SERP research identifies 'How many games should a home arcade machine have built in?' as a commonly searched question answered poorly by competitors (with a 'more is better' framing). The draft's game library section makes a strong quality-over-quantity argument but never offers a concrete frame of reference for what a good number looks like, which weakens its practical usefulness.",
+      "recommended_fix": "Add one sentence giving the reader a rough mental model, e.g., 'A well-curated collection of 100 to 200 genuinely enjoyable titles will typically deliver more lasting value than a library of thousands padded with filler.' This anchors the argument without making a hard spec claim."
     },
     {
       "severity": "low",
       "category": "quality",
-      "location": "Where the JVL Echo Home Fits In — paragraph 3",
-      "problem": "The phrase 'on an ordinary Tuesday evening when someone suggests one more round before calling it a night' is evocative but is the only moment in the article that reads like a constructed scene rather than practical guidance. It is effective but slightly inconsistent with the rest of the section's factual tone.",
-      "why_it_matters": "Very minor — some readers may find it charming, others may find it trying too hard. Not a real risk, just a polish note.",
-      "recommended_fix": "Keep or cut at editorial discretion — it works but is stylistically distinct from the surrounding copy."
+      "location": "Introduction — 'the bookshelf full of records'",
+      "problem": "The opening image (pool table, bookshelf of records) is evocative but slightly clichéd for the affluent-homeowner demographic. It risks feeling like a stock-photo description.",
+      "recommended_fix": "Minor polish — consider varying one of the two items to something slightly less expected (e.g., 'the turntable on the credenza') to keep it fresh. Not critical."
     },
     {
       "severity": "low",
       "category": "product_fit",
-      "location": "Den or family room subsection",
-      "problem": "The den/family room subsection mentions 'some machines have volume controls or headphone options' as a general statement. The writer's own TODO flags that it is unconfirmed whether the Echo Home has these features. If the Echo Home lacks them, this sentence could inadvertently set up expectations the product cannot meet.",
-      "why_it_matters": "The company insight flags this as a TODO requiring business confirmation. Leaving it as a general statement is acceptable but should be tracked.",
-      "recommended_fix": "The TODO is already flagged — no draft change needed, but the human reviewer should confirm before publishing."
-    }
-  ],
-  "unsupported_claims": [
-    "'convenience is the single biggest predictor of whether a home arcade becomes a lasting part of your routine or a forgotten purchase' — editorial opinion presented as fact, flagged by writer in claims_to_verify",
-    "'Cheaper machines often use thin MDF or printed vinyl wraps that peel, fade, or chip within months' — general industry characterization without sourcing, flagged by writer"
-  ],
-  "brief_alignment_issues": [
-    {
-      "severity": "medium",
-      "category": "brief",
-      "location": "Missing FAQ section",
-      "problem": "The brief requires a 'Frequently asked questions' section. The draft omits it entirely.",
-      "why_it_matters": "This is a required section per the brief, not optional. It also maps to PAA opportunities identified in the SERP research.",
-      "recommended_fix": "Add FAQ section with concise answers to the eight questions listed in the brief."
-    }
-  ],
-  "serp_coverage_issues": [
-    {
-      "severity": "medium",
-      "category": "serp",
-      "location": "Secondary keyword gaps",
-      "problem": "'Touchscreen arcade for home,' 'all-in-one arcade machine,' and 'best home arcade machine' are not addressed.",
-      "why_it_matters": "These are real search queries from the target audience identified in the brief's secondary keyword list.",
-      "recommended_fix": "Integrate naturally where relevant — 'all-in-one' in the plug-and-play section, 'best' in the FAQ, and 'touchscreen' only if confirmed as an Echo Home feature."
-    }
-  ],
-  "company_insight_issues": [
+      "location": "Den or family room subsection — 'some machines have volume controls or headphone options'",
+      "problem": "The writer's own TODO notes that it is unconfirmed whether the Echo Home has volume controls or headphone options. This sentence, while written about competitors generically, could create an implied expectation that the Echo Home offers these features. The company insight flags this as unconfirmed.",
+      "recommended_fix": "Reword to make it clearly generic advice: 'Check whether the machine you are considering offers volume controls or a headphone jack — these features make it a friendlier neighbor to a conversation happening across the room.'"
+    },
     {
       "severity": "low",
-      "category": "company_insight",
-      "location": "Where the JVL Echo Home Fits In",
-      "problem": "The company insight identifies JVL's commercial arcade heritage as an authority signal ('modern revival of classic ECHO bar-top arcade machines'). The draft mentions this but does not develop it — the heritage angle could do more work for EEAT credibility.",
-      "why_it_matters": "The heritage angle is one of JVL's unique brand perspectives that competitors cannot claim. It is mentioned but underutilized.",
-      "recommended_fix": "Add one sentence in the Echo Home section that lightly references JVL's background in commercial arcade machines, pending business confirmation of how to frame it. Flag as TODO if unconfirmable."
-    }
-  ],
-  "tone_persona_issues": [],
-  "product_fit_issues": [
-    {
-      "severity": "low",
-      "category": "product_fit",
-      "location": "Where the JVL Echo Home Fits In — opening",
-      "problem": "'If the criteria above sound like a checklist, the JVL Echo Home checks most of the boxes by design' is a slightly self-aware, meta transition that mildly undermines the natural integration the rest of the article achieves.",
-      "why_it_matters": "The brief warns against making the Echo Home 'the obvious winner of a rigged comparison.' This opening line slightly breaks the fourth wall by acknowledging the article was structured to lead here.",
-      "recommended_fix": "Rewrite the transition to be more direct and less self-referential — e.g., 'For homeowners drawn to the bartop format, the JVL Echo Home is a purpose-built option worth considering.'"
+      "category": "quality",
+      "location": "Where the JVL Echo Home Fits In — 'checks most of the boxes by design'",
+      "problem": "The phrase 'checks most of the boxes' is a mild cliché and slightly undermines the premium tone. It also hedges ambiguously — 'most' invites the reader to wonder which boxes it does not check.",
+      "recommended_fix": "Replace with something more direct, e.g., 'the Echo Home was designed around many of the same priorities this guide outlines' or simply remove the checklist metaphor."
     }
   ],
   "strengths": [
-    "Tone is consistently quiet-premium and homeowner-focused throughout — no gamer jargon, no affiliate hype, no flashy-luxury clichés",
-    "Product introduction is well-paced: the Echo Home does not appear until the final body section, after the article has built genuine credibility",
-    "Claims discipline is excellent — no invented specs, no fabricated social proof, no unsupported superlatives. The writer correctly flagged uncertain claims in claims_to_verify",
-    "The room-matching section provides specific, practical guidance for real spaces (home bar, basement, den, cabin) that outperforms typical SERP content",
-    "The reframing of game library value from quantity to curation is a strong differentiator that aligns perfectly with the Echo Home's 149-game positioning",
-    "Internal links to /en/echo and /en/home are placed naturally with appropriate anchor text",
-    "The plug-and-play vs. project-machine distinction is clearly drawn and speaks directly to the Mark & Linda persona's priorities",
-    "Writer-generated TODOs are thorough and responsible, flagging genuine unknowns rather than assuming"
+    "Tone is excellent throughout — warm, mature, understated premium without any gamer jargon, affiliate hype, or flashy luxury clichés. Passes the 'would Mark and Linda find this respectful of their time?' test consistently.",
+    "Echo Home introduction is well-positioned: it appears only in the final dedicated section after the article has built genuine editorial credibility. Product mention feels earned, not forced.",
+    "The plug-and-play vs. project-machine section directly addresses a major SERP content gap and is one of the strongest differentiators identified in the research.",
+    "Room-matching section provides specific, practical guidance for four distinct space types — a clear advantage over competitor content that treats all rooms the same.",
+    "Claims discipline is strong: no invented specs, dimensions, prices, game titles, or warranty details. The writer correctly omitted unconfirmed details and flagged them as TODOs.",
+    "The social and hosting dimension — guests discovering games, couples competing after dinner — fills a genuine content gap that competitors miss entirely.",
+    "Internal links to /en/echo and /en/home are placed naturally with appropriate anchor text and appropriate frequency."
   ],
   "recommended_fixes": [
-    "Add the required FAQ section with answers to the eight questions from the brief — this is the single most impactful fix",
-    "Reduce repetition of 'home bar' and 'basement' throughout the body sections; vary room references and save the comprehensive breakdown for the dedicated section",
-    "Integrate 'all-in-one arcade machine' as a natural phrase in the plug-and-play or game library section",
-    "Soften the intro's negative framing of alternatives with one sentence acknowledging that good options exist across formats",
-    "Rewrite the Echo Home section's opening transition to be less self-referential",
-    "Consider developing the JVL heritage angle slightly more in the Echo Home section, pending business confirmation"
+    "Add a Frequently Asked Questions section with 4–6 concise Q&A pairs drawn from the brief's questions_to_answer list. This is a required section per the brief and improves SERP snippet eligibility.",
+    "In the game library section, add a brief anchor for what constitutes a reasonable game count (e.g., 100–200 well-curated titles) to give readers a practical reference point.",
+    "Soften the DIY/kit dismissal in the setup section — the current draft already partially does this ('For hobbyists who enjoy the build process, that can be part of the fun') but the follow-up sentence undercuts it. Ensure the acknowledgment feels genuine.",
+    "Reword the volume controls / headphone mention in the den/family room subsection to make it clearly generic advice rather than an implied product feature.",
+    "Minor polish: freshen the opening image and replace 'checks most of the boxes' in the Echo Home section."
   ],
   "claims_to_verify_ok": true,
-  "publish_readiness": "needs_revision",
   "source_inputs_used": {
     "draft": "outputs/drafts/how-to-choose-a-home-arcade-machine.json",
     "brief": "outputs/briefs/how-to-choose-a-home-arcade-machine.json",
@@ -141,12 +75,11 @@
     "company_insight": "outputs/company_insight/how-to-choose-a-home-arcade-machine.json"
   },
   "todos": [
-    "Add the required FAQ section — this is a structural gap against the brief",
-    "Verify the 149 built-in games claim is current at time of publication",
-    "Confirm whether Echo Home has volume controls or headphone options before the den/family room subsection implies these may be available",
-    "Confirm whether Echo Home is a touchscreen device before targeting 'touchscreen arcade for home' keyword",
-    "Confirm whether JVL's commercial arcade manufacturing history can be referenced for EEAT purposes",
-    "Confirm whether specific game titles from the 149 built-in library can be named to strengthen the game library section",
-    "SERP research was mock data — re-run with real SERP analysis before final publication to validate coverage and differentiation assumptions"
+    "Add the missing FAQ section — this is a required section per the brief and should be prioritized in revision.",
+    "Verify that the 149 built-in games claim is still current at time of publication (flagged by writer).",
+    "Confirm whether Echo Home has volume controls or headphone options before publishing the den/family room subsection (flagged by writer).",
+    "Review whether any specific classic game titles can be named to strengthen the game library and FAQ sections (flagged by writer).",
+    "Confirm whether JVL's commercial arcade heritage can be referenced as an EEAT authority signal — currently unused in the draft.",
+    "Human reviewer should confirm the cabin/lake house use case resonates with actual buyer data (flagged by writer)."
   ]
 }

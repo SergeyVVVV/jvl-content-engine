@@ -152,6 +152,36 @@ class QAAgent:
             )
 
     # ------------------------------------------------------------------
+    # Deterministic normalization
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def _normalize(report: dict) -> dict:
+        """Recompute severity_counts and status from issues[] deterministically.
+
+        The LLM produces issues; this function makes the final verdict a pure
+        function of the issue list, so the gate can never contradict the data.
+        """
+        issues = report.get("issues") or []
+
+        counts = {"high": 0, "medium": 0, "low": 0}
+        for issue in issues:
+            sev = (issue.get("severity") or "").lower()
+            if sev in counts:
+                counts[sev] += 1
+
+        if counts["high"] > 0:
+            status = "fail"
+        elif counts["medium"] > 0:
+            status = "revise"
+        else:
+            status = "pass"
+
+        report["severity_counts"] = counts
+        report["status"] = status
+        return report
+
+    # ------------------------------------------------------------------
     # Auth mode 1: direct Anthropic SDK
     # ------------------------------------------------------------------
 
@@ -268,6 +298,10 @@ class QAAgent:
         # Ensure topic + source_inputs_used are stamped even if model omitted them.
         report.setdefault("topic", topic)
         report.setdefault("source_inputs_used", source_inputs_used)
+        report.setdefault("issues", [])
+
+        # Deterministic normalization: verdict is a pure function of issues[].
+        report = self._normalize(report)
 
         self._validate(report)
         return report

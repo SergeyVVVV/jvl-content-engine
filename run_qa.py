@@ -163,8 +163,7 @@ def main() -> int:
 
     counts = report.get("severity_counts", {})
     print(f"\nQA report saved → {out_path}", file=sys.stderr)
-    print(f"  Status   : {report.get('qa_status')}", file=sys.stderr)
-    print(f"  Readiness: {report.get('publish_readiness')}", file=sys.stderr)
+    print(f"  Status   : {report.get('status')}", file=sys.stderr)
     print(
         f"  Severity : high={counts.get('high', 0)} "
         f"medium={counts.get('medium', 0)} low={counts.get('low', 0)}",

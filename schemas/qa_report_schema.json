@@ -1,45 +1,58 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "QA Report v1",
+  "title": "QA Report v1 (simplified)",
   "type": "object",
   "required": [
     "topic",
-    "qa_status",
-    "overall_verdict",
+    "status",
     "summary",
     "severity_counts",
-    "publish_readiness"
+    "issues",
+    "source_inputs_used"
   ],
   "properties": {
-    "topic": { "type": "string" },
-    "qa_status": { "type": "string", "enum": ["pass", "revise", "fail"] },
-    "overall_verdict": { "type": "string" },
+    "topic":   { "type": "string" },
+    "status":  { "type": "string", "enum": ["pass", "revise", "fail"] },
     "summary": { "type": "string" },
     "severity_counts": {
       "type": "object",
+      "required": ["high", "medium", "low"],
       "properties": {
-        "high": { "type": "integer" },
-        "medium": { "type": "integer" },
-        "low": { "type": "integer" }
-      },
-      "required": ["high", "medium", "low"]
+        "high":   { "type": "integer", "minimum": 0 },
+        "medium": { "type": "integer", "minimum": 0 },
+        "low":    { "type": "integer", "minimum": 0 }
+      }
     },
-    "blocking_issues": { "type": "array", "items": { "$ref": "#/definitions/issue" } },
-    "major_issues":   { "type": "array", "items": { "$ref": "#/definitions/issue" } },
-    "minor_issues":   { "type": "array", "items": { "$ref": "#/definitions/issue" } },
-    "unsupported_claims":      { "type": "array", "items": { "type": "string" } },
-    "brief_alignment_issues":  { "type": "array", "items": { "$ref": "#/definitions/issue" } },
-    "serp_coverage_issues":    { "type": "array", "items": { "$ref": "#/definitions/issue" } },
-    "company_insight_issues":  { "type": "array", "items": { "$ref": "#/definitions/issue" } },
-    "tone_persona_issues":     { "type": "array", "items": { "$ref": "#/definitions/issue" } },
-    "product_fit_issues":      { "type": "array", "items": { "$ref": "#/definitions/issue" } },
-    "strengths":               { "type": "array", "items": { "type": "string" } },
-    "recommended_fixes":       { "type": "array", "items": { "type": "string" } },
-    "claims_to_verify_ok":     { "type": "boolean" },
-    "publish_readiness": {
-      "type": "string",
-      "enum": ["not_ready", "needs_revision", "ready_for_metadata"]
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["severity", "category", "problem"],
+        "properties": {
+          "severity": { "type": "string", "enum": ["high", "medium", "low"] },
+          "category": {
+            "type": "string",
+            "enum": [
+              "factual",
+              "unsupported_claim",
+              "grounding",
+              "brief",
+              "serp",
+              "company_insight",
+              "tone",
+              "quality",
+              "product_fit"
+            ]
+          },
+          "location":        { "type": "string" },
+          "problem":         { "type": "string" },
+          "recommended_fix": { "type": "string" }
+        }
+      }
     },
+    "strengths":          { "type": "array", "items": { "type": "string" } },
+    "recommended_fixes":  { "type": "array", "items": { "type": "string" } },
+    "claims_to_verify_ok": { "type": "boolean" },
     "source_inputs_used": {
       "type": "object",
       "properties": {
@@ -50,19 +63,5 @@
       }
     },
     "todos": { "type": "array", "items": { "type": "string" } }
-  },
-  "definitions": {
-    "issue": {
-      "type": "object",
-      "required": ["severity", "category", "problem"],
-      "properties": {
-        "severity":         { "type": "string", "enum": ["high", "medium", "low"] },
-        "category":         { "type": "string" },
-        "location":         { "type": "string" },
-        "problem":          { "type": "string" },
-        "why_it_matters":   { "type": "string" },
-        "recommended_fix":  { "type": "string" }
-      }
-    }
   }
 }
