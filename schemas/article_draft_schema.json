@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ArticleDraft",
+  "description": "Writer Agent output — structured article draft with QA-friendly metadata.",
+  "type": "object",
+  "properties": {
+    "topic": {
+      "type": "string",
+      "description": "Article topic as passed to the Writer Agent."
+    },
+    "working_title": {
+      "type": "string",
+      "description": "Working title from the brief (may differ from final H1)."
+    },
+    "primary_keyword": {
+      "type": "string",
+      "description": "Primary SEO keyword from the brief."
+    },
+    "search_intent": {
+      "type": "string",
+      "description": "Dominant search intent from the brief (informational / commercial_investigation / transactional)."
+    },
+    "funnel_stage": {
+      "type": "string",
+      "description": "Funnel position: top / mid / bottom."
+    },
+    "product_fit": {
+      "type": "string",
+      "enum": ["high", "medium", "low"],
+      "description": "How strongly the JVL Echo product fits this article topic."
+    },
+    "draft_markdown": {
+      "type": "string",
+      "description": "Full assembled article in markdown — H1 + intro + all sections."
+    },
+    "claims_to_verify": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Claims in the draft requiring business confirmation or external sourcing before publishing."
+    },
+    "source_inputs_used": {
+      "type": "object",
+      "description": "Which upstream inputs were provided to the Writer Agent.",
+      "properties": {
+        "brief": { "type": ["string", "null"] },
+        "serp_research": { "type": ["string", "null"] },
+        "company_insight": { "type": ["string", "null"] }
+      }
+    },
+    "risks_to_review": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Potential issues flagged for human review: tone drift, product over-mention, unsupported claims, etc."
+    },
+    "internal_links_used": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Internal link paths included in the draft."
+    },
+    "todos": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Open items deferred to human review or downstream agents."
+    }
+  },
+  "required": [
+    "topic",
+    "draft_markdown",
+    "claims_to_verify",
+    "source_inputs_used"
+  ]
+}

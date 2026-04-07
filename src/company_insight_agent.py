@@ -180,25 +180,42 @@ CRITICAL OUTPUT RULES:
 
     def _run_via_agent_sdk(self, system_prompt: str, user_message: str) -> dict:
         import anyio
-        from claude_agent_sdk import ClaudeAgentOptions, ResultMessage, query
+        from claude_code_sdk import (
+            AssistantMessage,
+            ClaudeCodeOptions,
+            ResultMessage,
+            TextBlock,
+            query,
+        )
 
-        collected: list[str] = []
+        result_text: list[str] = []
+        assistant_text: list[str] = []
 
         async def _run() -> None:
-            async for message in query(
-                prompt=user_message,
-                options=ClaudeAgentOptions(
-                    system_prompt=system_prompt,
-                    allowed_tools=[],
-                    model=self.model,
-                    max_turns=1,
-                ),
-            ):
-                if isinstance(message, ResultMessage):
-                    collected.append(message.result or "")
+            try:
+                async for message in query(
+                    prompt=user_message,
+                    options=ClaudeCodeOptions(
+                        system_prompt=system_prompt,
+                        allowed_tools=[],
+                        model=self.model,
+                        max_turns=1,
+                    ),
+                ):
+                    if isinstance(message, ResultMessage):
+                        result_text.append(message.result or "")
+                    elif isinstance(message, AssistantMessage):
+                        for block in message.content:
+                            if isinstance(block, TextBlock):
+                                assistant_text.append(block.text)
+            except Exception as exc:
+                if result_text or assistant_text:
+                    print(f"SDK warning (non-fatal, have content): {exc}", file=sys.stderr)
+                else:
+                    raise
 
         anyio.run(_run)
-        raw = "\n".join(collected).strip()
+        raw = "\n".join(result_text).strip() or "\n".join(assistant_text).strip()
         if not raw:
             raise ValueError("Agent SDK returned no content.")
         return self._extract_json(raw)
