@@ -1,34 +1,30 @@
 {
   "topic": "how to choose a home arcade machine",
   "meta_title": "How to Choose a Home Arcade Machine for Your Space",
-  "h1": "How to Choose a Home Arcade Machine Worth Keeping",
-  "meta_description": "A practical guide to choosing a home arcade machine that fits your space, looks right in the room, and stays enjoyable long after the novelty fades.",
+  "h1": "How to Choose a Home Arcade Machine That Actually Fits Your Life",
+  "meta_description": "A practical guide to choosing a home arcade machine based on room fit, build quality, ease of use, and social value — not spec sheets.",
   "slug": "how-to-choose-home-arcade-machine",
   "og_title": "How to Choose a Home Arcade Machine for Your Space",
-  "og_description": "Formats, build quality, game libraries, and setup — what mature homeowners should actually look for in a home arcade machine.",
+  "og_description": "A homeowner's guide to picking a home arcade machine based on room fit, build quality, plug-and-play simplicity, and lasting social value.",
   "image_alt_texts": [
-    "Countertop arcade machine on a wooden home bar surface",
-    "Full-size arcade cabinet, bartop, and countertop formats side by side",
-    "Close-up of arcade machine controls and screen in a home setting",
-    "Home basement lounge with an arcade machine among other furniture",
-    "Two guests playing a bartop arcade machine at a home bar"
+    "Countertop arcade machine on a home bar next to glassware",
+    "Two guests playing a bartop arcade machine in a basement lounge",
+    "Side view of a premium arcade machine on a wooden bar counter",
+    "Home den with warm lighting and a compact arcade machine on a sideboard",
+    "Close-up of arcade machine controls and screen during gameplay"
   ],
-  "excerpt": "A straightforward guide for homeowners choosing a home arcade machine — covering cabinet formats, build quality, game libraries, and what actually matters for long-term enjoyment in a real living space.",
+  "excerpt": "A practical guide to choosing a home arcade machine for your bar, den, or basement lounge — covering room fit, build quality, game library, setup simplicity, and the social value that makes the purchase worth it long-term.",
   "notes": [
-    "meta_title uses 'for Your Space' to differentiate from the h1's 'Worth Keeping' framing",
-    "Avoided year references since the draft is evergreen",
-    "Kept all copy grounded in homeowner language per brief — no gaming-culture jargon",
-    "Slug kept to five words for clean URL without redundancy",
-    "Did not reference 149 built-in games or Echo Home specs in metadata since those are product-page details and the article is informational-first"
+    "H1 matches the draft's existing heading, which is strong and audience-appropriate; meta_title is a shorter variant for SERPs.",
+    "Slug omits 'a' for brevity while staying clear and readable.",
+    "Meta description stays under 155 chars and leads with the practical framing that differentiates this piece from hobbyist guides.",
+    "Image alt texts are inferred from article content — no specific images were provided, so these describe likely supporting visuals.",
+    "Avoided year, superlatives, and any unverified product specs per hard rules."
   ],
   "source_inputs_used": {
     "draft": "outputs/drafts/how-to-choose-a-home-arcade-machine.json",
     "brief": "outputs/briefs/how-to-choose-a-home-arcade-machine.json",
     "qa_report": "outputs/qa/how-to-choose-a-home-arcade-machine.json"
   },
-  "todos": [
-    "Verify the 149 built-in games count is still accurate before any metadata references the number",
-    "Confirm whether Echo Home volume controls or headphone jack exist before adding to alt text or descriptions",
-    "If an FAQ section is added per QA recommendation, consider whether meta_description should reference common questions for snippet eligibility"
-  ]
+  "todos": []
 }

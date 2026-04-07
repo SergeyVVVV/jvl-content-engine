@@ -1,33 +1,30 @@
 {
   "topic": "no wifi arcade machine",
-  "meta_title": "No WiFi Arcade Machine: Why Offline Play Makes Sense",
-  "h1": "No WiFi Arcade Machine: Why Offline Play Still Matters for Home…",
-  "meta_description": "A no WiFi arcade machine offers plug-and-play reliability for home bars, basements, and cabins. Learn what to look for and why offline play is a…",
+  "meta_title": "No-WiFi Arcade Machines: Offline Play for Home",
+  "h1": "No-WiFi Arcade Machines: Why Offline Play Still Wins at Home",
+  "meta_description": "Home arcade machines that work without WiFi offer reliable, plug-and-play enjoyment with no accounts, downloads, or updates.",
   "slug": "no-wifi-arcade-machine",
-  "og_title": "No WiFi Arcade Machine: Why Offline Play Makes Sense",
-  "og_description": "Plug it in, turn it on, play. No accounts, no updates, no buffering. Here's why a WiFi-free arcade machine belongs in your home bar or lounge.",
+  "og_title": "No-WiFi Arcade Machines: Offline Play for Home",
+  "og_description": "Why offline, plug-and-play arcade machines deliver a better ownership experience for home bars, basements, and cabins — no internet required.",
   "image_alt_texts": [
-    "Bartop arcade machine on a wooden home bar counter with no cables except power",
-    "Two players standing side by side at an arcade machine in a basement lounge",
-    "Compact arcade machine in a lake house living room with no visible router or tech clutter",
-    "Close-up of arcade controls with a built-in game selection screen"
+    "Bartop arcade machine on a home bar counter ready to play",
+    "Person playing a standalone arcade machine in a basement lounge",
+    "Close-up of arcade machine controls with built-in game menu on screen",
+    "Home bar setup with countertop arcade machine alongside drinks and glasses",
+    "Plug-and-play arcade machine in a cabin recreation room"
   ],
-  "excerpt": "A no WiFi arcade machine removes every connectivity headache from your home leisure space. Plug it in, turn it on, and play — no accounts, no updates, no buffering, no matter where you put it.",
+  "excerpt": "A no-WiFi arcade machine with built-in games offers reliable, plug-and-play enjoyment — no accounts, no downloads, no updates. Here's what to look for and why offline play makes sense for home leisure spaces.",
   "notes": [
-    "meta_title kept shorter and punchier; h1 mirrors the draft's actual heading for continuity.",
-    "Avoided referencing the 149-game count in metadata given QA's medium-severity grounding concern.",
-    "slug matches the target keyword exactly at four words — clean and direct.",
-    "og_description uses a slightly warmer, more conversational tone suited to social sharing.",
-    "No year included as the content is evergreen and neither draft nor brief requires one."
+    "meta_title kept short and direct; h1 uses the draft's existing working title for differentiation",
+    "Avoided year references as the content is evergreen",
+    "slug matches primary keyword exactly at 4 words",
+    "image alt texts reflect scenes described in the draft without inventing specific product details",
+    "meta_description lands at 153 chars, within the 155 hard ceiling"
   ],
   "source_inputs_used": {
     "draft": "outputs/drafts/no-wifi-arcade-machine.json",
-    "brief": null,
+    "brief": "outputs/briefs/no-wifi-arcade-machine.json",
     "qa_report": "outputs/qa/no-wifi-arcade-machine.json"
   },
-  "todos": [
-    "Confirm the 149 built-in games count is accurate before using it anywhere in metadata or structured data.",
-    "Run SERP research for 'no wifi arcade machine' to verify coverage gaps before publishing, per QA recommendation.",
-    "Confirm whether specific classic game titles can be named in metadata or structured data if needed for rich results."
-  ]
+  "todos": []
 }

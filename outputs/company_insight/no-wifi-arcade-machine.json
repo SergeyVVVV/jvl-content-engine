@@ -1,0 +1,110 @@
+{
+  "topic": "No WiFi arcade machine - standalone arcade machines that work without internet",
+  "brief_alignment": "Strong fit — the 'no WiFi required' and 'plug-and-play' attributes are core confirmed product facts for the JVL Echo Home, and the topic maps directly to the persona's preference for simplicity, reliability, and things that just work. This is one of the strongest possible topic-product alignments in the content system.",
+  "relevant_jvl_angles": [
+    "UVP Pillar 3 (Plug and play) is the lead angle — no WiFi required, no downloads, no setup friction. This is the article's central thesis and the Echo Home's confirmed core strength.",
+    "UVP Pillar 2 (149 built-in games) directly answers the 'built-in vs. downloadable' content gap — a curated, ready-to-play library with no dependency on app stores or internet.",
+    "UVP Pillar 4 (Adult-home fit) differentiates from competitor content that defaults to gamer-culture framing — position offline arcade ownership as a mature, intentional home leisure decision.",
+    "UVP Pillar 1 (Nostalgia, modernized) supports the narrative that offline play is not a step backward but a return to how arcade games were always meant to work — immediate, social, no barriers.",
+    "UVP Pillar 5 (Quietly premium) counters the SERP gap where budget novelty devices are lumped with premium machines — the Echo Home belongs in a different category entirely."
+  ],
+  "relevant_product_facts": [
+    "Premium countertop / bartop arcade machine for home use",
+    "149 built-in games",
+    "Plug-and-play operation",
+    "No WiFi required",
+    "No downloads required",
+    "Designed as a modern revival of classic ECHO bar-top arcade machines",
+    "Core use cases: home bar, basement lounge, recreation room, game room, cabin / lake house leisure space",
+    "Product page: /en/echo",
+    "Home overview page: /en/home",
+    "B2C priority product"
+  ],
+  "natural_product_injection_points": [
+    "In the 'Built-in games vs. downloadable libraries' section — introduce the Echo Home as a concrete example of a curated 149-game built-in library that requires no downloads or accounts.",
+    "In the 'Plug-and-play setup: what to expect' section — reference the Echo Home as a product designed around zero-friction unboxing and immediate play, no WiFi configuration step at all.",
+    "In the dedicated 'How the JVL Echo Home delivers offline, plug-and-play arcade play' section — this is the brief's designated product section and the natural home for the fullest product mention.",
+    "In the 'Where a no-WiFi arcade machine fits best in the home' section — mention the Echo Home's bartop/countertop format as specifically suited to home bars, basement lounges, and cabin leisure spaces.",
+    "In the 'What to look for when choosing a standalone home arcade' section — use the Echo Home as an example of a premium option that checks the key boxes the article has established, without turning the section into a product pitch."
+  ],
+  "unique_brand_perspective": [
+    "JVL can frame 'no WiFi' as a design philosophy rather than a missing feature — the Echo Home was built as an offline-first product, not a connected product with WiFi removed. This is a narrative no generic affiliate reviewer can credibly claim.",
+    "The modern revival of classic bar-top arcade machines gives JVL a heritage angle — offline play is how arcades always worked, and the Echo Home preserves that immediacy by design.",
+    "JVL's adult-home positioning lets it own the conversation about where an arcade machine actually lives in a real household — home bar, basement lounge, den — while competitors default to generic 'game room' or 'man cave' language.",
+    "The brand voice (warm, mature, grounded) is itself a differentiator on this topic — most no-WiFi arcade content is written in gadget-review or young-gamer tone, which alienates the actual premium buyer."
+  ],
+  "eeat_signals": [
+    "JVL manufactures the Echo Home as a dedicated product line — this is first-party product expertise, not an affiliate review. TODO: requires business confirmation — confirm JVL's manufacturing role and company heritage for explicit E-E-A-T claims.",
+    "The article can demonstrate genuine experience-level knowledge of the unbox-to-first-game journey for an offline arcade machine, grounded in confirmed plug-and-play product design.",
+    "Positioning the Echo Home within specific home environments (home bar, basement lounge, cabin) signals practical, real-world experience with the product category.",
+    "TODO: requires business confirmation — any customer reviews, ratings, or testimonial data that could serve as trust signals.",
+    "TODO: requires business confirmation — company history, years in business, or arcade industry background that would strengthen authority."
+  ],
+  "persona_hooks": [
+    "Mark and Linda's frustration with smart devices that require constant updates, passwords, and troubleshooting — the no-WiFi arcade validates their instinct that home leisure should be simpler.",
+    "The hosting scenario: when friends or family visit, the arcade machine just works — no network passwords to share, no connectivity issues, no awkward troubleshooting in front of guests.",
+    "The 'buy it once, enjoy it for years' ownership mindset — an offline machine with built-in games has no subscription creep, no server shutdowns, no forced obsolescence.",
+    "The desire for a conversation-starting centerpiece in their home bar or basement lounge — an arcade machine that works instantly is a better social catalyst than one that needs setup.",
+    "The preference for premium, meaningful objects over trendy gadgets — choosing offline is an intentional quality-of-life decision, not a budget compromise."
+  ],
+  "trust_signals": [
+    "149 built-in games as a concrete, specific number — signals a curated, ready-to-use product rather than vague promises.",
+    "Plug-and-play with no WiFi and no downloads — eliminates the most common friction points buyers worry about with home electronics.",
+    "Bartop/countertop format designed for real home spaces — signals practical product design thinking, not just novelty.",
+    "Modern revival of classic ECHO bar-top arcade format — signals heritage and intentional design lineage.",
+    "TODO: requires business confirmation — warranty length, customer support details, and return policy as closing trust signals.",
+    "TODO: requires business confirmation — verified customer reviews or ratings."
+  ],
+  "claims_to_verify": [
+    "TODO: requires business confirmation — whether the Echo Home has any optional WiFi or connectivity capability at all, or is entirely offline by design.",
+    "TODO: requires business confirmation — whether the 149 built-in games can ever be updated or expanded, or if the library is permanently fixed at purchase.",
+    "TODO: requires business confirmation — whether the Echo Home supports 2-player simultaneous play.",
+    "TODO: requires business confirmation — specific dimensions, weight, or screen size for practical 'will it fit' guidance.",
+    "TODO: requires business confirmation — any specific game titles in the 149-game library that could be named in the article.",
+    "TODO: requires business confirmation — warranty length and customer support channels for the ownership confidence section."
+  ],
+  "forbidden_claims": [
+    "Do not claim specific dimensions, weight, screen size, or resolution for the Echo Home.",
+    "Do not name specific game titles unless confirmed in the knowledge base — none are currently confirmed.",
+    "Do not claim warranty length, return policy, or shipping details.",
+    "Do not state pricing or discounts.",
+    "Do not use 'best', '#1', or 'leading' to describe the Echo Home or its category position.",
+    "Do not make direct comparisons against named competitor products without sourced evidence.",
+    "Do not claim health, safety, legal, or compliance attributes.",
+    "Do not claim environmental or sustainability benefits.",
+    "Do not state or imply the Echo Home supports 2-player play — this is not confirmed in the knowledge base.",
+    "Do not invent statistics or cite 'studies show' claims without a verified source."
+  ],
+  "risks_to_avoid": [
+    "Framing 'no WiFi' as a limitation the buyer must accept rather than an intentional design advantage — the entire article must treat offline operation as a positive.",
+    "Slipping into anti-technology or luddite tone — the angle is smart simplicity for a real home, not rejection of modern technology.",
+    "Using gamer jargon like 'lag-free', 'DRM-free', 'emulation', 'ROM' — these terms alienate the Mark and Linda persona.",
+    "Making the article feel like a product page for the Echo Home — it must deliver genuine standalone value about offline arcade machines before and after any product mention.",
+    "Overstating WiFi-connected device problems in a paranoid or conspiratorial tone — keep the contrast grounded, practical, and relatable.",
+    "Inventing unboxing details or setup steps that are not confirmed — keep the plug-and-play narrative general or flag specifics as TODO.",
+    "Using novelty-gadget, toy, or 'man cave' framing instead of premium adult home leisure language.",
+    "Claiming the 149-game library is better than larger competitor libraries without evidence — frame it as curated quality, not quantity superiority."
+  ],
+  "notes_for_writer": [
+    "The 'no WiFi required' and 'plug-and-play' claims are fully confirmed — lean into these confidently as the article's backbone, but do not extend into unconfirmed technical details about connectivity hardware or update mechanisms.",
+    "Do not claim or imply 2-player support for the Echo Home — this is flagged as unverified. In the FAQ about 2-player on offline machines, answer generically for the category and do not attribute multiplayer capability to the Echo Home specifically.",
+    "When writing the 'Built-in games vs. downloadable libraries' section, use '149 built-in games' as a grounded proof point but do not name specific titles — none are confirmed. Frame the library as curated and permanent, and honestly note the trade-off that the library is fixed at purchase (flag update capability as TODO if the question arises).",
+    "In the dedicated Echo Home section, use only confirmed facts: premium bartop/countertop format, 149 built-in games, plug-and-play, no WiFi, no downloads, modern revival of classic ECHO bar-top arcade machines. Do not invent dimensions, weight, or screen details.",
+    "Use room-specific language from the persona file — home bar, basement lounge, den, cabin, lake house — and avoid generic 'man cave' or 'game room' phrasing. These specific environments are confirmed use cases and resonate directly with Mark and Linda.",
+    "Include one mandatory internal link to /en/echo placed naturally in the dedicated product section, and one additional link to /en/home in a contextually relevant spot such as the 'what to look for' or closing section. Use descriptive, natural anchor text."
+  ],
+  "internal_link_targets": [
+    "/en/echo",
+    "/en/home"
+  ],
+  "todos": [
+    "TODO: requires business confirmation — whether the Echo Home has any optional WiFi or connectivity capability, or is entirely offline-only by design.",
+    "TODO: requires business confirmation — whether the 149-game library can ever be updated or is permanently fixed.",
+    "TODO: requires business confirmation — whether the Echo Home supports 2-player simultaneous play.",
+    "TODO: source not confirmed — specific game titles in the 149-game library.",
+    "TODO: source not confirmed — exact dimensions, weight, and screen size.",
+    "TODO: requires business confirmation — warranty length and customer support details.",
+    "TODO: requires business confirmation — company history, years in arcade industry, manufacturing details for E-E-A-T claims.",
+    "TODO: requires business confirmation — customer reviews, ratings, or testimonial data."
+  ]
+}

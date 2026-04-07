@@ -1,0 +1,83 @@
+{
+  "keyword": "no wifi arcade machine",
+  "topic": "No WiFi arcade machine - standalone arcade machines that work without internet",
+  "serp_status": "mock",
+  "top_results": [],
+  "dominant_search_intent": "[MOCK] Commercial investigation — the searcher is actively researching home arcade machines that do not require internet connectivity, likely comparing options before a purchase decision. Sub-intent is buyer education around offline vs. connected arcade formats.",
+  "common_angles": [
+    "[MOCK] Product roundup angle listing several offline or plug-and-play arcade cabinets available for purchase, often organized by price tier or form factor.",
+    "[MOCK] Buying guide angle focused on what features to look for in a standalone arcade machine, with WiFi-free operation as one of several criteria.",
+    "[MOCK] Comparison angle pitting retro plug-and-play devices against app-based or connected arcade systems.",
+    "[MOCK] Gift guide or novelty gadget angle presenting offline arcade machines as fun holiday or birthday gifts.",
+    "[MOCK] DIY and Raspberry Pi angle explaining how to build your own offline arcade cabinet, which pulls in a technical hobbyist audience rather than premium buyers."
+  ],
+  "common_sections": [
+    "[MOCK] What is a no-WiFi or offline arcade machine — introductory definition section.",
+    "[MOCK] Best no-WiFi arcade machines — ranked or unranked product list with brief descriptions.",
+    "[MOCK] Bartop vs. full-size vs. countertop — form factor comparison.",
+    "[MOCK] How many games are included — discussion of built-in game libraries and what genres to expect.",
+    "[MOCK] Setup and installation — brief overview of plug-and-play unboxing experience.",
+    "[MOCK] Pros and cons of offline vs. connected arcade machines.",
+    "[MOCK] FAQ section covering basic questions about multiplayer, game updates, and compatibility.",
+    "[MOCK] Where to buy — links to retailers or manufacturer sites."
+  ],
+  "competitor_strengths": [
+    "[MOCK] Many ranking pages provide concrete product recommendations with photos and pricing, which gives the reader immediate actionable options.",
+    "[MOCK] Listicle-format articles tend to rank well because they match the commercial investigation intent with scannable, comparative content.",
+    "[MOCK] Some articles do a reasonable job explaining the plug-and-play concept and reassuring buyers that no technical skill is required.",
+    "[MOCK] Affiliate-driven content often includes real user review excerpts or aggregated ratings, adding a layer of social proof."
+  ],
+  "competitor_weaknesses": [
+    "[MOCK] Most ranking content treats offline operation as a default product spec rather than exploring why it matters to the buyer — the reliability, simplicity, and no-subscription benefits are rarely articulated.",
+    "[MOCK] Articles tend to lump budget novelty devices alongside premium machines, creating a confusing quality spectrum that does not help a discerning buyer.",
+    "[MOCK] Very few articles address the real-world frustrations of WiFi-dependent home entertainment devices, missing the emotional resonance of why someone specifically searches for a no-WiFi option.",
+    "[MOCK] Content is overwhelmingly written in a young-gamer or gadget-reviewer tone, alienating older homeowners who are the more likely premium buyers.",
+    "[MOCK] Setup sections are typically one or two generic sentences rather than a genuine walkthrough of the unboxing and first-play experience.",
+    "[MOCK] Almost no content discusses where in the home an arcade machine fits best — living room, basement, home bar — or how it integrates with existing decor and leisure spaces."
+  ],
+  "content_gaps": [
+    "[MOCK] No content meaningfully explains the long-term ownership advantages of offline arcade machines — no forced updates, no discontinued servers, no subscription creep.",
+    "[MOCK] The connection between no-WiFi operation and reliability for hosting and entertaining is almost never made — guests should not have to troubleshoot connectivity to play.",
+    "[MOCK] Very few articles address the specific concerns of a homeowner who has experienced smart-device frustration and is deliberately seeking something simpler.",
+    "[MOCK] The quality and craftsmanship dimension of premium offline arcade machines is typically absent — most content defaults to budget-tier plastic cabinets.",
+    "[MOCK] Multiplayer capability on offline machines is rarely discussed in practical terms — how two people actually play together without network features.",
+    "[MOCK] No ranking content frames the no-WiFi choice as a smart, intentional decision rather than a budget compromise or feature limitation."
+  ],
+  "differentiation_opportunities": [
+    "[MOCK] JVL can own the narrative that choosing offline is a premium, intentional decision — not a step backward — by connecting it to the broader trend of smart simplicity in home design.",
+    "[MOCK] Writing from the Mark and Linda persona perspective gives JVL a tone and audience fit that no gadget-review or affiliate site can replicate — mature, homeowner-focused, quality-conscious.",
+    "[MOCK] A genuine section on where a no-WiFi arcade machine fits in the home — basement lounge, home bar, family room — adds practical lifestyle value that competitors skip entirely.",
+    "[MOCK] JVL can provide a detailed, confident unboxing-to-first-game narrative that reassures buyers there is truly zero setup friction, which most competitor content handles in a throwaway sentence.",
+    "[MOCK] Addressing the built-in game library as curated quality rather than sheer quantity differentiates from competitors who focus only on game count as a ranking metric.",
+    "[MOCK] JVL can honestly address what you give up without WiFi — no over-the-air updates, fixed library — and frame it as a strength, showing editorial confidence that competitors lack."
+  ],
+  "paa_answered": [
+    "[MOCK] 'Do arcade machines for home use need WiFi to work?' — typically answered superficially in introductory paragraphs of buying guides, usually with a simple no.",
+    "[MOCK] 'How many games do standalone arcade machines typically come with?' — frequently addressed in product listings, though answers vary widely and lack context about game quality.",
+    "[MOCK] 'How do you set up a plug-and-play arcade machine at home?' — sometimes touched on briefly, but rarely with enough detail to be genuinely reassuring."
+  ],
+  "paa_missed": [
+    "[MOCK] 'What is the advantage of an arcade machine with built-in games vs. one that downloads games?' — this comparison is rarely framed as a deliberate ownership philosophy and is typically reduced to a spec-sheet bullet point.",
+    "[MOCK] 'Will a no-WiFi arcade machine still get new games or updates?' — almost never addressed honestly, leaving buyers uncertain about what they are committing to.",
+    "[MOCK] 'Are offline arcade machines less advanced than connected ones?' — this concern is rarely acknowledged or reframed, leaving a lingering perception that offline means inferior.",
+    "[MOCK] 'What happens if a WiFi-dependent arcade machine loses internet access?' — this scenario is virtually never discussed by competitor content, despite being a powerful argument for offline machines.",
+    "[MOCK] 'Can you play two players on a no-WiFi arcade machine?' — multiplayer on offline machines is rarely explained in practical, reassuring terms."
+  ],
+  "risks_to_avoid": [
+    "[MOCK] Do not frame offline capability as a workaround or budget compromise — the entire article must position it as a deliberate premium choice.",
+    "[MOCK] Avoid anti-technology or paranoid language about WiFi, smart devices, or connected products — the tone should be confident and pragmatic, not fearful.",
+    "[MOCK] Do not use gamer-culture jargon like 'DRM-free', 'lag-free', 'emulation', or 'ROM' — this alienates the target persona and signals the wrong audience.",
+    "[MOCK] Avoid comparing directly to named competitor products without verified data — keep comparisons at the category level.",
+    "[MOCK] Do not let the article become a thinly disguised product page — the majority of content must be genuinely useful buying education before any product mention.",
+    "[MOCK] Avoid implying that more games automatically means better — the Mark and Linda persona values quality and curation over sheer volume.",
+    "[MOCK] Do not use novelty-gadget or toy framing — language should consistently reflect premium home leisure, not impulse-buy entertainment."
+  ],
+  "notes_for_writer": [
+    "[MOCK] Open by validating the reader's frustration with WiFi-dependent home devices before introducing arcade machines — this creates immediate emotional alignment with the Mark and Linda persona.",
+    "[MOCK] The built-in games vs. downloadable games section is a key differentiator — frame built-in libraries as curated, tested, and permanent rather than limited, and address the update question honestly.",
+    "[MOCK] Dedicate a full section to the unboxing-to-first-game experience with enough sensory detail that the reader can picture it happening in their own home — this is where most competitor content falls flat.",
+    "[MOCK] When discussing where the machine fits in the home, use specific room contexts that resonate with the persona — basement bar, den, lake house game room — not generic 'man cave' language.",
+    "[MOCK] Introduce the JVL Echo Home only after the reader has received substantial standalone value from the article — the product mention should feel like a natural answer to questions the article has already raised.",
+    "[MOCK] In the FAQ section, prioritize the PAA questions that competitors miss — especially the WiFi-dependent failure scenario and the honest answer about updates — as these represent the strongest content gap opportunities."
+  ]
+}
