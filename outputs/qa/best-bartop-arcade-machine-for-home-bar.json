@@ -1,0 +1,101 @@
+{
+  "topic": "best bartop arcade machine for home bar",
+  "status": "revise",
+  "summary": "The draft is well-written with strong tone control, good brief alignment, and disciplined product integration. It avoids gamer jargon and reads like a genuine home-furnishing buyer guide. However, it has several medium-severity issues: a missing required section (FAQ), some unverified factual claims presented in the body text without adequate hedging, and a few areas where the article implies product features (2-player, volume control) that the writer flagged as unconfirmed. No high-severity issues were found because the writer was careful to flag uncertain claims with TODOs and avoid invented specs, but the unverified dimensional claims are stated as fact in the prose and need hedging or removal until confirmed.",
+  "severity_counts": {
+    "high": 0,
+    "medium": 5,
+    "low": 3
+  },
+  "issues": [
+    {
+      "severity": "medium",
+      "category": "brief",
+      "location": "Required sections list",
+      "problem": "The brief requires a 'Frequently asked questions' section. The draft excludes it with a note that it will be handled by faq_agent, but the brief lists it as a required section. If FAQ is genuinely delegated to another agent, this is acceptable — but the brief alignment is technically incomplete.",
+      "recommended_fix": "Confirm with pipeline owner that FAQ delegation to faq_agent satisfies the brief requirement. If not, add a placeholder FAQ section covering the 8 questions_to_answer from the brief."
+    },
+    {
+      "severity": "medium",
+      "category": "grounding",
+      "location": "How Size and Form Factor Affect Your Bar Layout — 'A standard home bar counter typically runs between 42 and 48 inches high, with a depth of 18 to 30 inches'",
+      "problem": "Specific dimensional claims (42-48 inches high, 18-30 inches deep) are stated as fact in the prose but flagged as unverified in the TODOs. Readers and editors may take these as sourced figures.",
+      "recommended_fix": "Soften to approximate language: 'Most home bar counters are roughly 42 to 48 inches high, though dimensions vary by design' — or remove until verified."
+    },
+    {
+      "severity": "medium",
+      "category": "grounding",
+      "location": "How Size and Form Factor — 'A full-size cabinet demands floor space, often three to four feet of depth'",
+      "problem": "Full-size cabinet dimensions stated as fact but flagged as unverified. This is a less critical claim but still presents unconfirmed specifics.",
+      "recommended_fix": "Hedge with 'typically' or 'can require' phrasing, or verify against a reliable source before publication."
+    },
+    {
+      "severity": "medium",
+      "category": "product_fit",
+      "location": "Two-player capability section + JVL Echo Home section",
+      "problem": "The buying criteria section emphasizes two-player capability as essential for a home bar. The Echo Home section does not confirm or deny this feature, and the writer flagged it as unverified. This creates an implicit gap — the article sets up 2-player as a key criterion and then spotlights a product without confirming it meets that criterion.",
+      "recommended_fix": "Either confirm 2-player support from JVL sources and state it, or add a note in the Echo Home section like 'Check the product page for current multiplayer details' to avoid the implication gap."
+    },
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "Top Bartop Arcade Machines Worth Considering — DIY and Budget categories",
+      "problem": "The DIY and budget categories are thin and vague — no specific products named, no price anchors, no distinguishing details. For a buyer guide, these placeholder categories weaken the article's usefulness and credibility as a genuine roundup. The writer correctly avoided inventing product names, but the section reads as incomplete.",
+      "recommended_fix": "Either add verified competitor examples (at least 1-2 named products per category with confirmed specs) before publication, or restructure the section to focus solely on category-level decision criteria without implying it is a product roundup."
+    },
+    {
+      "severity": "low",
+      "category": "tone",
+      "location": "Introduction — 'the stakes are a little different'",
+      "problem": "The word 'stakes' slightly over-dramatizes the purchase decision for a bartop arcade. Minor, but slightly misaligned with the understated premium tone.",
+      "recommended_fix": "Consider 'the criteria are a little different' or 'the considerations shift' — minor polish."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "How the JVL Echo Home Fits — 'For Mark and Linda'",
+      "problem": "The brief's persona names (Mark and Linda) appear directly in the article text. These are internal persona labels, not public-facing references. A reader would not know who Mark and Linda are.",
+      "recommended_fix": "Replace 'For Mark and Linda - or anyone who has invested...' with 'For anyone who has invested thought and money into their home bar' or similar generic phrasing."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Setting Up Your Bartop Arcade — final paragraph CTA",
+      "problem": "The link to /en/home with text 'explore the JVL home page for inspiration' feels slightly disconnected from the section's practical placement tips. It is a soft CTA but reads as an afterthought.",
+      "recommended_fix": "Tie the link more naturally to the section content, e.g., 'For more on designing a home leisure space around arcade entertainment, see [how JVL approaches home setups](/en/home).'"
+    }
+  ],
+  "strengths": [
+    "Excellent tone control throughout — reads as understated premium lifestyle content, not a gamer-affiliate roundup or flashy luxury piece",
+    "Strong brief alignment on angle, audience, and article structure; all required sections covered except FAQ (delegated)",
+    "Product integration is natural and earned — Echo Home is introduced after genuine buying criteria are established, avoiding the feel of a product page in disguise",
+    "Writer exercised strong claims discipline by flagging all unverified specs as TODOs rather than inventing them",
+    "The built-in vs. download-based section is genuinely useful and differentiating — not typically covered in competitor guides",
+    "Internal links to /en/echo and /en/home are placed naturally without feeling forced",
+    "The social-anchor framing (arcade as conversation piece, not distraction) is well-executed and aligned with the Mark & Linda persona",
+    "No gamer jargon, no affiliate hype, no spec-sheet comparisons — risks_to_avoid from the brief are all respected"
+  ],
+  "recommended_fixes": [
+    "Remove the persona names 'Mark and Linda' from the article body — these are internal labels not meaningful to readers",
+    "Hedge or soften the unverified dimensional claims (bar counter dimensions, full-size cabinet depth) until sources are confirmed",
+    "Resolve the 2-player gap: either confirm Echo Home supports it and state so, or acknowledge the gap explicitly so readers are not left assuming",
+    "Flesh out the competitor categories with at least 1-2 verified product examples each, or restructure that section to avoid implying a roundup it cannot deliver",
+    "Confirm FAQ section delegation to faq_agent is accepted pipeline behavior; if not, add FAQ content"
+  ],
+  "claims_to_verify_ok": true,
+  "source_inputs_used": {
+    "draft": "outputs/drafts/best-bartop-arcade-machine-for-home-bar.json",
+    "brief": "outputs/briefs/bartop-arcade-machine-for-home-bar.json",
+    "serp_research": null,
+    "company_insight": null
+  },
+  "todos": [
+    "SERP research was not provided — could not verify coverage of expected SERP topics, content gaps, or differentiation against ranking competitors",
+    "Company insight was not provided — could not verify whether all available JVL angles, EEAT signals, or injection points were used",
+    "Confirm with pipeline owner whether FAQ delegation to faq_agent satisfies the brief's required_sections list",
+    "Verify JVL Echo Home 2-player support, volume control, exact dimensions, and weight before publication",
+    "Verify standard home bar counter dimensions (42-48in high, 18-30in deep) against a reliable building/design source",
+    "Verify full-size arcade cabinet typical depth claim (3-4 feet)",
+    "Add verified competitor product names to the roundup section or restructure to category-level guidance only"
+  ]
+}

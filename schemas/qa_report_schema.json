@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QA Report v1 (simplified)",
+  "type": "object",
+  "required": [
+    "topic",
+    "status",
+    "summary",
+    "severity_counts",
+    "issues",
+    "source_inputs_used"
+  ],
+  "properties": {
+    "topic":   { "type": "string" },
+    "status":  { "type": "string", "enum": ["pass", "revise", "fail"] },
+    "summary": { "type": "string" },
+    "severity_counts": {
+      "type": "object",
+      "required": ["high", "medium", "low"],
+      "properties": {
+        "high":   { "type": "integer", "minimum": 0 },
+        "medium": { "type": "integer", "minimum": 0 },
+        "low":    { "type": "integer", "minimum": 0 }
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["severity", "category", "problem"],
+        "properties": {
+          "severity": { "type": "string", "enum": ["high", "medium", "low"] },
+          "category": {
+            "type": "string",
+            "enum": [
+              "factual",
+              "unsupported_claim",
+              "grounding",
+              "brief",
+              "serp",
+              "company_insight",
+              "tone",
+              "quality",
+              "product_fit"
+            ]
+          },
+          "location":        { "type": "string" },
+          "problem":         { "type": "string" },
+          "recommended_fix": { "type": "string" }
+        }
+      }
+    },
+    "strengths":          { "type": "array", "items": { "type": "string" } },
+    "recommended_fixes":  { "type": "array", "items": { "type": "string" } },
+    "claims_to_verify_ok": { "type": "boolean" },
+    "source_inputs_used": {
+      "type": "object",
+      "properties": {
+        "draft":           { "type": ["string", "null"] },
+        "brief":           { "type": ["string", "null"] },
+        "serp_research":   { "type": ["string", "null"] },
+        "company_insight": { "type": ["string", "null"] }
+      }
+    },
+    "todos": { "type": "array", "items": { "type": "string" } }
+  }
+}
