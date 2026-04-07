@@ -1,0 +1,34 @@
+{
+  "topic": "how to choose a home arcade machine",
+  "meta_title": "How to Choose a Home Arcade Machine for Your Space",
+  "h1": "How to Choose a Home Arcade Machine Worth Keeping",
+  "meta_description": "A practical guide to choosing a home arcade machine that fits your space, looks right in the room, and stays enjoyable long after the novelty fades.",
+  "slug": "how-to-choose-home-arcade-machine",
+  "og_title": "How to Choose a Home Arcade Machine for Your Space",
+  "og_description": "Formats, build quality, game libraries, and setup — what mature homeowners should actually look for in a home arcade machine.",
+  "image_alt_texts": [
+    "Countertop arcade machine on a wooden home bar surface",
+    "Full-size arcade cabinet, bartop, and countertop formats side by side",
+    "Close-up of arcade machine controls and screen in a home setting",
+    "Home basement lounge with an arcade machine among other furniture",
+    "Two guests playing a bartop arcade machine at a home bar"
+  ],
+  "excerpt": "A straightforward guide for homeowners choosing a home arcade machine — covering cabinet formats, build quality, game libraries, and what actually matters for long-term enjoyment in a real living space.",
+  "notes": [
+    "meta_title uses 'for Your Space' to differentiate from the h1's 'Worth Keeping' framing",
+    "Avoided year references since the draft is evergreen",
+    "Kept all copy grounded in homeowner language per brief — no gaming-culture jargon",
+    "Slug kept to five words for clean URL without redundancy",
+    "Did not reference 149 built-in games or Echo Home specs in metadata since those are product-page details and the article is informational-first"
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/drafts/how-to-choose-a-home-arcade-machine.json",
+    "brief": "outputs/briefs/how-to-choose-a-home-arcade-machine.json",
+    "qa_report": "outputs/qa/how-to-choose-a-home-arcade-machine.json"
+  },
+  "todos": [
+    "Verify the 149 built-in games count is still accurate before any metadata references the number",
+    "Confirm whether Echo Home volume controls or headphone jack exist before adding to alt text or descriptions",
+    "If an FAQ section is added per QA recommendation, consider whether meta_description should reference common questions for snippet eligibility"
+  ]
+}

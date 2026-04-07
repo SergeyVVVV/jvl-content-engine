@@ -1,0 +1,33 @@
+{
+  "topic": "no wifi arcade machine",
+  "meta_title": "No WiFi Arcade Machine: Why Offline Play Makes Sense",
+  "h1": "No WiFi Arcade Machine: Why Offline Play Still Matters for Home…",
+  "meta_description": "A no WiFi arcade machine offers plug-and-play reliability for home bars, basements, and cabins. Learn what to look for and why offline play is a…",
+  "slug": "no-wifi-arcade-machine",
+  "og_title": "No WiFi Arcade Machine: Why Offline Play Makes Sense",
+  "og_description": "Plug it in, turn it on, play. No accounts, no updates, no buffering. Here's why a WiFi-free arcade machine belongs in your home bar or lounge.",
+  "image_alt_texts": [
+    "Bartop arcade machine on a wooden home bar counter with no cables except power",
+    "Two players standing side by side at an arcade machine in a basement lounge",
+    "Compact arcade machine in a lake house living room with no visible router or tech clutter",
+    "Close-up of arcade controls with a built-in game selection screen"
+  ],
+  "excerpt": "A no WiFi arcade machine removes every connectivity headache from your home leisure space. Plug it in, turn it on, and play — no accounts, no updates, no buffering, no matter where you put it.",
+  "notes": [
+    "meta_title kept shorter and punchier; h1 mirrors the draft's actual heading for continuity.",
+    "Avoided referencing the 149-game count in metadata given QA's medium-severity grounding concern.",
+    "slug matches the target keyword exactly at four words — clean and direct.",
+    "og_description uses a slightly warmer, more conversational tone suited to social sharing.",
+    "No year included as the content is evergreen and neither draft nor brief requires one."
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/drafts/no-wifi-arcade-machine.json",
+    "brief": null,
+    "qa_report": "outputs/qa/no-wifi-arcade-machine.json"
+  },
+  "todos": [
+    "Confirm the 149 built-in games count is accurate before using it anywhere in metadata or structured data.",
+    "Run SERP research for 'no wifi arcade machine' to verify coverage gaps before publishing, per QA recommendation.",
+    "Confirm whether specific classic game titles can be named in metadata or structured data if needed for rich results."
+  ]
+}
