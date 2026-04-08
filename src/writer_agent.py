@@ -271,6 +271,7 @@ CRITICAL OUTPUT RULES:
     # ------------------------------------------------------------------
 
     def _run_via_agent_sdk(self, system_prompt: str, user_message: str) -> dict:
+        import time
         import anyio
         from claude_code_sdk import (
             AssistantMessage,
@@ -280,46 +281,87 @@ CRITICAL OUTPUT RULES:
             query,
         )
 
-        result_text: list[str] = []   # from ResultMessage (preferred)
-        assistant_text: list[str] = []  # from AssistantMessage (fallback)
+        # The Writer Agent generates a large response; rate_limit_event can fire
+        # before content arrives. Retry up to 3 times with backoff.
+        max_attempts = 3
+        for attempt in range(max_attempts):
+            result_text: list[str] = []
+            assistant_text: list[str] = []
 
-        async def _run() -> None:
+            async def _run() -> None:
+                try:
+                    async for message in query(
+                        prompt=user_message,
+                        options=ClaudeCodeOptions(
+                            system_prompt=system_prompt,
+                            allowed_tools=[],
+                            model=self.model,
+                            max_turns=1,
+                        ),
+                    ):
+                        if isinstance(message, ResultMessage):
+                            result_text.append(message.result or "")
+                        elif isinstance(message, AssistantMessage):
+                            for block in message.content:
+                                if isinstance(block, TextBlock):
+                                    assistant_text.append(block.text)
+                except Exception as exc:
+                    # If we already have usable content, treat as non-fatal warning.
+                    if result_text or assistant_text:
+                        print(
+                            f"SDK warning (non-fatal, have content): {exc}",
+                            file=sys.stderr,
+                        )
+                    else:
+                        raise
+
             try:
-                async for message in query(
-                    prompt=user_message,
-                    options=ClaudeCodeOptions(
-                        system_prompt=system_prompt,
-                        allowed_tools=[],
-                        model=self.model,
-                        max_turns=1,
-                    ),
-                ):
-                    if isinstance(message, ResultMessage):
-                        result_text.append(message.result or "")
-                    elif isinstance(message, AssistantMessage):
-                        for block in message.content:
-                            if isinstance(block, TextBlock):
-                                assistant_text.append(block.text)
+                anyio.run(_run)
             except Exception as exc:
-                # Some SDK versions raise on unknown event types (e.g. rate_limit_event).
-                # If we already have usable content, treat this as a non-fatal warning.
-                if result_text or assistant_text:
+                is_rate_limit = "rate_limit" in str(exc).lower()
+                if is_rate_limit and attempt < max_attempts - 1:
+                    wait = [30, 60, 120][attempt]
                     print(
-                        f"SDK warning (non-fatal, have content): {exc}",
+                        f"  Rate limit (attempt {attempt + 1}/{max_attempts}) — "
+                        f"retrying in {wait}s…",
                         file=sys.stderr,
                     )
-                else:
+                    time.sleep(wait)
+                    continue
+                raise
+
+            # Prefer ResultMessage; fall back to assembled AssistantMessage text.
+            raw = "\n".join(result_text).strip()
+            if not raw:
+                raw = "\n".join(assistant_text).strip()
+
+            if raw:
+                try:
+                    return self._extract_json(raw)
+                except (json.JSONDecodeError, ValueError) as parse_exc:
+                    # Truncated JSON — rate_limit interrupted mid-stream.
+                    if attempt < max_attempts - 1:
+                        wait = [30, 60, 120][attempt]
+                        print(
+                            f"  Truncated JSON (attempt {attempt + 1}) — "
+                            f"retrying in {wait}s…",
+                            file=sys.stderr,
+                        )
+                        time.sleep(wait)
+                        continue
                     raise
 
-        anyio.run(_run)
+            # No content — retry if attempts remain.
+            if attempt < max_attempts - 1:
+                wait = [30, 60, 120][attempt]
+                print(
+                    f"  No content returned (attempt {attempt + 1}) — "
+                    f"retrying in {wait}s…",
+                    file=sys.stderr,
+                )
+                time.sleep(wait)
 
-        # Prefer ResultMessage; fall back to assembled AssistantMessage text.
-        raw = "\n".join(result_text).strip()
-        if not raw:
-            raw = "\n".join(assistant_text).strip()
-        if not raw:
-            raise ValueError("Agent SDK returned no content.")
-        return self._extract_json(raw)
+        raise ValueError("Agent SDK returned no content after all retries.")
 
     # ------------------------------------------------------------------
     # Public interface
