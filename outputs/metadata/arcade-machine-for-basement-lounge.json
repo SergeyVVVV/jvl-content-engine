@@ -1,0 +1,34 @@
+{
+  "topic": "arcade machine for basement lounge",
+  "meta_title": "Choosing the Right Arcade Machine for a Basement Lounge",
+  "h1": "How to Choose an Arcade Machine for Your Basement Lounge",
+  "meta_description": "A practical guide to choosing a home arcade machine that fits a finished basement lounge — covering format, size, setup, aesthetic fit, and social value.",
+  "slug": "arcade-machine-for-basement-lounge",
+  "og_title": "Finding the Right Arcade Machine for Your Basement Lounge",
+  "og_description": "Format, placement, and style — what to consider when adding a home arcade machine to a finished basement lounge.",
+  "image_alt_texts": [
+    "Bartop arcade machine sitting on a wooden home bar counter in a warmly lit basement lounge",
+    "Finished basement lounge with comfortable seating, ambient lighting, and a bar area",
+    "Two people playing a countertop arcade machine at a home bar during a social evening",
+    "Close-up of a bartop arcade machine screen and controls on a polished counter surface",
+    "Basement entertainment space with wood accents, dim lighting, and bar seating"
+  ],
+  "excerpt": "A guide to choosing a home arcade machine that fits a finished basement lounge — covering format, placement, aesthetic fit, and why a bartop arcade is usually the better call for an upscale home space.",
+  "notes": [
+    "h1 echoes the draft's working title; meta_title uses a shorter phrasing to differentiate the two",
+    "Slug matches the brief's primary keyword exactly",
+    "og_title uses a slightly warmer verb (Finding) for social sharing while staying under 60 chars",
+    "No year included — neither draft nor brief requires date-specificity",
+    "Image alt texts inferred from scenes described in the draft; no specific product photography confirmed"
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/drafts/arcade-machine-for-basement-lounge.json",
+    "brief": "outputs/briefs/arcade-machine-for-basement-lounge.json",
+    "qa_report": "outputs/qa/arcade-machine-for-basement-lounge.json"
+  },
+  "todos": [
+    "Confirm JVL Echo Home product page URL (/en/echo) is live and returns the correct page before publishing",
+    "If actual product photography or lifestyle images are sourced, update image_alt_texts to describe the real images rather than these placeholder descriptions",
+    "Verify the meta_description renders fully in Google SERP previews — the em-dash may truncate differently across devices"
+  ]
+}

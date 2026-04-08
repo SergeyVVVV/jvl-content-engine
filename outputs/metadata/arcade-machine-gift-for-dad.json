@@ -1,0 +1,35 @@
+{
+  "topic": "arcade machine gift for dad",
+  "meta_title": "Arcade Machine Gift for Dad: Choosing the Right One",
+  "h1": "Why a Home Arcade Machine Is the Perfect Gift for Dad",
+  "meta_description": "A practical guide to choosing a home arcade machine as a gift for dad. What to look for in size, setup ease, game library, and home fit.",
+  "slug": "arcade-machine-gift-for-dad",
+  "og_title": "The Home Arcade Gift Your Dad Will Actually Use",
+  "og_description": "Your dad grew up in arcades. A home arcade brings that feeling back. Here's how to choose the right one as a lasting gift.",
+  "image_alt_texts": [
+    "Bartop arcade machine on a home bar counter with warm ambient lighting",
+    "Dad and adult child playing a countertop arcade machine together",
+    "Bartop arcade next to a decanter and glasses in a basement lounge",
+    "Countertop arcade machine set up in a den alongside books and furniture",
+    "Close-up of classic arcade game on a home arcade screen"
+  ],
+  "excerpt": "A guide to choosing a home arcade machine as a meaningful, lasting gift for dad — covering game libraries, setup simplicity, home fit, and how to make the moment memorable.",
+  "notes": [
+    "meta_title uses the primary keyword naturally while h1 mirrors the draft's editorial voice",
+    "og_title is warmer and more conversational for social sharing without crossing into clickbait",
+    "Avoided year references since the draft and brief do not require a time-specific angle",
+    "slug matches the primary keyword exactly for clean URL alignment",
+    "image alt texts reflect scenes described in the article — home bar, basement lounge, den, shared play — without inventing product specs or details",
+    "Did not reference 149 games or JVL Echo Home in metadata to keep it guide-focused rather than product-page-like"
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/drafts/arcade-machine-gift-for-dad.json",
+    "brief": "outputs/briefs/arcade-machine-gift-for-dad.json",
+    "qa_report": "outputs/qa/arcade-machine-gift-for-dad.json"
+  },
+  "todos": [
+    "Confirm the draft's final H1 after QA revisions are applied — the h1 field here matches the current draft heading",
+    "If specific game titles are confirmed for the Echo Home library, consider weaving one into the meta description for specificity",
+    "Verify image assets exist or are planned for the alt texts provided — adjust if the visual direction differs"
+  ]
+}
