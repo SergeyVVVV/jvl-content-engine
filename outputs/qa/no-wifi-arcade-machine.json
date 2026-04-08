@@ -1,83 +1,95 @@
 {
   "topic": "no wifi arcade machine",
   "status": "revise",
-  "summary": "The draft is well-written with a strong, natural tone that fits the JVL Echo Home brand voice. It handles the offline/no-WiFi angle convincingly and integrates the product without feeling forced. However, there are a few medium-severity issues: the '149 built-in games' claim, while noted in claims_to_verify, is stated as hard fact in the body and needs grounding confirmation; the piece lacks upstream context (brief, SERP, company insight) making it impossible to verify alignment or coverage; and there are a couple of spots with light AI filler patterns. No high-severity issues were found — no invented specs beyond what the knowledge base reportedly confirms, no fabricated testimonials, and no unsupported superlative claims.",
+  "summary": "The draft is well-structured, tonally appropriate, and factually disciplined — no invented specs, no forbidden claims violated, and the writer correctly avoided unconfirmed details like 2-player support and specific game titles. Brief alignment is strong across all required sections. However, the draft suffers from repetitive messaging (the 'no WiFi, no downloads, plug it in and play' formula appears in nearly identical phrasing across five sections) and the Echo Home is mentioned in five of seven body sections, which pushes the article toward product-page territory despite the brief's instruction to deliver substantial standalone value before product mentions. The dedicated Echo Home section (section 7) adds almost no new information beyond what was already stated in prior mentions. These repetition and product-density issues warrant a revision pass.",
   "severity_counts": {
     "high": 0,
-    "medium": 3,
+    "medium": 4,
     "low": 3
   },
   "issues": [
     {
       "severity": "medium",
-      "category": "grounding",
-      "location": "JVL Echo Home paragraph — '149 built-in games'",
-      "problem": "The specific game count of 149 is stated as fact in the draft body. The claims_to_verify section says 'confirmed in knowledge base' but the QA agent has no access to that knowledge base to independently verify. If this number is wrong, it is a high-severity factual error.",
-      "recommended_fix": "Human reviewer must confirm 149 is the current, accurate game count on the live /en/echo page before publishing. If unverifiable, soften to 'more than 100 built-in games' or similar hedged phrasing."
+      "category": "quality",
+      "location": "Multiple sections — 'Built-in Games vs. Downloadable', 'Plug-and-Play Setup', 'How the JVL Echo Home Delivers'",
+      "problem": "The core value proposition ('no WiFi, no downloads, no accounts, plug it in and play') is stated in nearly identical phrasing at least five times across the article. Sections 3, 4, and 7 in particular echo each other closely, making the second half feel repetitive.",
+      "recommended_fix": "Vary the framing in each section — e.g., section 3 focuses on library ownership, section 4 on the unboxing moment, section 7 on design philosophy. Cut redundant restatements of the same bullet list of 'no WiFi, no downloads, no accounts.'"
+    },
+    {
+      "severity": "medium",
+      "category": "product_fit",
+      "location": "Sections 3 through 7 (five consecutive sections mention Echo Home)",
+      "problem": "The Echo Home is mentioned in five of seven body sections. The brief instructs to 'introduce the JVL Echo Home only after the reader has received substantial standalone value' and the company insight warns against making the article 'feel like a product page.' While each individual mention is reasonably natural, the cumulative density is high for an informational article.",
+      "recommended_fix": "Remove or reduce the Echo Home mention in either the 'Plug-and-Play Setup' section (section 4) or the 'Where a No-WiFi Arcade Machine Fits Best' section (section 5). Keep the strongest mentions in sections 3 (built-in games proof point), 7 (dedicated product section), and the closing CTA. Three to four mentions is the right density."
     },
     {
       "severity": "medium",
       "category": "quality",
-      "location": "Opening paragraph — 'Your coffee maker doesn't need an app. Your bookshelf doesn't need a firmware update.'",
-      "problem": "The rhetorical triple (coffee maker / bookshelf / arcade) is a well-worn internet-essay pattern that risks feeling like generic blog filler. It's competent but not distinctive.",
-      "recommended_fix": "Replace with a more specific, persona-relevant opening — e.g., a scene-setting moment in a home bar or lake house that grounds the reader in the target lifestyle immediately."
+      "location": "How the JVL Echo Home Delivers Offline, Plug-and-Play Arcade Play (section 7)",
+      "problem": "This dedicated product section largely restates facts already covered in sections 3, 4, and 5 (149 games, plug-and-play, bartop format, home bar/basement/cabin fit). It reads as a summary of the article rather than adding new product-specific value.",
+      "recommended_fix": "Tighten section 7 to focus on what has NOT been said yet — the design philosophy ('modern revival of classic ECHO bar-top arcade machines'), the curated-not-bloated library approach, and the premium build intent. Cut the restatement of plug-and-play and placement details already covered."
     },
     {
       "severity": "medium",
-      "category": "serp",
-      "location": "Entire article",
-      "problem": "No SERP research was provided, so it is impossible to verify whether the article covers the topics, questions, and subtopics that real searchers expect for 'no wifi arcade machine'. The article may be missing key competitor comparisons, specific product alternatives, or informational gaps that top-ranking pages address.",
-      "recommended_fix": "Run SERP research for this keyword and cross-check coverage before publishing. Note this in todos."
+      "category": "quality",
+      "location": "Intro — second paragraph",
+      "problem": "The introduction runs two full paragraphs before reaching the article's purpose statement ('This article explains why…'). The second paragraph tries to do too much — thesis, audience definition, and article roadmap — making it dense and slightly formulaic.",
+      "recommended_fix": "Merge the thesis into the first paragraph's closing beat and trim the roadmap sentence. The reader should reach the first H2 faster."
     },
     {
       "severity": "low",
       "category": "tone",
-      "location": "'The Best Spaces for a No-WiFi Arcade Machine' — 'It's a natural icebreaker'",
-      "problem": "The word 'icebreaker' leans slightly toward marketing-speak for the otherwise understated tone of the piece.",
-      "recommended_fix": "Consider replacing with a more grounded phrase like 'it gives people something to gather around' or similar."
+      "location": "Closing heading — 'Choosing Offline Is the Smart Move'",
+      "problem": "The heading 'Choosing Offline Is the Smart Move' reads slightly prescriptive and salesy, which is a minor departure from the understated premium tone. It tells the reader what to think rather than inviting a conclusion.",
+      "recommended_fix": "Soften to something like 'Why Offline Makes Sense for Home Arcade Owners' or 'The Case for Keeping It Simple.'"
     },
     {
       "severity": "low",
       "category": "quality",
-      "location": "'Offline Doesn't Mean Outdated' — final paragraph",
-      "problem": "The sentence 'every family gathering, every evening with friends, every quiet night when you want fifteen minutes of something simple and satisfying' uses a triple-anaphora pattern that appears elsewhere in the draft (opening paragraph triple, FAQ list patterns). Repetitive rhetorical structure across the piece.",
-      "recommended_fix": "Vary sentence structure in one of the instances — trim the triple to a pair, or restructure the sentence to break the pattern."
+      "location": "'How the JVL Echo Home Delivers' — 'This is not a plastic novelty box stuffed with thousands of unrecognizable titles.'",
+      "problem": "This line, while category-level and not naming competitors, has a slightly dismissive, punching-down tone that could feel out of step with the 'quietly premium' brand voice. The Mark & Linda persona does not need competitors disparaged to feel confident.",
+      "recommended_fix": "Reframe positively: 'The library is curated and purposeful — 149 games selected to belong in the machine, not thousands padded to inflate a number on the box.'"
     },
     {
       "severity": "low",
-      "category": "product_fit",
-      "location": "Second product link — '/en/home' overview page",
-      "problem": "The anchor text 'JVL overview page' is vague and the surrounding sentence ('if you're exploring what a home arcade setup might look like') reads like a soft upsell that doesn't add informational value to the reader at this point in the article.",
-      "recommended_fix": "Either remove this second CTA or make it more purposeful — e.g., link it to a specific next step like 'see how the Echo fits different room layouts' if such content exists on that page."
+      "category": "quality",
+      "location": "'Here is what that looks like in practice.' (section 7)",
+      "problem": "Minor AI-filler transition phrase that adds no information.",
+      "recommended_fix": "Delete the sentence and lead directly with 'The Echo Home comes with 149 built-in games…'"
     }
   ],
   "strengths": [
-    "Tone is consistently understated premium — avoids gamer jargon, affiliate hype, and flashy luxury language throughout.",
-    "Product integration is natural and well-timed; the Echo Home mention arrives after the reader already understands the value proposition, not before.",
-    "The FAQ section addresses real buyer objections (limited selection, future-proofing, multiplayer) honestly and without overselling.",
-    "The 'What to Look for' section provides genuinely useful purchase criteria that double as implicit Echo Home selling points without naming the product.",
-    "Strong lifestyle framing — the article consistently speaks to the home-bar and entertaining persona rather than a generic gamer audience."
+    "Excellent factual discipline — no invented specs, dimensions, game titles, or unconfirmed product claims. The writer respected every item on the forbidden claims list.",
+    "Tone is consistently warm, mature, and premium without slipping into gamer jargon, affiliate hype, or novelty-gadget framing. Language choices like 'home bar,' 'basement lounge,' and 'cabin' match the persona perfectly.",
+    "Strong brief alignment — all required sections are present, the article angle matches the brief's thesis, and the CTA points to /en/echo as specified.",
+    "The 'What No WiFi Actually Means for Day-to-Day Use' section is the article's strongest — it delivers genuine buyer education about reliability, simplicity, and long-term ownership in a way that SERP competitors reportedly miss.",
+    "Claims_to_verify and TODOs are thorough and honest, properly flagging every unconfirmed detail rather than filling gaps with invented information.",
+    "The built-in vs. downloadable section addresses a key SERP content gap with genuine nuance, honestly noting the trade-off of a fixed library.",
+    "Internal links to /en/echo and /en/home are placed naturally with descriptive anchor text."
   ],
   "recommended_fixes": [
-    "Confirm the 149 game count against the live product page or official spec sheet before publishing.",
-    "Rework the opening paragraph to be more specific and persona-grounded, less generic internet-essay pattern.",
-    "Run SERP research and verify topical coverage against competing pages for 'no wifi arcade machine'.",
-    "Evaluate whether the second CTA link to /en/home adds value or should be removed/reframed.",
-    "Vary rhetorical triple patterns — at least one instance should be restructured for variety."
+    "Reduce Echo Home mentions from 5 sections to 3–4 by cutting one of the mid-article references (section 4 or 5).",
+    "Rewrite the dedicated Echo Home section (section 7) to focus on new information — design philosophy, heritage angle, curation approach — rather than restating plug-and-play and placement details already covered.",
+    "Vary the 'no WiFi, no downloads, no accounts' formula across sections so the article does not repeat the same bullet list in different words.",
+    "Tighten the introduction to one strong paragraph plus a brief roadmap sentence, merging the thesis into the opening narrative.",
+    "Soften the closing section heading to match understated premium tone.",
+    "Remove the 'Here is what that looks like in practice' filler line in section 7."
   ],
-  "claims_to_verify_ok": false,
+  "claims_to_verify_ok": true,
   "source_inputs_used": {
-    "draft": "outputs/drafts/no-wifi-arcade-machine.md",
-    "brief": null,
-    "serp_research": null,
-    "company_insight": null
+    "draft": "outputs/drafts/no-wifi-arcade-machine.json",
+    "brief": "outputs/briefs/no-wifi-arcade-machine.json",
+    "serp_research": "outputs/serp_research/no-wifi-arcade-machine.json",
+    "company_insight": "outputs/company_insight/no-wifi-arcade-machine.json"
   },
   "todos": [
-    "No brief was provided — unable to verify editorial angle, intent alignment, required sections, or funnel stage fit.",
-    "No SERP research was provided — unable to verify topical coverage, content gaps, or competitive differentiation.",
-    "No company insight was provided — unable to verify whether JVL-specific EEAT signals, differentiators, or approved messaging were available and used.",
-    "Human must independently verify the 149 built-in games claim against current product specs.",
-    "Consider whether specific classic game titles can be named to strengthen the 'curated classics' argument (pending licensing/legal review).",
-    "Evaluate adding a comparison table (WiFi vs no-WiFi) if SERP research shows competitors using structured comparisons."
+    "Business confirmation still needed: whether the 149-game library can ever receive updates or is permanently fixed at purchase.",
+    "Business confirmation still needed: whether the Echo Home supports 2-player simultaneous play — if confirmed, add to the article.",
+    "Business confirmation still needed: warranty length, return policy, and customer support channels to strengthen the 'what to look for' section.",
+    "Business confirmation still needed: specific game titles from the 149-game library for concreteness.",
+    "Business confirmation still needed: whether the Echo Home has any optional connectivity capability or is entirely offline by design.",
+    "Business confirmation still needed: specific dimensions, weight, or screen size for 'will it fit' guidance.",
+    "FAQ section was excluded per instructions (handled by faq_agent) — could not evaluate coverage of brief's questions_to_answer that would normally appear there (e.g., 2-player question, update question).",
+    "SERP research was mock data — differentiation and coverage gap assessments are based on stated competitor weaknesses, not verified SERP analysis."
   ]
 }

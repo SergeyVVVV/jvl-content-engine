@@ -1,63 +1,65 @@
 {
   "topic": "How to choose a home arcade machine",
-  "working_title": "How to Choose a Home Arcade Machine Worth Keeping",
+  "working_title": "How to Choose a Home Arcade Machine That Actually Fits Your Life",
   "article_type": "informational_with_commercial_support",
-  "search_intent": "informational",
+  "search_intent": "decision_support",
   "persona": "Mark & Linda Reynolds",
   "primary_keyword": "how to choose a home arcade machine",
   "secondary_keywords": [
     "home arcade machine",
     "bartop arcade for home",
-    "best home arcade machine",
+    "best arcade machine for home use",
     "arcade machine for home bar",
     "touchscreen arcade for home",
     "all-in-one arcade machine",
     "home arcade buying guide",
-    "arcade machine with built-in games",
+    "arcade machine for game room",
     "countertop arcade machine",
-    "home game room arcade"
+    "plug and play arcade machine"
   ],
-  "audience_summary": "This article is for mature homeowners researching their first home arcade purchase - people like Mark and Linda who want something premium, easy to live with, and worth the investment, not a novelty that ends up in storage after a month.",
-  "article_angle": "Most buying guides for home arcades are written for hobbyists and retro-gaming enthusiasts. This article reframes the decision for adult homeowners who care about how the machine looks in their home, how easy it is to use, and whether it will still feel like a good purchase a year from now. The angle is practical ownership confidence, not spec-sheet comparison.",
-  "cta_goal": "Guide the reader to explore the JVL Echo Home as a strong option that fits the criteria outlined in the article, linking naturally to /en/echo",
+  "audience_summary": "This article is for mature homeowners in the 55-72 range who are seriously considering adding a home arcade to a den, home bar, basement lounge, or game room - and want to make a smart, lasting purchase rather than impulse-buy something that ends up collecting dust.",
+  "article_angle": "Most home arcade buying advice is written for younger hobbyists building retro gaming setups. This article reframes the decision around what actually matters for an adult homeowner: room fit, ease of use, build quality, social value, and long-term satisfaction - not spec sheets or modding potential. It treats the purchase like choosing quality furniture or a home bar addition, not like shopping for a gaming gadget.",
+  "cta_goal": "Encourage the reader to explore the JVL Echo Home as a strong option in the bartop arcade category by visiting /en/echo to see how it fits their home and lifestyle.",
   "product_fit": "high",
   "required_sections": [
-    "Why home arcades are making a comeback in adult homes",
-    "Full-size cabinet vs. bartop vs. countertop - understanding the formats",
-    "What to look for in build quality and finish",
-    "Game library - built-in games vs. downloads and online dependencies",
-    "Ease of setup and daily use - plug-and-play vs. project machines",
-    "How to match an arcade machine to your space - home bar, basement, game room",
-    "What makes a home arcade worth keeping long-term",
-    "Where the JVL Echo Home fits in - a closer look",
-    "Frequently asked questions"
+    "Why More Homeowners Are Adding Arcade Machines to Their Homes",
+    "Full-Size Cabinet vs. Bartop Arcade: Which Format Fits Your Space",
+    "What to Look for in Build Quality and Finish",
+    "Game Library: Built-In Games vs. Download-Based Systems",
+    "Ease of Setup: Plug-and-Play vs. Complex Installation",
+    "Where It Goes: Matching the Machine to Your Room",
+    "Social Play and Conversation Value",
+    "How the JVL Echo Home Fits the Bartop Arcade Category",
+    "Common Mistakes to Avoid When Buying a Home Arcade",
+    "Frequently Asked Questions"
   ],
   "questions_to_answer": [
-    "What is the best type of arcade machine for a home bar or basement?",
-    "How many games should a home arcade machine have built in?",
-    "Do home arcade machines need Wi-Fi or software updates?",
-    "What is the difference between a bartop arcade and a full-size cabinet?",
-    "How much space does a home arcade machine need?",
-    "Are home arcade machines plug-and-play or do they require assembly?",
-    "What should I look for in a home arcade machine for adults?",
-    "Is a countertop arcade machine better than a full-size cabinet for home use?"
+    "What is the difference between a full-size arcade cabinet and a bartop arcade machine?",
+    "How much space do you need for a home arcade machine?",
+    "Are home arcade machines with built-in games better than ones that require downloads?",
+    "What should I look for in a home arcade machine for a home bar or basement lounge?",
+    "Do home arcade machines need Wi-Fi or a computer to work?",
+    "How do I know if an arcade machine will look good in my home and not feel out of place?",
+    "Is a plug-and-play arcade machine worth it compared to building your own?",
+    "What makes a home arcade machine worth the investment long-term?"
   ],
   "internal_link_targets": [
     "/en/echo",
     "/en/home"
   ],
   "claims_to_verify": [
-    "Any specific competitor formats, brands, or price ranges referenced during writing must be fact-checked before publishing",
-    "Any claims about typical game counts, screen sizes, or build materials for competing formats need sourcing",
-    "If the article references room-size recommendations or furniture-fit dimensions, these must be confirmed against real product specs"
+    "TODO: source not confirmed - whether any warranty or support details should be referenced in the buying criteria section",
+    "TODO: source not confirmed - exact weight and dimensions of JVL Echo Home for the space-planning section",
+    "TODO: source not confirmed - whether JVL Echo Home supports 2-player simultaneous play for the social play section"
   ],
   "risks_to_avoid": [
-    "Framing the article as a gamer buying guide - the tone must stay grounded in home ownership and adult leisure, not gaming culture",
-    "Using spec-heavy comparison tables that make the article feel like a tech review rather than a helpful guide for homeowners",
-    "Making the Echo Home the obvious winner in a rigged comparison - the article must be genuinely useful first, with the product introduced naturally where it fits",
-    "Using language like 'gaming device', 'retro gadget', 'ultimate setup', or any esports and console-culture jargon",
-    "Inventing Echo Home specs such as screen size, weight, dimensions, or price that are not confirmed in the knowledge base",
-    "Positioning the Echo Home as the only viable option rather than one strong choice among formats",
-    "Over-promising on nostalgia in a way that feels sentimental or gimmicky rather than warm and grounded"
+    "Framing the article like a gamer gear roundup - this must feel like a considered home purchase guide, not a tech review",
+    "Using language like 'retro gaming setup', 'ultimate arcade build', or 'beast mode' that signals a younger hobbyist audience",
+    "Comparing JVL Echo Home to specific competitor products by name without verified, factual comparison data",
+    "Inventing specs, pricing, or warranty details for the JVL Echo Home that are not confirmed in the knowledge base",
+    "Making the entire article feel like a sales page for JVL Echo Home rather than a genuinely useful buying framework that naturally includes it",
+    "Using gamer jargon, esports references, or novelty-gadget framing anywhere in the article",
+    "Overpromising on game variety or quality without confirmed details beyond the 149 built-in games fact",
+    "Positioning the product as luxury or status symbol rather than as a quietly premium, meaningful home addition"
   ]
 }

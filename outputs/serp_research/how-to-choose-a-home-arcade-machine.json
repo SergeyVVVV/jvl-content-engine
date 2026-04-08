@@ -3,85 +3,84 @@
   "topic": "How to choose a home arcade machine",
   "serp_status": "mock",
   "top_results": [],
-  "dominant_search_intent": "[MOCK] Informational — buyer education for adults researching their first home arcade purchase, with strong commercial investigation undertones as readers are typically comparing formats, price ranges, and brands before committing to a higher-ticket leisure purchase.",
+  "dominant_search_intent": "[MOCK] Informational with commercial investigation undertone — the searcher is actively considering a purchase and wants a decision framework to narrow options, not just general knowledge about arcade machines.",
   "common_angles": [
-    "[MOCK] Spec-driven buying guide framed around technical features like screen size, processor, and game count — written for hobbyists rather than homeowners.",
-    "[MOCK] Listicle of 'best home arcade machines' that is really a product roundup with affiliate links, offering little genuine guidance on how to choose.",
-    "[MOCK] Retro gaming nostalgia angle that leans heavily into gamer culture and assumes the reader already knows what they want.",
-    "[MOCK] Format comparison (full-size vs. bartop vs. countertop) that stays surface-level and doesn't connect format choice to real living situations.",
-    "[MOCK] Budget-tier focus aimed at casual impulse buyers looking for the cheapest option, not quality-conscious homeowners."
+    "[MOCK] Tech-spec comparison angle listing resolution, processor, and emulation capabilities across multiple machines",
+    "[MOCK] Budget-tier buying guide framed around price brackets rather than lifestyle fit",
+    "[MOCK] Retro gaming hobbyist angle focused on ROM libraries, modding potential, and emulator compatibility",
+    "[MOCK] Listicle-style roundup of top picks with affiliate links and brief product blurbs",
+    "[MOCK] DIY vs. pre-built framing that assumes the reader is comfortable with technical assembly"
   ],
   "common_sections": [
-    "[MOCK] Types of home arcade machines (full-size, bartop, countertop, pedestal)",
-    "[MOCK] How many games / what games are included",
-    "[MOCK] Screen size and display quality",
-    "[MOCK] Build quality and materials",
-    "[MOCK] Price ranges and what to expect at each tier",
-    "[MOCK] Space requirements and dimensions",
-    "[MOCK] Assembly and setup",
-    "[MOCK] Top picks or product recommendations",
+    "[MOCK] Types of arcade machines (full-size, bartop, cocktail table, countertop, virtual pinball)",
+    "[MOCK] Key features to consider (screen size, controls, game count, connectivity)",
+    "[MOCK] Price ranges and what you get at each tier",
+    "[MOCK] Best arcade machines for home use (product roundup with affiliate links)",
+    "[MOCK] Size and space requirements",
+    "[MOCK] Built-in games vs. custom ROM loading",
+    "[MOCK] Build quality and materials overview",
+    "[MOCK] Setup and installation tips",
     "[MOCK] FAQ section covering basic buyer questions"
   ],
   "competitor_strengths": [
-    "[MOCK] Many ranking articles do a reasonable job explaining the basic format differences between full-size cabinets, bartop units, and countertop machines.",
-    "[MOCK] Product roundup articles typically include real photos and dimensions, giving readers a visual sense of what they are buying.",
-    "[MOCK] Some guides include useful comparison tables that help readers quickly scan key differences across formats.",
-    "[MOCK] Higher-quality articles address assembly requirements honestly, which helps set realistic expectations for buyers."
+    "[MOCK] Typical ranking content provides useful side-by-side format comparisons (full-size vs. bartop vs. cocktail table) that help readers understand physical differences quickly",
+    "[MOCK] Many articles include specific dimensions and weight figures that help with practical space planning",
+    "[MOCK] Product roundup articles tend to include real photos and brief hands-on impressions that give a tangible sense of each machine",
+    "[MOCK] Some articles do a reasonable job explaining the difference between plug-and-play systems and those requiring software configuration"
   ],
   "competitor_weaknesses": [
-    "[MOCK] Most guides are written for a younger, tech-savvy gamer audience and use language and framing that feels alien to a mature homeowner.",
-    "[MOCK] Very few articles address how an arcade machine fits into a real home environment — they treat it as a gadget, not a piece of furniture.",
-    "[MOCK] Build quality discussion is usually limited to 'it feels sturdy' or spec mentions, with no meaningful guidance on materials, finish, or long-term durability.",
-    "[MOCK] Game library sections focus on raw game counts (1,200+ games!) without discussing whether most of those games are actually enjoyable or relevant to adults.",
-    "[MOCK] Almost no ranking content discusses the ownership experience beyond unboxing — what it is like to live with the machine after the novelty wears off.",
-    "[MOCK] Setup and daily-use friction is rarely addressed in practical terms — most articles assume the reader is comfortable with software configuration and troubleshooting.",
-    "[MOCK] The emotional and social value of a home arcade — hosting, shared moments, conversation piece — is almost entirely absent from typical guides."
+    "[MOCK] Most content is written for a younger, tech-savvy hobbyist audience and uses language and framing that alienates mature homeowners",
+    "[MOCK] Articles rarely address how an arcade machine fits into a room aesthetically — they treat it as tech gear, not as a piece of home furnishing",
+    "[MOCK] Build quality discussion is typically shallow, focusing on specs rather than materials, finish, longevity, and how the machine ages over years of use",
+    "[MOCK] Social and entertaining value is almost never discussed — articles focus on solo play experience rather than the machine as a conversation piece or gathering point",
+    "[MOCK] Long-term ownership satisfaction is ignored in favor of unboxing-day excitement and first-impression reviews",
+    "[MOCK] Most buying guides are thinly disguised affiliate roundups with little genuine editorial perspective or decision-making framework",
+    "[MOCK] The emotional dimension of the purchase — nostalgia, shared family moments, pride in a well-chosen home addition — is almost entirely absent"
   ],
   "content_gaps": [
-    "[MOCK] No ranking content frames the purchase decision from the perspective of a homeowner who cares about aesthetics, room fit, and long-term satisfaction rather than specs.",
-    "[MOCK] The question of how a machine ages — will it still look good and work well in two to three years — is almost never addressed.",
-    "[MOCK] Practical guidance on matching a machine to a specific room type (home bar, basement lounge, open-plan living area) is missing from most guides.",
-    "[MOCK] The social and hosting dimension — how a home arcade changes the dynamic when guests come over — is a major gap in existing content.",
-    "[MOCK] Very few articles discuss what 'plug-and-play' actually means in practice, or warn buyers about machines that require ongoing software updates, Wi-Fi dependencies, or technical maintenance.",
-    "[MOCK] The difference between a machine designed for adults and one designed for casual or younger users is not explored meaningfully.",
-    "[MOCK] No existing content connects the purchase decision to broader home leisure or interior design thinking — it is always isolated as a 'gaming' purchase."
+    "[MOCK] No typical ranking content addresses how to evaluate whether an arcade machine will look appropriate in a finished living space, home bar, or basement lounge",
+    "[MOCK] The question of long-term value — will this still feel worthwhile in two or three years — is virtually never explored",
+    "[MOCK] Guidance on matching machine style and finish to existing room décor and furniture is missing from nearly all ranking content",
+    "[MOCK] The social hosting dimension — how a machine performs when guests are over, how intuitive it is for non-gamers — is a gap across the category",
+    "[MOCK] Practical ownership considerations like noise level, heat output, power consumption, and maintenance are rarely covered in a homeowner-relevant way",
+    "[MOCK] Almost no content frames the purchase from the perspective of a couple making a joint home decision rather than a solo hobbyist buyer",
+    "[MOCK] The difference between a machine that impresses for a week and one that becomes a genuine part of home life is unexplored territory"
   ],
   "differentiation_opportunities": [
-    "[MOCK] Frame the entire article around the homeowner's perspective — room fit, aesthetics, ease of living with the machine — rather than the gamer's perspective of specs and game counts.",
-    "[MOCK] Introduce the concept of 'ownership confidence' as the central thread: will this still feel like a good decision a year from now?",
-    "[MOCK] Provide genuinely practical room-matching guidance that connects machine format to real spaces like a home bar counter, a basement corner, or a game room wall.",
-    "[MOCK] Discuss build quality and finish in terms a homeowner understands — materials, craftsmanship, how it looks next to real furniture — not in spec-sheet language.",
-    "[MOCK] Address the social value of a home arcade as a hosting asset and conversation piece, which no typical buying guide covers well.",
-    "[MOCK] Be honest about what large game counts actually mean in practice, helping readers understand quality over quantity in game libraries.",
-    "[MOCK] Position the JVL Echo Home naturally within the framework of criteria the article establishes, rather than as a product pitch bolted onto a generic guide."
+    "[MOCK] Frame the entire decision as a home addition — like choosing a quality piece of furniture or a home bar feature — rather than a tech purchase, which no typical competitor does",
+    "[MOCK] Write for the Mark and Linda persona specifically: a couple in their late fifties to early seventies making a considered purchase for a shared space, not a solo gamer optimizing a setup",
+    "[MOCK] Address aesthetic fit directly with practical guidance on how different formats look in real rooms, near real furniture, under real lighting",
+    "[MOCK] Cover the social and entertaining value of a home arcade as a genuine decision factor, not an afterthought",
+    "[MOCK] Discuss build quality the way a homeowner evaluates furniture: materials, finish, weight, feel, aging, not just specs",
+    "[MOCK] Position the JVL Echo Home naturally within a broader decision framework so the product mention feels like a helpful example rather than a sales pitch",
+    "[MOCK] Treat ease of use as a first-class buying criterion — if a guest cannot figure it out in thirty seconds, it fails the hosting test"
   ],
   "paa_answered": [
-    "[MOCK] 'What is the difference between a bartop arcade and a full-size cabinet?' — this is the most commonly addressed question in typical ranking content, though answers tend to be shallow.",
-    "[MOCK] 'How much space does a home arcade machine need?' — usually answered with basic dimensions but rarely connected to specific room types or real furniture layouts.",
-    "[MOCK] 'How many games should a home arcade machine have built in?' — frequently addressed but almost always answered with a 'more is better' framing that is misleading."
+    "[MOCK] What is the difference between a full-size arcade cabinet and a bartop arcade machine — this is commonly covered in format comparison sections",
+    "[MOCK] How much space do you need for a home arcade machine — typically addressed with basic dimension guidance",
+    "[MOCK] Are home arcade machines with built-in games better than ones that require downloads — usually touched on in a features or setup section"
   ],
   "paa_missed": [
-    "[MOCK] 'What is the best type of arcade machine for a home bar or basement?' — rarely answered with real room-specific guidance; most articles treat all rooms the same.",
-    "[MOCK] 'Do home arcade machines need Wi-Fi or software updates?' — almost never addressed directly, which is a significant gap for non-technical buyers.",
-    "[MOCK] 'Are home arcade machines plug-and-play or do they require assembly?' — sometimes mentioned but rarely explained in enough detail for a buyer who has never owned one.",
-    "[MOCK] 'What should I look for in a home arcade machine for adults?' — this specific adult-focused framing is almost entirely absent from typical ranking content.",
-    "[MOCK] 'Is a countertop arcade machine better than a full-size cabinet for home use?' — the countertop format is often overlooked or lumped in with bartop without meaningful distinction."
+    "[MOCK] What should I look for in a home arcade machine for a home bar or basement lounge — this room-specific framing is rarely addressed directly",
+    "[MOCK] Do home arcade machines need Wi-Fi or a computer to work — connectivity and standalone operation are inconsistently covered and often assumed",
+    "[MOCK] How do I know if an arcade machine will look good in my home and not feel out of place — aesthetic and décor fit is almost never discussed",
+    "[MOCK] Is a plug-and-play arcade machine worth it compared to building your own — this is sometimes covered but usually with a hobbyist bias toward DIY",
+    "[MOCK] What makes a home arcade machine worth the investment long-term — long-term satisfaction and value retention are virtually never explored"
   ],
   "risks_to_avoid": [
-    "[MOCK] Do not adopt the gamer-culture tone that dominates existing content — avoid words like 'rig', 'setup', 'build', 'mod', 'retro gaming', or 'ultimate' when describing the purchase decision.",
-    "[MOCK] Do not lead with or over-emphasize game counts, as this pulls the article into the same shallow territory as competing guides.",
-    "[MOCK] Do not use dense comparison tables as the primary structure — they make the article feel like a tech review and alienate the target persona.",
-    "[MOCK] Do not position the Echo Home as the obvious winner in a rigged framework — the article must earn credibility by being genuinely useful before any product mention.",
-    "[MOCK] Do not invent or assume Echo Home specifications such as dimensions, weight, screen size, or price — only use confirmed details from the knowledge base.",
-    "[MOCK] Avoid a listicle structure that ranks products by number — this format signals affiliate content and undermines trust with the target reader.",
-    "[MOCK] Do not over-promise on nostalgia in a way that feels sentimental or gimmicky — keep the emotional tone warm but grounded in real adult life."
+    "[MOCK] Do not adopt the gamer-gear review tone that dominates this category — language like ultimate setup, beast mode, retro gaming rig, or epic build will alienate the target persona immediately",
+    "[MOCK] Avoid structuring the article as a product roundup or affiliate listicle, which would undermine the genuine buying-framework positioning",
+    "[MOCK] Do not lead with or over-emphasize game count as the primary decision factor — for this audience, game quality and accessibility matter far more than raw numbers",
+    "[MOCK] Resist the temptation to compare JVL Echo Home against named competitors without verified factual data — keep the product positioning category-level, not head-to-head",
+    "[MOCK] Do not assume the reader is technically comfortable with emulators, ROMs, firmware updates, or custom software — treat plug-and-play simplicity as the baseline expectation",
+    "[MOCK] Avoid making the article feel like a long-form advertisement for JVL Echo Home — the buying framework must stand on its own as genuinely useful even if the reader never clicks through to the product page"
   ],
   "notes_for_writer": [
-    "[MOCK] The central differentiator for this article is perspective: write for a homeowner making a considered purchase, not a gamer adding to a collection — every section should pass the test of 'would Mark and Linda find this useful and respectful of their time?'",
-    "[MOCK] Use the concept of 'ownership confidence' as the article's throughline — each section should help the reader feel more certain about what makes a home arcade worth buying and keeping, not just what specs to compare.",
-    "[MOCK] When discussing game libraries, reframe the conversation from quantity to quality and relevance — help the reader understand that 50 genuinely enjoyable games matter more than 1,200 titles they will never play.",
-    "[MOCK] The section on room matching is a major opportunity to outperform competitors — provide specific, practical guidance for home bars, basements, and game rooms that connects machine format to real spatial and aesthetic considerations.",
-    "[MOCK] Introduce the Echo Home only after the article has established clear, credible criteria for what makes a good home arcade — the product should feel like a natural answer to the framework, not the reason the framework exists.",
-    "[MOCK] Address Wi-Fi dependencies and software update requirements directly and honestly — this is a genuine concern for the target persona that almost no competing content covers, and it is a natural strength of plug-and-play machines like the Echo Home."
+    "[MOCK] Open the article by validating the reader's mindset: they are making a considered home purchase, not impulse-buying a gadget, and this guide respects that approach.",
+    "[MOCK] Use the language of home improvement and interior decision-making throughout — think how you would discuss choosing a quality bar cart, a pool table, or a built-in entertainment feature, not how you would review a gaming peripheral.",
+    "[MOCK] When covering format differences (full-size vs. bartop), anchor every comparison to real-life room scenarios: a finished basement with limited counter space, a home bar area, a den that doubles as a guest room — make it spatial and visual.",
+    "[MOCK] Treat the JVL Echo Home section as one natural chapter in the decision framework — show how it answers the criteria established earlier in the article rather than introducing it as a separate sales pitch.",
+    "[MOCK] Give the social and hosting angle genuine depth: describe what happens when guests arrive, when a non-gamer spouse or friend encounters the machine, when it becomes part of an evening rather than a solo activity.",
+    "[MOCK] Close with a clear, low-pressure next step — visiting /en/echo to see how the product fits their specific situation — rather than a hard sell or urgency-driven call to action."
   ]
 }
