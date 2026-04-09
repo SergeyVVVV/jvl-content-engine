@@ -1,0 +1,90 @@
+{
+  "topic": "bartop arcade machine for home bar",
+  "status": "revise",
+  "summary": "The draft is well-crafted with strong tone, disciplined factual handling, and natural product integration that follows the brief closely. No HIGH-severity issues were found — the writer avoided invented specs, fabricated claims, and forbidden territory throughout. Two MEDIUM issues prevent a pass: noticeable thematic overlap between the 'What to Look For' and 'Matching the Machine' sections that creates redundancy, and the couple-as-buyer perspective (emphasized in both the brief and company insight as a key differentiator) is limited to a single bullet in the Common Mistakes section rather than woven through the article. Several LOW polish issues round out the report, including inline TODOs visible in the draft body and a slightly formulaic 'this guide is different' intro paragraph.",
+  "severity_counts": {
+    "high": 0,
+    "medium": 2,
+    "low": 4
+  },
+  "issues": [
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "'What to Look for' and 'Matching the Machine to Your Home Bar Style' sections",
+      "problem": "These two sections overlap significantly. 'What to Look For' covers finish, materials, and quality ('Finish and materials determine whether the machine blends into the space or sticks out'), while 'Matching the Machine' repeats the same ground ('Quality you can see and feel — Surfaces that look finished and solid'). The concluding line of 'What to Look For' ('if the machine looks like it belongs in a teenager's bedroom, it does not belong on your bar') is effectively the thesis of the entire 'Matching' section. The reader encounters the same message twice with insufficient differentiation.",
+      "recommended_fix": "Sharpen each section's focus. Keep 'What to Look For' strictly on practical, measurable evaluation criteria (footprint measurement, weight check, counter clearance, material feel test). Move all aesthetic philosophy, design-language guidance, and the style checklist exclusively into 'Matching the Machine.' Remove or relocate the 'teenager's bedroom' line to the matching section where it belongs thematically."
+    },
+    {
+      "severity": "medium",
+      "category": "brief",
+      "location": "Article-wide — couple-as-buyer perspective",
+      "problem": "The brief's notes_for_writer explicitly instructs: 'Write the couple-as-buyer perspective into the article naturally.' The company insight flags it as a wide-open differentiation opportunity and a unique brand perspective. The SERP research identifies it as an unoccupied angle. Yet the article only addresses this explicitly in a single bullet point in 'Common Mistakes' ('Treating it as a solo decision'). The social play section, the style section, and the intro all miss natural opportunities to reflect how this purchase is a shared decision between partners with complementary priorities.",
+      "recommended_fix": "Weave the couple perspective into 2–3 additional sections. In the social play section, include a brief scenario where both partners enjoy the machine differently (he reconnects with nostalgia, she appreciates how guests engage). In the style section, acknowledge that aesthetic approval from both partners is what earns the machine its permanent spot. Keep it natural — a sentence or two per section, not a forced framing device."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Echo Home section final paragraph and FAQ (size, 2-player)",
+      "problem": "Three inline TODO comments are visible in the article body text: 'TODO: source not confirmed — specific dimensions, weight, screen size, and control interface type should be verified on the product page before purchase', 'TODO: specific dimensions vary by model - check product pages for exact measurements', and 'TODO: 2-player capability for specific models should be confirmed on product pages.' While these are intentional writer flags for the pipeline, they appear within the publishable draft body and would be embarrassing if published without removal.",
+      "recommended_fix": "Convert all inline TODOs to a standardized editorial marker format (e.g., <!-- EDITORIAL TODO: ... -->) that will be stripped by the publishing pipeline, or move them entirely to the metadata section where the writer already maintains a comprehensive TODO list."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Introduction, third paragraph",
+      "problem": "'Most buying guides for bartop arcades are written for hobbyists or younger buyers chasing technical specifications. This one is different.' This is a recognizable AI-writing pattern — positioning the article as superior to unnamed competitors. While it serves a positioning purpose, the phrasing feels slightly formulaic and self-congratulatory rather than reader-serving.",
+      "recommended_fix": "Reframe the paragraph to focus on the reader's situation rather than the article's superiority. Instead of 'This one is different,' try something like: 'The questions that matter for a finished home bar are not about processors or emulators' — and cut the meta-commentary about other guides."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "FAQ section — size and 2-player answers",
+      "problem": "The FAQ answers on bartop size and 2-player capability are notably generic due to missing dimension and feature data. The size answer ('measure your available counter space before buying') provides no useful benchmark, and the 2-player answer defers entirely to 'check the specific machine's product details.' These are among the reader's most important practical questions per the SERP research, and the current answers may feel unsatisfying.",
+      "recommended_fix": "While specific Echo Home dimensions remain unconfirmed, the size answer could include general bartop arcade industry ranges as a rough guide (flagged with a hedge) or explicitly direct the reader to /en/echo for the Echo Home's specific dimensions. The 2-player answer should at minimum note that the social play section above describes side-by-side interaction and link to the product page for confirmation."
+    },
+    {
+      "severity": "low",
+      "category": "company_insight",
+      "location": "Article-wide — EEAT manufacturer authority",
+      "problem": "The company insight identifies JVL's first-party manufacturer authority as an EEAT signal ('JVL is the manufacturer of the Echo Home, giving first-party product authority that third-party review sites and affiliate pages cannot match'). The article never explicitly states that JVL manufactures the Echo Home — the reader could assume JVL is a retailer or reviewer. This is a missed trust signal.",
+      "recommended_fix": "In the dedicated Echo Home section or in the introduction of the product, add a brief clause establishing JVL as the maker — e.g., 'The JVL Echo Home, designed and built by JVL as a modern revival of their classic ECHO bar-top arcade format…' This grounds the product authority without feeling promotional."
+    }
+  ],
+  "strengths": [
+    "Excellent tone and persona fit throughout — warm, mature, understated premium with zero gamer jargon, affiliate hype, or flashy luxury clichés. Passes the 'would Mark and Linda feel this was written for them?' test consistently.",
+    "Strong factual discipline — no invented specifications, dimensions, game titles, warranty terms, or fabricated testimonials. Every unconfirmed detail is properly flagged in claims_to_verify and inline TODOs.",
+    "Natural product integration — the Echo Home is introduced only after editorial buying criteria have been established in each section, making the product feel like an answer to the reader's questions rather than a pitch inserted into a guide.",
+    "Complete brief coverage — all nine required sections are present, all eight FAQ questions are answered, both internal link targets are placed, and the article angle matches the brief's 'taste-driven decision support' framing.",
+    "Effective narrative devices — the Saturday gathering vignette in the social play section and the Wi-Fi failure scenario in the built-in games section are vivid, persona-appropriate, and serve genuine editorial purpose.",
+    "Strong SERP differentiation — the article avoids every competitor pattern identified in the research (listicle format, spec-comparison framing, gamer tone, shallow affiliate descriptions) and occupies the uncontested angles (home-bar-as-furniture evaluation, hosting dynamics, premium vs. cheap honest contrast).",
+    "Honest and comprehensive claims_to_verify and todos lists that demonstrate responsible editorial judgment and make downstream verification straightforward.",
+    "The closing section is warm, non-pushy, and reader-focused — it summarizes evaluation criteria, offers the product link without pressure, and ends on a genuinely appealing note about the purpose of a home bar."
+  ],
+  "recommended_fixes": [
+    "Differentiate the 'What to Look For' and 'Matching the Machine' sections: restrict the former to practical, measurable evaluation steps (measure, weigh, touch-test) and the latter to aesthetic philosophy and style guidance. Remove thematic overlap.",
+    "Weave the couple-as-buyer perspective into 2–3 additional sections (social play, style, possibly intro) with brief, natural references to shared decision-making — not as a gimmick but as a realistic reflection of how this purchase happens.",
+    "Convert inline TODO comments to pipeline-safe editorial markers or move them entirely to the metadata section to prevent accidental publication.",
+    "Tighten the intro's third paragraph to remove the 'this guide is different' self-positioning; focus on the reader's situation instead.",
+    "Strengthen FAQ answers on size and 2-player capability with general industry context or explicit product-page CTAs rather than leaving them as bare deferrals.",
+    "Add a brief manufacturer-authority clause when introducing JVL to establish first-party EEAT credibility."
+  ],
+  "claims_to_verify_ok": true,
+  "source_inputs_used": {
+    "draft": "outputs/drafts/bartop-arcade-machine-for-home-bar.json",
+    "brief": "outputs/briefs/bartop-arcade-machine-for-home-bar.json",
+    "serp_research": "outputs/serp_research/bartop-arcade-machine-for-home-bar.json",
+    "company_insight": "outputs/company_insight/bartop-arcade-machine-for-home-bar.json"
+  },
+  "todos": [
+    "Confirm specific Echo Home dimensions and weight to strengthen the FAQ size answer and the 'will it fit on my bar' angle — currently the weakest practical gap in the article.",
+    "Confirm 2-player simultaneous play capability to support the social play sections and FAQ answer more directly.",
+    "Confirm control interface type (touchscreen vs. joystick-and-buttons) — correctly omitted from draft but needed if the article is to address the SERP content gap on this topic.",
+    "Confirm specific build materials and finish details to give the design and durability sections more substance.",
+    "Confirm warranty length and support process — not referenced in the article, which is appropriate given missing data, but would strengthen bottom-of-funnel trust for this commercial investigation piece.",
+    "Confirm specific game titles in the 149-game library that would resonate with the persona (classic bar games, familiar arcade titles) to add concreteness to the built-in games section.",
+    "Source customer reviews or testimonials from real home bar installations for social proof — currently absent from the article by necessity.",
+    "Remove or convert all inline TODO markers in the draft body before publication.",
+    "SERP research is mock data — when real SERP data becomes available, re-evaluate coverage gaps and differentiation."
+  ]
+}

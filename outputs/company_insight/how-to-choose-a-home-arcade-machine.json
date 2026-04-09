@@ -1,121 +1,118 @@
 {
   "topic": "How to choose a home arcade machine",
-  "brief_alignment": "Strong fit — this is a direct product-category article where the JVL Echo Home is a natural, high-relevance example within a broader decision framework. The topic aligns perfectly with the Mark & Linda persona, the core use cases (home bar, basement lounge, game room), and every UVP pillar. The article type (informational with commercial support) matches the content engine's editorial-first, product-natural approach.",
+  "brief_alignment": "Strong fit — the topic is a direct decision-support guide for the exact product category the JVL Echo Home occupies (premium bartop/countertop arcade for home). The persona match is near-perfect: mature, affluent homeowners making a considered purchase for a shared leisure space. Every required section maps naturally to at least one Echo Home strength or UVP pillar. This is a priority content opportunity.",
   "relevant_jvl_angles": [
-    "Nostalgia modernized (UVP pillar 1): Position the Echo Home as a modern revival of the classic bar-top arcade format — not a retro replica, but a contemporary product rooted in authentic arcade heritage. This is directly relevant to the 'what makes a machine worth it long-term' angle.",
-    "Plug-and-play simplicity (UVP pillar 3): In the setup and ease-of-use sections, the Echo Home's no-Wi-Fi, no-download, plug-and-play design is a genuine differentiator when compared to download-based or build-your-own alternatives.",
-    "Adult-home fit (UVP pillar 4): The Echo Home is designed for home bars, basement lounges, dens, and cabins — exactly the spaces this article covers. This lets the writer use the product as a concrete example of what 'fitting your room' actually looks like.",
-    "149 built-in games as a curated library (UVP pillar 2): In the game library section, the built-in approach can be contrasted with download-dependent machines as a practical advantage for non-technical buyers.",
-    "Bartop format as a space-conscious choice: The countertop/bartop form factor is directly relevant to the full-size vs. bartop comparison section and the room-matching section.",
-    "Social and conversation-piece value: The Echo Home's positioning as a social centerpiece and conversation starter maps directly to the social play section and the hosting angle identified in the SERP gaps."
+    "Plug-and-play simplicity as a decisive buying criterion: position ease of setup as one of the most important factors when choosing a home arcade, then let the Echo Home's no-Wi-Fi, no-downloads, no-assembly reality speak for itself. Maps to UVP pillar 3 (Plug and play).",
+    "Adult-home fit as a category differentiator: most competing content assumes a gamer buyer decorating around the machine. JVL can own the reverse framing — the machine must earn its place in a well-furnished adult room. Maps to UVP pillar 4 (Adult-home fit) and pillar 5 (Quietly premium).",
+    "Curated game library vs. bloated game counts: reframe the game-library discussion away from raw numbers and toward whether the included games are genuinely playable, familiar, and guest-friendly. 149 built-in games is a strong mid-point — enough variety without the overwhelming, low-quality padding of 5,000-game machines. Maps to UVP pillar 2 (149 built-in games).",
+    "The bartop/countertop format as the smart choice for real home spaces: full-size cabinets dominate most buying guides, but for home bars, basement lounges, and dens, a countertop format often makes more practical sense. JVL can own this reframe because the Echo Home is purpose-built for it. Maps to UVP pillar 4 (Adult-home fit).",
+    "Nostalgia as a legitimate buying motivation for adults: most guides treat nostalgia as a footnote. JVL can elevate it as the emotional core of the purchase decision — the reason someone buys a home arcade in the first place. Maps to UVP pillar 1 (Nostalgia, modernized).",
+    "Social and hosting value as a selection criterion: the Echo Home's conversation-piece positioning and social play design map directly to the SERP gap around the hosting use case. Frame 'will guests enjoy this?' as a key buying question."
   ],
   "relevant_product_facts": [
     "Premium countertop / bartop arcade machine designed for home use",
-    "Modern revival of classic ECHO bar-top arcade machines",
-    "149 built-in games",
-    "Plug-and-play — no Wi-Fi required, no downloads required",
-    "Core use cases: home bar, basement lounge, recreation room, game room, cabin / lake house leisure space",
-    "Premium look and feel",
-    "Nostalgic appeal designed for adults",
-    "Easy setup and low friction",
-    "Social play and conversation-piece value",
-    "Fits mature upscale home leisure spaces better than bulky arcade cabinets in many cases",
-    "Product page: /en/echo",
-    "Home overview page: /en/home",
-    "TODO: source not confirmed — exact dimensions, weight, screen size",
-    "TODO: source not confirmed — specific game titles in the 149-game library",
-    "TODO: source not confirmed — whether 2-player simultaneous play is supported",
-    "TODO: source not confirmed — warranty length or support details"
+    "Modern revival of the classic ECHO bar-top arcade machine format",
+    "149 built-in games — ready to play out of the box",
+    "Plug-and-play setup — no assembly, no configuration required",
+    "No Wi-Fi required — works independently without an internet connection",
+    "No downloads required — full game library is pre-loaded",
+    "Core use cases: home bar, basement lounge, recreation room, game room, cabin, lake house",
+    "Designed to fit mature, upscale home leisure spaces — not styled as gamer gear or neon arcade decor",
+    "Social play and conversation-piece value — designed for shared moments, not solo gaming",
+    "Fits many home environments better than bulky full-size arcade cabinets"
   ],
   "natural_product_injection_points": [
-    "In 'Full-Size Cabinet vs. Bartop Arcade: Which Format Fits Your Space' — introduce the Echo Home as a concrete example of the bartop/countertop format, showing how this form factor solves the space and aesthetic challenges of full-size cabinets in finished living spaces.",
-    "In 'Game Library: Built-In Games vs. Download-Based Systems' — reference the Echo Home's 149 built-in games as an example of the plug-and-ready approach, contrasting it with the friction of download-dependent machines without naming competitors.",
-    "In 'Ease of Setup: Plug-and-Play vs. Complex Installation' — use the Echo Home's no-Wi-Fi, no-download design as a real-world example of what true plug-and-play means for a non-technical buyer.",
-    "In the dedicated 'How the JVL Echo Home Fits the Bartop Arcade Category' section — this is the natural home for a fuller product profile, positioned as one strong option that answers the criteria established in prior sections.",
-    "In 'Where It Goes: Matching the Machine to Your Room' — mention the Echo Home's design intent for home bars, basement lounges, and dens as an example of a machine built with room fit in mind.",
-    "In 'Social Play and Conversation Value' — reference the Echo Home's social and conversation-piece positioning as an example of a machine designed for shared moments, not solo gaming sessions."
+    "In the 'Types of home arcade machines' section — when explaining the bartop/countertop category, introduce the Echo Home as a concrete example of a premium bartop format designed specifically for home use, contrasting it with generic bartop kits.",
+    "In the 'Setup and ease of use' section — after establishing that plug-and-play matters for non-hobbyist buyers, cite the Echo Home as a machine that requires no Wi-Fi, no downloads, and no configuration. This is where the product's friction-free setup is most relevant.",
+    "In the 'Game library' section — when discussing built-in vs. download-based libraries, reference the Echo Home's 149 built-in games as an example of a curated, ready-to-play approach versus bloated or empty-on-arrival alternatives.",
+    "In the 'Where it belongs in your home' section — when describing the home bar and basement lounge use case, position the Echo Home as purpose-built for exactly these spaces. This is a natural fit, not a forced mention.",
+    "In the dedicated 'How the JVL Echo Home fits these criteria' section — this is the brief's designated product section. Summarize how the Echo Home meets the decision criteria the article has already established. Keep it editorial, not sales-heavy.",
+    "In the 'Who will actually play it' section — reference the Echo Home's social play design and conversation-piece value when discussing the hosting and couples use case. This connects to the persona's core motivation."
   ],
   "unique_brand_perspective": [
-    "JVL can frame the home arcade decision as a home addition — like choosing a quality piece of furniture or a bar feature — because the Echo Home is genuinely designed for adult home leisure spaces, not repurposed from a gamer market. Competitors selling repurposed gaming hardware cannot authentically claim this positioning.",
-    "The 'nostalgia modernized' angle is uniquely JVL's: the Echo Home is a modern revival of a classic bar-top arcade format, not a retro replica or a novelty gadget. This heritage framing is grounded in the product's actual lineage.",
-    "JVL can authentically speak to the couple-decision persona (Mark & Linda) because the product is designed for shared spaces and social use — not for a solo gamer's den. The brand voice is built around togetherness, mature tone, and shared moments.",
-    "The plug-and-play, no-Wi-Fi, no-download positioning lets JVL own the 'zero friction ownership' angle — a machine that works the moment you set it down, with no ongoing tech management. This is a genuine product trait, not marketing spin."
+    "JVL can own the 'arcade machine as adult home furnishing' angle — framing the buying decision around room fit, guest experience, and tasteful design rather than specs and emulation performance. No major competitor is writing from this perspective.",
+    "The 'modern revival of a classic format' narrative is uniquely JVL's — the Echo Home is not a retro reproduction or a DIY emulation box, it is a modern product that carries forward a real arcade heritage. This gives JVL an authenticity angle that generic multi-game machines cannot claim.",
+    "JVL can credibly frame plug-and-play as a premium feature rather than a limitation — positioning zero-setup simplicity as something a quality-conscious adult buyer should demand, not something only beginners need.",
+    "The warm, mature, nostalgia-led editorial tone itself is a differentiator — competitor content overwhelmingly reads as tech reviews for young male gamers. An article that sounds like advice from a knowledgeable friend who understands adult homes creates a completely different reading experience."
   ],
   "eeat_signals": [
-    "JVL manufactures the Echo Home as a dedicated home arcade product — this is first-party product authority, not an affiliate roundup perspective. The article can be framed as coming from a company that makes these machines.",
-    "The product's heritage as a modern revival of classic ECHO bar-top arcade machines signals category experience and longevity in the arcade space.",
-    "TODO: requires business confirmation — how many years JVL has been manufacturing arcade machines, for a concrete authority signal.",
-    "TODO: requires business confirmation — whether customer reviews or testimonials can be referenced or quoted as trust proof.",
-    "TODO: requires business confirmation — any awards, certifications, or industry recognition that could be cited."
+    "JVL manufactures the Echo Home as a purpose-built home arcade product — this is first-party product expertise, not affiliate-style aggregation of other brands' specs.",
+    "The Echo Home is described as a modern revival of the classic ECHO bar-top arcade format — this implies heritage and category experience that can be referenced editorially. TODO: requires business confirmation — specific years of JVL arcade manufacturing history, company founding date, and number of commercial installations for use as concrete authority signals.",
+    "The article can reference the Echo Home's specific design decisions (plug-and-play, no Wi-Fi, 149 curated games, countertop format) as evidence of deliberate product thinking — this is expertise demonstrated through product choices.",
+    "TODO: requires business confirmation — customer review count, average rating, or review platform presence that could serve as trust/authority signals.",
+    "TODO: requires business confirmation — any industry awards, trade show presence, or professional endorsements that could strengthen authority."
   ],
   "persona_hooks": [
-    "The couple-decision hook: Mark and Linda are making this purchase together for a shared space — the article should validate that this is a joint home decision, not a solo hobby indulgence. This maps to the SERP gap about couple-oriented buying guidance.",
-    "The conversation-piece hook: Mark and Linda host friends and family and want something that sparks shared moments — the Echo Home's social play and conversation-starter value speaks directly to their entertaining lifestyle.",
-    "The 'lasting purchase' hook: Mark and Linda prefer premium, meaningful objects over trendy gadgets and value craftsmanship — the long-term satisfaction angle and 'will this still feel worthwhile in two or three years' question maps perfectly here.",
-    "The nostalgia hook: reconnecting with arcade memories from their youth is a core emotional motivator — the article can open this thread early and let the Echo Home's heritage close it naturally.",
-    "The 'easy enjoyment' hook: Mark and Linda want plug-and-play simplicity, not a tech project — the no-Wi-Fi, no-download design removes the friction they would find off-putting.",
-    "The aesthetic fit hook: Mark and Linda care that purchases look appropriate in their finished, adult living spaces — the Echo Home's premium look and adult-home design intent addresses their concern about clutter or out-of-place gadgets."
+    "The fear of a regretted impulse purchase: Mark and Linda value lasting, meaningful purchases. The article's core question — 'which machine will you still be glad you bought three years from now' — speaks directly to their buying psychology.",
+    "The hosting and entertaining motivation: Mark and Linda host friends and family in their home bar and basement lounge. A machine that creates shared moments and conversation is more valuable to them than one with the highest spec sheet.",
+    "The 'conversation piece' desire: the persona explicitly values objects that start conversations and carry emotional weight. Frame the arcade machine as something guests notice, ask about, and want to play — not something that blends into the background.",
+    "Distaste for setup hassle and tech complexity: Mark and Linda prefer things that work beautifully out of the box. The plug-and-play criterion in the article maps directly to their low tolerance for configuration, troubleshooting, and ongoing maintenance.",
+    "The couple's shared decision: unlike most arcade content that assumes a solo male buyer, this persona is a couple making a joint household decision. The article should acknowledge that both partners need to feel good about how the machine looks and fits in their home.",
+    "Nostalgia as emotional value, not gamer culture: Mark and Linda's nostalgia is warm, personal, and social — remembering playing arcade games together or with friends decades ago. It is not about gaming culture, collector completionism, or retro aesthetics as a style choice."
   ],
   "trust_signals": [
-    "149 built-in games as a ready-to-use signal — the buyer gets a complete, curated library without ongoing purchases or technical setup.",
-    "Plug-and-play reliability — no Wi-Fi dependency, no downloads, no updates means fewer things that can go wrong or degrade over time.",
-    "Adult-home design fit — the product is explicitly designed for the spaces this audience cares about (home bars, basement lounges, dens), not retrofitted from a different market.",
-    "Premium look and feel as a quality signal — the product is positioned as tasteful and durable, not as a novelty item.",
-    "Modern revival of a classic arcade format — heritage and continuity signal quality and category commitment.",
-    "TODO: requires business confirmation — warranty and support details that would strengthen ownership confidence.",
-    "TODO: requires business confirmation — customer review proof points or aggregate ratings."
+    "Plug-and-play reliability: no Wi-Fi, no downloads, no configuration means fewer things that can go wrong — this is a practical trust signal for non-technical buyers.",
+    "149 built-in games as a ready-to-use signal: the machine arrives complete with its full game library, eliminating the risk of buying a machine that requires additional purchases or downloads to be usable.",
+    "Purpose-built for adult home spaces: the Echo Home is explicitly designed for home bars, basement lounges, and dens — not repurposed from a commercial or children's product. This signals intentional design for the reader's actual use case.",
+    "Premium countertop format: the bartop design signals a product made for real furniture and real rooms, not a novelty item that will look out of place.",
+    "Modern revival of a classic format: this positions the Echo Home as a product with heritage and design lineage, not a generic import or hobbyist kit.",
+    "TODO: requires business confirmation — warranty length, customer support availability, and return policy details that would strengthen ownership confidence.",
+    "TODO: requires business confirmation — specific materials, build quality details, or durability testing that could be cited as proof of lasting quality."
   ],
   "claims_to_verify": [
-    "TODO: requires business confirmation — warranty length and after-sale support details for the ownership confidence section",
-    "TODO: requires business confirmation — exact dimensions and weight of the Echo Home for the space-planning and room-fit sections",
-    "TODO: requires business confirmation — whether the Echo Home supports 2-player simultaneous play for the social play section",
-    "TODO: requires business confirmation — whether any specific game titles from the 149 built-in library can be named",
-    "TODO: requires business confirmation — whether customer reviews or ratings can be quoted or referenced",
-    "TODO: requires business confirmation — materials and finish details for the build quality section",
-    "TODO: requires business confirmation — power consumption or noise level details for the practical ownership section"
+    "TODO: requires business confirmation — exact physical dimensions and weight of the Echo Home, which would be valuable for the 'room fit' and 'countertop' sections.",
+    "TODO: requires business confirmation — screen size and type (touchscreen confirmation for the home model specifically).",
+    "TODO: requires business confirmation — specific game titles included in the 149 built-in games, which would strengthen the game library section.",
+    "TODO: requires business confirmation — warranty length and customer support details for ownership confidence messaging.",
+    "TODO: requires business confirmation — any customer satisfaction data, review scores, or Net Promoter Score that could be cited.",
+    "TODO: requires business confirmation — price point or price range, which readers of a buying guide will expect to understand.",
+    "TODO: requires business confirmation — materials and construction details (wood type, screen glass, control quality) for the build quality section.",
+    "TODO: requires business confirmation — country of manufacture or design origin, which could serve as a quality signal."
   ],
   "forbidden_claims": [
-    "Do not claim specific dimensions, weight, screen size, or resolution for the Echo Home — these are not confirmed in the knowledge base.",
-    "Do not claim specific game titles from the 149-game library unless individually confirmed.",
-    "Do not state warranty length, return policy, or shipping details.",
-    "Do not state pricing, discounts, or promotions.",
-    "Do not use '#1', 'best', or 'leading' to describe the Echo Home or JVL without sourced evidence.",
-    "Do not compare the Echo Home against named competitor products without verified factual comparison data.",
-    "Do not make health, safety, legal, or compliance claims.",
-    "Do not claim environmental or sustainability attributes.",
-    "Do not cite statistics or 'studies show' style claims without a verified source.",
-    "Do not invent customer testimonials, user stories, or founder quotes."
+    "Do not claim the Echo Home is 'the best,' '#1,' or 'leading' home arcade machine — no sourced evidence supports superlative ranking claims.",
+    "Do not state specific dimensions, weight, or screen size for the Echo Home — these are not confirmed in the knowledge base.",
+    "Do not name specific game titles included in the 149-game library unless confirmed by the business.",
+    "Do not state warranty length, return policy, or shipping details — none are present in the knowledge base.",
+    "Do not claim specific pricing, discounts, or promotional offers for the Echo Home.",
+    "Do not make direct named-competitor comparisons (e.g., 'better than Arcade1Up') — no sourced comparison data exists.",
+    "Do not make health, safety, legal, or compliance claims about the Echo Home.",
+    "Do not cite 'studies show' statistics or unverified market data about the home arcade category.",
+    "Do not claim specific environmental or sustainability credentials for JVL or the Echo Home.",
+    "Do not invent customer testimonials, user stories, or founder quotes — none are present in the knowledge base."
   ],
   "risks_to_avoid": [
-    "Avoid framing the article like a gamer gear roundup or tech review — it must read like a considered home purchase guide for mature homeowners.",
-    "Do not use language like 'retro gaming setup', 'ultimate arcade build', 'beast mode', or any gamer slang that signals a younger hobbyist audience.",
-    "Do not let the dedicated JVL Echo Home section feel like a sales pitch — it must answer the decision criteria established earlier in the article, not introduce new selling points disconnected from the framework.",
-    "Do not invent specs for the build quality or space-planning sections — use qualitative descriptors grounded in the knowledge base (premium look and feel, adult-home fit) and flag missing hard specs as TODOs.",
-    "Do not position the Echo Home as a luxury or status product — keep premium understated and justified through quality, durability, and home fit, not exclusivity or price signaling.",
-    "Do not let product mentions dominate the article — the Echo Home should appear in 2-3 sections naturally plus its dedicated section, not in every paragraph.",
-    "Avoid neon arcade clichés, flashy language, or childish excitement in any section — maintain the warm, mature, grounded tone throughout.",
-    "Do not overstate the game library beyond '149 built-in games' — avoid implying specific genres, specific titles, or quality judgments about the games without confirmation."
+    "Introducing the Echo Home too early — the SERP analysis and brief both emphasize that the product should not appear until the decision framework is established (second half of article). Premature mention will undermine editorial trust.",
+    "Slipping into gamer-audience tone: terms like 'input lag,' 'emulation cores,' 'ROM sets,' 'refresh rates,' or 'modding potential' will alienate the target persona. Every section must be written in warm, mature, home-leisure language.",
+    "Making the entire article feel like a sales funnel: the article must deliver genuine, useful decision-support value independent of the Echo Home. A reader who never buys the Echo Home should still find the article helpful.",
+    "Overstating the Echo Home's advantages without confirmed specs: the temptation to compare dimensions, weight, screen quality, or game library depth against competitors must be resisted when specific Echo Home specs are not confirmed.",
+    "Using neon-arcade, retro-gamer, or 'man cave' visual and verbal clichés — the persona responds to warm, tasteful, adult-home language, not loud arcade-parlor styling.",
+    "Overloading the FAQ with thinly disguised product pitches — every FAQ answer must genuinely serve the reader's question first, with product references only where natural and brief.",
+    "Framing the article as a 'top 10' list or product roundup — the brief and SERP context both indicate the article should be a decision framework, not a product comparison page.",
+    "Neglecting the couple/shared-decision dynamic: writing as if a single male enthusiast is the buyer will miss the persona entirely. The article should feel relevant to both Mark and Linda."
   ],
   "notes_for_writer": [
-    "Frame the entire article as a home-addition decision guide, not a tech buying guide. Use the language of home improvement and interior decision-making: think choosing a quality bar cart or pool table, not reviewing a gaming peripheral. This framing is the single biggest differentiator from competitor content.",
-    "In the dedicated Echo Home section, explicitly connect the product back to 3-4 criteria established in earlier sections (bartop format, plug-and-play ease, built-in games, adult-home aesthetic fit) so the mention feels like a natural answer to the reader's framework, not a pivot to sales copy.",
-    "Write for the couple: validate that this is a joint household decision, not a solo hobby purchase. Use 'you and your partner', 'your guests', 'the room you share' style framing. This maps to the persona and fills a real SERP gap.",
-    "Keep the product mention footprint contained: the Echo Home should appear substantively in its dedicated section and be referenced briefly in 2-3 other sections (format comparison, game library, ease of setup) as a concrete example. Do not mention it in every section.",
-    "Close with a low-pressure CTA directing to /en/echo — frame it as a natural next step to see how the product fits their situation, not as urgency-driven or sales-heavy. Also link /en/home once where contextually appropriate.",
-    "For the build quality and space-planning sections, use the confirmed qualitative facts (premium look and feel, fits mature upscale home leisure spaces, countertop/bartop format) but do not invent hard specs. Where hard specs would genuinely help the reader, note that readers should check the product page for current details."
+    "Hold the first Echo Home mention until after the decision framework sections are complete — the 'How the JVL Echo Home fits these criteria' section is the designated product introduction point. Earlier sections should build criteria that the Echo Home naturally satisfies, without naming it yet.",
+    "Write every section from the reader's living space outward, not from the product inward: 'picture your home bar counter — how much space is beside the drinks?' is stronger than 'the bartop format measures X inches.' Ground the reader in their own environment first, then introduce product attributes as answers to their spatial and social questions.",
+    "Use the 149 built-in games fact strategically in the game library section — position it as evidence of a curated, ready-to-play approach, contrasting it with machines that ship empty or overwhelm with thousands of unplayable filler titles. Do not inflate the number's significance beyond what it is.",
+    "In the plug-and-play vs. DIY section, be genuinely respectful of DIY builders — acknowledge that some buyers enjoy the project — but be clear that for the persona reading this article, plug-and-play is not a compromise, it is the smarter choice. The Echo Home's no-Wi-Fi, no-download simplicity is the proof point here.",
+    "Link to /en/echo exactly once, placed naturally in the dedicated Echo Home section or in a contextual CTA at the article's end. Link to /en/home once in a broader context — either early when framing JVL's perspective or in a secondary mention. Do not repeat either link mechanically.",
+    "Never invent dimensions, weight, screen specs, game titles, warranty details, or pricing for the Echo Home. Where these details would strengthen a section, write the content in a way that works without them, and flag the gap as a TODO for the business to fill before publishing."
   ],
   "internal_link_targets": [
-    "/en/echo — mandatory, place in the dedicated Echo Home section and/or the CTA close, using natural anchor text like 'explore the JVL Echo Home' or 'see how the Echo Home fits your space'",
-    "/en/home — place once in an early or contextual section, using anchor text like 'JVL's home arcade range' or 'home arcade options from JVL'"
+    "/en/echo — mandatory, place in the dedicated Echo Home section or closing CTA, using natural anchor text such as 'the JVL Echo Home' or 'see the Echo Home for yourself'",
+    "/en/home — place once in a supporting context, such as an introductory reference to JVL's home arcade range or a secondary mention in the FAQ section"
   ],
   "todos": [
-    "TODO: requires business confirmation — warranty length and after-sale support details",
-    "TODO: requires business confirmation — exact dimensions and weight of the Echo Home",
-    "TODO: requires business confirmation — whether the Echo Home supports 2-player simultaneous play",
-    "TODO: requires business confirmation — whether specific game titles from the 149-game library can be named",
-    "TODO: requires business confirmation — customer reviews or ratings that can be quoted",
-    "TODO: requires business confirmation — materials and finish details for build quality discussion",
-    "TODO: requires business confirmation — power consumption or noise level details",
-    "TODO: requires business confirmation — years JVL has been manufacturing arcade machines"
+    "TODO: requires business confirmation — exact dimensions and weight of the JVL Echo Home for the room-fit and countertop sections",
+    "TODO: requires business confirmation — screen size and whether the home model uses a touchscreen interface",
+    "TODO: requires business confirmation — specific game titles from the 149 built-in library for the game selection section",
+    "TODO: requires business confirmation — warranty length and customer support details for the ownership confidence section",
+    "TODO: requires business confirmation — price point or price range for the Echo Home",
+    "TODO: requires business confirmation — materials and construction specifics (casing material, screen type, control quality)",
+    "TODO: requires business confirmation — customer review count, average rating, or review platform presence",
+    "TODO: requires business confirmation — JVL company history, founding date, and years of arcade manufacturing experience for E-E-A-T authority signals",
+    "TODO: requires business confirmation — country of design or manufacture for quality signaling",
+    "TODO: source not confirmed — typical dimensions and weight ranges for competing bartop and full-size arcade machines, needed if the article includes size comparisons across categories"
   ]
 }

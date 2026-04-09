@@ -1,80 +1,68 @@
 {
   "topic": "how to choose a home arcade machine",
   "status": "revise",
-  "summary": "The draft is a well-structured, tonally appropriate buying guide that successfully reframes the home arcade purchase as a home-addition decision rather than a tech review. It hits every required section from the brief, maintains the understated premium tone throughout, and integrates the JVL Echo Home naturally within the decision framework. No high-severity issues were found — the writer correctly avoided inventing specs, naming unconfirmed game titles, or making unsupported superlative claims, and flagged all uncertain items as TODOs. However, there are medium-severity issues: the Echo Home appears in six content sections plus its dedicated section, exceeding the 2-3 natural mentions guideline; some paragraphs lean into repetitive phrasing patterns; and the FAQ section required by the brief is missing (noted as a TODO for faq_agent but still a brief-alignment gap in the current deliverable). The draft earns a revise verdict — tightening product mention frequency and reducing structural repetition would bring it to pass quality.",
+  "summary": "A strong, well-structured draft that nails the persona, tone, and editorial framing. It delivers genuine decision-support value, avoids gamer jargon, and introduces the Echo Home at the right moment with honest limitations acknowledged. No factual safety issues were found — the writer correctly avoided inventing specs, pricing, or testimonials. One MEDIUM issue: a noticeable pattern of repetitive key phrases ('pick-up-and-play,' 'earn its place,' 'plug-and-play') that would benefit from a quick variation pass. Several minor LOW issues round out the report. The writer's self-flagged claims_to_verify and TODOs are thorough and appropriate. A light revision pass to vary repeated phrasing should bring this to pass status.",
   "severity_counts": {
     "high": 0,
-    "medium": 4,
-    "low": 3
+    "medium": 1,
+    "low": 4
   },
   "issues": [
     {
       "severity": "medium",
+      "category": "quality",
+      "location": "Multiple sections — Game Library, Multi-Game Machines, FAQ, Who Will Play, Build Quality, intro",
+      "problem": "Repetitive key phrases create a noticeable echo across the article. 'Pick-up-and-play' appears 3 times in near-identical constructions ('recognizable, pick-up-and-play titles/games'). 'Earn its place' and variants appear 4 times ('earning its place,' 'earns its place,' 'earn their place,' 'earn their keep'). 'Plug-and-play' appears 7 times — some repetition is expected for a core concept, but combined with the other patterns the article feels lexically narrow in its anchor phrases.",
+      "recommended_fix": "Vary the language on a targeted pass. For 'pick-up-and-play,' alternate with 'instantly accessible,' 'easy to jump into,' or 'no-tutorial-needed.' For 'earn its place,' use 'justify its presence,' 'prove its worth,' or 'belong' in at least two of the four instances. Trim one or two 'plug-and-play' uses with 'ready out of the box,' 'zero-setup,' or 'works the moment you plug it in.'"
+    },
+    {
+      "severity": "low",
       "category": "product_fit",
-      "location": "Multiple sections — Format, Game Library, Ease of Setup, Where It Goes, Social Play, dedicated Echo Home section",
-      "problem": "The Echo Home is substantively mentioned in six sections plus its dedicated section. The company insight and brief both specify the product should appear in 2-3 sections naturally plus the dedicated section. Mentions in Format, Game Library, Ease of Setup, Where It Goes, Social Play, and the dedicated section total six, which risks the article reading as product-led rather than editorially led.",
-      "recommended_fix": "Remove or reduce the Echo Home mention in 2-3 of the non-dedicated sections. The strongest natural fits are Format, Game Library, and Ease of Setup. Consider removing or trimming the mentions in 'Where It Goes' and 'Social Play' to brief qualitative nods without naming the product, reserving the full product discussion for the dedicated section."
-    },
-    {
-      "severity": "medium",
-      "category": "quality",
-      "location": "Throughout — especially repeated rhetorical patterns",
-      "problem": "Several sections use a nearly identical rhetorical structure: introduce a general criterion, contrast the weaker approach, then present the stronger approach, then cite the Echo Home as an example. This pattern repeats in Game Library, Ease of Setup, Social Play, and Where It Goes, creating a formulaic feel that a careful reader will notice.",
-      "recommended_fix": "Vary the section structures. For example, lead one section with a scenario, another with a common mistake, another with a direct comparison table or checklist. Breaking the pattern in 2-3 sections will make the article feel less templated."
-    },
-    {
-      "severity": "medium",
-      "category": "brief",
-      "location": "Required sections list",
-      "problem": "The brief requires a 'Frequently Asked Questions' section. The draft omits it entirely, noting it is deferred to a faq_agent. While this is an understood pipeline convention, the current deliverable does not satisfy the brief's required_sections list, and the QA report should flag this gap.",
-      "recommended_fix": "No action needed from the writer if the faq_agent will append the FAQ before publication. However, flag this as a blocking dependency: the article should not be published without the FAQ section being appended, as it covers PAA questions identified in SERP research."
-    },
-    {
-      "severity": "medium",
-      "category": "quality",
-      "location": "Intro paragraph and 'Why More Homeowners' section",
-      "problem": "The introduction and the first section cover very similar ground — both discuss the emotional appeal, the social value, and the home-addition framing. This creates a sense of redundancy in the first 500+ words, which risks losing the reader before the substantive buying criteria begin.",
-      "recommended_fix": "Tighten the intro to 2-3 sentences that set up the guide's purpose and audience, then let the 'Why More Homeowners' section carry the emotional and contextual weight. Alternatively, fold the intro's strongest lines into the first section and start the article there."
-    },
-    {
-      "severity": "low",
-      "category": "tone",
-      "location": "\"Is that an arcade machine?\" (intro closing line)",
-      "problem": "The closing line of the intro — 'every time someone walks over and says, Is that an arcade machine?' — is slightly cliché and leans toward a marketing tagline rather than the understated editorial tone the rest of the article maintains well.",
-      "recommended_fix": "Replace with a more grounded closing line, e.g., 'help you make a confident, lasting purchase that looks right in your home and works without hassle.' (The sentence already contains this — just cut the final clause.)"
-    },
-    {
-      "severity": "low",
-      "category": "quality",
-      "location": "'Common Mistakes to Avoid' section",
-      "problem": "Several mistake items repeat advice already given in earlier sections almost verbatim (e.g., ignoring the room, setup friction, forgetting about guests). While a recap section can be useful, the current version feels like it restates the article rather than adding new value.",
-      "recommended_fix": "Shorten each mistake item to 1-2 sentences and frame them as quick reminders with forward-references ('as we covered in the room-matching section') rather than re-explaining the full rationale. Alternatively, add 1-2 genuinely new mistakes not covered earlier (e.g., overlooking noise levels, not considering power outlet placement)."
+      "location": "Who Will Actually Play It — 'Machines designed with this social dimension at their core - like the JVL Echo Home'",
+      "problem": "The first Echo Home name-drop appears in section 8 ('Who Will Actually Play It'), one section before the designated product introduction ('How the JVL Echo Home Fits These Criteria'). The company insight's writer notes specify holding the first mention until the dedicated section. The mention is brief and contextually natural, so the impact is minor, but it slightly undercuts the editorial independence of the framework sections.",
+      "recommended_fix": "Either move this sentence into the dedicated Echo Home section (where it would reinforce the social-play angle) or generalize it to 'Machines designed with this social dimension at their core tend to earn their keep more quickly than those designed primarily for solo use' — saving the product name for the next section."
     },
     {
       "severity": "low",
       "category": "serp",
-      "location": "Missing coverage",
-      "problem": "The SERP research identifies practical ownership considerations (noise level, heat output, power consumption) as a content gap competitors miss. The draft does not address any of these, which is a missed differentiation opportunity — though not critical since these details may require business confirmation.",
-      "recommended_fix": "Add a brief paragraph in the 'Where It Goes' or 'Common Mistakes' section noting that practical factors like power outlet access, heat output, and ambient noise are worth considering for placement — even if specific figures cannot be provided without manufacturer confirmation."
+      "location": "Types of Home Arcade Machines / Game Library sections",
+      "problem": "The secondary keyword 'touchscreen arcade for home' and the SERP-identified content gap around touchscreen formats are not addressed anywhere in the article. This is understandable given unconfirmed Echo Home specs, but the article could acknowledge touchscreen-based countertop machines as a format category without making claims about the Echo Home specifically.",
+      "recommended_fix": "Add a brief mention of touchscreen formats in the bartop/countertop subsection or game library section — e.g., 'Some countertop machines use a touchscreen interface rather than traditional joystick-and-button controls, which can simplify the experience and broaden the game library to include puzzle, trivia, and card games.' Flag for business confirmation whether this applies to the Echo Home."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Build Quality and Materials",
+      "problem": "The build quality section correctly avoids inventing specs but reads somewhat generically as a result. It describes quality degradation in abstract terms ('buttons stick,' 'graphics peel,' 'joints loosen') without offering the reader concrete indicators to evaluate before purchase — e.g., what materials or construction details to look for, what questions to ask a manufacturer, or what red flags to spot in product photos.",
+      "recommended_fix": "Add 2–3 concrete evaluation tips that don't require confirmed Echo Home specs: 'Look for solid enclosure materials like wood or steel rather than thin plastic shells,' 'Ask about the screen type — an IPS or high-quality LCD panel will maintain viewing angles and brightness over time,' 'Check whether the controls use arcade-grade microswitched buttons or cheaper membrane switches.' These are category-general and help the reader without making unverified product claims."
+    },
+    {
+      "severity": "low",
+      "category": "tone",
+      "location": "Intro paragraph 2 — 'Most buying guides for home arcade machines focus on technical specifications, screen resolution, and processor speed'",
+      "problem": "Minor inconsistency: the article criticizes other guides for focusing on 'screen resolution and processor speed,' but these terms themselves are the tech-spec language the article otherwise avoids. The sentence works rhetorically but briefly introduces the jargon it's positioning against.",
+      "recommended_fix": "Soften to something like 'Most buying guides focus on technical details that matter to hobbyist builders — screen specs, processing power, emulation compatibility — but not to someone furnishing a home.' This frames the jargon as belonging to a different audience rather than dropping it into the reader's space."
     }
   ],
   "strengths": [
-    "Tone is consistently on-brand: warm, mature, understated premium throughout. No gamer jargon, no affiliate hype, no flashy luxury cliché detected anywhere in the draft.",
-    "The home-addition framing is genuinely differentiated from typical SERP content. The pool table, bar cart, and furniture analogies land well and establish the right decision-making lens from the first paragraph.",
-    "Claims discipline is strong. The writer correctly avoids inventing specs, game titles, pricing, warranty details, or customer testimonials. All uncertain items are properly flagged in claims_to_verify and TODOs.",
-    "The couple-decision persona (Mark & Linda) is woven naturally throughout — references to partners, shared spaces, joint decisions, and guest-hosting scenarios appear without feeling forced.",
-    "The dedicated Echo Home section successfully connects back to criteria established in earlier sections rather than introducing disconnected selling points, which is exactly what the brief and company insight called for.",
-    "The 'thirty-second test' concept in the social play and ease-of-setup sections is a strong, memorable, and original decision heuristic that adds genuine editorial value.",
-    "Internal links to /en/echo and /en/home are placed naturally with appropriate anchor text and without hard-sell framing.",
-    "The CTA close is appropriately low-pressure — 'worth a closer look' and 'explore the full product details' rather than urgency-driven language."
+    "Excellent persona alignment throughout — warm, mature, understated premium tone with zero gamer jargon, affiliate hype, or 'man cave' clichés. The Mark & Linda archetype is served consistently.",
+    "The 'six-week reckoning' opening hook is original, emotionally resonant, and immediately differentiates the article from spec-driven competitors.",
+    "Genuine editorial value independent of product promotion — a reader who never buys the Echo Home would still find this article useful, which is exactly what the brief demanded.",
+    "Echo Home introduced in the second half with honest limitation acknowledgments ('won't be the right choice for every buyer'), which builds trust rather than eroding it.",
+    "All 10 required sections from the brief are present and well-developed, with logical flow between them.",
+    "All 8 brief-specified FAQ questions are answered with genuinely helpful, reader-first responses — product mentions in FAQ are limited to one natural instance.",
+    "No invented specs, dimensions, pricing, warranty details, game titles, or testimonials — the writer exercised strong factual discipline across all forbidden-claim categories.",
+    "Claims_to_verify and TODOs are comprehensive and honestly flagged, giving the human reviewer clear next steps.",
+    "Social and hosting dimension is explored with real depth — a major SERP gap that competitors ignore entirely.",
+    "The couples/shared-decision dynamic is woven throughout naturally, particularly in 'Who Will Actually Play It' and the intro — not bolted on as an afterthought.",
+    "Internal links deployed exactly as specified: /en/echo once in the dedicated section, /en/home once in the closing CTA. No mechanical repetition."
   ],
   "recommended_fixes": [
-    "Reduce Echo Home mentions from six content sections to 3 content sections plus the dedicated section. Keep mentions in Format, Game Library, and Ease of Setup; trim or remove from Where It Goes and Social Play.",
-    "Tighten the intro to reduce overlap with the 'Why More Homeowners' section — either shorten the intro or merge its strongest elements into the first section.",
-    "Vary section structures to break the repeating pattern of general-criterion → weak-approach → strong-approach → Echo-Home-example.",
-    "Condense the 'Common Mistakes' section to avoid restating earlier sections and consider adding 1-2 new practical points (power outlet access, noise, heat).",
-    "Ensure the FAQ section is appended by the faq_agent before publication — flag as a blocking dependency.",
-    "Add a brief note about practical placement factors (power access, heat, noise) in the room-matching or mistakes section to capture the SERP differentiation opportunity."
+    "Vary repetitive anchor phrases ('pick-up-and-play,' 'earn its place,' excess 'plug-and-play') with synonyms on a single targeted editing pass.",
+    "Move or generalize the Echo Home mention in 'Who Will Actually Play It' so the product name first appears in the designated section.",
+    "Add a brief touchscreen format mention in the bartop/countertop or game library section to address the SERP keyword gap.",
+    "Strengthen the Build Quality section with 2–3 concrete, category-general evaluation tips (enclosure materials, screen type, control switch quality).",
+    "Soften the intro's reference to competitor jargon so the article doesn't briefly introduce the tech-spec language it's positioning against."
   ],
   "claims_to_verify_ok": true,
   "source_inputs_used": {
@@ -84,11 +72,15 @@
     "company_insight": "outputs/company_insight/how-to-choose-a-home-arcade-machine.json"
   },
   "todos": [
-    "FAQ section must be appended by faq_agent before publication — this is a blocking dependency for brief compliance.",
-    "Metadata (title tag, meta description) to be produced by metadata_agent.",
-    "Business confirmation still needed for: exact dimensions/weight, 2-player support, specific game titles, materials/finish details, warranty/support details, years of JVL manufacturing history.",
-    "If business confirms specific game titles, add 2-3 recognizable examples in the game library section.",
-    "If business confirms dimensions and weight, add a practical sizing reference in the room-matching section.",
-    "Consider adding imagery or visual placement guidance references if the article will be published with photos."
+    "Confirm JVL Echo Home physical dimensions and weight to strengthen the Size/Room Fit section with concrete measurements.",
+    "Confirm whether the Echo Home features a touchscreen interface — if yes, add touchscreen format coverage to address the SERP keyword gap.",
+    "Confirm specific game titles in the 149-game library — naming 3–5 recognizable classics would strengthen the game library section and FAQ.",
+    "Confirm warranty length and customer support details for the build quality and ownership confidence sections.",
+    "Confirm price point or price range — readers of a buying guide expect price context; currently omitted entirely.",
+    "Confirm materials and construction specifics (enclosure material, screen type, control components) to allow concrete language in the build quality section.",
+    "Confirm JVL company history (founding date, years in arcade manufacturing) to strengthen E-E-A-T authority signals.",
+    "Confirm customer review data or review platform presence for concrete trust signals in the Echo Home section.",
+    "Consider adding a visual comparison or sizing illustration showing bartop vs. full-size formats in a typical home setting.",
+    "Review whether additional internal link targets (related blog posts, about page) are available and would serve the reader naturally."
   ]
 }
