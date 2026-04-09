@@ -1,0 +1,81 @@
+{
+  "topic": "arcade machine for basement lounge",
+  "status": "revise",
+  "summary": "The draft is a strong buyer guide that nails the understated-premium tone, avoids all forbidden claims, and differentiates clearly from the hobbyist/gamer content that dominates the SERP. Product mentions arrive after genuine editorial value and are generally positioned as examples fitting independently established criteria. However, three medium-severity issues need attention before publishing: the FAQ section required by the brief is missing from the draft, the plug-and-play / no-Wi-Fi messaging is repeated across four or more sections without enough variation, and one product mention in the social-evening section uses product-sheet language that breaks the editorial voice. No high-severity issues were found — no specs were invented, no forbidden claims were made, and the claims-to-verify list is thorough and honest.",
+  "severity_counts": {
+    "high": 0,
+    "medium": 3,
+    "low": 2
+  },
+  "issues": [
+    {
+      "severity": "medium",
+      "category": "brief",
+      "location": "Required sections / missing FAQ",
+      "problem": "The brief lists 'Frequently asked questions' as a required section. The draft omits it entirely, with a TODO noting it will be written by faq_agent. As submitted, the draft is structurally incomplete against the brief — several PAA questions identified in the SERP research (e.g., 'Do home arcade machines need Wi-Fi?', 'Are plug-and-play machines as good as custom-built ones?') lack a dedicated answer location.",
+      "recommended_fix": "Either add a stub FAQ section with the key questions from the brief's questions_to_answer list, or confirm in the pipeline that faq_agent output will be appended before the draft advances. If the latter, note this explicitly in the draft's TODO section so the gap is tracked."
+    },
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "Multiple sections: 'What to Look for', 'How Many Games', 'Setup and Placement', 'Choosing with Confidence'",
+      "problem": "The plug-and-play / no-Wi-Fi / no-downloads messaging is stated in substantially similar phrasing across at least four sections. While each instance has a contextual purpose, the cumulative effect feels repetitive to a reader who encounters nearly identical sentences every few paragraphs. This dilutes the impact of what is genuinely a strong differentiator.",
+      "recommended_fix": "Keep the fullest treatment in the 'Setup and Placement' section where it is most contextually relevant. In other sections, use brief back-references or varied phrasing (e.g., 'the zero-setup convenience discussed earlier') rather than restating the full point each time. The conclusion can summarize it once more as part of the wrap-up."
+    },
+    {
+      "severity": "medium",
+      "category": "tone",
+      "location": "How a Home Arcade Becomes the Centerpiece of a Social Evening — 'Its strengths include social play and conversation-piece value'",
+      "problem": "This sentence reads like it was lifted from a product spec sheet or marketing brief. The phrasing 'Its strengths include' is catalog language that breaks the warm editorial voice maintained everywhere else in the article. In a section that is otherwise the draft's most emotionally resonant, this line feels jarring and undermines the natural product integration.",
+      "recommended_fix": "Rewrite to show rather than list: e.g., 'The Echo Home is built for exactly this kind of moment — two people stepping up to the bar, picking a game, and drawing the rest of the room into the result.' Let the social-play and conversation-piece qualities emerge from the description rather than being stated as bullet-point strengths."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Intro, 'Full-Size vs Bartop', 'What to Look for', 'Matching the Machine', 'Choosing with Confidence'",
+      "problem": "The aesthetic-fit argument ('will it look right in your space') is raised in five separate locations with similar framing. The dedicated 'Matching the Machine' section handles this concern thoroughly; the scattered references in other sections add diminishing value and make the article feel slightly circular.",
+      "recommended_fix": "In the intro and 'What to Look for' sections, reduce aesthetic-fit mentions to brief forward-references (e.g., 'we cover aesthetic fit in detail below') rather than restating the concern each time. Let the dedicated section carry the full argument."
+    },
+    {
+      "severity": "low",
+      "category": "brief",
+      "location": "Questions to answer — 'Are plug-and-play arcade machines as good as custom-built ones?'",
+      "problem": "The brief lists this as a question to answer and the SERP research identifies it as a missed PAA opportunity. The article implicitly favors plug-and-play for this audience but never directly addresses the plug-and-play vs. custom/DIY comparison as a distinct question. Readers who searched this specific question may not feel it was answered.",
+      "recommended_fix": "Add a brief paragraph (in the 'What to Look for' section or in the FAQ when written) that directly acknowledges the DIY/emulator alternative and explains why plug-and-play is the better fit for this audience — without disparaging the DIY route. Two to three sentences would suffice."
+    }
+  ],
+  "strengths": [
+    "Opening immediately frames the reader as someone with an existing finished space — this is the exact differentiation angle the brief and SERP research call for, and it is executed confidently from sentence one.",
+    "Tone is consistently warm, mature, and grounded throughout. No gamer jargon, no affiliate hype, no flashy luxury clichés. The article reads like a considered home-furnishing conversation, which is exactly what the brand voice requires.",
+    "The full-size vs. bartop comparison section is well-structured around lifestyle fit (footprint, aesthetics, placement) rather than technical specs — this is the article's strongest structural section and its primary editorial differentiator.",
+    "The game-count section takes a clear, defensible editorial position (curated quality over inflated quantity) and avoids inventing specific game titles. The cable-TV analogy is effective and relatable for the target persona.",
+    "Product mentions arrive only after the article has delivered genuine, product-agnostic decision-support value. The first Echo Home reference in the bartop-comparison section flows naturally from criteria the guide has independently established.",
+    "No forbidden claims were made. No specs were invented. No game titles were fabricated. Inline TODOs and the claims-to-verify section are thorough and honest — the writer flagged every uncertain detail rather than filling gaps with invented data.",
+    "The partner/couple perspective is woven in naturally (especially in the conclusion: 'both you and your partner feel good about') without being heavy-handed, addressing a genuine SERP gap identified in the research.",
+    "Strong differentiation from hobbyist and gamer-oriented competitor content. The article never treats the basement as a game room to build; it consistently treats it as a finished room to enhance."
+  ],
+  "recommended_fixes": [
+    "Address the FAQ gap: either add a stub FAQ section covering the brief's key questions, or confirm the faq_agent pipeline step will handle this before the draft advances.",
+    "Consolidate plug-and-play / no-Wi-Fi messaging: keep the full treatment in 'Setup and Placement', use brief back-references elsewhere, and allow the conclusion one summary mention.",
+    "Rewrite the product-sheet sentence in the social-evening section ('Its strengths include social play and conversation-piece value') to show those qualities through description rather than listing them as features.",
+    "Reduce aesthetic-fit repetition by converting scattered mentions into forward-references to the dedicated 'Matching the Machine' section.",
+    "Add a brief plug-and-play vs. custom/DIY comparison paragraph to directly answer the brief's question and capture the SERP opportunity."
+  ],
+  "claims_to_verify_ok": true,
+  "source_inputs_used": {
+    "draft": "outputs/drafts/arcade-machine-for-basement-lounge.json",
+    "brief": "outputs/briefs/arcade-machine-for-basement-lounge.json",
+    "serp_research": "outputs/serp_research/arcade-machine-for-basement-lounge.json",
+    "company_insight": "outputs/company_insight/arcade-machine-for-basement-lounge.json"
+  },
+  "todos": [
+    "FAQ section is missing from the draft — confirm whether faq_agent will append it before this draft advances in the pipeline.",
+    "Exact physical dimensions and weight of JVL Echo Home still unconfirmed — required for the placement section's inline TODO.",
+    "Confirm whether all 149 games or only a subset support simultaneous two-player play — the article carefully avoids overclaiming but a confirmed answer would strengthen the social-play sections.",
+    "Noise level and power consumption details for enclosed basement environments still unconfirmed — flagged inline in the draft.",
+    "Warranty length and after-sale support terms would strengthen the 'Choosing with Confidence' conclusion if confirmed.",
+    "Real customer reviews or testimonials referencing basement lounge installations would add E-E-A-T value if available.",
+    "JVL's years of manufacturing experience would strengthen the heritage angle if confirmed.",
+    "Metadata (title tag, meta description) to be written separately by metadata_agent."
+  ]
+}
