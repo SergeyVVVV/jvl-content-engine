@@ -1,0 +1,90 @@
+{
+  "keyword": "bartop arcade machine for home bar",
+  "topic": "bartop arcade machine for home bar",
+  "serp_status": "mock",
+  "top_results": [],
+  "dominant_search_intent": "[MOCK] Commercial investigation — the searcher likely already owns or is building a home bar and is now evaluating which bartop arcade machine fits that specific context. The intent sits between informational buyer education and active product comparison, with a strong sub-intent around aesthetic fit and ease of ownership rather than raw specs.",
+  "common_angles": [
+    "[MOCK] Product roundup or 'best of' listicle comparing multiple bartop arcade machines by price tier, with brief pro/con summaries for each",
+    "[MOCK] DIY build guide framing — how to assemble a bartop arcade kit, often assuming the reader wants a Raspberry Pi or custom build",
+    "[MOCK] Spec-driven buyer's guide organized around screen size, button layout, number of games, and emulator compatibility",
+    "[MOCK] Affiliate-driven comparison article structured around Amazon-available units with embedded purchase links",
+    "[MOCK] General home game room roundup that includes bartop arcades alongside pinball, foosball, and other entertainment options"
+  ],
+  "common_sections": [
+    "[MOCK] What is a bartop arcade machine — basic category definition",
+    "[MOCK] Top N bartop arcade machines ranked or compared in a table",
+    "[MOCK] Key specs to consider — screen size, dimensions, number of games, controls",
+    "[MOCK] Bartop vs full-size arcade cabinet comparison",
+    "[MOCK] DIY vs pre-built — pros and cons of building your own",
+    "[MOCK] Setup and installation tips",
+    "[MOCK] Price ranges and what you get at each tier",
+    "[MOCK] FAQ section covering basic buyer questions",
+    "[MOCK] Where to buy — links to retailers or Amazon listings"
+  ],
+  "competitor_strengths": [
+    "[MOCK] Listicle-style articles typically do well at giving the reader a quick visual scan of several options, which satisfies the comparison impulse early in the buying journey",
+    "[MOCK] Some ranking content includes real photos of machines on countertops or in home settings, which helps readers visualize fit",
+    "[MOCK] DIY-focused articles tend to be genuinely detailed and passionate, offering deep technical knowledge that builds trust with a hobbyist audience",
+    "[MOCK] Well-structured FAQ sections in some articles directly address the most common buyer hesitations, improving dwell time and snippet eligibility",
+    "[MOCK] Spec comparison tables are scannable and can be useful for readers who already know what dimensions or features they need"
+  ],
+  "competitor_weaknesses": [
+    "[MOCK] Most ranking content is written for a younger, tech-savvy, or hobbyist audience — not for affluent homeowners furnishing an adult entertaining space",
+    "[MOCK] Very few articles address the aesthetic and decor-fit question — how a bartop arcade actually looks on a real home bar next to bottles, glassware, and bar stools",
+    "[MOCK] DIY content dominates but is irrelevant to buyers who want a finished, plug-and-play product that simply works out of the box",
+    "[MOCK] Product roundups tend to feature budget or mid-range machines from mass-market brands, with little coverage of premium or design-conscious options",
+    "[MOCK] Tone is almost universally casual-gamer or tech-reviewer — language like 'epic retro setup' or 'ultimate gaming station' alienates the mature homeowner audience",
+    "[MOCK] Almost no content discusses durability, build materials, or finish quality in the context of daily life in a home bar environment",
+    "[MOCK] Social and hosting angles are largely absent — articles rarely discuss how a bartop arcade functions as a conversation starter or shared experience for guests",
+    "[MOCK] Many articles are thinly veiled affiliate pages with shallow product descriptions and no genuine editorial perspective"
+  ],
+  "content_gaps": [
+    "[MOCK] No content specifically addresses how to evaluate a bartop arcade as a piece of home bar furniture — finish, footprint on a real countertop, visual harmony with bar decor",
+    "[MOCK] The hosting and entertaining angle is almost entirely missing — how a bartop arcade changes the dynamic when guests come over, intergenerational play, conversation-starting moments",
+    "[MOCK] Very little content helps the reader understand what 'plug-and-play' actually means in practice — unboxing to first game in minutes, no cables draped everywhere, no software updates",
+    "[MOCK] No articles frame the purchase decision from the perspective of a couple (like Mark and Linda) rather than a solo buyer or hobbyist",
+    "[MOCK] The question of long-term reliability and everyday durability in a home bar context — where drinks may spill and the machine lives permanently on the counter — is not addressed",
+    "[MOCK] Premium positioning is absent: no content explains why paying more for a purpose-built bartop arcade is worth it compared to a cheap imported unit that feels like a toy",
+    "[MOCK] Touchscreen vs joystick-and-buttons as a control interface choice is rarely discussed from a usability and elegance standpoint",
+    "[MOCK] No content covers how to avoid the 'gamer room' aesthetic bleed — keeping the home bar feeling sophisticated while adding an arcade element"
+  ],
+  "differentiation_opportunities": [
+    "[MOCK] JVL can own the 'home bar fit' angle entirely — writing from the perspective of someone who has already invested in a beautiful home bar and wants to protect that investment with a machine that belongs there",
+    "[MOCK] The couple-as-buyer framing is wide open — addressing both partners' concerns (he wants the nostalgia and fun, she wants it to look good and not dominate the space) creates a uniquely relatable article",
+    "[MOCK] A warm, mature editorial tone that avoids gamer jargon will immediately stand apart from every other ranking article in this space",
+    "[MOCK] Emphasizing the social and emotional value of a bartop arcade — shared moments, laughter with guests, nostalgia as a bridge between generations — is a completely unoccupied angle",
+    "[MOCK] JVL can position the Echo Home not through spec sheets but through the experience of ownership: what it feels like to have it on your bar, how guests react, how simple it is to enjoy",
+    "[MOCK] Practical, honest guidance on common buying mistakes (cheap builds that break, machines that look like toys, complicated setup) builds trust and naturally contrasts with the Echo Home's strengths",
+    "[MOCK] A design-conscious visual approach — describing or showing how a quality bartop arcade complements dark wood, brass fixtures, leather stools — is something no competitor is doing"
+  ],
+  "paa_answered": [
+    "[MOCK] 'What is the difference between a bartop arcade and a full-size arcade cabinet?' — this is commonly addressed in most ranking content, though often in a shallow spec-comparison way",
+    "[MOCK] 'How many games come built into a bartop arcade machine?' — frequently answered, but usually as a raw number without context on game quality or relevance to adult players",
+    "[MOCK] 'Are bartop arcade machines good for two players?' — sometimes addressed, typically with a brief mention of two-player control panels"
+  ],
+  "paa_missed": [
+    "[MOCK] 'What size bartop arcade machine fits on a standard home bar?' — rarely answered with specific dimensional guidance relative to actual bar counter depths and widths",
+    "[MOCK] 'Are bartop arcade machines plug-and-play or do they need setup?' — most content conflates this with DIY builds and does not clearly distinguish finished products from kits",
+    "[MOCK] 'Do bartop arcade machines need Wi-Fi or downloads to work?' — almost never addressed directly, despite being a real concern for non-technical buyers",
+    "[MOCK] 'What should I look for in an arcade machine that matches my home bar decor?' — virtually absent from ranking content, which ignores aesthetics and interior design fit entirely",
+    "[MOCK] 'How durable are bartop arcade machines for everyday home use?' — rarely discussed beyond basic build-quality mentions; no content frames durability in the context of a living home bar environment"
+  ],
+  "risks_to_avoid": [
+    "[MOCK] Do not structure the article as a product roundup or listicle comparing multiple machines — this positions JVL as one option among many rather than the definitive choice for this specific use case",
+    "[MOCK] Avoid any gamer-culture language, tone, or framing — words like 'rig,' 'setup,' 'beast,' 'epic,' or 'ultimate gaming station' will immediately alienate the target persona",
+    "[MOCK] Do not lead with specs or technical comparisons — the reader cares about how the machine fits their life, not its processor or emulator compatibility",
+    "[MOCK] Do not position the Echo Home as a luxury status symbol — the persona values substance and craftsmanship, not conspicuous spending",
+    "[MOCK] Avoid making the article feel like a product page with an editorial wrapper — the buying guidance must be genuinely useful even to someone who never clicks through to the Echo Home",
+    "[MOCK] Do not invent or assume product specifications for the Echo Home that are not confirmed in the knowledge base — dimensions, weight, screen size, game count, and connectivity must be verified",
+    "[MOCK] Avoid dismissing all competitors as inferior — acknowledge that many options exist, but frame the decision around what matters for a home bar context specifically"
+  ],
+  "notes_for_writer": [
+    "[MOCK] Open the article by establishing the home bar as a space the reader has already invested in — the bartop arcade is the next layer, not the starting point, and the reader needs to feel you understand what they have built",
+    "[MOCK] Frame every evaluation criterion through the lens of 'does this belong on my bar?' rather than 'does this have good specs?' — size relative to a real countertop, finish that matches wood and brass, controls that feel intentional not toy-like",
+    "[MOCK] The plug-and-play distinction is critical for this persona — dedicate meaningful space to explaining why a finished, self-contained machine matters versus a DIY kit, and make the case without being condescending to the reader's intelligence",
+    "[MOCK] Use the social and hosting angle as emotional connective tissue throughout the article — a bartop arcade on a home bar is not a solo hobby purchase, it is a way to create moments when friends and family gather",
+    "[MOCK] When introducing the Echo Home, do so after the reader has already absorbed genuine buying criteria — the product should feel like a natural answer to the questions the article raised, not a pitch inserted into a guide",
+    "[MOCK] Avoid any visual or tonal cues that suggest a young male gamer audience — the language, examples, and scenarios should consistently reflect a mature couple hosting in a well-appointed home space"
+  ]
+}

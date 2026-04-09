@@ -1,30 +1,35 @@
 {
   "topic": "how to choose a home arcade machine",
-  "meta_title": "How to Choose a Home Arcade Machine for Your Space",
-  "h1": "How to Choose a Home Arcade Machine That Actually Fits Your Life",
-  "meta_description": "A practical guide to choosing a home arcade machine based on room fit, build quality, ease of use, and social value — not spec sheets.",
+  "meta_title": "How to Choose a Home Arcade Machine Worth Keeping",
+  "h1": "Choosing a Home Arcade Machine: What Actually Matters",
+  "meta_description": "A practical guide to choosing a home arcade machine for your home bar or lounge — based on room fit, game quality, build materials, and real-life use.",
   "slug": "how-to-choose-home-arcade-machine",
-  "og_title": "How to Choose a Home Arcade Machine for Your Space",
-  "og_description": "A homeowner's guide to picking a home arcade machine based on room fit, build quality, plug-and-play simplicity, and lasting social value.",
+  "og_title": "How to Choose a Home Arcade Machine You'll Actually Keep",
+  "og_description": "Not specs and rankings — a practical framework for choosing an arcade machine that fits your home, your life, and the people in it.",
   "image_alt_texts": [
-    "Countertop arcade machine on a home bar next to glassware",
-    "Two guests playing a bartop arcade machine in a basement lounge",
-    "Side view of a premium arcade machine on a wooden bar counter",
-    "Home den with warm lighting and a compact arcade machine on a sideboard",
-    "Close-up of arcade machine controls and screen during gameplay"
+    "Countertop arcade machine sitting on a home bar with drinks and glasses nearby",
+    "Side-by-side comparison of a full-size standing arcade cabinet and a compact bartop machine",
+    "Friends gathered around a bartop arcade machine during an evening at home",
+    "Bartop arcade machine in a furnished basement lounge with comfortable seating",
+    "Close-up of arcade machine controls and screen in a home setting"
   ],
-  "excerpt": "A practical guide to choosing a home arcade machine for your bar, den, or basement lounge — covering room fit, build quality, game library, setup simplicity, and the social value that makes the purchase worth it long-term.",
+  "excerpt": "A practical guide to choosing a home arcade machine for your home bar or lounge. Focused on room fit, game quality, build materials, setup simplicity, and the social moments that make the purchase worthwhile.",
   "notes": [
-    "H1 matches the draft's existing heading, which is strong and audience-appropriate; meta_title is a shorter variant for SERPs.",
-    "Slug omits 'a' for brevity while staying clear and readable.",
-    "Meta description stays under 155 chars and leads with the practical framing that differentiates this piece from hobbyist guides.",
-    "Image alt texts are inferred from article content — no specific images were provided, so these describe likely supporting visuals.",
-    "Avoided year, superlatives, and any unverified product specs per hard rules."
+    "meta_title uses the primary keyword verbatim plus the draft's 'worth keeping' thesis for SERP alignment",
+    "h1 reframed as 'What Actually Matters' to differentiate from meta_title while reflecting the article's editorial angle",
+    "slug drops the article 'a' for a cleaner URL at five words",
+    "og_title uses a warmer 'You'll Actually Keep' phrasing suited to social sharing",
+    "image alt texts describe plausible supporting images implied by the article without referencing any specific brand or product",
+    "no year included in any field — the article is evergreen in framing"
   ],
   "source_inputs_used": {
     "draft": "outputs/drafts/how-to-choose-a-home-arcade-machine.json",
     "brief": "outputs/briefs/how-to-choose-a-home-arcade-machine.json",
     "qa_report": "outputs/qa/how-to-choose-a-home-arcade-machine.json"
   },
-  "todos": []
+  "todos": [
+    "Confirm whether the JVL Echo Home features a touchscreen — affects keyword coverage for 'touchscreen arcade for home' identified as a SERP gap in the brief",
+    "Confirm Echo Home physical dimensions and weight — if added to the article, image alt texts and meta description may benefit from specificity",
+    "Verify that 'home bar or lounge' are the primary placement contexts JVL wants to emphasize in search-facing copy"
+  ]
 }

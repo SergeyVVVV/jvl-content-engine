@@ -1,0 +1,37 @@
+{
+  "topic": "bartop arcade machine for home bar",
+  "meta_title": "Choosing a Bartop Arcade Machine for Your Home Bar",
+  "h1": "How to Choose a Bartop Arcade Machine for Your Home Bar",
+  "meta_description": "What to look for in a bartop arcade for your home bar. Covers size, finish, plug-and-play ease, and how to choose a machine that fits an adult space.",
+  "slug": "bartop-arcade-machine-home-bar",
+  "og_title": "Choosing a Bartop Arcade That Belongs on Your Home Bar",
+  "og_description": "A guide to finding a bartop arcade that fits your home bar — not your game room. Covers size, finish, setup, and the details that actually matter.",
+  "image_alt_texts": [
+    "Bartop arcade machine sitting on a wooden home bar counter with glasses and bottles nearby",
+    "Two guests playing side by side on a countertop arcade at a home bar during an evening gathering",
+    "Close-up of a bartop arcade machine showing clean lines and a premium finish on a bar surface",
+    "Home bar with warm ambient lighting, curated shelving, and a compact arcade machine on the counter"
+  ],
+  "excerpt": "A practical guide to choosing a bartop arcade machine that earns its place on your home bar — covering size, finish, plug-and-play setup, built-in game libraries, and how to avoid machines that clash with an adult entertaining space.",
+  "notes": [
+    "meta_title uses 'Choosing' while h1 uses 'How to Choose' for natural differentiation",
+    "og_title reframed with 'That Belongs on' for warmer social tone without adding hype",
+    "Slug drops 'for' to stay within the 3–6 word target while preserving the primary keyword",
+    "Image alt texts inferred from article scenarios — no specific product photography was provided so descriptions are general",
+    "No year included; neither the draft nor brief requires temporal framing",
+    "Avoided specifying 149 games in meta or excerpt since the number is confirmed but specific titles are not"
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/drafts/bartop-arcade-machine-for-home-bar.json",
+    "brief": "outputs/briefs/bartop-arcade-machine-for-home-bar.json",
+    "qa_report": "outputs/qa/bartop-arcade-machine-for-home-bar.json"
+  },
+  "todos": [
+    "Inline TODOs in the draft body must be removed or converted to non-visible editorial markers before publishing",
+    "Confirm Echo Home dimensions, weight, and screen size — the size/fit sections and FAQ currently lack specific measurements",
+    "Confirm 2-player simultaneous play capability for the Echo Home to support the social play angle",
+    "Confirm control interface type (touchscreen vs. joystick-and-buttons) — intentionally omitted from draft but relevant to metadata if later added",
+    "Confirm specific build materials and finish details to ensure image alt texts remain accurate if product photos are added",
+    "Review whether slug should include 'guide' or 'choosing' for SEO — current version mirrors the primary keyword directly"
+  ]
+}
