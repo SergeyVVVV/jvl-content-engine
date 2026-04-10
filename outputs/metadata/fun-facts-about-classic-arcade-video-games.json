@@ -1,0 +1,34 @@
+{
+  "topic": "Fun Facts About Classic Arcade Video Games",
+  "meta_title": "25 Fun Facts About Classic Arcade Games",
+  "h1": "25 Fun Facts About Classic Arcade Games That Shaped a Generation",
+  "meta_description": "From Pong's overflowing coin box to Pac-Man's kill screen, these 25 facts capture the real history behind the golden age of arcade games.",
+  "slug": "classic-arcade-game-fun-facts",
+  "og_title": "25 Fun Facts From the Golden Age of Arcade Games",
+  "og_description": "The real stories behind the games, the arcades, and the generation that grew up feeding quarters into machines.",
+  "image_alt_texts": [
+    "Row of classic arcade cabinets glowing in a dimly lit 1980s arcade",
+    "Close-up of quarters lined up on an arcade machine marquee",
+    "Pac-Man maze gameplay on an original arcade CRT screen",
+    "Group of players gathered around an arcade cabinet in the early 1980s",
+    "Modern countertop arcade machine on a home bar surface"
+  ],
+  "excerpt": "From the first Pong prototype to Pac-Man's infamous kill screen, these 25 facts tell the real story of the golden age of arcade games — the history, the culture, and the generation that lived it.",
+  "notes": [
+    "h1 retained from draft — well-crafted, exactly 65 chars, and accurate to content",
+    "meta_title shortened by dropping the trailing clause for cleaner search display",
+    "og_title reframed around 'Golden Age' for slightly warmer social tone",
+    "slug omits '25' to stay keyword-focused and evergreen",
+    "image alt texts inferred from article themes — no specific photos were provided, so alts are written for likely supporting imagery"
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/drafts/fun-facts-about-classic-arcade-video-games.json",
+    "brief": "outputs/briefs/video-games-facts.json",
+    "qa_report": "outputs/qa/fun-facts-about-classic-arcade-video-games.json"
+  },
+  "todos": [
+    "Brief's primary keyword is 'video games facts' but article and meta_title use 'arcade games' — confirm SEO team is aligned on target keyword",
+    "No year included per style rules — verify this is correct given evergreen intent",
+    "Image alt texts are based on inferred supporting images — replace with actual alt texts once final images are selected"
+  ]
+}

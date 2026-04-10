@@ -1,0 +1,91 @@
+{
+  "keyword": "video games facts",
+  "topic": "Fun Facts About Classic Arcade Video Games",
+  "serp_status": "mock",
+  "top_results": [],
+  "dominant_search_intent": "[MOCK] Informational — casual trivia-seeking. Users searching 'video games facts' are typically looking for entertaining, easily digestible pieces of trivia about video game history. The intent is broad and skews toward listicle-style content. A significant subset of searchers are adults with nostalgic interest in classic games, but most ranking content targets a general or younger audience.",
+  "common_angles": [
+    "[MOCK] Broad trivia listicle covering all eras of video games, from Pong to modern titles, with no specific audience framing",
+    "[MOCK] 'Did you know?' style compilation optimized for social sharing and quick scanning",
+    "[MOCK] Timeline or chronological walkthrough of video game history milestones",
+    "[MOCK] Mix of industry revenue stats, pop-culture crossover facts, and oddities about specific games",
+    "[MOCK] Clickbait-adjacent framing — 'mind-blowing facts' or 'facts that will shock you' — designed to maximize clicks rather than depth",
+    "[MOCK] Some articles blend arcade, console, and PC gaming facts indiscriminately with no clear editorial thread"
+  ],
+  "common_sections": [
+    "[MOCK] Introduction or overview of video game history",
+    "[MOCK] Early origins — Pong, Space Invaders, the birth of the industry",
+    "[MOCK] Golden age arcade facts — Pac-Man, Donkey Kong, Galaga",
+    "[MOCK] Revenue and industry growth statistics",
+    "[MOCK] Famous glitches, bugs, and Easter eggs",
+    "[MOCK] Pop culture crossovers — movies, TV shows, music inspired by games",
+    "[MOCK] Records and world firsts — highest scores, fastest completions, most expensive games",
+    "[MOCK] Modern gaming facts mixed in with retro content",
+    "[MOCK] FAQ section covering basic questions like 'what was the first video game'"
+  ],
+  "competitor_strengths": [
+    "[MOCK] Typical ranking content is well-structured for quick scanning with numbered lists, bold highlights, and short paragraphs that keep casual readers engaged",
+    "[MOCK] Strong use of well-known anchor facts (Pac-Man revenue, Mario naming origin, Donkey Kong story) that are genuinely interesting and widely verified",
+    "[MOCK] Many top-ranking articles are hosted on high-authority domains (major entertainment sites, educational platforms, gaming publications) giving them strong domain-level trust signals",
+    "[MOCK] Effective use of images — cabinet photos, pixel art, retro screenshots — that add visual interest and break up text",
+    "[MOCK] Some articles include embedded video clips or GIFs of classic gameplay moments that increase time on page"
+  ],
+  "competitor_weaknesses": [
+    "[MOCK] Most articles cast an extremely wide net across all video game eras, diluting relevance for anyone specifically interested in the classic arcade period",
+    "[MOCK] Tone is almost universally pitched at a younger, internet-native audience — casual, meme-adjacent, sometimes flippant — which alienates older adults who actually lived the arcade era",
+    "[MOCK] Facts are frequently recycled across multiple competing articles with no original research, unique framing, or editorial voice",
+    "[MOCK] Very few articles organize facts into meaningful thematic groupings — most are flat numbered lists with no narrative arc or structure",
+    "[MOCK] Emotional resonance is almost entirely absent — facts are presented as detached trivia rather than connected to real human experiences or cultural moments",
+    "[MOCK] Source attribution is weak or nonexistent — many articles present claims without any citation, making accuracy questionable",
+    "[MOCK] The social and cultural dimension of arcades — the spaces themselves, the community, the rituals — is almost never explored",
+    "[MOCK] Product or experience-oriented conclusions are rare; articles typically just end without giving the reader a meaningful next step"
+  ],
+  "content_gaps": [
+    "[MOCK] The lived experience of arcades as social spaces — the sounds, the etiquette, the quarter-on-the-cabinet ritual, the after-school culture — is virtually never covered in trivia-format content",
+    "[MOCK] Almost no ranking content connects classic arcade facts to the specific nostalgia of adults who were teenagers in the late 1970s and 1980s",
+    "[MOCK] The economics of individual arcade ownership — how operators chose machines, how a single cabinet could earn thousands per week — is a fascinating angle that is rarely explored",
+    "[MOCK] Facts about the designers and engineers behind classic games (Toru Iwatani, Eugene Jarvis, Ed Logg) as real people with creative stories, not just credited names",
+    "[MOCK] The physical craftsmanship of arcade cabinets — the art, the controls, the CRT displays — is a tactile dimension that trivia articles ignore entirely",
+    "[MOCK] How specific games shaped local communities, rivalries, and social hierarchies in real American towns and suburbs",
+    "[MOCK] The transition from arcade to home play — why it happened, what was lost, and what modern solutions exist — is a natural content gap that almost no trivia article addresses",
+    "[MOCK] Intergenerational appeal — the idea that these games can connect grandparents with grandchildren — is emotionally powerful and completely absent from typical ranking content"
+  ],
+  "differentiation_opportunities": [
+    "[MOCK] Frame every fact through the lens of someone who was actually there — trigger 'I remember that' moments rather than presenting detached trivia for a general audience",
+    "[MOCK] Group facts into thematic sections with narrative connective tissue, creating an article that reads like a curated experience rather than a random list",
+    "[MOCK] Write in a warm, grounded, adult tone that respects the reader's intelligence and personal history with these games — the opposite of the young-skewing clickbait tone that dominates",
+    "[MOCK] Include the sensory and social dimensions of the arcade experience that no competing article covers — the sounds, the crowds, the specific feel of joystick and buttons",
+    "[MOCK] Close with a genuinely earned product connection: after 24 facts that build nostalgia, introduce the Echo Home as the natural answer to 'I wish I could play those games again'",
+    "[MOCK] Prioritize facts with emotional resonance for US adults aged 55-72 over obscure technical trivia that only hardcore collectors would appreciate",
+    "[MOCK] Provide real source attribution for every major claim, building trust that typical listicles completely lack"
+  ],
+  "paa_answered": [
+    "[MOCK] 'Which classic arcade game made the most money of all time?' — typically answered with Pac-Man revenue figures, though often without clear sourcing",
+    "[MOCK] 'What was the golden age of arcade video games?' — commonly addressed with the standard 1978-1986 timeframe",
+    "[MOCK] 'What was the first arcade video game ever made?' — usually answered with Computer Space (1971) or Pong (1972), though articles often conflate 'first' with 'first commercially successful'",
+    "[MOCK] 'Why were arcade games so popular in the 1980s?' — sometimes touched on briefly but rarely explored with real cultural depth"
+  ],
+  "paa_missed": [
+    "[MOCK] 'What are the most surprising facts about classic arcade games?' — this is the core query but most articles don't curate for genuine surprise value; they recycle the same well-known facts",
+    "[MOCK] 'Are classic arcade games still available to play today?' — almost never addressed in trivia articles, which focus entirely on history and never bridge to the present",
+    "[MOCK] 'What hidden Easter eggs exist in classic arcade games?' — occasionally mentioned in passing but rarely given dedicated depth with specific examples and stories behind them",
+    "[MOCK] 'Why did arcades disappear and can you still play those games at home?' — this transition narrative is a major gap in typical ranking content and represents JVL's strongest opportunity to connect nostalgia to product"
+  ],
+  "risks_to_avoid": [
+    "[MOCK] Do not adopt the young-gamer listicle tone that dominates ranking content — words like 'insane', 'epic', 'mind-blowing', and meme-style humor will immediately alienate the target persona",
+    "[MOCK] Do not mix modern gaming facts (Fortnite revenue, esports statistics, mobile gaming) into an article that should be focused on the classic arcade era",
+    "[MOCK] Do not present commonly debunked myths as fact — for example, the widely repeated claim that Pac-Man was designed to appeal to women is more nuanced than most articles suggest",
+    "[MOCK] Do not create a flat, undifferentiated list of 25 facts with no grouping or narrative structure — this is the single most common structural weakness in competing content",
+    "[MOCK] Do not let the product mention appear before the final section; premature commercial framing will break the nostalgic trust the article builds",
+    "[MOCK] Do not include Japanese-market-only facts or deep technical specifications that have no emotional resonance for US readers who visited American arcades in the 1970s-1980s",
+    "[MOCK] Do not use unverified revenue figures — arcade earnings claims vary wildly across sources and presenting uncertain numbers as definitive facts damages credibility"
+  ],
+  "notes_for_writer": [
+    "[MOCK] Lead with facts that trigger specific sensory or social memories for the target persona — the sound of quarters dropping, the glow of a CRT in a dark room, the crowd gathered around a high scorer — before moving to historical milestones and records.",
+    "[MOCK] Every fact should pass the 'Mark and Linda test': would a 60-year-old who spent real quarters in real arcades find this interesting, surprising, or personally meaningful? If a fact only resonates with younger gaming enthusiasts, cut it.",
+    "[MOCK] Structure the 25 facts into the brief's required thematic sections rather than a flat numbered list — this is your single biggest structural advantage over every competing article, which universally fails at meaningful organization.",
+    "[MOCK] Reserve the JVL Echo Home mention exclusively for the final section ('Bringing the Arcade Home') where it answers the emotional question the entire article has been building: 'I wish I could play those games again.' One natural mention with a link to /en/echo is sufficient.",
+    "[MOCK] Verify every historical claim independently — competing articles frequently repeat inaccurate revenue figures, disputed 'firsts', and oversimplified origin stories. Accuracy is both an editorial standard and a trust differentiator.",
+    "[MOCK] Write in a tone that feels like a knowledgeable friend sharing stories over drinks — warm, specific, genuinely enthusiastic — not like a content mill producing SEO trivia. The target reader can instantly detect generic AI-written listicle voice."
+  ]
+}
