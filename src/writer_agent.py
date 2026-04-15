@@ -126,6 +126,7 @@ CRITICAL OUTPUT RULES:
         brief: dict,
         serp_context: str,
         insight_context: str,
+        seo_structure_context: str = "",
     ) -> str:
         brief_block = (
             f"# ARTICLE BRIEF\n\n{json.dumps(brief, indent=2, ensure_ascii=False)}"
@@ -151,12 +152,22 @@ CRITICAL OUTPUT RULES:
             else ""
         )
 
+        seo_block = (
+            f"\n# SEO OUTLINE — FOLLOW THIS STRUCTURE\n"
+            f"# Use the H1, headings, and section order provided below.\n"
+            f"# The FAQ section will be produced by a separate agent — write a placeholder.\n\n"
+            f"{seo_structure_context}\n"
+            if seo_structure_context
+            else ""
+        )
+
         return (
             f"Write a complete first-draft article for the following topic.\n\n"
             f"Topic: {topic}\n\n"
             f"{brief_block}"
             f"{serp_block}"
             f"{insight_block}"
+            f"{seo_block}"
             "\nReturn only a valid JSON object. No markdown fences, no commentary."
         )
 
@@ -373,14 +384,16 @@ CRITICAL OUTPUT RULES:
         brief: dict | None = None,
         serp_context: str = "",
         insight_context: str = "",
+        seo_structure_context: str = "",
     ) -> dict:
         """Run the Writer Agent and return the raw LLM output dict.
 
         Args:
-            topic:          Article topic (plain text).
-            brief:          Optional brief dict from Brief Agent.
-            serp_context:   Optional pre-formatted SERP summary string.
-            insight_context: Optional pre-formatted company insight summary string.
+            topic:                 Article topic (plain text).
+            brief:                 Optional brief dict from Brief Agent.
+            serp_context:          Optional pre-formatted SERP summary string.
+            insight_context:       Optional pre-formatted company insight summary string.
+            seo_structure_context: Optional SEO outline JSON string from SEO Structure Agent.
 
         Returns:
             Dict with keys: h1, intro, sections, internal_links_used,
@@ -394,6 +407,7 @@ CRITICAL OUTPUT RULES:
             brief=brief or {},
             serp_context=serp_context,
             insight_context=insight_context,
+            seo_structure_context=seo_structure_context,
         )
 
         if self.api_key:
