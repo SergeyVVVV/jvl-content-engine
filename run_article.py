@@ -2,8 +2,7 @@
 """JVL Content Engine — Full Article Pipeline Runner.
 
 Runs the complete pipeline for one topic:
-  Brief → SERP Research → Company Insight → SEO Structure → Writer
-    → FAQ → QA → Factcheck → Metadata Copy
+  Brief → SERP Research → Company Insight → SEO Structure → Writer → QA → Metadata Copy
 
 All artifacts are saved in the existing output folders.
 
@@ -24,9 +23,7 @@ Output folders:
   outputs/company_insight/
   outputs/seo_structure/
   outputs/drafts/
-  outputs/faq/
   outputs/qa/
-  outputs/factcheck/
   outputs/metadata/
 """
 
@@ -47,9 +44,7 @@ from src.serp_research_agent import SerpResearchAgent  # noqa: E402
 from src.company_insight_agent import CompanyInsightAgent  # noqa: E402
 from src.seo_structure_agent import SeoStructureAgent  # noqa: E402
 from src.writer_agent import WriterAgent  # noqa: E402
-from src.faq_agent import FaqAgent  # noqa: E402
 from src.qa_agent import QAAgent  # noqa: E402
-from src.factcheck_agent import FactcheckAgent  # noqa: E402
 from src.metadata_copy_agent import MetadataCopyAgent  # noqa: E402
 
 
@@ -160,22 +155,10 @@ def main() -> int:
         help="Skip SEO Structure step",
     )
     parser.add_argument(
-        "--skip-faq",
-        dest="skip_faq",
-        action="store_true",
-        help="Skip FAQ step",
-    )
-    parser.add_argument(
         "--skip-qa",
         dest="skip_qa",
         action="store_true",
         help="Skip QA step",
-    )
-    parser.add_argument(
-        "--skip-factcheck",
-        dest="skip_factcheck",
-        action="store_true",
-        help="Skip Factcheck step",
     )
     parser.add_argument(
         "--skip-metadata",
@@ -202,7 +185,7 @@ def main() -> int:
     # ================================================================
     # Step 1 — Brief (hard stop on failure)
     # ================================================================
-    _step(1, 9, "Brief Agent")
+    _step(1, 7, "Brief Agent")
     try:
         brief_agent = BriefAgent()
         brief = brief_agent.run(
@@ -237,7 +220,7 @@ def main() -> int:
     if args.skip_serp:
         print("\n[SKIP] SERP Research — --skip-serp flag set", file=sys.stderr)
     else:
-        _step(2, 9, "SERP Research Agent")
+        _step(2, 7, "SERP Research Agent")
         try:
             serp_agent = SerpResearchAgent()
             serp_data = serp_agent.run(
@@ -265,7 +248,7 @@ def main() -> int:
     insight_data: dict | None = None
     insight_path: Path | None = None
 
-    _step(3, 9, "Company Insight Agent")
+    _step(3, 7, "Company Insight Agent")
 
     extra_context = ""
     if serp_data:
@@ -306,7 +289,7 @@ def main() -> int:
     if args.skip_seo_structure:
         print("\n[SKIP] SEO Structure — --skip-seo-structure flag set", file=sys.stderr)
     else:
-        _step(4, 9, "SEO Structure Agent")
+        _step(4, 7, "SEO Structure Agent")
         try:
             seo_agent = SeoStructureAgent()
             seo_data = seo_agent.run(topic=topic, brief=brief)
@@ -326,7 +309,7 @@ def main() -> int:
     # ================================================================
     # Step 5 — Writer (hard stop on failure)
     # ================================================================
-    _step(5, 9, "Writer Agent")
+    _step(5, 7, "Writer Agent")
 
     serp_context = _build_serp_context(serp_data) if serp_data else ""
     insight_context = _build_insight_context(insight_data) if insight_data else ""
@@ -380,37 +363,7 @@ def main() -> int:
     print(f"  Sections: {len(draft_result.get('sections', []))}", file=sys.stderr)
 
     # ================================================================
-    # Step 6 — FAQ (soft failure — pipeline continues)
-    # ================================================================
-    faq_data: dict | None = None
-    faq_path: Path | None = None
-
-    if args.skip_faq:
-        print("\n[SKIP] FAQ — --skip-faq flag set", file=sys.stderr)
-    else:
-        _step(6, 9, "FAQ Agent")
-        try:
-            faq_agent = FaqAgent()
-            faq_data = faq_agent.run(
-                topic=topic,
-                brief=brief,
-                seo_outline=seo_data,
-                draft_markdown=draft_markdown,
-            )
-            faq_path = root / "faq" / f"{topic_slug}.json"
-            _save_json(faq_data, faq_path)
-            generated["faq"] = faq_path
-            print(f"  Saved → {faq_path}", file=sys.stderr)
-            print(
-                f"  FAQ items: {len(faq_data.get('items', []))}",
-                file=sys.stderr,
-            )
-        except Exception as exc:
-            print(f"\nWarning: FAQ Agent failed — {exc}", file=sys.stderr)
-            print("  Continuing without FAQ.", file=sys.stderr)
-
-    # ================================================================
-    # Step 7 — QA (hard stop on failure)
+    # Step 6 — QA (hard stop on failure)
     # ================================================================
     qa_report: dict | None = None
     qa_path: Path | None = None
@@ -418,7 +371,7 @@ def main() -> int:
     if args.skip_qa:
         print("\n[SKIP] QA — --skip-qa flag set", file=sys.stderr)
     else:
-        _step(7, 9, "QA Agent")
+        _step(6, 7, "QA Agent")
 
         qa_source_inputs = {
             "draft": str(draft_json_path),
@@ -456,47 +409,7 @@ def main() -> int:
         )
 
     # ================================================================
-    # Step 8 — Factcheck (soft failure — pipeline continues)
-    # ================================================================
-    factcheck_data: dict | None = None
-    factcheck_path: Path | None = None
-
-    if args.skip_factcheck:
-        print("\n[SKIP] Factcheck — --skip-factcheck flag set", file=sys.stderr)
-    else:
-        _step(8, 9, "Factcheck Agent")
-        try:
-            factcheck_agent = FactcheckAgent()
-            factcheck_data = factcheck_agent.run(
-                topic=topic,
-                draft_markdown=draft_markdown,
-            )
-            factcheck_path = root / "factcheck" / f"{topic_slug}.json"
-            _save_json(factcheck_data, factcheck_path)
-            generated["factcheck"] = factcheck_path
-            print(f"  Saved → {factcheck_path}", file=sys.stderr)
-            print(
-                f"  grounded    : {len(factcheck_data.get('grounded_claims', []))}",
-                file=sys.stderr,
-            )
-            print(
-                f"  unsupported : {len(factcheck_data.get('unsupported_claims', []))}",
-                file=sys.stderr,
-            )
-            print(
-                f"  forbidden   : {len(factcheck_data.get('forbidden_claims', []))}",
-                file=sys.stderr,
-            )
-            print(
-                f"  publish_blocking: {factcheck_data.get('publish_blocking', False)}",
-                file=sys.stderr,
-            )
-        except Exception as exc:
-            print(f"\nWarning: Factcheck Agent failed — {exc}", file=sys.stderr)
-            print("  Continuing without factcheck.", file=sys.stderr)
-
-    # ================================================================
-    # Step 9 — Metadata Copy (hard stop on failure)
+    # Step 7 — Metadata Copy (hard stop on failure)
     # ================================================================
     metadata: dict | None = None
     metadata_path: Path | None = None
@@ -504,7 +417,7 @@ def main() -> int:
     if args.skip_metadata:
         print("\n[SKIP] Metadata Copy — --skip-metadata flag set", file=sys.stderr)
     else:
-        _step(9, 9, "Metadata Copy Agent")
+        _step(7, 7, "Metadata Copy Agent")
 
         meta_source_inputs = {
             "draft": str(draft_json_path),
@@ -551,9 +464,7 @@ def main() -> int:
         "seo_structure":   "SEO Structure",
         "draft_md":        "Draft (markdown)",
         "draft_json":      "Draft (JSON)",
-        "faq":             "FAQ",
         "qa":              "QA Report",
-        "factcheck":       "Factcheck",
         "metadata":        "Metadata",
     }
     for key, path in generated.items():
@@ -577,15 +488,6 @@ def main() -> int:
             for issue in high_issues:
                 problem = str(issue.get("problem", ""))[:80]
                 print(f"  [{issue.get('category', '')}] {problem}")
-
-    if factcheck_data:
-        print()
-        print(f"Factcheck  : publish_blocking={factcheck_data.get('publish_blocking', False)}")
-        forbidden = factcheck_data.get("forbidden_claims", [])
-        if forbidden:
-            print("Forbidden claims found:")
-            for c in forbidden[:3]:
-                print(f"  - {str(c)[:80]}")
 
     if metadata:
         print()
