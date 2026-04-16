@@ -2,7 +2,7 @@
 """JVL Content Engine — Full Article Pipeline Runner.
 
 Runs the complete pipeline for one topic:
-  Brief → SERP Research → Company Insight → Writer → QA → Metadata Copy
+  Brief → SERP Research → Company Insight → SEO Structure → Writer → QA → Metadata Copy
 
 All artifacts are saved in the existing output folders.
 
@@ -21,6 +21,7 @@ Output folders:
   outputs/briefs/
   outputs/serp_research/
   outputs/company_insight/
+  outputs/seo_structure/
   outputs/drafts/
   outputs/qa/
   outputs/metadata/
@@ -41,6 +42,7 @@ load_dotenv()
 from src.agents import BriefAgent  # noqa: E402
 from src.serp_research_agent import SerpResearchAgent  # noqa: E402
 from src.company_insight_agent import CompanyInsightAgent  # noqa: E402
+from src.seo_structure_agent import SeoStructureAgent  # noqa: E402
 from src.writer_agent import WriterAgent  # noqa: E402
 from src.qa_agent import QAAgent  # noqa: E402
 from src.metadata_copy_agent import MetadataCopyAgent  # noqa: E402
@@ -147,6 +149,12 @@ def main() -> int:
         help="Skip SERP Research step",
     )
     parser.add_argument(
+        "--skip-seo-structure",
+        dest="skip_seo_structure",
+        action="store_true",
+        help="Skip SEO Structure step",
+    )
+    parser.add_argument(
         "--skip-qa",
         dest="skip_qa",
         action="store_true",
@@ -177,7 +185,7 @@ def main() -> int:
     # ================================================================
     # Step 1 — Brief (hard stop on failure)
     # ================================================================
-    _step(1, 6, "Brief Agent")
+    _step(1, 7, "Brief Agent")
     try:
         brief_agent = BriefAgent()
         brief = brief_agent.run(
@@ -212,7 +220,7 @@ def main() -> int:
     if args.skip_serp:
         print("\n[SKIP] SERP Research — --skip-serp flag set", file=sys.stderr)
     else:
-        _step(2, 6, "SERP Research Agent")
+        _step(2, 7, "SERP Research Agent")
         try:
             serp_agent = SerpResearchAgent()
             serp_data = serp_agent.run(
@@ -240,7 +248,7 @@ def main() -> int:
     insight_data: dict | None = None
     insight_path: Path | None = None
 
-    _step(3, 6, "Company Insight Agent")
+    _step(3, 7, "Company Insight Agent")
 
     extra_context = ""
     if serp_data:
@@ -273,12 +281,41 @@ def main() -> int:
         print("  Continuing without company insight data.", file=sys.stderr)
 
     # ================================================================
-    # Step 4 — Writer (hard stop on failure)
+    # Step 4 — SEO Structure (soft failure — pipeline continues)
     # ================================================================
-    _step(4, 6, "Writer Agent")
+    seo_data: dict | None = None
+    seo_path: Path | None = None
+
+    if args.skip_seo_structure:
+        print("\n[SKIP] SEO Structure — --skip-seo-structure flag set", file=sys.stderr)
+    else:
+        _step(4, 7, "SEO Structure Agent")
+        try:
+            seo_agent = SeoStructureAgent()
+            seo_data = seo_agent.run(topic=topic, brief=brief)
+            seo_path = root / "seo_structure" / f"{topic_slug}.json"
+            _save_json(seo_data, seo_path)
+            generated["seo_structure"] = seo_path
+            print(f"  Saved → {seo_path}", file=sys.stderr)
+            print(f"  h1: {seo_data.get('h1', '')}", file=sys.stderr)
+            print(
+                f"  outline sections: {len(seo_data.get('outline', []))}",
+                file=sys.stderr,
+            )
+        except Exception as exc:
+            print(f"\nWarning: SEO Structure Agent failed — {exc}", file=sys.stderr)
+            print("  Continuing without SEO structure.", file=sys.stderr)
+
+    # ================================================================
+    # Step 5 — Writer (hard stop on failure)
+    # ================================================================
+    _step(5, 7, "Writer Agent")
 
     serp_context = _build_serp_context(serp_data) if serp_data else ""
     insight_context = _build_insight_context(insight_data) if insight_data else ""
+    seo_structure_context = (
+        json.dumps(seo_data, indent=2, ensure_ascii=False) if seo_data else ""
+    )
 
     try:
         writer_agent = WriterAgent()
@@ -287,6 +324,7 @@ def main() -> int:
             brief=brief,
             serp_context=serp_context,
             insight_context=insight_context,
+            seo_structure_context=seo_structure_context,
         )
         draft_markdown = writer_agent.assemble_markdown(draft_result)
     except Exception as exc:
@@ -306,6 +344,7 @@ def main() -> int:
             "brief": str(brief_path),
             "serp_research": str(serp_path) if serp_path else None,
             "company_insight": str(insight_path) if insight_path else None,
+            "seo_structure": str(seo_path) if seo_path else None,
         },
         "risks_to_review": _build_risks(brief, insight_data),
         "internal_links_used": draft_result.get("internal_links_used", []),
@@ -324,7 +363,7 @@ def main() -> int:
     print(f"  Sections: {len(draft_result.get('sections', []))}", file=sys.stderr)
 
     # ================================================================
-    # Step 5 — QA (hard stop on failure)
+    # Step 6 — QA (hard stop on failure)
     # ================================================================
     qa_report: dict | None = None
     qa_path: Path | None = None
@@ -332,7 +371,7 @@ def main() -> int:
     if args.skip_qa:
         print("\n[SKIP] QA — --skip-qa flag set", file=sys.stderr)
     else:
-        _step(5, 6, "QA Agent")
+        _step(6, 7, "QA Agent")
 
         qa_source_inputs = {
             "draft": str(draft_json_path),
@@ -370,7 +409,7 @@ def main() -> int:
         )
 
     # ================================================================
-    # Step 6 — Metadata Copy (hard stop on failure)
+    # Step 7 — Metadata Copy (hard stop on failure)
     # ================================================================
     metadata: dict | None = None
     metadata_path: Path | None = None
@@ -378,7 +417,7 @@ def main() -> int:
     if args.skip_metadata:
         print("\n[SKIP] Metadata Copy — --skip-metadata flag set", file=sys.stderr)
     else:
-        _step(6, 6, "Metadata Copy Agent")
+        _step(7, 7, "Metadata Copy Agent")
 
         meta_source_inputs = {
             "draft": str(draft_json_path),
@@ -419,13 +458,14 @@ def main() -> int:
     print()
     print("Artifacts:")
     labels = {
-        "brief": "Brief",
-        "serp_research": "SERP Research",
+        "brief":           "Brief",
+        "serp_research":   "SERP Research",
         "company_insight": "Company Insight",
-        "draft_md": "Draft (markdown)",
-        "draft_json": "Draft (JSON)",
-        "qa": "QA Report",
-        "metadata": "Metadata",
+        "seo_structure":   "SEO Structure",
+        "draft_md":        "Draft (markdown)",
+        "draft_json":      "Draft (JSON)",
+        "qa":              "QA Report",
+        "metadata":        "Metadata",
     }
     for key, path in generated.items():
         label = labels.get(key, key)
