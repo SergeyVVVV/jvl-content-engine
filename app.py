@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import re
-import sys
 from pathlib import Path
 
 import streamlit as st
@@ -75,10 +74,22 @@ def _build_risks(brief: dict, insight_data: dict | None) -> list[str]:
     return risks
 
 
-def run_pipeline(topic: str, primary_keyword: str, funnel_stage: str) -> dict:
+def run_pipeline(
+    topic: str,
+    primary_keyword: str,
+    funnel_stage: str,
+    secondary_keywords: list[str],
+    custom_requirements: str,
+):
     """Run the full 7-step pipeline and return result dict."""
     root = OUTPUT_ROOT
     results: dict = {}
+
+    content_goal = "drive product consideration and support organic search traffic"
+    if secondary_keywords:
+        content_goal += f". Also incorporate these secondary keywords naturally: {', '.join(secondary_keywords)}"
+    if custom_requirements:
+        content_goal += f". Additional requirements from editor: {custom_requirements}"
 
     # Step 1 — Brief
     yield {"step": 1, "label": "Brief Agent", "status": "running"}
@@ -86,7 +97,7 @@ def run_pipeline(topic: str, primary_keyword: str, funnel_stage: str) -> dict:
     brief = brief_agent.run(
         topic=topic,
         primary_keyword=primary_keyword,
-        content_goal="drive product consideration and support organic search traffic",
+        content_goal=content_goal,
         funnel_stage=funnel_stage,
         audience="Mark & Linda Reynolds",
         country="US",
@@ -274,7 +285,7 @@ def run_pipeline(topic: str, primary_keyword: str, funnel_stage: str) -> dict:
 st.set_page_config(page_title="JVL Content Engine", page_icon="🎮", layout="wide")
 
 st.title("JVL Content Engine")
-st.caption("Создайте SEO-статью для JVL Echo Home — просто введите тему и нажмите кнопку.")
+st.caption("Generate SEO articles for JVL Echo Home — enter a topic and click the button.")
 
 st.divider()
 
@@ -282,36 +293,53 @@ col1, col2 = st.columns([2, 1])
 
 with col1:
     topic = st.text_input(
-        "Тема статьи",
-        placeholder="например: how to choose a home arcade machine",
-        help="Кратко опишите, о чём должна быть статья",
+        "Article topic",
+        placeholder="e.g. how to choose a home arcade machine",
+        help="Briefly describe what the article should be about",
     )
     keyword = st.text_input(
-        "Основное ключевое слово",
-        placeholder="например: home arcade machine for adults",
-        help="Главный поисковый запрос, под который оптимизируется статья",
+        "Primary keyword",
+        placeholder="e.g. home arcade machine for adults",
+        help="The main search query this article will be optimised for",
+    )
+    secondary_raw = st.text_area(
+        "Secondary keywords (optional)",
+        placeholder="arcade machine for living room\nbest home arcade games\nretro arcade cabinet for home",
+        help="One keyword per line, up to 10. These will be woven naturally into the article.",
+        height=120,
+    )
+    custom_requirements = st.text_area(
+        "Additional requirements (optional)",
+        placeholder="e.g. Mention that the Echo Home fits under a standard staircase. Include a comparison table. Avoid mentioning competitors by name.",
+        help="Any specific instructions for this article — facts to include, sections to add, things to avoid, etc.",
+        height=100,
     )
 
 with col2:
-    funnel_map = {"Верхний (Top) — информационный": "top", "Средний (Mid) — сравнение": "mid", "Нижний (Bottom) — покупка": "bottom"}
-    funnel_label = st.selectbox(
-        "Этап воронки",
-        options=list(funnel_map.keys()),
+    funnel_stage = st.radio(
+        "Reader intent",
+        options=["top", "mid", "bottom"],
         index=1,
-        help="На каком этапе принятия решения находится читатель",
+        format_func=lambda x: {"top": "Top — Just exploring", "mid": "Mid — Comparing options", "bottom": "Bottom — Ready to buy"}[x],
+        captions=[
+            "Reader is curious but not thinking about buying yet. E.g. 'what games did people play in the 80s'. Article is educational; product is mentioned lightly.",
+            "Reader is evaluating options and considering a purchase. E.g. 'how to choose a home arcade machine'. Best for most JVL articles.",
+            "Reader is close to buying and wants confirmation. E.g. 'JVL Echo Home review'. Article is product-focused.",
+        ],
     )
-    funnel_stage = funnel_map[funnel_label]
 
 st.divider()
 
-if st.button("Сгенерировать статью", type="primary", disabled=not (topic and keyword)):
+secondary_keywords = [kw.strip() for kw in secondary_raw.splitlines() if kw.strip()][:10]
+
+if st.button("Generate article", type="primary", disabled=not (topic and keyword)):
 
     STEP_LABELS = [
-        "Brief Agent",
+        "Brief",
         "SERP Research",
         "Company Insight",
         "SEO Structure",
-        "Writer Agent",
+        "Writer",
         "QA Review",
         "Metadata",
     ]
@@ -320,13 +348,13 @@ if st.button("Сгенерировать статью", type="primary", disabled
     progress_col, _ = st.columns([3, 1])
 
     with progress_col:
-        st.subheader("Прогресс")
+        st.subheader("Progress")
         for label in STEP_LABELS:
             step_placeholders.append(st.empty())
 
     def _render_step(idx: int, status: str) -> None:
         icon = {"running": "⏳", "done": "✅", "pending": "⬜"}[status]
-        step_placeholders[idx].markdown(f"{icon} **Шаг {idx + 1}:** {STEP_LABELS[idx]}")
+        step_placeholders[idx].markdown(f"{icon} **Step {idx + 1}:** {STEP_LABELS[idx]}")
 
     for i in range(len(STEP_LABELS)):
         _render_step(i, "pending")
@@ -335,7 +363,7 @@ if st.button("Сгенерировать статью", type="primary", disabled
     error: str | None = None
 
     try:
-        for event in run_pipeline(topic, keyword, funnel_stage):
+        for event in run_pipeline(topic, keyword, funnel_stage, secondary_keywords, custom_requirements):
             step_idx = event["step"] - 1
             if event["step"] == 0:
                 results = event["results"]
@@ -350,43 +378,39 @@ if st.button("Сгенерировать статью", type="primary", disabled
     st.divider()
 
     if error:
-        st.error(f"Ошибка: {error}")
+        st.error(f"Error: {error}")
     elif results:
-        st.success("Статья готова!")
+        st.success("Article ready!")
 
         draft_markdown: str = results.get("draft_markdown", "")
         metadata: dict | None = results.get("metadata")
         qa_report: dict | None = results.get("qa_report")
         draft_md_path: Path | None = results.get("draft_md_path")
 
-        # Download button
         filename = draft_md_path.name if draft_md_path else "article.md"
         st.download_button(
-            label="Скачать статью (.md)",
+            label="Download article (.md)",
             data=draft_markdown.encode("utf-8"),
             file_name=filename,
             mime="text/markdown",
         )
 
-        # Metadata summary
         if metadata:
-            with st.expander("SEO-метаданные", expanded=False):
+            with st.expander("SEO metadata", expanded=False):
                 st.markdown(f"**Slug:** `{metadata.get('slug', '')}`")
                 st.markdown(f"**H1:** {metadata.get('h1', '')}")
                 st.markdown(f"**Meta Title:** {metadata.get('meta_title', '')}")
                 st.markdown(f"**Meta Description:** {metadata.get('meta_description', '')}")
 
-        # QA status
         if qa_report:
             status_val = qa_report.get("status", "unknown")
             counts = qa_report.get("severity_counts", {})
-            badge = "✅ Прошёл QA" if status_val == "pass" else "⚠️ Требует проверки"
+            badge = "✅ QA passed" if status_val == "pass" else "⚠️ Needs review"
             st.info(
-                f"{badge} — критических: {counts.get('high', 0)}, "
-                f"средних: {counts.get('medium', 0)}, "
-                f"низких: {counts.get('low', 0)}"
+                f"{badge} — critical: {counts.get('high', 0)}, "
+                f"medium: {counts.get('medium', 0)}, "
+                f"low: {counts.get('low', 0)}"
             )
 
-        # Article preview
-        st.subheader("Предпросмотр статьи")
+        st.subheader("Article preview")
         st.markdown(draft_markdown)
