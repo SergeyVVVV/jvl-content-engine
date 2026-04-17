@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import datetime
 from pathlib import Path
 
 import streamlit as st
@@ -20,6 +21,7 @@ from src.qa_agent import QAAgent
 from src.metadata_copy_agent import MetadataCopyAgent
 
 OUTPUT_ROOT = Path("outputs")
+HISTORY_PATH = OUTPUT_ROOT / "history.json"
 
 
 def slugify(text: str) -> str:
@@ -34,6 +36,37 @@ def _save_json(data: dict, path: Path) -> None:
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(data, fh, indent=2, ensure_ascii=False)
 
+
+# ─── History helpers ──────────────────────────────────────────────────────────
+
+def load_history() -> list[dict]:
+    if not HISTORY_PATH.exists():
+        return []
+    try:
+        with open(HISTORY_PATH, encoding="utf-8") as fh:
+            return json.load(fh)
+    except Exception:
+        return []
+
+
+def save_to_history(entry: dict) -> None:
+    history = load_history()
+    history = [h for h in history if h.get("id") != entry["id"]]
+    history.insert(0, entry)
+    OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
+    with open(HISTORY_PATH, "w", encoding="utf-8") as fh:
+        json.dump(history, fh, indent=2, ensure_ascii=False)
+
+
+def delete_from_history(article_id: str) -> None:
+    history = load_history()
+    history = [h for h in history if h.get("id") != article_id]
+    OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
+    with open(HISTORY_PATH, "w", encoding="utf-8") as fh:
+        json.dump(history, fh, indent=2, ensure_ascii=False)
+
+
+# ─── Pipeline helpers ─────────────────────────────────────────────────────────
 
 def _build_serp_context(serp_data: dict) -> str:
     fields = {
@@ -81,7 +114,7 @@ def run_pipeline(
     secondary_keywords: list[str],
     custom_requirements: str,
 ):
-    """Run the full 7-step pipeline and return result dict."""
+    """Run the full 7-step pipeline; yields progress events, ends with results dict."""
     root = OUTPUT_ROOT
     results: dict = {}
 
@@ -257,6 +290,7 @@ def run_pipeline(
     # Step 7 — Metadata
     yield {"step": 7, "label": "Metadata", "status": "running"}
     metadata: dict | None = None
+    metadata_path: Path | None = None
     try:
         meta_agent = MetadataCopyAgent()
         metadata = meta_agent.run(
@@ -275,142 +309,293 @@ def run_pipeline(
     except Exception:
         pass
     results["metadata"] = metadata
+    results["metadata_path"] = metadata_path
     yield {"step": 7, "label": "Metadata", "status": "done"}
+
+    # Save to shared history
+    article_title = (
+        (metadata.get("h1") or metadata.get("title")) if metadata else None
+    ) or brief.get("working_title") or topic
+    history_entry = {
+        "id": topic_slug,
+        "topic": topic,
+        "title": article_title,
+        "primary_keyword": primary_keyword,
+        "created_at": datetime.utcnow().isoformat(),
+        "qa_status": qa_report.get("status", "unknown") if qa_report else "unknown",
+        "md_path": str(draft_md_path),
+        "companion_path": str(draft_json_path),
+        "metadata_path": str(metadata_path) if metadata_path else None,
+    }
+    save_to_history(history_entry)
+    results["history_entry"] = history_entry
 
     yield {"step": 0, "label": "done", "status": "done", "results": results}
 
 
-# ─── Streamlit UI ────────────────────────────────────────────────────────────
+# ─── Shared article renderer ──────────────────────────────────────────────────
 
-st.set_page_config(page_title="JVL Content Engine", page_icon="🎮", layout="wide")
+def _render_article(
+    draft_markdown: str,
+    metadata: dict | None,
+    qa_report: dict | None,
+    filename: str = "article.md",
+) -> None:
+    """Show metadata, QA badge, then three view tabs."""
+    if metadata:
+        with st.expander("SEO metadata", expanded=False):
+            st.markdown(f"**Slug:** `{metadata.get('slug', '')}`")
+            st.markdown(f"**H1:** {metadata.get('h1', '')}")
+            st.markdown(f"**Meta Title:** {metadata.get('meta_title', '')}")
+            st.markdown(f"**Meta Description:** {metadata.get('meta_description', '')}")
 
-st.title("JVL Content Engine")
-st.caption("Generate SEO articles for JVL Echo Home — enter a topic and click the button.")
+    if qa_report:
+        status_val = qa_report.get("status", "unknown")
+        counts = qa_report.get("severity_counts", {})
+        badge = "✅ QA passed" if status_val == "pass" else "⚠️ Needs review"
+        st.info(
+            f"{badge} — critical: {counts.get('high', 0)}, "
+            f"medium: {counts.get('medium', 0)}, "
+            f"low: {counts.get('low', 0)}"
+        )
 
-st.divider()
-
-col1, col2 = st.columns([2, 1])
-
-with col1:
-    topic = st.text_input(
-        "Article topic",
-        placeholder="e.g. how to choose a home arcade machine",
-        help="Briefly describe what the article should be about",
-    )
-    keyword = st.text_input(
-        "Primary keyword",
-        placeholder="e.g. home arcade machine for adults",
-        help="The main search query this article will be optimised for",
-    )
-    secondary_raw = st.text_area(
-        "Secondary keywords (optional)",
-        placeholder="arcade machine for living room\nbest home arcade games\nretro arcade cabinet for home",
-        help="One keyword per line, up to 10. These will be woven naturally into the article.",
-        height=120,
-    )
-    custom_requirements = st.text_area(
-        "Additional requirements (optional)",
-        placeholder="e.g. Mention that the Echo Home fits under a standard staircase. Include a comparison table. Avoid mentioning competitors by name.",
-        help="Any specific instructions for this article — facts to include, sections to add, things to avoid, etc.",
-        height=100,
+    tab_rendered, tab_source, tab_download = st.tabs(
+        ["Rendered", "Markdown source", "Download .md"]
     )
 
-with col2:
-    funnel_stage = st.radio(
-        "Reader intent",
-        options=["top", "mid", "bottom"],
-        index=1,
-        format_func=lambda x: {"top": "Top — Just exploring", "mid": "Mid — Comparing options", "bottom": "Bottom — Ready to buy"}[x],
-        captions=[
-            "Reader is curious but not thinking about buying yet. E.g. 'what games did people play in the 80s'. Article is educational; product is mentioned lightly.",
-            "Reader is evaluating options and considering a purchase. E.g. 'how to choose a home arcade machine'. Best for most JVL articles.",
-            "Reader is close to buying and wants confirmation. E.g. 'JVL Echo Home review'. Article is product-focused.",
-        ],
-    )
+    with tab_rendered:
+        st.markdown(draft_markdown)
 
-st.divider()
+    with tab_source:
+        st.code(draft_markdown, language="markdown")
 
-secondary_keywords = [kw.strip() for kw in secondary_raw.splitlines() if kw.strip()][:10]
-
-if st.button("Generate article", type="primary", disabled=not (topic and keyword)):
-
-    STEP_LABELS = [
-        "Brief",
-        "SERP Research",
-        "Company Insight",
-        "SEO Structure",
-        "Writer",
-        "QA Review",
-        "Metadata",
-    ]
-
-    step_placeholders = []
-    progress_col, _ = st.columns([3, 1])
-
-    with progress_col:
-        st.subheader("Progress")
-        for label in STEP_LABELS:
-            step_placeholders.append(st.empty())
-
-    def _render_step(idx: int, status: str) -> None:
-        icon = {"running": "⏳", "done": "✅", "pending": "⬜"}[status]
-        step_placeholders[idx].markdown(f"{icon} **Step {idx + 1}:** {STEP_LABELS[idx]}")
-
-    for i in range(len(STEP_LABELS)):
-        _render_step(i, "pending")
-
-    results: dict = {}
-    error: str | None = None
-
-    try:
-        for event in run_pipeline(topic, keyword, funnel_stage, secondary_keywords, custom_requirements):
-            step_idx = event["step"] - 1
-            if event["step"] == 0:
-                results = event["results"]
-                break
-            if event["status"] == "running":
-                _render_step(step_idx, "running")
-            elif event["status"] == "done":
-                _render_step(step_idx, "done")
-    except Exception as exc:
-        error = str(exc)
-
-    st.divider()
-
-    if error:
-        st.error(f"Error: {error}")
-    elif results:
-        st.success("Article ready!")
-
-        draft_markdown: str = results.get("draft_markdown", "")
-        metadata: dict | None = results.get("metadata")
-        qa_report: dict | None = results.get("qa_report")
-        draft_md_path: Path | None = results.get("draft_md_path")
-
-        filename = draft_md_path.name if draft_md_path else "article.md"
+    with tab_download:
         st.download_button(
             label="Download article (.md)",
             data=draft_markdown.encode("utf-8"),
             file_name=filename,
             mime="text/markdown",
         )
+        st.caption(f"File: `{filename}`")
 
-        if metadata:
-            with st.expander("SEO metadata", expanded=False):
-                st.markdown(f"**Slug:** `{metadata.get('slug', '')}`")
-                st.markdown(f"**H1:** {metadata.get('h1', '')}")
-                st.markdown(f"**Meta Title:** {metadata.get('meta_title', '')}")
-                st.markdown(f"**Meta Description:** {metadata.get('meta_description', '')}")
 
-        if qa_report:
-            status_val = qa_report.get("status", "unknown")
-            counts = qa_report.get("severity_counts", {})
-            badge = "✅ QA passed" if status_val == "pass" else "⚠️ Needs review"
-            st.info(
-                f"{badge} — critical: {counts.get('high', 0)}, "
-                f"medium: {counts.get('medium', 0)}, "
-                f"low: {counts.get('low', 0)}"
+# ─── Streamlit UI ─────────────────────────────────────────────────────────────
+
+st.set_page_config(page_title="JVL Content Engine", page_icon="🎮", layout="wide")
+
+# Initialise session state
+if "view_article" not in st.session_state:
+    st.session_state.view_article = None
+if "pipeline_results" not in st.session_state:
+    st.session_state.pipeline_results = None
+
+# ─── Sidebar: shared article history ─────────────────────────────────────────
+
+with st.sidebar:
+    st.header("Article history")
+
+    if st.button("↩ Back to generator", disabled=st.session_state.view_article is None):
+        st.session_state.view_article = None
+        st.rerun()
+
+    st.divider()
+
+    history = load_history()
+
+    if not history:
+        st.caption("No articles yet. Generate one to get started.")
+    else:
+        for entry in history:
+            article_id = entry.get("id", "")
+            title = entry.get("title") or entry.get("topic") or "Untitled"
+            created_at = entry.get("created_at", "")
+            qa_status = entry.get("qa_status", "unknown")
+
+            try:
+                dt = datetime.fromisoformat(created_at)
+                date_str = dt.strftime("%d %b %Y, %H:%M")
+            except Exception:
+                date_str = created_at[:10] if created_at else ""
+
+            qa_badge = {"pass": "✅", "revise": "⚠️", "fail": "❌"}.get(qa_status, "❓")
+
+            st.markdown(
+                f"{qa_badge} **{title[:45]}{'…' if len(title) > 45 else ''}**"
             )
+            st.caption(date_str)
 
-        st.subheader("Article preview")
-        st.markdown(draft_markdown)
+            col_view, col_del = st.columns(2)
+            with col_view:
+                if st.button("View", key=f"view_{article_id}"):
+                    st.session_state.view_article = entry
+                    st.session_state.pipeline_results = None
+            with col_del:
+                if st.button("Delete", key=f"del_{article_id}"):
+                    delete_from_history(article_id)
+                    if (st.session_state.view_article or {}).get("id") == article_id:
+                        st.session_state.view_article = None
+                    st.rerun()
+
+            st.divider()
+
+# ─── Main area: history viewer ────────────────────────────────────────────────
+
+if st.session_state.view_article:
+    entry = st.session_state.view_article
+    title = entry.get("title") or entry.get("topic") or "Article"
+
+    st.title(title)
+    st.caption(
+        f"Topic: {entry.get('topic', '')}  ·  "
+        f"Keyword: {entry.get('primary_keyword', '')}  ·  "
+        f"Created: {entry.get('created_at', '')[:10]}"
+    )
+    st.divider()
+
+    md_path_str = entry.get("md_path")
+    draft_markdown = ""
+    if md_path_str and Path(md_path_str).exists():
+        draft_markdown = Path(md_path_str).read_text(encoding="utf-8")
+    else:
+        st.error("Article file not found on disk.")
+
+    metadata = None
+    meta_path_str = entry.get("metadata_path")
+    if meta_path_str and Path(meta_path_str).exists():
+        try:
+            with open(meta_path_str, encoding="utf-8") as fh:
+                metadata = json.load(fh)
+        except Exception:
+            pass
+
+    qa_report = None
+    if md_path_str:
+        qa_path = OUTPUT_ROOT / "qa" / f"{Path(md_path_str).stem}.json"
+        if qa_path.exists():
+            try:
+                with open(qa_path, encoding="utf-8") as fh:
+                    qa_report = json.load(fh)
+            except Exception:
+                pass
+
+    if draft_markdown:
+        filename = Path(md_path_str).name if md_path_str else f"{entry.get('id', 'article')}.md"
+        _render_article(draft_markdown, metadata, qa_report, filename)
+
+# ─── Main area: generator ─────────────────────────────────────────────────────
+
+else:
+    st.title("JVL Content Engine")
+    st.caption("Generate SEO articles for JVL Echo Home — enter a topic and click the button.")
+
+    st.divider()
+
+    col1, col2 = st.columns([2, 1])
+
+    with col1:
+        topic = st.text_input(
+            "Article topic",
+            placeholder="e.g. how to choose a home arcade machine",
+            help="Briefly describe what the article should be about",
+        )
+        keyword = st.text_input(
+            "Primary keyword",
+            placeholder="e.g. home arcade machine for adults",
+            help="The main search query this article will be optimised for",
+        )
+        secondary_raw = st.text_area(
+            "Secondary keywords (optional)",
+            placeholder="arcade machine for living room\nbest home arcade games\nretro arcade cabinet for home",
+            help="One keyword per line, up to 10. These will be woven naturally into the article.",
+            height=120,
+        )
+        custom_requirements = st.text_area(
+            "Additional requirements (optional)",
+            placeholder="e.g. Mention that the Echo Home fits under a standard staircase. Include a comparison table. Avoid mentioning competitors by name.",
+            help="Any specific instructions for this article — facts to include, sections to add, things to avoid, etc.",
+            height=100,
+        )
+
+    with col2:
+        funnel_stage = st.radio(
+            "Reader intent",
+            options=["top", "mid", "bottom"],
+            index=1,
+            format_func=lambda x: {
+                "top": "Top — Just exploring",
+                "mid": "Mid — Comparing options",
+                "bottom": "Bottom — Ready to buy",
+            }[x],
+            captions=[
+                "Reader is curious but not thinking about buying yet. E.g. 'what games did people play in the 80s'. Article is educational; product is mentioned lightly.",
+                "Reader is evaluating options and considering a purchase. E.g. 'how to choose a home arcade machine'. Best for most JVL articles.",
+                "Reader is close to buying and wants confirmation. E.g. 'JVL Echo Home review'. Article is product-focused.",
+            ],
+        )
+
+    st.divider()
+
+    secondary_keywords = [kw.strip() for kw in secondary_raw.splitlines() if kw.strip()][:10]
+
+    if st.button("Generate article", type="primary", disabled=not (topic and keyword)):
+        STEP_LABELS = [
+            "Brief",
+            "SERP Research",
+            "Company Insight",
+            "SEO Structure",
+            "Writer",
+            "QA Review",
+            "Metadata",
+        ]
+
+        step_placeholders = []
+        progress_col, _ = st.columns([3, 1])
+
+        with progress_col:
+            st.subheader("Progress")
+            for label in STEP_LABELS:
+                step_placeholders.append(st.empty())
+
+        def _render_step(idx: int, status: str) -> None:
+            icon = {"running": "⏳", "done": "✅", "pending": "⬜"}[status]
+            step_placeholders[idx].markdown(f"{icon} **Step {idx + 1}:** {STEP_LABELS[idx]}")
+
+        for i in range(len(STEP_LABELS)):
+            _render_step(i, "pending")
+
+        pipeline_results: dict = {}
+        error: str | None = None
+
+        try:
+            for event in run_pipeline(
+                topic, keyword, funnel_stage, secondary_keywords, custom_requirements
+            ):
+                step_idx = event["step"] - 1
+                if event["step"] == 0:
+                    pipeline_results = event["results"]
+                    break
+                if event["status"] == "running":
+                    _render_step(step_idx, "running")
+                elif event["status"] == "done":
+                    _render_step(step_idx, "done")
+        except Exception as exc:
+            error = str(exc)
+
+        st.divider()
+
+        if error:
+            st.error(f"Error: {error}")
+        elif pipeline_results:
+            st.session_state.pipeline_results = pipeline_results
+
+    # Show results from last pipeline run (persists across reruns)
+    if st.session_state.pipeline_results:
+        res = st.session_state.pipeline_results
+        draft_markdown: str = res.get("draft_markdown", "")
+        metadata: dict | None = res.get("metadata")
+        qa_report: dict | None = res.get("qa_report")
+        draft_md_path: Path | None = res.get("draft_md_path")
+        filename = draft_md_path.name if draft_md_path else "article.md"
+
+        st.success("Article ready!")
+        _render_article(draft_markdown, metadata, qa_report, filename)
