@@ -2,7 +2,7 @@
 """JVL Content Engine — Full Article Pipeline Runner.
 
 Runs the complete pipeline for one topic:
-  Brief → SERP Research → Company Insight → SEO Structure → Writer → QA → Metadata Copy
+  Brief → SERP Research → Company Insight → SEO Structure → Writer → Visual → QA → Metadata Copy
 
 All artifacts are saved in the existing output folders.
 
@@ -23,6 +23,8 @@ Output folders:
   outputs/company_insight/
   outputs/seo_structure/
   outputs/drafts/
+  outputs/images/
+  outputs/visuals/
   outputs/qa/
   outputs/metadata/
 """
@@ -44,6 +46,7 @@ from src.serp_research_agent import SerpResearchAgent  # noqa: E402
 from src.company_insight_agent import CompanyInsightAgent  # noqa: E402
 from src.seo_structure_agent import SeoStructureAgent  # noqa: E402
 from src.writer_agent import WriterAgent  # noqa: E402
+from src.visual_agent import VisualAgent  # noqa: E402
 from src.qa_agent import QAAgent  # noqa: E402
 from src.metadata_copy_agent import MetadataCopyAgent  # noqa: E402
 
@@ -155,6 +158,12 @@ def main() -> int:
         help="Skip SEO Structure step",
     )
     parser.add_argument(
+        "--skip-visual",
+        dest="skip_visual",
+        action="store_true",
+        help="Skip Visual step",
+    )
+    parser.add_argument(
         "--skip-qa",
         dest="skip_qa",
         action="store_true",
@@ -185,7 +194,7 @@ def main() -> int:
     # ================================================================
     # Step 1 — Brief (hard stop on failure)
     # ================================================================
-    _step(1, 7, "Brief Agent")
+    _step(1, 8, "Brief Agent")
     try:
         brief_agent = BriefAgent()
         brief = brief_agent.run(
@@ -220,7 +229,7 @@ def main() -> int:
     if args.skip_serp:
         print("\n[SKIP] SERP Research — --skip-serp flag set", file=sys.stderr)
     else:
-        _step(2, 7, "SERP Research Agent")
+        _step(2, 8, "SERP Research Agent")
         try:
             serp_agent = SerpResearchAgent()
             serp_data = serp_agent.run(
@@ -248,7 +257,7 @@ def main() -> int:
     insight_data: dict | None = None
     insight_path: Path | None = None
 
-    _step(3, 7, "Company Insight Agent")
+    _step(3, 8, "Company Insight Agent")
 
     extra_context = ""
     if serp_data:
@@ -289,7 +298,7 @@ def main() -> int:
     if args.skip_seo_structure:
         print("\n[SKIP] SEO Structure — --skip-seo-structure flag set", file=sys.stderr)
     else:
-        _step(4, 7, "SEO Structure Agent")
+        _step(4, 8, "SEO Structure Agent")
         try:
             seo_agent = SeoStructureAgent()
             seo_data = seo_agent.run(topic=topic, brief=brief)
@@ -309,7 +318,7 @@ def main() -> int:
     # ================================================================
     # Step 5 — Writer (hard stop on failure)
     # ================================================================
-    _step(5, 7, "Writer Agent")
+    _step(5, 8, "Writer Agent")
 
     serp_context = _build_serp_context(serp_data) if serp_data else ""
     insight_context = _build_insight_context(insight_data) if insight_data else ""
@@ -363,7 +372,39 @@ def main() -> int:
     print(f"  Sections: {len(draft_result.get('sections', []))}", file=sys.stderr)
 
     # ================================================================
-    # Step 6 — QA (hard stop on failure)
+    # Step 6 — Visual (soft failure — pipeline continues)
+    # ================================================================
+    visuals_path: Path | None = None
+
+    if args.skip_visual:
+        print("\n[SKIP] Visual — --skip-visual flag set", file=sys.stderr)
+    else:
+        _step(6, 8, "Visual Agent")
+        try:
+            visual_agent = VisualAgent()
+            visual_result = visual_agent.run(
+                topic=topic,
+                brief=brief,
+                draft_markdown=draft_markdown,
+                output_dir=root / "images" / topic_slug,
+            )
+            draft_markdown = visual_result.get("enriched_markdown", draft_markdown)
+            companion["draft_markdown"] = draft_markdown
+            draft_md_path.write_text(draft_markdown, encoding="utf-8")
+            visuals_path = root / "visuals" / f"{topic_slug}.json"
+            _save_json(visual_result, visuals_path)
+            generated["visuals"] = visuals_path
+            assets = visual_result.get("assets", [])
+            dalle_count = sum(1 for a in assets if a.get("source") == "dalle3")
+            mock_count = sum(1 for a in assets if a.get("source") == "mock")
+            print(f"  Saved → {visuals_path}", file=sys.stderr)
+            print(f"  Assets: {len(assets)} (dalle3={dalle_count}, mock={mock_count})", file=sys.stderr)
+        except Exception as exc:
+            print(f"\nWarning: Visual Agent failed — {exc}", file=sys.stderr)
+            print("  Continuing without visual assets.", file=sys.stderr)
+
+    # ================================================================
+    # Step 7 — QA (hard stop on failure)
     # ================================================================
     qa_report: dict | None = None
     qa_path: Path | None = None
@@ -371,7 +412,7 @@ def main() -> int:
     if args.skip_qa:
         print("\n[SKIP] QA — --skip-qa flag set", file=sys.stderr)
     else:
-        _step(6, 7, "QA Agent")
+        _step(7, 8, "QA Agent")
 
         qa_source_inputs = {
             "draft": str(draft_json_path),
@@ -409,7 +450,7 @@ def main() -> int:
         )
 
     # ================================================================
-    # Step 7 — Metadata Copy (hard stop on failure)
+    # Step 8 — Metadata Copy (hard stop on failure)
     # ================================================================
     metadata: dict | None = None
     metadata_path: Path | None = None
@@ -417,7 +458,7 @@ def main() -> int:
     if args.skip_metadata:
         print("\n[SKIP] Metadata Copy — --skip-metadata flag set", file=sys.stderr)
     else:
-        _step(7, 7, "Metadata Copy Agent")
+        _step(8, 8, "Metadata Copy Agent")
 
         meta_source_inputs = {
             "draft": str(draft_json_path),
@@ -464,6 +505,7 @@ def main() -> int:
         "seo_structure":   "SEO Structure",
         "draft_md":        "Draft (markdown)",
         "draft_json":      "Draft (JSON)",
+        "visuals":         "Visuals",
         "qa":              "QA Report",
         "metadata":        "Metadata",
     }
