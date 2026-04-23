@@ -53,6 +53,8 @@ Use this priority order unless the task clearly requires a narrower route:
 
 Important rule:
 - Emotion opens interest. Proof closes the sale.
+- Campaign-confirmed (Easter Meta Ads, April 2026): the text with a sharp emotional hook into category + proof + CTA produced the lowest CPC ($0.18). Proof-first openers (warranty, durability) produced the worst CPC ($0.22). This is an operating rule.
+- Do not stack multiple message routes in one piece of copy. One driver per ad or section.
 
 ## Tone rules
 ### Do
