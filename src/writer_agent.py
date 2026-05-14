@@ -151,6 +151,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         insight_context: str,
         seo_structure_context: str = "",
         revision_feedback: str = "",
+        original_article: str = "",
     ) -> str:
         brief_block = (
             f"# ARTICLE BRIEF\n\n{json.dumps(brief, indent=2, ensure_ascii=False)}"
@@ -195,13 +196,35 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
             else ""
         )
 
+        if original_article:
+            original_block = (
+                "\n# EXISTING PUBLISHED ARTICLE — YOU ARE REVISING THIS TEXT\n"
+                "# Treat this as the baseline. Preserve every section the "
+                "update plan does not explicitly modify. Keep prose verbatim "
+                "where possible. Output the FULL updated article as JSON — "
+                "not a diff, not partial sections.\n\n"
+                f"{original_article.strip()}\n"
+            )
+            opening = (
+                "Update the existing article below according to the update "
+                "instructions. Preserve everything the diagnostic flagged as "
+                "still strong; only change what the plan asks for.\n\n"
+                f"Topic: {topic}\n"
+            )
+        else:
+            original_block = ""
+            opening = (
+                f"Write a complete first-draft article for the following topic.\n\n"
+                f"Topic: {topic}\n"
+            )
+
         return (
-            f"Write a complete first-draft article for the following topic.\n\n"
-            f"Topic: {topic}\n\n"
+            f"{opening}\n"
             f"{brief_block}"
             f"{serp_block}"
             f"{insight_block}"
             f"{seo_block}"
+            f"{original_block}"
             f"{revision_block}"
             "\nReturn only a valid JSON object. No markdown fences, no commentary."
         )
@@ -421,6 +444,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         insight_context: str = "",
         seo_structure_context: str = "",
         revision_feedback: str = "",
+        original_article: str = "",
     ) -> dict:
         """Run the Writer Agent and return the raw LLM output dict.
 
@@ -445,6 +469,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
             insight_context=insight_context,
             seo_structure_context=seo_structure_context,
             revision_feedback=revision_feedback,
+            original_article=original_article,
         )
 
         if self.api_key:

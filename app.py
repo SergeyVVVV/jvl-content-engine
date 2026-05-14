@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import difflib
 import json
 import re
 from datetime import datetime
@@ -21,6 +22,7 @@ from src.readability_agent import ReadabilityChecker
 from src.faq_agent import FAQAgent
 from src.qa_agent import QAAgent
 from src.metadata_copy_agent import MetadataCopyAgent
+from src.article_diagnostic_agent import ArticleDiagnosticAgent
 
 OUTPUT_ROOT = Path("outputs")
 HISTORY_PATH = OUTPUT_ROOT / "history.json"
@@ -422,6 +424,243 @@ def run_pipeline(
     yield {"step": 0, "label": "done", "status": "done", "results": results}
 
 
+# ─── Article Update pipeline ──────────────────────────────────────────────────
+
+def _extract_topic_from_markdown(md: str) -> str:
+    """Return the first H1 if present, else the first non-empty line."""
+    h1 = re.search(r"^\s*#\s+(.+?)\s*$", md, flags=re.MULTILINE)
+    if h1:
+        return h1.group(1).strip()
+    for line in md.splitlines():
+        line = line.strip()
+        if line:
+            return line[:120]
+    return ""
+
+
+def run_update_pipeline(
+    topic: str,
+    primary_keyword: str,
+    scope: str,
+    original_article: str,
+    previous_brief: dict | None = None,
+):
+    """Run the 7-step Article Update pipeline."""
+    root = OUTPUT_ROOT
+    results: dict = {
+        "original_article": original_article,
+        "scope": scope,
+    }
+    topic_slug = slugify(topic) or "article-update"
+    run_stamp = datetime.utcnow().strftime("%Y%m%d-%H%M%S")
+    update_dir = root / "updates" / topic_slug / run_stamp
+    update_dir.mkdir(parents=True, exist_ok=True)
+
+    # Save the original next to the update for traceability
+    (update_dir / "original.md").write_text(original_article, encoding="utf-8")
+
+    # Step 1 — Fresh SERP Research
+    yield {"step": 1, "label": "SERP Research (fresh)", "status": "running"}
+    serp_data: dict | None = None
+    try:
+        serp_agent = SerpResearchAgent()
+        serp_data = serp_agent.run(
+            primary_keyword=primary_keyword,
+            topic=topic,
+            brief=previous_brief or {},
+            country="us",
+            language="en",
+            top_n=5,
+            paa_questions=(previous_brief or {}).get("questions_to_answer", []),
+        )
+        _save_json(serp_data, update_dir / "serp_research.json")
+    except Exception:
+        pass
+    results["serp_data"] = serp_data
+    yield {"step": 1, "label": "SERP Research (fresh)", "status": "done"}
+
+    # Step 2 — Fresh Company Insight
+    yield {"step": 2, "label": "Company Insight (fresh)", "status": "running"}
+    insight_data: dict | None = None
+    serp_context = _build_serp_context(serp_data) if serp_data else ""
+    try:
+        insight_agent = CompanyInsightAgent()
+        insight_data = insight_agent.run(
+            topic=topic,
+            brief=previous_brief or {},
+            extra_context=serp_context,
+        )
+        _save_json(insight_data, update_dir / "company_insight.json")
+    except Exception:
+        pass
+    results["insight_data"] = insight_data
+    yield {"step": 2, "label": "Company Insight (fresh)", "status": "done"}
+
+    # Step 3 — Article Diagnostic (scoped update plan)
+    yield {"step": 3, "label": "Article Diagnostic", "status": "running"}
+    diag_plan: dict = {}
+    try:
+        diag_agent = ArticleDiagnosticAgent()
+        diag_plan = diag_agent.run(
+            topic=topic,
+            original_article=original_article,
+            scope=scope,
+            serp_data=serp_data,
+            insight_data=insight_data,
+            previous_brief=previous_brief,
+        )
+        _save_json(diag_plan, update_dir / "diagnostic.json")
+    except Exception as exc:
+        print(f"Article Diagnostic failed: {exc}", file=__import__("sys").stderr)
+        raise
+    results["diagnostic"] = diag_plan
+    yield {"step": 3, "label": "Article Diagnostic", "status": "done"}
+
+    # Step 4 — Writer (update mode)
+    yield {"step": 4, "label": "Writer (update mode)", "status": "running"}
+    insight_context = _build_insight_context(insight_data) if insight_data else ""
+    revision_feedback = ArticleDiagnosticAgent.format_for_writer(diag_plan, scope)
+    writer_agent = WriterAgent()
+    draft_result = writer_agent.run(
+        topic=topic,
+        brief=previous_brief,
+        serp_context=serp_context,
+        insight_context=insight_context,
+        seo_structure_context="",
+        revision_feedback=revision_feedback,
+        original_article=original_article,
+    )
+    draft_markdown = writer_agent.assemble_markdown(draft_result)
+    yield {"step": 4, "label": "Writer (update mode)", "status": "done"}
+
+    # Step 5 — Readability Checker
+    yield {"step": 5, "label": "Readability Checker", "status": "running"}
+    readability_report: dict | None = None
+    try:
+        readability = ReadabilityChecker()
+
+        def _rewrite(feedback: str) -> dict:
+            return writer_agent.run(
+                topic=topic,
+                brief=previous_brief,
+                serp_context=serp_context,
+                insight_context=insight_context,
+                seo_structure_context="",
+                revision_feedback=feedback,
+                original_article=original_article,
+            )
+
+        readability_report = readability.run(
+            draft_result=draft_result,
+            draft_markdown=draft_markdown,
+            rewrite_fn=_rewrite,
+            assemble_markdown_fn=writer_agent.assemble_markdown,
+        )
+        draft_result = readability_report["final_result"]
+        draft_markdown = readability_report["final_markdown"]
+        _save_json(readability_report, update_dir / "readability.json")
+    except Exception as exc:
+        print(f"Readability Checker failed: {exc}", file=__import__("sys").stderr)
+    results["readability_report"] = readability_report
+    yield {"step": 5, "label": "Readability Checker", "status": "done"}
+
+    # Step 6 — FAQ (refresh)
+    yield {"step": 6, "label": "FAQ Agent (refresh)", "status": "running"}
+    faq_result: dict | None = None
+    faq_json_ld: str = ""
+    try:
+        faq_agent = FAQAgent()
+        faq_result = faq_agent.run(
+            topic=topic,
+            draft_markdown=draft_markdown,
+            brief=previous_brief,
+            serp_data=serp_data,
+            insight_data=insight_data,
+        )
+        faq_markdown = faq_agent.assemble_markdown(faq_result)
+        draft_markdown = faq_agent.append_to_article(draft_markdown, faq_markdown)
+        faq_json_ld = faq_agent.assemble_json_ld(faq_result)
+        _save_json(faq_result, update_dir / "faq.json")
+        if faq_json_ld:
+            (update_dir / "faq.jsonld").write_text(faq_json_ld, encoding="utf-8")
+    except Exception as exc:
+        print(f"FAQ Agent failed: {exc}", file=__import__("sys").stderr)
+    results["faq_result"] = faq_result
+    results["faq_json_ld"] = faq_json_ld
+    yield {"step": 6, "label": "FAQ Agent (refresh)", "status": "done"}
+
+    # Save the updated article markdown now that all content edits are in
+    updated_md_path = update_dir / "updated.md"
+    updated_md_path.write_text(draft_markdown, encoding="utf-8")
+    results["draft_markdown"] = draft_markdown
+    results["updated_md_path"] = updated_md_path
+    results["update_dir"] = update_dir
+
+    # Step 7 — QA Review (on full updated text including FAQ)
+    yield {"step": 7, "label": "QA Review", "status": "running"}
+    qa_report: dict | None = None
+    try:
+        qa_agent = QAAgent()
+        qa_report = qa_agent.run(
+            topic=topic,
+            draft_markdown=draft_markdown,
+            draft_wrapper={
+                "claims_to_verify": draft_result.get("claims_to_verify", []),
+                "internal_links_used": draft_result.get("internal_links_used", []),
+                "primary_keyword": primary_keyword,
+                "todos": draft_result.get("todos", []),
+            },
+            brief=previous_brief,
+            serp_data=serp_data,
+            insight_data=insight_data,
+            source_inputs_used={
+                "original": str(update_dir / "original.md"),
+                "updated": str(updated_md_path),
+                "diagnostic": str(update_dir / "diagnostic.json"),
+            },
+        )
+        _save_json(qa_report, update_dir / "qa.json")
+    except Exception:
+        pass
+    results["qa_report"] = qa_report
+    yield {"step": 7, "label": "QA Review", "status": "done"}
+
+    # Step 8 — Metadata (refresh)
+    yield {"step": 8, "label": "Metadata (refresh)", "status": "running"}
+    metadata: dict | None = None
+    try:
+        meta_agent = MetadataCopyAgent()
+        metadata = meta_agent.run(
+            topic=topic,
+            draft_markdown=draft_markdown,
+            brief=previous_brief or {},
+            qa_report=qa_report,
+            source_inputs_used={
+                "updated": str(updated_md_path),
+                "qa_report": str(update_dir / "qa.json"),
+            },
+        )
+        _save_json(metadata, update_dir / "metadata.json")
+    except Exception:
+        pass
+    results["metadata"] = metadata
+    yield {"step": 8, "label": "Metadata (refresh)", "status": "done"}
+
+    yield {"step": 0, "label": "done", "status": "done", "results": results}
+
+
+def _build_unified_diff(original: str, updated: str) -> str:
+    diff = difflib.unified_diff(
+        original.splitlines(),
+        updated.splitlines(),
+        fromfile="original.md",
+        tofile="updated.md",
+        lineterm="",
+        n=3,
+    )
+    return "\n".join(diff)
+
+
 # ─── Shared article renderer ──────────────────────────────────────────────────
 
 def _render_article(
@@ -495,6 +734,8 @@ if "view_article" not in st.session_state:
     st.session_state.view_article = None
 if "pipeline_results" not in st.session_state:
     st.session_state.pipeline_results = None
+if "update_results" not in st.session_state:
+    st.session_state.update_results = None
 
 # ─── Sidebar: shared article history ─────────────────────────────────────────
 
@@ -601,119 +842,352 @@ if st.session_state.view_article:
 
 else:
     st.title("JVL Content Engine")
-    st.caption("Generate SEO articles for JVL Echo Home — enter a topic and click the button.")
+    st.caption("Generate or refresh SEO articles for JVL Echo Home.")
 
-    st.divider()
+    tab_create, tab_update = st.tabs(["✏️ Create new article", "🔄 Update existing article"])
 
-    col1, col2 = st.columns([2, 1])
+    with tab_create:
+        col1, col2 = st.columns([2, 1])
 
-    with col1:
-        topic = st.text_input(
-            "Article topic",
-            placeholder="e.g. how to choose a home arcade machine",
-            help="Briefly describe what the article should be about",
-        )
-        keyword = st.text_input(
-            "Primary keyword",
-            placeholder="e.g. home arcade machine for adults",
-            help="The main search query this article will be optimised for",
-        )
-        secondary_raw = st.text_area(
-            "Secondary keywords (optional)",
-            placeholder="arcade machine for living room\nbest home arcade games\nretro arcade cabinet for home",
-            help="One keyword per line, up to 10. These will be woven naturally into the article.",
-            height=120,
-        )
-        custom_requirements = st.text_area(
-            "Additional requirements (optional)",
-            placeholder="e.g. Mention that the Echo Home fits under a standard staircase. Include a comparison table. Avoid mentioning competitors by name.",
-            help="Any specific instructions for this article — facts to include, sections to add, things to avoid, etc.",
-            height=100,
-        )
+        with col1:
+            topic = st.text_input(
+                "Article topic",
+                placeholder="e.g. how to choose a home arcade machine",
+                help="Briefly describe what the article should be about",
+                key="create_topic",
+            )
+            keyword = st.text_input(
+                "Primary keyword",
+                placeholder="e.g. home arcade machine for adults",
+                help="The main search query this article will be optimised for",
+                key="create_keyword",
+            )
+            secondary_raw = st.text_area(
+                "Secondary keywords (optional)",
+                placeholder="arcade machine for living room\nbest home arcade games\nretro arcade cabinet for home",
+                help="One keyword per line, up to 10. These will be woven naturally into the article.",
+                height=120,
+                key="create_secondary",
+            )
+            custom_requirements = st.text_area(
+                "Additional requirements (optional)",
+                placeholder="e.g. Mention that the Echo Home fits under a standard staircase. Include a comparison table. Avoid mentioning competitors by name.",
+                help="Any specific instructions for this article — facts to include, sections to add, things to avoid, etc.",
+                height=100,
+                key="create_custom",
+            )
 
-    with col2:
-        funnel_stage = st.radio(
-            "Reader intent",
-            options=["top", "mid", "bottom"],
-            index=1,
-            format_func=lambda x: {
-                "top": "Top — Just exploring",
-                "mid": "Mid — Comparing options",
-                "bottom": "Bottom — Ready to buy",
-            }[x],
-            captions=[
-                "Reader is curious but not thinking about buying yet. E.g. 'what games did people play in the 80s'. Article is educational; product is mentioned lightly.",
-                "Reader is evaluating options and considering a purchase. E.g. 'how to choose a home arcade machine'. Best for most JVL articles.",
-                "Reader is close to buying and wants confirmation. E.g. 'JVL Echo Home review'. Article is product-focused.",
-            ],
-        )
-
-    st.divider()
-
-    secondary_keywords = [kw.strip() for kw in secondary_raw.splitlines() if kw.strip()][:10]
-
-    if st.button("Generate article", type="primary", disabled=not (topic and keyword)):
-        STEP_LABELS = [
-            "Brief",
-            "SERP Research",
-            "Company Insight",
-            "SEO Structure",
-            "Writer",
-            "Readability Checker",
-            "FAQ Agent",
-            "QA Review",
-            "Metadata",
-        ]
-
-        step_placeholders = []
-        progress_col, _ = st.columns([3, 1])
-
-        with progress_col:
-            st.subheader("Progress")
-            for label in STEP_LABELS:
-                step_placeholders.append(st.empty())
-
-        def _render_step(idx: int, status: str) -> None:
-            icon = {"running": "⏳", "done": "✅", "pending": "⬜"}[status]
-            step_placeholders[idx].markdown(f"{icon} **Step {idx + 1}:** {STEP_LABELS[idx]}")
-
-        for i in range(len(STEP_LABELS)):
-            _render_step(i, "pending")
-
-        pipeline_results: dict = {}
-        error: str | None = None
-
-        try:
-            for event in run_pipeline(
-                topic, keyword, funnel_stage, secondary_keywords, custom_requirements
-            ):
-                step_idx = event["step"] - 1
-                if event["step"] == 0:
-                    pipeline_results = event["results"]
-                    break
-                if event["status"] == "running":
-                    _render_step(step_idx, "running")
-                elif event["status"] == "done":
-                    _render_step(step_idx, "done")
-        except Exception as exc:
-            error = str(exc)
+        with col2:
+            funnel_stage = st.radio(
+                "Reader intent",
+                options=["top", "mid", "bottom"],
+                index=1,
+                format_func=lambda x: {
+                    "top": "Top — Just exploring",
+                    "mid": "Mid — Comparing options",
+                    "bottom": "Bottom — Ready to buy",
+                }[x],
+                captions=[
+                    "Reader is curious but not thinking about buying yet. E.g. 'what games did people play in the 80s'. Article is educational; product is mentioned lightly.",
+                    "Reader is evaluating options and considering a purchase. E.g. 'how to choose a home arcade machine'. Best for most JVL articles.",
+                    "Reader is close to buying and wants confirmation. E.g. 'JVL Echo Home review'. Article is product-focused.",
+                ],
+                key="create_funnel",
+            )
 
         st.divider()
 
-        if error:
-            st.error(f"Error: {error}")
-        elif pipeline_results:
-            st.session_state.pipeline_results = pipeline_results
+        secondary_keywords = [kw.strip() for kw in secondary_raw.splitlines() if kw.strip()][:10]
 
-    # Show results from last pipeline run (persists across reruns)
-    if st.session_state.pipeline_results:
-        res = st.session_state.pipeline_results
-        draft_markdown: str = res.get("draft_markdown", "")
-        metadata: dict | None = res.get("metadata")
-        qa_report: dict | None = res.get("qa_report")
-        draft_md_path: Path | None = res.get("draft_md_path")
-        faq_json_ld: str = res.get("faq_json_ld", "")
-        filename = draft_md_path.name if draft_md_path else "article.md"
+        if st.button("Generate article", type="primary", disabled=not (topic and keyword), key="create_btn"):
+            STEP_LABELS = [
+                "Brief",
+                "SERP Research",
+                "Company Insight",
+                "SEO Structure",
+                "Writer",
+                "Readability Checker",
+                "FAQ Agent",
+                "QA Review",
+                "Metadata",
+            ]
 
-        st.success("Article ready!")
-        _render_article(draft_markdown, metadata, qa_report, filename, faq_json_ld)
+            step_placeholders = []
+            progress_col, _ = st.columns([3, 1])
+
+            with progress_col:
+                st.subheader("Progress")
+                for label in STEP_LABELS:
+                    step_placeholders.append(st.empty())
+
+            def _render_step(idx: int, status: str) -> None:
+                icon = {"running": "⏳", "done": "✅", "pending": "⬜"}[status]
+                step_placeholders[idx].markdown(f"{icon} **Step {idx + 1}:** {STEP_LABELS[idx]}")
+
+            for i in range(len(STEP_LABELS)):
+                _render_step(i, "pending")
+
+            pipeline_results: dict = {}
+            error: str | None = None
+
+            try:
+                for event in run_pipeline(
+                    topic, keyword, funnel_stage, secondary_keywords, custom_requirements
+                ):
+                    step_idx = event["step"] - 1
+                    if event["step"] == 0:
+                        pipeline_results = event["results"]
+                        break
+                    if event["status"] == "running":
+                        _render_step(step_idx, "running")
+                    elif event["status"] == "done":
+                        _render_step(step_idx, "done")
+            except Exception as exc:
+                error = str(exc)
+
+            st.divider()
+
+            if error:
+                st.error(f"Error: {error}")
+            elif pipeline_results:
+                st.session_state.pipeline_results = pipeline_results
+
+        if st.session_state.pipeline_results:
+            res = st.session_state.pipeline_results
+            draft_markdown: str = res.get("draft_markdown", "")
+            metadata: dict | None = res.get("metadata")
+            qa_report: dict | None = res.get("qa_report")
+            draft_md_path: Path | None = res.get("draft_md_path")
+            faq_json_ld: str = res.get("faq_json_ld", "")
+            filename = draft_md_path.name if draft_md_path else "article.md"
+
+            st.success("Article ready!")
+            _render_article(draft_markdown, metadata, qa_report, filename, faq_json_ld)
+
+    with tab_update:
+        st.caption(
+            "Refresh an existing article: fix stale facts, close new SERP gaps, "
+            "improve brand alignment. The Writer Agent works in revise mode and "
+            "preserves what the diagnostic flags as still strong."
+        )
+
+        history_for_update = load_history()
+        history_options = ["(paste manually)"] + [
+            f"{h.get('title') or h.get('topic', '?')}  —  {h.get('id', '')}"
+            for h in history_for_update
+        ]
+        source_choice = st.selectbox(
+            "Source article",
+            history_options,
+            index=0,
+            help="Pick an article previously generated in this engine, or choose '(paste manually)' to supply markdown.",
+            key="update_source",
+        )
+
+        preloaded_md = ""
+        preloaded_topic = ""
+        preloaded_keyword = ""
+        preloaded_brief: dict | None = None
+        if source_choice != "(paste manually)":
+            picked_index = history_options.index(source_choice) - 1
+            picked = history_for_update[picked_index]
+            md_path_str = picked.get("md_path")
+            if md_path_str and Path(md_path_str).exists():
+                try:
+                    preloaded_md = Path(md_path_str).read_text(encoding="utf-8")
+                except Exception:
+                    pass
+            companion_path_str = picked.get("companion_path")
+            if companion_path_str and Path(companion_path_str).exists():
+                try:
+                    with open(companion_path_str, encoding="utf-8") as fh:
+                        comp = json.load(fh)
+                    preloaded_topic = picked.get("topic", "") or comp.get("topic", "")
+                    preloaded_keyword = (
+                        picked.get("primary_keyword")
+                        or comp.get("primary_keyword", "")
+                    )
+                    brief_path_str = (comp.get("source_inputs_used") or {}).get("brief")
+                    if brief_path_str and Path(brief_path_str).exists():
+                        with open(brief_path_str, encoding="utf-8") as bfh:
+                            preloaded_brief = json.load(bfh)
+                except Exception:
+                    pass
+
+        update_topic = st.text_input(
+            "Article topic",
+            value=preloaded_topic,
+            placeholder="auto-detected from H1 when you paste markdown below",
+            key="update_topic",
+        )
+        update_keyword = st.text_input(
+            "Primary keyword",
+            value=preloaded_keyword,
+            placeholder="e.g. home arcade machine for adults",
+            key="update_keyword",
+        )
+
+        original_markdown = st.text_area(
+            "Existing article markdown",
+            value=preloaded_md,
+            placeholder="Paste the full markdown of the article you want to update…",
+            height=320,
+            key="update_markdown",
+        )
+
+        scope = st.radio(
+            "Update scope",
+            options=["light", "medium", "heavy"],
+            index=1,
+            horizontal=True,
+            captions=[
+                "Freshness only — dates, numbers, broken links, forbidden claims.",
+                "Light + close SERP gaps + targeted paragraph rewrites for brand drift.",
+                "Medium + reorder sections + replace intro/outro (preserves ≥60% prose).",
+            ],
+            key="update_scope",
+        )
+
+        effective_topic = update_topic.strip() or _extract_topic_from_markdown(original_markdown)
+        update_disabled = not (effective_topic and update_keyword.strip() and original_markdown.strip())
+
+        if st.button("Update article", type="primary", disabled=update_disabled, key="update_btn"):
+            UPDATE_STEP_LABELS = [
+                "SERP Research (fresh)",
+                "Company Insight (fresh)",
+                "Article Diagnostic",
+                "Writer (update mode)",
+                "Readability Checker",
+                "FAQ Agent (refresh)",
+                "QA Review",
+                "Metadata (refresh)",
+            ]
+
+            step_placeholders: list = []
+            progress_col, _ = st.columns([3, 1])
+            with progress_col:
+                st.subheader("Progress")
+                for label in UPDATE_STEP_LABELS:
+                    step_placeholders.append(st.empty())
+
+            def _render_update_step(idx: int, status: str) -> None:
+                icon = {"running": "⏳", "done": "✅", "pending": "⬜"}[status]
+                step_placeholders[idx].markdown(
+                    f"{icon} **Step {idx + 1}:** {UPDATE_STEP_LABELS[idx]}"
+                )
+
+            for i in range(len(UPDATE_STEP_LABELS)):
+                _render_update_step(i, "pending")
+
+            update_results: dict = {}
+            update_error: str | None = None
+
+            try:
+                for event in run_update_pipeline(
+                    topic=effective_topic,
+                    primary_keyword=update_keyword.strip(),
+                    scope=scope,
+                    original_article=original_markdown,
+                    previous_brief=preloaded_brief,
+                ):
+                    step_idx = event["step"] - 1
+                    if event["step"] == 0:
+                        update_results = event["results"]
+                        break
+                    if event["status"] == "running":
+                        _render_update_step(step_idx, "running")
+                    elif event["status"] == "done":
+                        _render_update_step(step_idx, "done")
+            except Exception as exc:
+                update_error = str(exc)
+
+            st.divider()
+
+            if update_error:
+                st.error(f"Error: {update_error}")
+            elif update_results:
+                st.session_state.update_results = update_results
+
+        if st.session_state.get("update_results"):
+            res = st.session_state.update_results
+            updated_md: str = res.get("draft_markdown", "")
+            original_md: str = res.get("original_article", "")
+            qa_report: dict | None = res.get("qa_report")
+            metadata: dict | None = res.get("metadata")
+            faq_json_ld: str = res.get("faq_json_ld", "")
+            diagnostic: dict = res.get("diagnostic") or {}
+            scope_used: str = res.get("scope", "medium")
+            update_dir: Path | None = res.get("update_dir")
+
+            st.success(f"Article updated (scope: **{scope_used}**)")
+
+            if diagnostic:
+                with st.expander("Diagnostic summary", expanded=False):
+                    diag = diagnostic.get("diagnosis", {})
+                    if diag.get("summary"):
+                        st.markdown(diag["summary"])
+                    cols = st.columns(2)
+                    with cols[0]:
+                        st.markdown("**Freshness issues**")
+                        for x in diag.get("freshness_issues") or ["(none)"]:
+                            st.markdown(f"- {x}")
+                        st.markdown("**SERP gaps closed**")
+                        for x in diag.get("serp_gaps_to_close") or ["(none)"]:
+                            st.markdown(f"- {x}")
+                    with cols[1]:
+                        st.markdown("**Brand alignment issues**")
+                        for x in diag.get("brand_alignment_issues") or ["(none)"]:
+                            st.markdown(f"- {x}")
+                        st.markdown("**Experience anchor gaps**")
+                        for x in diag.get("experience_anchor_gaps") or ["(none)"]:
+                            st.markdown(f"- {x}")
+
+            tab_labels = ["Updated", "Original", "Diff", "Diagnostic JSON"]
+            if faq_json_ld:
+                tab_labels.append("FAQ JSON-LD")
+            update_tabs = st.tabs(tab_labels)
+
+            with update_tabs[0]:
+                st.markdown(updated_md)
+                st.download_button(
+                    "Download updated.md",
+                    data=updated_md.encode("utf-8"),
+                    file_name="updated.md",
+                    mime="text/markdown",
+                    key="dl_updated",
+                )
+            with update_tabs[1]:
+                st.markdown(original_md)
+            with update_tabs[2]:
+                diff_text = _build_unified_diff(original_md, updated_md)
+                if diff_text:
+                    st.code(diff_text, language="diff")
+                else:
+                    st.info("No textual differences detected.")
+            with update_tabs[3]:
+                st.code(json.dumps(diagnostic, indent=2, ensure_ascii=False), language="json")
+            if faq_json_ld:
+                with update_tabs[4]:
+                    st.caption(
+                        "Paste into the article page `<head>`. Helps AI search "
+                        "engines extract atomic Q/A pairs for citation."
+                    )
+                    st.code(faq_json_ld, language="html")
+
+            if update_dir:
+                st.caption(f"Run artifacts saved to: `{update_dir}`")
+            if qa_report:
+                status_val = qa_report.get("status", "unknown")
+                counts = qa_report.get("severity_counts", {})
+                badge = "✅ QA passed" if status_val == "pass" else "⚠️ Needs review"
+                st.info(
+                    f"{badge} — critical: {counts.get('high', 0)}, "
+                    f"medium: {counts.get('medium', 0)}, "
+                    f"low: {counts.get('low', 0)}"
+                )
+            if metadata:
+                with st.expander("Refreshed metadata", expanded=False):
+                    st.markdown(f"**Slug:** `{metadata.get('slug', '')}`")
+                    st.markdown(f"**H1:** {metadata.get('h1', '')}")
+                    st.markdown(f"**Meta Title:** {metadata.get('meta_title', '')}")
+                    st.markdown(f"**Meta Description:** {metadata.get('meta_description', '')}")
