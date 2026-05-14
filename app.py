@@ -18,6 +18,7 @@ from src.company_insight_agent import CompanyInsightAgent
 from src.seo_structure_agent import SeoStructureAgent
 from src.writer_agent import WriterAgent
 from src.readability_agent import ReadabilityChecker
+from src.faq_agent import FAQAgent
 from src.qa_agent import QAAgent
 from src.metadata_copy_agent import MetadataCopyAgent
 
@@ -115,7 +116,7 @@ def run_pipeline(
     secondary_keywords: list[str],
     custom_requirements: str,
 ):
-    """Run the full 8-step pipeline; yields progress events, ends with results dict."""
+    """Run the full 9-step pipeline; yields progress events, ends with results dict."""
     root = OUTPUT_ROOT
     results: dict = {}
 
@@ -294,6 +295,34 @@ def run_pipeline(
         if readability_report
         else None,
     }
+    # Step 7 — FAQ
+    yield {"step": 7, "label": "FAQ Agent", "status": "running"}
+    faq_result: dict | None = None
+    faq_markdown: str = ""
+    faq_path: Path | None = None
+    try:
+        faq_agent = FAQAgent()
+        faq_result = faq_agent.run(
+            topic=topic,
+            draft_markdown=draft_markdown,
+            brief=brief,
+            serp_data=serp_data,
+            insight_data=insight_data,
+        )
+        faq_markdown = faq_agent.assemble_markdown(faq_result)
+        draft_markdown = faq_agent.append_to_article(draft_markdown, faq_markdown)
+        faq_path = root / "faq" / f"{topic_slug}.json"
+        _save_json(faq_result, faq_path)
+    except Exception as exc:
+        print(f"FAQ Agent failed: {exc}", file=__import__("sys").stderr)
+    results["faq_result"] = faq_result
+    results["faq_markdown"] = faq_markdown
+    results["faq_path"] = faq_path
+
+    companion["draft_markdown"] = draft_markdown
+    companion["faq_items"] = (faq_result or {}).get("items", [])
+    companion["source_inputs_used"]["faq"] = str(faq_path) if faq_path else None
+
     draft_md_path = root / "drafts" / f"{topic_slug}.md"
     draft_json_path = root / "drafts" / f"{topic_slug}.json"
     draft_md_path.parent.mkdir(parents=True, exist_ok=True)
@@ -303,9 +332,10 @@ def run_pipeline(
     results["draft_md_path"] = draft_md_path
     results["companion"] = companion
     results["draft_json_path"] = draft_json_path
+    yield {"step": 7, "label": "FAQ Agent", "status": "done"}
 
-    # Step 7 — QA
-    yield {"step": 7, "label": "QA Review", "status": "running"}
+    # Step 8 — QA (reviews full draft including FAQ block)
+    yield {"step": 8, "label": "QA Review", "status": "running"}
     qa_report: dict | None = None
     qa_path: Path | None = None
     try:
@@ -329,10 +359,10 @@ def run_pipeline(
     except Exception:
         pass
     results["qa_report"] = qa_report
-    yield {"step": 7, "label": "QA Review", "status": "done"}
+    yield {"step": 8, "label": "QA Review", "status": "done"}
 
-    # Step 8 — Metadata
-    yield {"step": 8, "label": "Metadata", "status": "running"}
+    # Step 9 — Metadata
+    yield {"step": 9, "label": "Metadata", "status": "running"}
     metadata: dict | None = None
     metadata_path: Path | None = None
     try:
@@ -354,7 +384,7 @@ def run_pipeline(
         pass
     results["metadata"] = metadata
     results["metadata_path"] = metadata_path
-    yield {"step": 8, "label": "Metadata", "status": "done"}
+    yield {"step": 9, "label": "Metadata", "status": "done"}
 
     # Save to shared history
     article_title = (
@@ -589,6 +619,7 @@ else:
             "SEO Structure",
             "Writer",
             "Readability Checker",
+            "FAQ Agent",
             "QA Review",
             "Metadata",
         ]
