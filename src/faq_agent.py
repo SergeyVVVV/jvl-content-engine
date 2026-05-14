@@ -216,6 +216,70 @@ class FAQAgent:
         return f"{draft_markdown.rstrip()}\n\n{faq_markdown}\n"
 
     # ------------------------------------------------------------------
+    # JSON-LD (schema.org FAQPage) — for AI search engines / GEO
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def assemble_json_ld(
+        result: dict,
+        page_url: str | None = None,
+        wrap_in_script_tag: bool = True,
+    ) -> str:
+        """Render FAQ items as schema.org FAQPage JSON-LD.
+
+        Aimed at AI search engines (Perplexity, ChatGPT Search, Google AI
+        Overviews) which use structured data to extract atomic Q/A pairs for
+        citation. Not aimed at Google FAQ rich snippets — those were
+        restricted to gov/health sites in August 2023.
+
+        Args:
+            result:              FAQAgent.run() output dict.
+            page_url:            Optional canonical URL of the article page.
+                                 Adds @id / mainEntityOfPage when provided.
+            wrap_in_script_tag:  True (default) returns the ready-to-paste
+                                 <script type="application/ld+json"> block.
+                                 False returns raw JSON only.
+
+        Returns:
+            String — either a <script> block or raw JSON. Empty string if
+            no items present.
+        """
+        items = result.get("items") or []
+        valid_items = [
+            it for it in items
+            if (it.get("question") or "").strip() and (it.get("answer") or "").strip()
+        ]
+        if not valid_items:
+            return ""
+
+        ld: dict = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": (it.get("question") or "").strip(),
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": (it.get("answer") or "").strip(),
+                    },
+                }
+                for it in valid_items
+            ],
+        }
+        if page_url:
+            ld["@id"] = f"{page_url}#faq"
+            ld["mainEntityOfPage"] = {
+                "@type": "WebPage",
+                "@id": page_url,
+            }
+
+        raw_json = json.dumps(ld, indent=2, ensure_ascii=False)
+        if not wrap_in_script_tag:
+            return raw_json
+        return f'<script type="application/ld+json">\n{raw_json}\n</script>'
+
+    # ------------------------------------------------------------------
     # Auth mode 1: direct Anthropic SDK
     # ------------------------------------------------------------------
 

@@ -299,7 +299,9 @@ def run_pipeline(
     yield {"step": 7, "label": "FAQ Agent", "status": "running"}
     faq_result: dict | None = None
     faq_markdown: str = ""
+    faq_json_ld: str = ""
     faq_path: Path | None = None
+    faq_jsonld_path: Path | None = None
     try:
         faq_agent = FAQAgent()
         faq_result = faq_agent.run(
@@ -313,15 +315,27 @@ def run_pipeline(
         draft_markdown = faq_agent.append_to_article(draft_markdown, faq_markdown)
         faq_path = root / "faq" / f"{topic_slug}.json"
         _save_json(faq_result, faq_path)
+
+        faq_json_ld = faq_agent.assemble_json_ld(faq_result)
+        if faq_json_ld:
+            faq_jsonld_path = root / "faq" / f"{topic_slug}.jsonld"
+            faq_jsonld_path.parent.mkdir(parents=True, exist_ok=True)
+            faq_jsonld_path.write_text(faq_json_ld, encoding="utf-8")
     except Exception as exc:
         print(f"FAQ Agent failed: {exc}", file=__import__("sys").stderr)
     results["faq_result"] = faq_result
     results["faq_markdown"] = faq_markdown
+    results["faq_json_ld"] = faq_json_ld
     results["faq_path"] = faq_path
+    results["faq_jsonld_path"] = faq_jsonld_path
 
     companion["draft_markdown"] = draft_markdown
     companion["faq_items"] = (faq_result or {}).get("items", [])
+    companion["faq_json_ld"] = faq_json_ld
     companion["source_inputs_used"]["faq"] = str(faq_path) if faq_path else None
+    companion["source_inputs_used"]["faq_json_ld"] = (
+        str(faq_jsonld_path) if faq_jsonld_path else None
+    )
 
     draft_md_path = root / "drafts" / f"{topic_slug}.md"
     draft_json_path = root / "drafts" / f"{topic_slug}.json"
@@ -400,6 +414,7 @@ def run_pipeline(
         "md_path": str(draft_md_path),
         "companion_path": str(draft_json_path),
         "metadata_path": str(metadata_path) if metadata_path else None,
+        "faq_jsonld_path": str(faq_jsonld_path) if faq_jsonld_path else None,
     }
     save_to_history(history_entry)
     results["history_entry"] = history_entry
@@ -414,8 +429,9 @@ def _render_article(
     metadata: dict | None,
     qa_report: dict | None,
     filename: str = "article.md",
+    faq_json_ld: str = "",
 ) -> None:
-    """Show metadata, QA badge, then three view tabs."""
+    """Show metadata, QA badge, then content + FAQ JSON-LD tabs."""
     if metadata:
         with st.expander("SEO metadata", expanded=False):
             st.markdown(f"**Slug:** `{metadata.get('slug', '')}`")
@@ -433,17 +449,18 @@ def _render_article(
             f"low: {counts.get('low', 0)}"
         )
 
-    tab_rendered, tab_source, tab_download = st.tabs(
-        ["Rendered", "Markdown source", "Download .md"]
-    )
+    tab_labels = ["Rendered", "Markdown source", "Download .md"]
+    if faq_json_ld:
+        tab_labels.append("FAQ JSON-LD")
+    tabs = st.tabs(tab_labels)
 
-    with tab_rendered:
+    with tabs[0]:
         st.markdown(draft_markdown)
 
-    with tab_source:
+    with tabs[1]:
         st.code(draft_markdown, language="markdown")
 
-    with tab_download:
+    with tabs[2]:
         st.download_button(
             label="Download article (.md)",
             data=draft_markdown.encode("utf-8"),
@@ -451,6 +468,22 @@ def _render_article(
             mime="text/markdown",
         )
         st.caption(f"File: `{filename}`")
+
+    if faq_json_ld:
+        with tabs[3]:
+            st.caption(
+                "Paste this block into the article page `<head>`. Used by AI "
+                "search engines (Perplexity, ChatGPT Search, AI Overviews) "
+                "to extract atomic Q/A pairs for citation."
+            )
+            st.code(faq_json_ld, language="html")
+            jsonld_filename = filename.rsplit(".", 1)[0] + ".jsonld"
+            st.download_button(
+                label="Download FAQ JSON-LD",
+                data=faq_json_ld.encode("utf-8"),
+                file_name=jsonld_filename,
+                mime="application/ld+json",
+            )
 
 
 # ─── Streamlit UI ─────────────────────────────────────────────────────────────
@@ -552,9 +585,17 @@ if st.session_state.view_article:
             except Exception:
                 pass
 
+    faq_json_ld = ""
+    jsonld_path_str = entry.get("faq_jsonld_path")
+    if jsonld_path_str and Path(jsonld_path_str).exists():
+        try:
+            faq_json_ld = Path(jsonld_path_str).read_text(encoding="utf-8")
+        except Exception:
+            pass
+
     if draft_markdown:
         filename = Path(md_path_str).name if md_path_str else f"{entry.get('id', 'article')}.md"
-        _render_article(draft_markdown, metadata, qa_report, filename)
+        _render_article(draft_markdown, metadata, qa_report, filename, faq_json_ld)
 
 # ─── Main area: generator ─────────────────────────────────────────────────────
 
@@ -671,7 +712,8 @@ else:
         metadata: dict | None = res.get("metadata")
         qa_report: dict | None = res.get("qa_report")
         draft_md_path: Path | None = res.get("draft_md_path")
+        faq_json_ld: str = res.get("faq_json_ld", "")
         filename = draft_md_path.name if draft_md_path else "article.md"
 
         st.success("Article ready!")
-        _render_article(draft_markdown, metadata, qa_report, filename)
+        _render_article(draft_markdown, metadata, qa_report, filename, faq_json_ld)
