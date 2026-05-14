@@ -34,6 +34,12 @@ _KNOWLEDGE_FILES: list[tuple[str, str]] = [
     ("positioning_uvp.md", "POSITIONING AND UVP PILLARS"),
     ("claims_constraints.md", "ALLOWED AND FORBIDDEN CLAIMS"),
     ("internal_links.md", "INTERNAL LINK TARGETS"),
+    (
+        "firsthand_experience.md",
+        "FIRSTHAND EXPERIENCE ANCHORS — use ONLY entries where consent_status is "
+        "'confirmed' (or 'not_required' for JVL's own operational data) AND "
+        "verified_by is filled. Never invent stories, names, dates, or quotes.",
+    ),
 ]
 
 
@@ -118,7 +124,24 @@ CRITICAL OUTPUT RULES:
 - Each body_markdown must be substantive real content — not filler.
 - claims_to_verify must list every claim not 100% confirmed by source inputs.
   Write ["none identified"] only if truly none require verification.
-- Never invent product specs, dimensions, game counts, warranty, pricing."""
+- Never invent product specs, dimensions, game counts, warranty, pricing.
+
+EXPERIENCE-ANCHOR RULES (E-E-A-T):
+- Include AT LEAST ONE anchor from FIRSTHAND EXPERIENCE in every article.
+- Only use entries where `consent_status` is `confirmed` (or `not_required`
+  for JVL's own operational data) AND `verified_by` is filled.
+- Skip every entry where `consent_status` is `pending` or `verified_by` is
+  null — those are not yet cleared for publication.
+- Never invent customer stories, names, quotes, dates, or operational
+  figures. Fabricated testimonials violate Canada Competition Act s. 74.01,
+  US FTC 16 CFR Part 465, and EU UCPD.
+- If no relevant verified anchor exists for the topic, add the literal
+  string `TODO: experience anchor needed` to the `todos` array AND inline
+  in the section that would have used it. Do not fabricate.
+- When using an anchor, paraphrase or quote it faithfully. Generic
+  attribution is preferred ("our production team", "a JVL service
+  technician"). Never expose internal IDs, ticket numbers, or private
+  customer details."""
 
     def _build_user_message(
         self,

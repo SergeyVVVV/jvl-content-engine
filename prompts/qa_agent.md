@@ -47,6 +47,16 @@ For each dimension, look for concrete, evidence-based issues — not vibes.
 7. **Draft quality** — coherence, flow, AI filler, weak intro/outro.
 8. **Product-fit discipline** — product mentions natural, not forced,
    not absent when relevant; CTA appropriate for funnel stage.
+9. **Experience grounding (E-E-A-T)** — does the article include at least
+   one firsthand experience anchor (customer story, founder/team quote,
+   craftsmanship detail, operational data point, or review aggregate)?
+   Are anchors grounded — i.e. traceable to a verified entry in
+   `knowledge/firsthand_experience.md`, not fabricated? If the Writer
+   wrote `TODO: experience anchor needed`, that's a MEDIUM gap (writer
+   honestly flagged missing source). If the Writer used an anchor that
+   appears invented (named customer with no internal record, suspiciously
+   round operational numbers, quotes without an interview date), that's
+   HIGH.
 
 ## Severity rules
 
@@ -56,6 +66,8 @@ For each dimension, look for concrete, evidence-based issues — not vibes.
 - Unsupported "best" / ranking / superiority claims
 - Fabricated social proof, customer quotes, company anecdotes
 - Strong factual claims not grounded and not in `claims_to_verify`
+- Experience anchor that appears fabricated (named person/quote/figure
+  not traceable to a verified entry in firsthand_experience.md)
 
 **MEDIUM** — any of:
 - Forced or unnatural product integration
@@ -63,6 +75,9 @@ For each dimension, look for concrete, evidence-based issues — not vibes.
 - Repetitive structure
 - Weak differentiation or poor brief alignment
 - Missed major SERP coverage opportunity (when SERP available)
+- No experience anchor used and no `TODO: experience anchor needed` flagged
+- `TODO: experience anchor needed` flagged honestly by Writer (the gap is
+  real but flagged correctly — log as MEDIUM so editorial can backfill)
 
 **LOW** — minor stylistic awkwardness, weak transitions, polish issues.
 

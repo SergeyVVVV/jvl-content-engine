@@ -42,6 +42,12 @@ The Writer must keep:
 - Internal links and structural headings.
 - Claims discipline — do not loosen hedged claims into firm ones to shorten.
 - Persona alignment — Mark & Linda Reynolds, affluent homeowners.
+- **Firsthand experience anchors** — customer stories, founder/team quotes,
+  craftsmanship details, operational data, review aggregates. Never strip
+  these for the sake of a shorter sentence. They are E-E-A-T signals and
+  must be preserved verbatim (paraphrase only to split a long sentence).
+  `TODO: experience anchor needed` markers must also stay — they signal
+  to the editorial team that a real anchor is missing.
 
 Flag any tension between "simpler" and "on-brand" in `tradeoff_notes`.
 
