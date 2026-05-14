@@ -34,6 +34,12 @@ _KNOWLEDGE_FILES: list[tuple[str, str]] = [
     ("positioning_uvp.md", "POSITIONING AND UVP PILLARS"),
     ("claims_constraints.md", "ALLOWED AND FORBIDDEN CLAIMS"),
     ("internal_links.md", "INTERNAL LINK TARGETS"),
+    (
+        "firsthand_experience.md",
+        "FIRSTHAND EXPERIENCE ANCHORS — use ONLY entries where consent_status is "
+        "'confirmed' (or 'not_required' for JVL's own operational data) AND "
+        "verified_by is filled. Never invent stories, names, dates, or quotes.",
+    ),
 ]
 
 
@@ -118,7 +124,24 @@ CRITICAL OUTPUT RULES:
 - Each body_markdown must be substantive real content — not filler.
 - claims_to_verify must list every claim not 100% confirmed by source inputs.
   Write ["none identified"] only if truly none require verification.
-- Never invent product specs, dimensions, game counts, warranty, pricing."""
+- Never invent product specs, dimensions, game counts, warranty, pricing.
+
+EXPERIENCE-ANCHOR RULES (E-E-A-T):
+- Include AT LEAST ONE anchor from FIRSTHAND EXPERIENCE in every article.
+- Only use entries where `consent_status` is `confirmed` (or `not_required`
+  for JVL's own operational data) AND `verified_by` is filled.
+- Skip every entry where `consent_status` is `pending` or `verified_by` is
+  null — those are not yet cleared for publication.
+- Never invent customer stories, names, quotes, dates, or operational
+  figures. Fabricated testimonials violate Canada Competition Act s. 74.01,
+  US FTC 16 CFR Part 465, and EU UCPD.
+- If no relevant verified anchor exists for the topic, add the literal
+  string `TODO: experience anchor needed` to the `todos` array AND inline
+  in the section that would have used it. Do not fabricate.
+- When using an anchor, paraphrase or quote it faithfully. Generic
+  attribution is preferred ("our production team", "a JVL service
+  technician"). Never expose internal IDs, ticket numbers, or private
+  customer details."""
 
     def _build_user_message(
         self,
@@ -127,6 +150,8 @@ CRITICAL OUTPUT RULES:
         serp_context: str,
         insight_context: str,
         seo_structure_context: str = "",
+        revision_feedback: str = "",
+        original_article: str = "",
     ) -> str:
         brief_block = (
             f"# ARTICLE BRIEF\n\n{json.dumps(brief, indent=2, ensure_ascii=False)}"
@@ -161,13 +186,46 @@ CRITICAL OUTPUT RULES:
             else ""
         )
 
+        revision_block = (
+            f"\n{revision_feedback}\n\n"
+            "Apply every required edit above. Keep the same JSON output shape "
+            "(h1, intro, sections, internal_links_used, claims_to_verify, todos). "
+            "Preserve all JVL facts, brand voice, and claims discipline while "
+            "simplifying language.\n"
+            if revision_feedback
+            else ""
+        )
+
+        if original_article:
+            original_block = (
+                "\n# EXISTING PUBLISHED ARTICLE — YOU ARE REVISING THIS TEXT\n"
+                "# Treat this as the baseline. Preserve every section the "
+                "update plan does not explicitly modify. Keep prose verbatim "
+                "where possible. Output the FULL updated article as JSON — "
+                "not a diff, not partial sections.\n\n"
+                f"{original_article.strip()}\n"
+            )
+            opening = (
+                "Update the existing article below according to the update "
+                "instructions. Preserve everything the diagnostic flagged as "
+                "still strong; only change what the plan asks for.\n\n"
+                f"Topic: {topic}\n"
+            )
+        else:
+            original_block = ""
+            opening = (
+                f"Write a complete first-draft article for the following topic.\n\n"
+                f"Topic: {topic}\n"
+            )
+
         return (
-            f"Write a complete first-draft article for the following topic.\n\n"
-            f"Topic: {topic}\n\n"
+            f"{opening}\n"
             f"{brief_block}"
             f"{serp_block}"
             f"{insight_block}"
             f"{seo_block}"
+            f"{original_block}"
+            f"{revision_block}"
             "\nReturn only a valid JSON object. No markdown fences, no commentary."
         )
 
@@ -385,6 +443,8 @@ CRITICAL OUTPUT RULES:
         serp_context: str = "",
         insight_context: str = "",
         seo_structure_context: str = "",
+        revision_feedback: str = "",
+        original_article: str = "",
     ) -> dict:
         """Run the Writer Agent and return the raw LLM output dict.
 
@@ -408,6 +468,8 @@ CRITICAL OUTPUT RULES:
             serp_context=serp_context,
             insight_context=insight_context,
             seo_structure_context=seo_structure_context,
+            revision_feedback=revision_feedback,
+            original_article=original_article,
         )
 
         if self.api_key:
