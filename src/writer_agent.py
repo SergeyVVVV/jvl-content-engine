@@ -127,6 +127,7 @@ CRITICAL OUTPUT RULES:
         serp_context: str,
         insight_context: str,
         seo_structure_context: str = "",
+        revision_feedback: str = "",
     ) -> str:
         brief_block = (
             f"# ARTICLE BRIEF\n\n{json.dumps(brief, indent=2, ensure_ascii=False)}"
@@ -161,6 +162,16 @@ CRITICAL OUTPUT RULES:
             else ""
         )
 
+        revision_block = (
+            f"\n{revision_feedback}\n\n"
+            "Apply every required edit above. Keep the same JSON output shape "
+            "(h1, intro, sections, internal_links_used, claims_to_verify, todos). "
+            "Preserve all JVL facts, brand voice, and claims discipline while "
+            "simplifying language.\n"
+            if revision_feedback
+            else ""
+        )
+
         return (
             f"Write a complete first-draft article for the following topic.\n\n"
             f"Topic: {topic}\n\n"
@@ -168,6 +179,7 @@ CRITICAL OUTPUT RULES:
             f"{serp_block}"
             f"{insight_block}"
             f"{seo_block}"
+            f"{revision_block}"
             "\nReturn only a valid JSON object. No markdown fences, no commentary."
         )
 
@@ -385,6 +397,7 @@ CRITICAL OUTPUT RULES:
         serp_context: str = "",
         insight_context: str = "",
         seo_structure_context: str = "",
+        revision_feedback: str = "",
     ) -> dict:
         """Run the Writer Agent and return the raw LLM output dict.
 
@@ -408,6 +421,7 @@ CRITICAL OUTPUT RULES:
             serp_context=serp_context,
             insight_context=insight_context,
             seo_structure_context=seo_structure_context,
+            revision_feedback=revision_feedback,
         )
 
         if self.api_key:

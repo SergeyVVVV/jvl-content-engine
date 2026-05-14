@@ -17,6 +17,7 @@ from src.serp_research_agent import SerpResearchAgent
 from src.company_insight_agent import CompanyInsightAgent
 from src.seo_structure_agent import SeoStructureAgent
 from src.writer_agent import WriterAgent
+from src.readability_agent import ReadabilityChecker
 from src.qa_agent import QAAgent
 from src.metadata_copy_agent import MetadataCopyAgent
 
@@ -114,7 +115,7 @@ def run_pipeline(
     secondary_keywords: list[str],
     custom_requirements: str,
 ):
-    """Run the full 7-step pipeline; yields progress events, ends with results dict."""
+    """Run the full 8-step pipeline; yields progress events, ends with results dict."""
     root = OUTPUT_ROOT
     results: dict = {}
 
@@ -230,6 +231,41 @@ def run_pipeline(
         seo_structure_context=seo_structure_context,
     )
     draft_markdown = writer_agent.assemble_markdown(draft_result)
+    yield {"step": 5, "label": "Writer Agent", "status": "done"}
+
+    # Step 6 — Readability Checker (Flesch Reading Ease >= 90, up to 3 rewrites)
+    yield {"step": 6, "label": "Readability Checker", "status": "running"}
+    readability_report: dict | None = None
+    readability_path: Path | None = None
+    try:
+        readability = ReadabilityChecker()
+
+        def _rewrite(feedback: str) -> dict:
+            return writer_agent.run(
+                topic=topic,
+                brief=brief,
+                serp_context=serp_context,
+                insight_context=insight_context,
+                seo_structure_context=seo_structure_context,
+                revision_feedback=feedback,
+            )
+
+        readability_report = readability.run(
+            draft_result=draft_result,
+            draft_markdown=draft_markdown,
+            rewrite_fn=_rewrite,
+            assemble_markdown_fn=writer_agent.assemble_markdown,
+        )
+        draft_result = readability_report["final_result"]
+        draft_markdown = readability_report["final_markdown"]
+        readability_path = root / "readability" / f"{topic_slug}.json"
+        _save_json(readability_report, readability_path)
+    except Exception as exc:
+        print(f"Readability Checker failed: {exc}", file=__import__("sys").stderr)
+    results["readability_report"] = readability_report
+    results["readability_path"] = readability_path
+    yield {"step": 6, "label": "Readability Checker", "status": "done"}
+
     companion = {
         "topic": topic,
         "working_title": brief.get("working_title", draft_result.get("h1", "")),
@@ -244,10 +280,19 @@ def run_pipeline(
             "serp_research": str(serp_path) if serp_path else None,
             "company_insight": str(insight_path) if insight_path else None,
             "seo_structure": str(seo_path) if seo_path else None,
+            "readability_report": str(readability_path) if readability_path else None,
         },
         "risks_to_review": _build_risks(brief, insight_data),
         "internal_links_used": draft_result.get("internal_links_used", []),
         "todos": draft_result.get("todos", []),
+        "readability": {
+            "final_score": readability_report["final_score"],
+            "target_score": readability_report["target_score"],
+            "passed": readability_report["passed"],
+            "iterations_run": len(readability_report["iterations"]),
+        }
+        if readability_report
+        else None,
     }
     draft_md_path = root / "drafts" / f"{topic_slug}.md"
     draft_json_path = root / "drafts" / f"{topic_slug}.json"
@@ -258,10 +303,9 @@ def run_pipeline(
     results["draft_md_path"] = draft_md_path
     results["companion"] = companion
     results["draft_json_path"] = draft_json_path
-    yield {"step": 5, "label": "Writer Agent", "status": "done"}
 
-    # Step 6 — QA
-    yield {"step": 6, "label": "QA Review", "status": "running"}
+    # Step 7 — QA
+    yield {"step": 7, "label": "QA Review", "status": "running"}
     qa_report: dict | None = None
     qa_path: Path | None = None
     try:
@@ -285,10 +329,10 @@ def run_pipeline(
     except Exception:
         pass
     results["qa_report"] = qa_report
-    yield {"step": 6, "label": "QA Review", "status": "done"}
+    yield {"step": 7, "label": "QA Review", "status": "done"}
 
-    # Step 7 — Metadata
-    yield {"step": 7, "label": "Metadata", "status": "running"}
+    # Step 8 — Metadata
+    yield {"step": 8, "label": "Metadata", "status": "running"}
     metadata: dict | None = None
     metadata_path: Path | None = None
     try:
@@ -310,7 +354,7 @@ def run_pipeline(
         pass
     results["metadata"] = metadata
     results["metadata_path"] = metadata_path
-    yield {"step": 7, "label": "Metadata", "status": "done"}
+    yield {"step": 8, "label": "Metadata", "status": "done"}
 
     # Save to shared history
     article_title = (
@@ -544,6 +588,7 @@ else:
             "Company Insight",
             "SEO Structure",
             "Writer",
+            "Readability Checker",
             "QA Review",
             "Metadata",
         ]
