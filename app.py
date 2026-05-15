@@ -444,6 +444,7 @@ def run_update_pipeline(
     scope: str,
     original_article: str,
     previous_brief: dict | None = None,
+    secondary_keywords: list[str] | None = None,
 ):
     """Run the 7-step Article Update pipeline."""
     root = OUTPUT_ROOT
@@ -508,6 +509,7 @@ def run_update_pipeline(
             serp_data=serp_data,
             insight_data=insight_data,
             previous_brief=previous_brief,
+            secondary_keywords=secondary_keywords,
         )
         _save_json(diag_plan, update_dir / "diagnostic.json")
     except Exception as exc:
@@ -519,7 +521,9 @@ def run_update_pipeline(
     # Step 4 — Writer (update mode)
     yield {"step": 4, "label": "Writer (update mode)", "status": "running"}
     insight_context = _build_insight_context(insight_data) if insight_data else ""
-    revision_feedback = ArticleDiagnosticAgent.format_for_writer(diag_plan, scope)
+    revision_feedback = ArticleDiagnosticAgent.format_for_writer(
+        diag_plan, scope, secondary_keywords=secondary_keywords
+    )
     writer_agent = WriterAgent()
     draft_result = writer_agent.run(
         topic=topic,
@@ -1027,10 +1031,32 @@ else:
             key="update_keyword",
         )
 
+        update_secondary_raw = st.text_area(
+            "Secondary keywords (optional)",
+            placeholder="arcade machine for living room\nbest home arcade games\nretro arcade cabinet for home",
+            help="One keyword per line, up to 10. Lower priority than the primary keyword. The Diagnostic will flag missing coverage and the Writer will weave them naturally.",
+            height=110,
+            key="update_secondary",
+        )
+
         original_markdown = st.text_area(
             "Existing article markdown",
             value=preloaded_md,
-            placeholder="Paste the full markdown of the article you want to update…",
+            placeholder=(
+                "# Article H1\n\n"
+                "Intro paragraph in plain prose.\n\n"
+                "## Section heading\n\n"
+                "Paragraph text. Internal links like [Echo Home](/en/echo) work.\n\n"
+                "### Subsection\n\n"
+                "More paragraph text…"
+            ),
+            help=(
+                "Markdown format: `#` for H1, `##` for H2, `###` for H3, blank "
+                "lines between paragraphs. If your article is HTML on the site, "
+                "paste it through html-to-markdown.com first — or just paste "
+                "the visible text and prefix headings with `#`/`##` manually; "
+                "the Diagnostic will work with messy markdown too."
+            ),
             height=320,
             key="update_markdown",
         )
@@ -1049,6 +1075,11 @@ else:
         )
 
         effective_topic = update_topic.strip() or _extract_topic_from_markdown(original_markdown)
+        update_secondary_keywords = [
+            kw.strip()
+            for kw in update_secondary_raw.splitlines()
+            if kw.strip()
+        ][:10]
         update_disabled = not (effective_topic and update_keyword.strip() and original_markdown.strip())
 
         if st.button("Update article", type="primary", disabled=update_disabled, key="update_btn"):
@@ -1089,6 +1120,7 @@ else:
                     scope=scope,
                     original_article=original_markdown,
                     previous_brief=preloaded_brief,
+                    secondary_keywords=update_secondary_keywords,
                 ):
                     step_idx = event["step"] - 1
                     if event["step"] == 0:
