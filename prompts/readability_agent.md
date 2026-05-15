@@ -48,6 +48,10 @@ The Writer must keep:
   must be preserved verbatim (paraphrase only to split a long sentence).
   `TODO: experience anchor needed` markers must also stay — they signal
   to the editorial team that a real anchor is missing.
+- **Structural elements** — bulleted lists, numbered lists, markdown tables,
+  and `> **[VISUAL]** *type — description*` placeholders. These are 2026 GEO
+  signals (AI search engines cite structured content) and must be preserved
+  verbatim. Do not flatten a list into a paragraph for the sake of "flow".
 
 Flag any tension between "simpler" and "on-brand" in `tradeoff_notes`.
 

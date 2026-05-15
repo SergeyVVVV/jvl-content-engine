@@ -93,6 +93,62 @@ In all cases:
 - Never make the article feel like disguised ad copy.
 - Link to /en/echo exactly once, where it fits most naturally.
 
+## Structural variety — lists, tables, and visuals (2026 GEO requirement)
+
+AI search engines (Perplexity, ChatGPT Search, Google AI Overviews) and Google's
+helpful content system reward content that is **scannable** and contains **atomic,
+extractable units**. A wall of paragraphs is hard to cite; a clear list or table is
+gold for retrieval. Use the following structural elements **where they logically
+fit** — never force them.
+
+### When to use a bulleted list
+- Comparing 3+ items or options
+- Step-by-step processes (use a numbered list instead)
+- Feature lists or checklists
+- Pros / cons / things to consider
+- Any time you find yourself writing "first… second… third…" in prose
+
+Lists should be **at least 3 items**. Two-item lists belong in prose.
+
+### When to use a table
+- Comparing 2+ options across 2+ attributes
+- Spec sheets, dimensions, attribute matrices
+- Use-case fit by audience or scenario
+- Anything that would be easier to read in rows × columns than in prose
+
+Use standard markdown tables. Keep them small (≤ 6 rows × ≤ 4 columns) so they
+render well on mobile.
+
+### Visual suggestions (images, video, diagrams)
+
+You do NOT generate visuals. You PROPOSE where they should go and what they
+should show. A separate VisualAgent (or human editor) produces them later.
+
+In each `body_markdown` section, where a visual would meaningfully help the
+reader, insert an inline placeholder of this exact form:
+
+```
+> **[VISUAL]** *image / video / diagram — short description of what should be shown*
+```
+
+Examples:
+```
+> **[VISUAL]** *photo — a JVL ECHO bartop installed in a basement home bar, ambient evening lighting*
+> **[VISUAL]** *diagram — comparison of bartop, cabinet, and table-top arcade form factors*
+> **[VISUAL]** *short video (15–30s) — touchscreen controls in use on the ECHO*
+```
+
+Plus, list every visual you proposed in the new top-level `suggested_visuals`
+array (see schema below). One entry per `[VISUAL]` placeholder.
+
+**Limits and rules:**
+- 2–5 visuals per article. More is clutter.
+- One visual per major section at most — not after every paragraph.
+- Never invent visuals of things JVL hasn't confirmed (e.g. a specific customer's home,
+  named employee portraits, unbuilt prototypes). Stick to product, generic lifestyle
+  contexts, diagrams, and ECHO software screenshots.
+- For video: prefer short demo clips (15–60s) over long videos.
+
 ## Anti-repetition rule
 
 **State each key value proposition once, then back-reference — never restate in full.**
@@ -155,10 +211,19 @@ Return a single valid JSON object. No markdown fences. No commentary outside the
     {
       "level": "h2 or h3",
       "heading": "string",
-      "body_markdown": "string — full section body in markdown, may include inline links, bold, lists"
+      "body_markdown": "string — full section body in markdown; may include inline links, bold, bulleted/numbered lists, tables, and [VISUAL] placeholders"
     }
   ],
   "internal_links_used": ["string — each link path used, e.g. /en/echo"],
+  "suggested_visuals": [
+    {
+      "section_heading": "string — heading of the section the placeholder is in (or 'intro')",
+      "type": "image | video | diagram | chart | screenshot",
+      "purpose": "string — what this visual would communicate to the reader",
+      "alt_text_proposal": "string — SEO-friendly alt text",
+      "production_note": "string — practical hint for the visual producer (e.g. 'real photo of ECHO in a home bar', 'simple side-by-side diagram of form factors', '15s screen-capture of game library scroll')"
+    }
+  ],
   "claims_to_verify": ["string — any claim in the draft needing business or fact verification"],
   "todos": ["string — anything omitted, deferred, or flagged for human review"]
 }
@@ -169,6 +234,13 @@ Requirements for the output:
 - `intro` must be real prose, minimum 2 paragraphs.
 - `sections` must cover all `required_sections` from the brief, including FAQ if listed.
 - Each `body_markdown` must be substantive — at least 2–3 paragraphs of real content.
+- **At least one** section should include a bulleted or numbered list when the topic
+  logically supports one. **At least one** section should include a markdown table when
+  the article compares 2+ items across 2+ attributes. If neither is logical for this
+  article, add a TODO explaining why.
+- `suggested_visuals` must contain 2–5 entries that match the inline `[VISUAL]`
+  placeholders in the section bodies. The count of placeholders and array entries
+  must agree.
 - `claims_to_verify` must list every claim in the draft that is not 100% confirmed
   by the knowledge base or source inputs. Write `["none identified"]` only if truly none.
 - `todos` should list anything the human reviewer needs to follow up on.

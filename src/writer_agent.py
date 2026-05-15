@@ -107,10 +107,19 @@ Your response must be a single valid JSON object with these fields:
     {{
       "level": "h2 or h3",
       "heading": "string",
-      "body_markdown": "string (markdown prose, at least 2–3 paragraphs)"
+      "body_markdown": "string (markdown prose with lists/tables/visual placeholders where they fit)"
     }}
   ],
   "internal_links_used": ["string"],
+  "suggested_visuals": [
+    {{
+      "section_heading": "string",
+      "type": "image | video | diagram | chart | screenshot",
+      "purpose": "string",
+      "alt_text_proposal": "string",
+      "production_note": "string"
+    }}
+  ],
   "claims_to_verify": ["string"],
   "todos": ["string"]
 }}
@@ -125,6 +134,22 @@ CRITICAL OUTPUT RULES:
 - claims_to_verify must list every claim not 100% confirmed by source inputs.
   Write ["none identified"] only if truly none require verification.
 - Never invent product specs, dimensions, game counts, warranty, pricing.
+
+STRUCTURAL ENRICHMENT RULES (2026 GEO requirement):
+- Use a **bulleted or numbered list** in at least one section when the topic
+  logically supports one (comparisons of 3+ items, steps, checklists, pros/cons).
+  Lists must have ≥ 3 items.
+- Use a **markdown table** in at least one section when the article compares
+  2+ items across 2+ attributes (specs, use-cases, form factors). Max 6 rows × 4 cols.
+- Insert inline visual placeholders of the EXACT form
+  `> **[VISUAL]** *type — short description*` where a visual would help.
+  Examples of type: image / video / diagram / chart / screenshot.
+- Propose 2–5 visuals per article (not after every paragraph; one per major section max).
+- The `suggested_visuals` array must contain ONE ENTRY PER `[VISUAL]` placeholder
+  in section bodies — counts must match.
+- Never propose visuals that would require inventing JVL content (specific named
+  customers, employee portraits, unbuilt prototypes). Stick to product, generic
+  lifestyle contexts, diagrams, and ECHO software screenshots.
 
 EXPERIENCE-ANCHOR RULES (E-E-A-T):
 - Include AT LEAST ONE anchor from FIRSTHAND EXPERIENCE in every article.

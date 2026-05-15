@@ -187,6 +187,10 @@ class ArticleDiagnosticAgent:
         _bullet_block("Brand alignment issues", diag.get("brand_alignment_issues"))
         _bullet_block("Experience anchor gaps", diag.get("experience_anchor_gaps"))
         _bullet_block("Structural issues", diag.get("structural_issues"))
+        _bullet_block(
+            "Structural enrichment gaps (lists, tables, visuals)",
+            diag.get("structural_enrichment_gaps"),
+        )
 
         preserve = plan.get("sections_to_preserve") or []
         if preserve:

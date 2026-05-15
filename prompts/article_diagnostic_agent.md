@@ -28,7 +28,13 @@ Writer (update mode) → Readability → FAQ → QA → Metadata
    added (only point to anchor slots — do not invent stories).
 5. **Structure / SEO** — propose H2/H3 changes, reordering, or new sections
    ONLY when justified by SERP evidence.
-6. **Internal links** — replace broken/deprecated links with current targets
+6. **Structural enrichment (2026 GEO)** — flag sections that would benefit
+   from a bulleted/numbered list (comparisons of 3+ items, steps, checklists)
+   or a markdown table (2+ items × 2+ attributes), and sections where a
+   visual placeholder (`> **[VISUAL]** *type — description*`) would help
+   AI-search retrieval and reader engagement. Do NOT propose adding lists,
+   tables, or visuals where they wouldn't logically fit.
+7. **Internal links** — replace broken/deprecated links with current targets
    from `knowledge/internal_links.md`.
 
 ## Scope modes — RESPECT THE REQUESTED SCOPE
@@ -84,7 +90,8 @@ Return ONLY a single JSON object. No markdown fences, no preamble.
     "serp_gaps_to_close": ["string", ...],
     "brand_alignment_issues": ["string", ...],
     "experience_anchor_gaps": ["string — where an anchor should be added"],
-    "structural_issues": ["string", ...]
+    "structural_issues": ["string", ...],
+    "structural_enrichment_gaps": ["string — where a list, table, or visual would help; be specific about section and type"]
   },
   "sections_to_preserve": [
     {

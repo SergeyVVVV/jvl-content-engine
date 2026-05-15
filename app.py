@@ -287,6 +287,7 @@ def run_pipeline(
         },
         "risks_to_review": _build_risks(brief, insight_data),
         "internal_links_used": draft_result.get("internal_links_used", []),
+        "suggested_visuals": draft_result.get("suggested_visuals", []),
         "todos": draft_result.get("todos", []),
         "readability": {
             "final_score": readability_report["final_score"],
@@ -347,6 +348,12 @@ def run_pipeline(
     results["draft_markdown"] = draft_markdown
     results["draft_md_path"] = draft_md_path
     results["companion"] = companion
+    results["suggested_visuals"] = draft_result.get("suggested_visuals", []) or []
+    if results["suggested_visuals"]:
+        _save_json(
+            {"suggested_visuals": results["suggested_visuals"]},
+            root / "visuals" / f"{topic_slug}.json",
+        )
     results["draft_json_path"] = draft_json_path
     yield {"step": 7, "label": "FAQ Agent", "status": "done"}
 
@@ -597,9 +604,16 @@ def run_update_pipeline(
     # Save the updated article markdown now that all content edits are in
     updated_md_path = update_dir / "updated.md"
     updated_md_path.write_text(draft_markdown, encoding="utf-8")
+    suggested_visuals = draft_result.get("suggested_visuals", []) or []
+    if suggested_visuals:
+        _save_json(
+            {"suggested_visuals": suggested_visuals},
+            update_dir / "suggested_visuals.json",
+        )
     results["draft_markdown"] = draft_markdown
     results["updated_md_path"] = updated_md_path
     results["update_dir"] = update_dir
+    results["suggested_visuals"] = suggested_visuals
 
     # Step 7 — QA Review (on full updated text including FAQ)
     yield {"step": 7, "label": "QA Review", "status": "running"}
@@ -612,6 +626,7 @@ def run_update_pipeline(
             draft_wrapper={
                 "claims_to_verify": draft_result.get("claims_to_verify", []),
                 "internal_links_used": draft_result.get("internal_links_used", []),
+                "suggested_visuals": draft_result.get("suggested_visuals", []),
                 "primary_keyword": primary_keyword,
                 "todos": draft_result.get("todos", []),
             },
@@ -675,8 +690,9 @@ def _render_article(
     qa_report: dict | None,
     filename: str = "article.md",
     faq_json_ld: str = "",
+    suggested_visuals: list | None = None,
 ) -> None:
-    """Show metadata, QA badge, then content + FAQ JSON-LD tabs."""
+    """Show metadata, QA badge, then content + FAQ JSON-LD + visuals tabs."""
     if metadata:
         with st.expander("SEO metadata", expanded=False):
             st.markdown(f"**Slug:** `{metadata.get('slug', '')}`")
@@ -697,6 +713,9 @@ def _render_article(
     tab_labels = ["Rendered", "Markdown source", "Download .md"]
     if faq_json_ld:
         tab_labels.append("FAQ JSON-LD")
+    visuals = suggested_visuals or []
+    if visuals:
+        tab_labels.append(f"Suggested visuals ({len(visuals)})")
     tabs = st.tabs(tab_labels)
 
     with tabs[0]:
@@ -714,8 +733,9 @@ def _render_article(
         )
         st.caption(f"File: `{filename}`")
 
+    next_idx = 3
     if faq_json_ld:
-        with tabs[3]:
+        with tabs[next_idx]:
             st.caption(
                 "Paste this block into the article page `<head>`. Used by AI "
                 "search engines (Perplexity, ChatGPT Search, AI Overviews) "
@@ -729,6 +749,27 @@ def _render_article(
                 file_name=jsonld_filename,
                 mime="application/ld+json",
             )
+        next_idx += 1
+
+    if visuals:
+        with tabs[next_idx]:
+            st.caption(
+                "The Writer flagged these spots where a visual would help "
+                "the reader and AI-search retrieval. Each entry corresponds "
+                "to a `> **[VISUAL]**` placeholder in the markdown."
+            )
+            for i, v in enumerate(visuals, 1):
+                with st.container(border=True):
+                    st.markdown(
+                        f"**{i}. {v.get('type', 'image').upper()}** — "
+                        f"section: *{v.get('section_heading', '?')}*"
+                    )
+                    if v.get("purpose"):
+                        st.markdown(f"**Purpose:** {v['purpose']}")
+                    if v.get("production_note"):
+                        st.markdown(f"**Production note:** {v['production_note']}")
+                    if v.get("alt_text_proposal"):
+                        st.markdown(f"**Alt text:** `{v['alt_text_proposal']}`")
 
 
 # ─── Streamlit UI ─────────────────────────────────────────────────────────────
@@ -840,9 +881,22 @@ if st.session_state.view_article:
         except Exception:
             pass
 
+    sidebar_visuals: list = []
+    companion_path_str = entry.get("companion_path")
+    if companion_path_str and Path(companion_path_str).exists():
+        try:
+            with open(companion_path_str, encoding="utf-8") as fh:
+                comp = json.load(fh)
+            sidebar_visuals = comp.get("suggested_visuals", []) or []
+        except Exception:
+            pass
+
     if draft_markdown:
         filename = Path(md_path_str).name if md_path_str else f"{entry.get('id', 'article')}.md"
-        _render_article(draft_markdown, metadata, qa_report, filename, faq_json_ld)
+        _render_article(
+            draft_markdown, metadata, qa_report, filename, faq_json_ld,
+            suggested_visuals=sidebar_visuals,
+        )
 
 # ─── Main area: generator ─────────────────────────────────────────────────────
 
@@ -965,10 +1019,14 @@ else:
             qa_report: dict | None = res.get("qa_report")
             draft_md_path: Path | None = res.get("draft_md_path")
             faq_json_ld: str = res.get("faq_json_ld", "")
+            suggested_visuals: list = res.get("suggested_visuals", []) or []
             filename = draft_md_path.name if draft_md_path else "article.md"
 
             st.success("Article ready!")
-            _render_article(draft_markdown, metadata, qa_report, filename, faq_json_ld)
+            _render_article(
+                draft_markdown, metadata, qa_report, filename, faq_json_ld,
+                suggested_visuals=suggested_visuals,
+            )
 
     with tab_update:
         st.caption(
@@ -1176,9 +1234,12 @@ else:
                         for x in diag.get("experience_anchor_gaps") or ["(none)"]:
                             st.markdown(f"- {x}")
 
+            update_visuals: list = res.get("suggested_visuals", []) or []
             tab_labels = ["Updated", "Original", "Diff", "Diagnostic JSON"]
             if faq_json_ld:
                 tab_labels.append("FAQ JSON-LD")
+            if update_visuals:
+                tab_labels.append(f"Suggested visuals ({len(update_visuals)})")
             update_tabs = st.tabs(tab_labels)
 
             with update_tabs[0]:
@@ -1200,13 +1261,34 @@ else:
                     st.info("No textual differences detected.")
             with update_tabs[3]:
                 st.code(json.dumps(diagnostic, indent=2, ensure_ascii=False), language="json")
+            update_next_idx = 4
             if faq_json_ld:
-                with update_tabs[4]:
+                with update_tabs[update_next_idx]:
                     st.caption(
                         "Paste into the article page `<head>`. Helps AI search "
                         "engines extract atomic Q/A pairs for citation."
                     )
                     st.code(faq_json_ld, language="html")
+                update_next_idx += 1
+
+            if update_visuals:
+                with update_tabs[update_next_idx]:
+                    st.caption(
+                        "Spots flagged in the updated draft where a visual would "
+                        "help. Each entry matches a `> **[VISUAL]**` placeholder."
+                    )
+                    for i, v in enumerate(update_visuals, 1):
+                        with st.container(border=True):
+                            st.markdown(
+                                f"**{i}. {v.get('type', 'image').upper()}** — "
+                                f"section: *{v.get('section_heading', '?')}*"
+                            )
+                            if v.get("purpose"):
+                                st.markdown(f"**Purpose:** {v['purpose']}")
+                            if v.get("production_note"):
+                                st.markdown(f"**Production note:** {v['production_note']}")
+                            if v.get("alt_text_proposal"):
+                                st.markdown(f"**Alt text:** `{v['alt_text_proposal']}`")
 
             if update_dir:
                 st.caption(f"Run artifacts saved to: `{update_dir}`")

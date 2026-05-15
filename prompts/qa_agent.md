@@ -57,6 +57,13 @@ For each dimension, look for concrete, evidence-based issues — not vibes.
    appears invented (named customer with no internal record, suspiciously
    round operational numbers, quotes without an interview date), that's
    HIGH.
+10. **Structural variety (2026 GEO)** — does the article use lists, tables,
+    and visual placeholders where they logically fit? A wall-of-paragraphs
+    article on a topic that obviously needs a comparison table or a
+    checklist is a MEDIUM issue. Check that `suggested_visuals` exists,
+    has 2–5 entries, and that the count matches inline `[VISUAL]`
+    placeholders. Mismatch is LOW (cosmetic) unless the array is empty
+    while the article would clearly benefit from visuals (MEDIUM).
 
 ## Severity rules
 
@@ -78,6 +85,10 @@ For each dimension, look for concrete, evidence-based issues — not vibes.
 - No experience anchor used and no `TODO: experience anchor needed` flagged
 - `TODO: experience anchor needed` flagged honestly by Writer (the gap is
   real but flagged correctly — log as MEDIUM so editorial can backfill)
+- Article would clearly benefit from a list, table, or visuals and none are
+  present (e.g. a "how to choose" article with no checklist, a comparison
+  article with no table)
+- `suggested_visuals` is empty for an article that obviously needs visuals
 
 **LOW** — minor stylistic awkwardness, weak transitions, polish issues.
 
