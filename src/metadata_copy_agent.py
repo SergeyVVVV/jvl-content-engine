@@ -65,11 +65,26 @@ class MetadataCopyAgent:
         brief: dict | None,
         qa_report: dict | None,
         source_inputs_used: dict,
+        secondary_keywords: list[str] | None = None,
     ) -> str:
         parts: list[str] = [
             f"Generate publish-support copy for topic: {topic}\n",
             "# DRAFT MARKDOWN\n\n" + draft_markdown.strip() + "\n",
         ]
+
+        merged_secondary = list(secondary_keywords or [])
+        if brief:
+            for kw in brief.get("secondary_keywords", []) or []:
+                if kw and kw not in merged_secondary:
+                    merged_secondary.append(kw)
+
+        if merged_secondary:
+            parts.append(
+                "# SECONDARY KEYWORDS (weave 1–2 naturally into meta_description "
+                "where they fit — do not stuff)\n\n"
+                + "\n".join(f"- {kw}" for kw in merged_secondary)
+                + "\n"
+            )
 
         if brief:
             parts.append(
@@ -123,25 +138,35 @@ class MetadataCopyAgent:
         return json.loads(raw)
 
     @staticmethod
-    def _trim_to_limit(text: str, limit: int, min_length: int = 120) -> str:
-        """Trim text to at most `limit` chars at a clean word boundary.
+    def _trim_to_limit(text: str, limit: int, min_length: int = 100) -> str:
+        """Trim text to at most `limit` chars at a clean sentence or word boundary.
 
-        Tries to end on a sentence boundary ('. ') first, only if the result
-        would still be >= min_length. Falls back to the last space within the
-        limit. Appends '…' only if text was actually cut.
+        Never appends an ellipsis or any other truncation marker — the result
+        must look like a deliberate, complete fragment. Prefers ending at a
+        sentence boundary; falls back to the last word boundary; ensures the
+        result does not end on a dangling preposition or punctuation.
         """
         if len(text) <= limit:
             return text
-        candidate = text[:limit]
-        # prefer ending at a sentence boundary, but only if long enough
-        dot_pos = candidate.rfind(". ")
+        candidate = text[:limit].rstrip()
+        # Prefer sentence boundary if it leaves enough content.
+        dot_pos = max(candidate.rfind(". "), candidate.rfind("? "), candidate.rfind("! "))
         if dot_pos >= min_length:
-            return candidate[: dot_pos + 1]
-        # fall back to word boundary
+            return candidate[: dot_pos + 1].rstrip()
+        # Otherwise cut at the last whole word and remove trailing punctuation.
         space_pos = candidate.rfind(" ")
         if space_pos > 0:
-            return candidate[:space_pos].rstrip(".,;:") + "…"
-        return candidate[:limit]
+            trimmed = candidate[:space_pos].rstrip(" .,;:—-")
+            # Ensure we don't end on a stop word that leaves the line dangling.
+            dangling = {"a", "an", "the", "and", "or", "but", "to", "of", "for", "with", "in", "on", "at"}
+            words = trimmed.split()
+            while words and words[-1].lower() in dangling:
+                words.pop()
+            trimmed = " ".join(words).rstrip(" .,;:—-")
+            if trimmed and not trimmed.endswith((".", "!", "?")):
+                trimmed += "."
+            return trimmed
+        return candidate
 
     @classmethod
     def _enforce_limits(cls, out: dict) -> dict:
@@ -149,11 +174,12 @@ class MetadataCopyAgent:
 
         The model reliably overshoots meta_description and occasionally h1.
         This mirrors the QA agent's _normalize() pattern: make the final value
-        a pure function of content, not a guess.
+        a pure function of content, not a guess. No ellipsis is ever appended —
+        meta_description must read as a complete, polished fragment.
         """
         md = out.get("meta_description", "")
-        if len(md) > 155:
-            trimmed = cls._trim_to_limit(md, 152)
+        if len(md) > 150:
+            trimmed = cls._trim_to_limit(md, 150)
             print(
                 f"Metadata Copy Agent enforcing meta_description limit: "
                 f"{len(md)} → {len(trimmed)} chars",
@@ -273,6 +299,7 @@ class MetadataCopyAgent:
         brief: dict | None = None,
         qa_report: dict | None = None,
         source_inputs_used: dict | None = None,
+        secondary_keywords: list[str] | None = None,
     ) -> dict:
         if not draft_markdown or not draft_markdown.strip():
             raise ValueError("draft_markdown is required and cannot be empty.")
@@ -290,6 +317,7 @@ class MetadataCopyAgent:
             brief=brief,
             qa_report=qa_report,
             source_inputs_used=source_inputs_used,
+            secondary_keywords=secondary_keywords,
         )
 
         if self.api_key:

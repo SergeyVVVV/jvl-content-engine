@@ -18,8 +18,20 @@ Return ONE good version for each of these fields — no variants, no alternative
 - `meta_title` — ≤ 60 chars, natural, reflects the article, not clickbait
 - `h1` — the on-page H1 title; should differ from meta_title (longer or slightly
   reframed); target ≤ 65 chars (hard ceiling 70)
-- `meta_description` — target 120–150 chars (hard ceiling 155), useful and honest,
-  no keyword stuffing
+- `meta_description` — target 120–150 chars (HARD CEILING 150 — never exceed).
+  Must:
+    • COMPLEMENT the meta_title, do not just rephrase or duplicate it
+    • SAY what the article covers and INVITE the reader to read (soft CTA verb
+      like "Learn how…", "See why…", "Discover…", "Compare…" — pick one,
+      not all)
+    • Weave in 1–2 SECONDARY KEYWORDS naturally where they fit; never stuff
+    • Be a SUMMARY, not a copy-paste of the article intro. Reading the meta_title
+      and meta_description together should feel additive, not redundant.
+  Must NOT:
+    • End with an ellipsis ("…") or any other truncation marker
+    • Be longer than 150 chars
+    • Duplicate the meta_title verbatim or near-verbatim
+    • Open with the same sentence as the article intro
 - `slug` — 3–6 words, lowercase, hyphenated, ASCII only
 - `og_title` — ≤ 60 chars, can equal meta_title or a slightly warmer variant
 - `og_description` — 100–150 chars, social-friendly, still understated

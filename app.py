@@ -393,6 +393,7 @@ def run_pipeline(
                 "brief": str(brief_path),
                 "qa_report": str(qa_path) if qa_path else None,
             },
+            secondary_keywords=secondary_keywords,
         )
         metadata_path = root / "metadata" / f"{topic_slug}.json"
         _save_json(metadata, metadata_path)
@@ -643,6 +644,7 @@ def run_update_pipeline(
                 "updated": str(updated_md_path),
                 "qa_report": str(update_dir / "qa.json"),
             },
+            secondary_keywords=secondary_keywords,
         )
         _save_json(metadata, update_dir / "metadata.json")
     except Exception:
