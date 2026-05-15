@@ -81,6 +81,7 @@ class ArticleDiagnosticAgent:
         serp_data: dict | None,
         insight_data: dict | None,
         previous_brief: dict | None,
+        secondary_keywords: list[str] | None = None,
     ) -> str:
         parts: list[str] = [
             f"Audit the following existing article for topic: {topic}\n",
@@ -89,6 +90,17 @@ class ArticleDiagnosticAgent:
             + original_article.strip()
             + "\n",
         ]
+
+        if secondary_keywords:
+            parts.append(
+                "# SECONDARY KEYWORDS TO COVER\n\n"
+                "These lower-priority keywords should be woven naturally into "
+                "the updated article. If the original article does not cover "
+                "any of them, flag the gap in `serp_gaps_to_close` and propose "
+                "where to add coverage.\n\n"
+                + "\n".join(f"- {kw}" for kw in secondary_keywords)
+                + "\n"
+            )
 
         if previous_brief:
             parts.append(
@@ -143,7 +155,11 @@ class ArticleDiagnosticAgent:
     # ------------------------------------------------------------------
 
     @staticmethod
-    def format_for_writer(plan: dict, scope: str) -> str:
+    def format_for_writer(
+        plan: dict,
+        scope: str,
+        secondary_keywords: list[str] | None = None,
+    ) -> str:
         """Render the update plan as a structured instruction block that
         WriterAgent.run() consumes via the `revision_feedback` parameter."""
         lines: list[str] = [
@@ -205,6 +221,17 @@ class ArticleDiagnosticAgent:
         if new_links:
             lines += ["## New internal links to weave in", ""]
             lines.extend(f"- {l}" for l in new_links)
+            lines.append("")
+
+        if secondary_keywords:
+            lines += [
+                "## Secondary keywords to weave naturally",
+                "",
+                "Use these lower-priority keywords in body prose where they fit "
+                "the topic. Do not stuff them — natural mentions only.",
+                "",
+            ]
+            lines.extend(f"- {kw}" for kw in secondary_keywords)
             lines.append("")
 
         lines += [
@@ -301,6 +328,7 @@ class ArticleDiagnosticAgent:
         serp_data: dict | None = None,
         insight_data: dict | None = None,
         previous_brief: dict | None = None,
+        secondary_keywords: list[str] | None = None,
     ) -> dict:
         """Audit an existing article and return a scoped update plan.
 
@@ -334,6 +362,7 @@ class ArticleDiagnosticAgent:
             serp_data=serp_data,
             insight_data=insight_data,
             previous_brief=previous_brief,
+            secondary_keywords=secondary_keywords,
         )
 
         if self.api_key:
