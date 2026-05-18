@@ -260,7 +260,12 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
 
     @staticmethod
     def _extract_json(raw: str) -> dict:
-        """Strip markdown artifacts and parse the first JSON object found."""
+        """Strip markdown artifacts and parse the first JSON object found.
+
+        Falls back to json-repair when strict parsing fails — long article
+        drafts often contain an unescaped quote or trailing comma inside a
+        body_markdown string, which would otherwise blow up the whole step.
+        """
         raw = raw.strip()
         raw = re.sub(r"^```(?:json)?\s*\n?", "", raw, flags=re.MULTILINE)
         raw = re.sub(r"\n?```\s*$", "", raw, flags=re.MULTILINE)
@@ -268,7 +273,21 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         match = re.search(r"\{.*\}", raw, re.DOTALL)
         if match:
             raw = match.group(0)
-        return json.loads(raw)
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError as exc:
+            try:
+                from json_repair import repair_json
+            except ImportError:
+                raise exc
+            repaired = repair_json(raw, return_objects=True)
+            if not isinstance(repaired, dict):
+                raise exc
+            print(
+                f"Writer Agent: recovered malformed JSON via json-repair ({exc}).",
+                file=sys.stderr,
+            )
+            return repaired
 
     def _validate(self, result: dict) -> None:
         """Validate the LLM output has the expected shape."""
@@ -347,18 +366,35 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         import anthropic
 
         client = anthropic.Anthropic(api_key=self.api_key)
-        response = client.messages.create(
-            model=self.model,
-            max_tokens=8192,
-            system=system_prompt,
-            messages=[{"role": "user", "content": user_message}],
-        )
-        raw = next(
-            (block.text for block in response.content if block.type == "text"), ""
-        )
-        if not raw:
-            raise ValueError("Model returned no text content.")
-        return self._extract_json(raw)
+
+        max_attempts = 2
+        last_exc: Exception | None = None
+        for attempt in range(max_attempts):
+            response = client.messages.create(
+                model=self.model,
+                max_tokens=8192,
+                system=system_prompt,
+                messages=[{"role": "user", "content": user_message}],
+            )
+            raw = next(
+                (block.text for block in response.content if block.type == "text"), ""
+            )
+            if not raw:
+                raise ValueError("Model returned no text content.")
+            try:
+                return self._extract_json(raw)
+            except (json.JSONDecodeError, ValueError) as exc:
+                last_exc = exc
+                if attempt < max_attempts - 1:
+                    print(
+                        f"  Writer JSON parse failed (attempt {attempt + 1}/"
+                        f"{max_attempts}): {exc} — retrying…",
+                        file=sys.stderr,
+                    )
+                    continue
+                raise
+        assert last_exc is not None
+        raise last_exc
 
     # ------------------------------------------------------------------
     # Auth mode 2: Claude Agent SDK (Claude Code environment)
