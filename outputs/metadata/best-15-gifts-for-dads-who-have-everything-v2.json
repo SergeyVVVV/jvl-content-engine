@@ -1,0 +1,32 @@
+{
+  "topic": "Best 15 Gifts for Dads Who Have Everything",
+  "meta_title": "Best 15 Gifts for Dads Who Have Everything",
+  "h1": "15 Thoughtful Gifts for the Dad Who Has Everything",
+  "meta_description": "From home bar upgrades to backyard essentials and one-of-a-kind experiences, discover unique gifts for dad that fit his routine and actually get used.",
+  "slug": "gifts-for-dads-who-have-everything",
+  "og_title": "Best 15 Gifts for the Dad Who Has Everything",
+  "og_description": "A curated guide to home bar, den, backyard, and experience gifts that fit the routine of a dad who already owns the obvious picks.",
+  "image_alt_texts": [
+    "Home bar counter with warm lighting, glassware, and a bartop arcade in the background",
+    "Cozy den or basement lounge with a leather chair, bookshelf speakers, and warm lighting",
+    "Backyard fire pit scene at dusk with an outdoor blanket draped over a chair",
+    "Small aircraft in flight over scenic landscape at golden hour, viewed from the passenger seat",
+    "Espresso maker on a kitchen counter beside a freshly pulled shot"
+  ],
+  "excerpt": "A gift guide for the dad who already owns the obvious. Fifteen picks organised by the rooms and routines he loves — home bar, den, backyard, and beyond — each chosen for real, lasting use.",
+  "notes": [
+    "meta_title uses '15' to match the topic, not the draft's expanded 20-item count",
+    "'unique gifts for dad' woven into meta_description as a secondary keyword",
+    "No year included per style rules — the topic string does not require it",
+    "h1 reframed with 'Thoughtful' and singular 'the Dad' to differentiate from meta_title",
+    "og_title uses 'the Dad' for a slightly warmer, social-friendly feel while staying close to meta_title"
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/drafts/best-15-gifts-for-dads-who-have-everything-v2.json"
+  },
+  "todos": [
+    "Draft contains 20 numbered items plus a bonus flowers note but the topic specifies 15 — confirm final item count with editor before publishing",
+    "All non-JVL product picks (#1-2, #4-15) lack specific brand and model names — meta copy avoids referencing specifics until sourced",
+    "Price ranges in the draft spending table need verification against live retail data before any are surfaced in meta or excerpts"
+  ]
+}
