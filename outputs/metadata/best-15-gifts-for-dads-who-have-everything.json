@@ -1,0 +1,26 @@
+{
+  "topic": "Best 15 Gifts for Dads Who Have Everything",
+  "meta_title": "Best 15 Gifts for Dads Who Have Everything",
+  "h1": "15 Gifts for the Dad Who Already Has Everything",
+  "meta_description": "Curated by room and routine — from the home bar to the backyard. Discover unique gifts for dad that earn daily use, not drawer space.",
+  "slug": "gifts-for-dads-who-have-everything",
+  "og_title": "Best 15 Gifts for Dads Who Have Everything",
+  "og_description": "15 gifts picked by room and routine — for the dad who doesn't need more stuff, just better moments in the spaces he loves.",
+  "image_alt_texts": [
+    "Warm home bar counter with glassware, a decanter, and soft lighting",
+    "Cozy den with a leather recliner, bookshelf speakers, and warm ambient lighting",
+    "Backyard fire pit glowing at dusk with an outdoor blanket draped over a chair",
+    "Close-up of a cocktail smoking kit with smoke curling over an old fashioned glass",
+    "Espresso maker on a kitchen counter beside a leather journal and quality pen"
+  ],
+  "excerpt": "Fifteen gifts for the dad who already owns the good grill and the nice watch. Each pick is matched to the rooms and routines he cares about most — from the home bar to the backyard — so it gets used on a Tuesday night, not just the day he opens it.",
+  "notes": [
+    "Omitted year from meta_title to create natural differentiation from h1; the draft warrants the year in the H1 but the title tag reads cleaner without it",
+    "Used 'unique gifts for dad' as the secondary keyword in meta_description for natural fit with the article's angle of non-obvious picks",
+    "Slug is 6 words to capture the full long-tail phrase; dropping 'best' keeps it concise while preserving search intent"
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/drafts/best-15-gifts-for-dads-who-have-everything.json"
+  },
+  "todos": []
+}

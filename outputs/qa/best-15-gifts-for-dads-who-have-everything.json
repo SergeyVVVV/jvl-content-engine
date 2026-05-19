@@ -1,0 +1,106 @@
+{
+  "topic": "Best 15 Gifts for Dads Who Have Everything",
+  "status": "revise",
+  "summary": "The draft is editorially strong: warm tone, room-by-room organisation, genuine depth per gift entry, and careful avoidance of forbidden claims. JVL Echo Home facts are accurate and the heritage claim is correctly attributed. The writer honestly flagged every gap (unsourced products, missing experience anchor, unverified prices). Three MEDIUM issues need attention before the article can pass: (1) the honestly flagged missing experience anchor, (2) two separate FAQ sections that should be consolidated, and (3) the JVL Echo Home / bartop arcade appearing in roughly half of all FAQ answers — too heavy for a medium product-fit article. Five LOW issues relate to formatting inconsistencies in the Echo Home entry and minor structural polish.",
+  "severity_counts": {
+    "high": 0,
+    "medium": 3,
+    "low": 5
+  },
+  "issues": [
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "TODO: experience anchor needed (after 'Why the Best Gifts' section)",
+      "problem": "No firsthand experience anchor (customer story, founder quote, craftsmanship detail, review aggregate) is present anywhere in the article. The writer honestly flagged this gap with a TODO, which is the correct behaviour, but the article cannot pass without at least one verified anchor.",
+      "recommended_fix": "When a verified entry becomes available in firsthand_experience.md (e.g. a confirmed customer quote, a team manufacturing detail with consent, or an Amazon review aggregate snapshot), insert it into the Echo Home entry or the 'Why the best gifts focus on experience' section. Do not fabricate one."
+    },
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "Two H2-level FAQ sections: '## FAQ - Gifting for Dads Who Have Everything' and '## FAQ'",
+      "problem": "The article contains two separate FAQ sections with different heading levels and formatting conventions (bold Q&A pairs vs. ### subheadings). This is structurally confusing for readers and for search engines parsing FAQ schema. The split appears to separate brief-required questions from additional long-tail keyword FAQs, but there is no editorial reason to keep them apart.",
+      "recommended_fix": "Merge both FAQ sections into a single '## FAQ' section. Use a consistent formatting convention (### headings for questions recommended for FAQ schema eligibility). Order questions from highest search volume to most niche."
+    },
+    {
+      "severity": "medium",
+      "category": "product_fit",
+      "location": "FAQ sections (combined)",
+      "problem": "Across the two FAQ sections (~15 total Q&A pairs), approximately 7-9 answers reference 'bartop arcade,' 'JVL Echo Home,' or 'home arcade.' For an article with product_fit: medium, this concentration turns the FAQ into a product mention vehicle. Questions like 'Are bartop arcade machines difficult to set up as a gift?' and 'Do intergenerational gifts actually get used more?' read as pretexts to re-promote the product rather than genuine reader concerns.",
+      "recommended_fix": "Reduce Echo Home / bartop arcade mentions in FAQs to 3-4 answers maximum: the 'Is a home arcade machine a good gift for dad?' entry (its natural home), one 'what premium gifts last past week one' mention, and at most one other. Remove or rewrite the 'Are bartop arcade machines difficult to set up' question entirely — it is a product FAQ, not a gift-guide FAQ. For the remaining answers, substitute other list picks (poker set, fire pit, turntable) as examples."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Echo Home entry heading: '### A Bartop Arcade That Earns Its Spot in the Room'",
+      "problem": "Every other gift entry uses a **bold numbered** format (e.g. '**1. A Glass Decanter Set**'). The Echo Home entry breaks this pattern with a ### subheading and no item number. This structural inconsistency gives the Echo Home different visual prominence, which could read as preferential editorial treatment.",
+      "recommended_fix": "Reformat the Echo Home entry to match the other 14: use '**3. A Bartop Arcade That Earns Its Spot**' (or similar) with the same bold-number convention. Move the current ### heading text into the first sentence or a brief sub-label if needed."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Home bar section structure: items 1-2, then ###, then '### The Finishing Touches' for items 4-5",
+      "problem": "The home bar section uses three different formatting levels: bold-numbered items (1-2), a ### subheading for Echo Home, and another ### subheading ('The Finishing Touches') wrapping items 4-5. No other gift section uses subheadings this way. The structure is inconsistent with the den, backyard, and personal routine sections.",
+      "recommended_fix": "Flatten the home bar section to use the same bold-numbered format for all five items. Remove the '### The Finishing Touches' subheading — items 4 and 5 can stand on their own like items in other sections."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Gift entry descriptions across all sections",
+      "problem": "Several entries use a recognisable pattern: 'A [noun] is the kind of [thing] that...' or 'This is the kind of gift that...' (decanter, poker set, chess set, recliner, turntable). The repetition is noticeable when reading the article end to end and slightly undercuts the editorial voice.",
+      "recommended_fix": "Vary sentence openers for 3-4 of the most similar entries. For example, the chess set entry could open with the tactile detail ('Carved wood, weighted pieces, a board that feels solid') rather than the evaluative frame. Small variation in lead-in structure will break the pattern."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Writer wrapper metadata — suggested_visuals field",
+      "problem": "The draft contains 3 inline [VISUAL] placeholders (home bar, den, backyard) but the writer metadata does not include a suggested_visuals array. The GEO review dimension expects 2-5 entries in suggested_visuals matching inline placeholders. The mismatch is cosmetic since the inline markers exist, but the metadata gap means downstream tooling cannot auto-generate image briefs.",
+      "recommended_fix": "Add a suggested_visuals array to the writer metadata with 3-5 entries matching the inline [VISUAL] placeholders, e.g.: home bar counter scene, den/lounge scene, backyard fire pit at dusk, and optionally a gift-wrapping or unboxing moment and a close-up of the price comparison table."
+    },
+    {
+      "severity": "low",
+      "category": "brief",
+      "location": "Article angle — missing 'workshop' space",
+      "problem": "The brief's article_angle mentions five spaces: 'the home bar, the den, the backyard, the workshop, and the personal routine.' The draft covers four but drops 'workshop' entirely. While workshop is not listed in required_sections, its absence from the angle is a minor gap — a dad with a workshop is a strong fit for the persona.",
+      "recommended_fix": "No section change needed since workshop is not in required_sections. Optionally, a single FAQ entry or a brief mention in the 'how to choose' section could acknowledge workshop/garage dads to close the gap with the stated angle."
+    }
+  ],
+  "strengths": [
+    "Room-by-room organisation is a genuine structural differentiator from SERP competitors and matches the brief's core angle precisely.",
+    "Tone is consistently warm, understated, and premium throughout — no gamer jargon, no affiliate hype, no AI filler. Reads like a thoughtful editorial piece.",
+    "JVL Echo Home entry opens with an ownership scene (Saturday night at the home bar) before any product specs, correctly following the messaging hierarchy from the company insight.",
+    "All forbidden claims are cleanly avoided: no trademarked game titles, heritage claim correctly attributed to JVL bartops (not Echo specifically), no pricing or ranking claims.",
+    "Every unsourced product, unverified price range, and missing experience anchor is honestly flagged with a TODO — the writer did not fabricate anything to fill gaps.",
+    "The 'How to Choose' section with its three-question test and the price comparison table provide genuine decision-support value matching the search intent.",
+    "FAQ coverage is comprehensive — all 8 brief-required questions are answered, plus additional long-tail queries covering missed PAA opportunities from the SERP research.",
+    "Each gift entry has a specific reason it suits a dad who 'has everything' — no entry reads as a generic product blurb.",
+    "Claims_to_verify list is thorough and covers all material factual gaps, including business-confirmation items for JVL availability and pricing."
+  ],
+  "recommended_fixes": [
+    "Merge the two FAQ sections into one consolidated section with consistent ### formatting for all questions. Reorder by relevance and search volume.",
+    "Reduce bartop arcade / JVL Echo Home mentions in FAQ answers from ~7-9 to 3-4 maximum. Remove the 'Are bartop arcade machines difficult to set up as a gift?' question entirely — it belongs on a product page, not a gift guide.",
+    "Reformat the Echo Home entry to use the same **bold numbered** convention as items 1-2 and 4-15. Remove the '### The Finishing Touches' subheading to flatten the home bar section structure.",
+    "Add a suggested_visuals array to the writer metadata with 3-5 entries matching the inline [VISUAL] placeholders.",
+    "Vary sentence openers for 3-4 gift entries to reduce the 'This is the kind of [thing] that...' pattern.",
+    "When a verified firsthand experience entry becomes available, insert it into the Echo Home entry or the 'experience over stuff' section — do not fabricate one in the interim."
+  ],
+  "claims_to_verify_ok": true,
+  "source_inputs_used": {
+    "draft": "outputs/drafts/best-15-gifts-for-dads-who-have-everything.json",
+    "brief": "provided inline",
+    "serp_research": "provided inline",
+    "company_insight": "provided inline"
+  },
+  "todos": [
+    "All 14 non-JVL product picks require specific brand, model, and retail link sourcing before publication — each marked with inline TODO.",
+    "Price ranges in the spending guide table must be verified against live retail data before publication.",
+    "Experience anchor must be added when a verified firsthand_experience.md entry becomes available (customer story, team quote, or review aggregate with consent).",
+    "Confirm JVL Echo Home Amazon availability and shipping timeline relative to Father's Day 2026.",
+    "Confirm whether any Father's Day 2026 promotions, bundles, or delivery guarantees apply.",
+    "Heritage claim wording ('more than once' vs. 'multiple times') should be confirmed with editor as acceptable readability revision.",
+    "Secondary keywords 'best gifts for new dads' target a younger persona than 55-72 — editor should confirm FAQ-only treatment is sufficient.",
+    "All external product links should use nofollow attributes per editor guidance.",
+    "Flesch Reading Ease ceiling of ~86-87 FRE (vs. 90+ target) is noted by the writer as irreducible given product vocabulary — editor should confirm acceptable.",
+    "SERP research is mock data — when live SERP data is available, re-evaluate coverage and differentiation claims."
+  ]
+}
