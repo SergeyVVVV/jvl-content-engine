@@ -20,8 +20,8 @@ Working list of content angles aligned to the Mark & Linda Reynolds persona and 
 
 ## Product integration rules
 - product fit is **high** only when the topic naturally connects to home arcade ownership
-- never force /en/echo into unrelated topics
-- 1 mandatory natural link to /en/echo plus 1-2 relevant internal links (see internal_links.md)
+- never force https://jvl.ca/en/echo into unrelated topics
+- 1 mandatory natural link to https://jvl.ca/en/echo plus 1-2 relevant internal links (see internal_links.md)
 
 ## Out of scope for current MVP
 - B2B / commercial venue content

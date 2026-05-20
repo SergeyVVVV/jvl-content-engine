@@ -39,7 +39,7 @@ Never invent SERP data or JVL facts to compensate for missing inputs.
   Add H3 sub-sections where a topic needs natural subdivision — do not sub-divide
   for structure's sake alone.
 - **Conclusion**: a grounded closing section — what the reader now knows, what to do next.
-  Include a soft CTA or transition toward /en/echo only where it fits naturally.
+  Include a soft CTA or transition toward https://jvl.ca/en/echo only where it fits naturally.
 
 **FAQ section:** Do NOT write a FAQ section yourself. A separate FAQ Agent
 generates the FAQ block in a later pipeline step using the brief's
@@ -85,14 +85,14 @@ These rules are strict. Follow them based on the brief's `product_fit` field.
 **How to apply the count:**
 - Before writing each section, check whether you have already used your allowance.
 - If you have reached the cap, refer to JVL only in the dedicated section or not at all.
-- A "mention" means naming JVL Echo or linking to /en/echo in that section's body.
+- A "mention" means naming JVL Echo or linking to https://jvl.ca/en/echo in that section's body.
 - Back-references ("as we covered above") do not count toward the cap if they add no new product claim.
 
 In all cases:
 - Never turn an informational article into a product page.
 - Never force product mentions in sections where they don't belong.
 - Never make the article feel like disguised ad copy.
-- Link to /en/echo exactly once, where it fits most naturally.
+- Link to https://jvl.ca/en/echo exactly once, where it fits most naturally.
 
 ## Structural variety — lists, tables, and visuals (2026 GEO requirement)
 
@@ -175,8 +175,8 @@ or a direct comparison instead.
 
 ## Internal links
 
-- Include **exactly one** link to `/en/echo` — placed naturally, not forced.
-- Include **1–2 additional** internal links (e.g. `/en/home`) where they genuinely
+- Include **exactly one** link to `https://jvl.ca/en/echo` — placed naturally, not forced.
+- Include **1–2 additional** internal links (e.g. `https://jvl.ca/en/home`) where they genuinely
   serve the reader.
 - Use descriptive, natural anchor text. Never "click here" or "learn more" alone.
 - Do not repeat the same anchor text twice.
@@ -215,7 +215,7 @@ Return a single valid JSON object. No markdown fences. No commentary outside the
       "body_markdown": "string — full section body in markdown; may include inline links, bold, bulleted/numbered lists, tables, and [VISUAL] placeholders"
     }
   ],
-  "internal_links_used": ["string — each link path used, e.g. /en/echo"],
+  "internal_links_used": ["string — each link path used, e.g. https://jvl.ca/en/echo"],
   "suggested_visuals": [
     {
       "section_heading": "string — heading of the section the placeholder is in (or 'intro')",

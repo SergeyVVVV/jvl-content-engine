@@ -5,8 +5,8 @@ Create a strong article brief for an SEO-driven blog article that supports JVL E
 
 Business context:
 - Primary business goal: increase sales of JVL Echo Home
-- Main priority page: /en/echo
-- Secondary support page: /en/home
+- Main priority page: https://jvl.ca/en/echo
+- Secondary support page: https://jvl.ca/en/home
 - The article must support revenue relevance, not just traffic
 
 Audience:
@@ -48,7 +48,7 @@ Rules:
 - Do not produce generic SEO fluff
 - Keep the article genuinely helpful first
 - Use the product only where it naturally strengthens the article
-- Assume the content is for the JVL blog and should support /en/echo
+- Assume the content is for the JVL blog and should support https://jvl.ca/en/echo
 - Tone must be warm, mature, grounded, quietly premium — no gamer jargon, no esports language, no novelty-gadget framing
 - Category clarity matters: say "home arcade" or "bartop arcade", not "gaming device" or "retro gadget"
 

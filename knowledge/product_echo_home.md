@@ -95,6 +95,6 @@ ECHO is a premium bartop arcade machine â€” once the king of bars and arcades â€
 ## Commercial context
 
 - Primary B2C product for this content engine
-- Product page: /en/echo
-- Home overview page: /en/home
+- Product page: https://jvl.ca/en/echo
+- Home overview page: https://jvl.ca/en/home
 - Amazon is the primary B2C sales channel

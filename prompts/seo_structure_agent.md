@@ -14,7 +14,7 @@ Produce an outline (H1, H2s, optional H3s) that:
 - uses secondary keywords naturally across H2/H3
 - matches the search intent declared in the brief
 - includes a logical reader path from problem to next step
-- reserves space for an FAQ section and a natural /en/echo internal link
+- reserves space for an FAQ section and a natural https://jvl.ca/en/echo internal link
 - avoids keyword stuffing and generic SEO filler
 
 Rules:

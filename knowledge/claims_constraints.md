@@ -39,8 +39,8 @@
 - Each unit individually tested before shipping
 
 ### Links and pages
-- Product page: /en/echo
-- Home overview page: /en/home
+- Product page: https://jvl.ca/en/echo
+- Home overview page: https://jvl.ca/en/home
 
 ## Heritage claim rules
 
@@ -76,7 +76,7 @@ Use this exact framing:
 
 - Content targeting home buyers must NOT surface B2B value propositions (revenue potential, investment framing, coin-operation features)
 - Content targeting business buyers / operators must NOT appear on the Echo for Home B2C page
-- Echo for Home page (/en/home) and Amazon listing = B2C only
+- Echo for Home page (https://jvl.ca/en/home) and Amazon listing = B2C only
 - Echo for Business page = B2B only (operators, distributors, resellers)
 
 ## Editorial guardrails
