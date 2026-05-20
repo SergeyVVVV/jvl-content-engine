@@ -97,7 +97,8 @@ CRITICAL OUTPUT RULES:
 - All required fields must be present.
 - One H1 only — must contain the primary keyword.
 - outline must contain at least 3 h2 sections.
-- Reserve one h2 section as a placeholder for the FAQ block.
+- Reserve one h2 section as a placeholder for the FAQ block. The Writer
+  Agent skips this placeholder; the FAQ Agent fills it in a later step.
 - internal_link_targets must contain at least https://jvl.ca/en/echo.
 - Never invent product specs, dimensions, pricing, game titles, or warranty details.
 - Mark anything unsupported as TODO: source not confirmed."""

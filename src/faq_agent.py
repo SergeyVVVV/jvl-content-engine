@@ -201,20 +201,35 @@ class FAQAgent:
 
     @staticmethod
     def append_to_article(draft_markdown: str, faq_markdown: str) -> str:
-        """Insert FAQ block before any trailing review block (Claims/TODOs)."""
+        """Insert the FAQ block, replacing any existing `## FAQ*` sections.
+
+        The Writer Agent is instructed to skip FAQ, but defensively we strip
+        any FAQ-like H2 sections it (or a previous update-mode revision) may
+        have emitted, then insert this FAQ block before any trailing
+        Claims/TODOs review block.
+        """
         if not faq_markdown:
             return draft_markdown
 
+        # Strip every existing `## FAQ*` or `## Frequently Asked Questions*`
+        # section, from its H2 up to (but not including) the next H2 of the
+        # same level, the trailing review block, or end-of-document.
+        faq_section_re = re.compile(
+            r"(?ms)^##\s+(?:FAQ|Frequently\s+Asked\s+Questions)\b.*?"
+            r"(?=^##\s|\n---\s*\n+##\s+(?:Claims to Verify|Open TODOs)|\Z)"
+        )
+        stripped = faq_section_re.sub("", draft_markdown).rstrip() + "\n"
+
         marker = re.search(
             r"\n---\s*\n+##\s+(?:Claims to Verify|Open TODOs)",
-            draft_markdown,
+            stripped,
         )
         if marker:
-            head = draft_markdown[: marker.start()].rstrip()
-            tail = draft_markdown[marker.start():]
+            head = stripped[: marker.start()].rstrip()
+            tail = stripped[marker.start():]
             return f"{head}\n\n{faq_markdown}\n{tail}"
 
-        return f"{draft_markdown.rstrip()}\n\n{faq_markdown}\n"
+        return f"{stripped.rstrip()}\n\n{faq_markdown}\n"
 
     # ------------------------------------------------------------------
     # JSON-LD (schema.org FAQPage) — for AI search engines / GEO

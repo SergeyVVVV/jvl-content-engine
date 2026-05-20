@@ -41,12 +41,13 @@ Never invent SERP data or JVL facts to compensate for missing inputs.
 - **Conclusion**: a grounded closing section — what the reader now knows, what to do next.
   Include a soft CTA or transition toward https://jvl.ca/en/echo only where it fits naturally.
 
-**FAQ section:** If the brief's `required_sections` list includes a section named
-"Frequently Asked Questions" or similar (e.g. "Frequently asked questions about…"),
-**write it** using the brief's `questions_to_answer` list as the questions. Keep each
-answer concise — 2–5 sentences. Do not invent answers to questions not in the brief.
-No external FAQ agent is available; the Writer is responsible for this section when the
-brief requires it.
+**FAQ section:** Do NOT write a FAQ section yourself. A separate FAQ Agent
+generates the FAQ block in a later pipeline step using the brief's
+`questions_to_answer` list and SERP signals. If the brief's `required_sections`
+or the SEO outline lists an FAQ section (e.g. "Frequently Asked Questions",
+"FAQ"), simply omit it from your `sections` array — the FAQ Agent will insert
+its block where appropriate. Writing an inline FAQ here causes duplicate
+sections in the final article.
 
 Do NOT write metadata (title tag, meta description) — handled by metadata_agent.
 
@@ -232,7 +233,8 @@ Return a single valid JSON object. No markdown fences. No commentary outside the
 Requirements for the output:
 - `h1` must be specific and publication-ready — not a placeholder.
 - `intro` must be real prose, minimum 2 paragraphs.
-- `sections` must cover all `required_sections` from the brief, including FAQ if listed.
+- `sections` must cover all `required_sections` from the brief **except FAQ**
+  (the FAQ Agent generates that section in a later step — see "FAQ section" above).
 - Each `body_markdown` must be substantive — at least 2–3 paragraphs of real content.
 - **At least one** section should include a bulleted or numbered list when the topic
   logically supports one. **At least one** section should include a markdown table when
