@@ -196,7 +196,8 @@ class FAQAgent:
             lines.append("")
             lines.append(a)
             lines.append("")
-        return "\n".join(lines).strip()
+        from src.writer_agent import WriterAgent
+        return WriterAgent._absolutize_jvl_links("\n".join(lines).strip())
 
     @staticmethod
     def append_to_article(draft_markdown: str, faq_markdown: str) -> str:

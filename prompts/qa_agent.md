@@ -22,7 +22,7 @@ context in `todos`. Do not fabricate issues from missing upstream data.
 
 ## What JVL Echo Home is
 
-- B2C premium home leisure arcade product (`/en/echo`)
+- B2C premium home leisure arcade product (`https://jvl.ca/en/echo`)
 - Affluent homeowner persona (Mark & Linda Reynolds archetype)
 - Nostalgia + craftsmanship + social / home-bar framing
 - Understated premium tone — NOT flashy luxury, NOT gamer-affiliate

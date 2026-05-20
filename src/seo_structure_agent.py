@@ -29,7 +29,7 @@ _KNOWLEDGE_FILES: list[tuple[str, str]] = [
     ("seo_rules.md",      "SEO RULES — follow these rules for every outline decision"),
     ("metadata_rules.md", "METADATA RULES — slug, H1, and heading hierarchy rules"),
     ("keyword_intent.md", "KEYWORD INTENT — primary and secondary keyword guidance"),
-    ("internal_links.md", "INTERNAL LINK TARGETS — include at least /en/echo"),
+    ("internal_links.md", "INTERNAL LINK TARGETS — include at least https://jvl.ca/en/echo"),
 ]
 
 
@@ -98,7 +98,7 @@ CRITICAL OUTPUT RULES:
 - One H1 only — must contain the primary keyword.
 - outline must contain at least 3 h2 sections.
 - Reserve one h2 section as a placeholder for the FAQ block.
-- internal_link_targets must contain at least /en/echo.
+- internal_link_targets must contain at least https://jvl.ca/en/echo.
 - Never invent product specs, dimensions, pricing, game titles, or warranty details.
 - Mark anything unsupported as TODO: source not confirmed."""
 

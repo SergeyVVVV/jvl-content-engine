@@ -306,6 +306,24 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
     # Markdown assembly
     # ------------------------------------------------------------------
 
+    # Canonical host for JVL pages. Articles must link to jvl.ca, not to
+    # relative paths — those break when the article is previewed anywhere
+    # outside the production site (e.g. on the Streamlit app host).
+    _JVL_BASE_URL = "https://jvl.ca"
+    _JVL_RELATIVE_LINK_RE = re.compile(r"(?<!\w)(/(?:en|fr)/[A-Za-z0-9/_\-]+)")
+
+    @classmethod
+    def _absolutize_jvl_links(cls, text: str) -> str:
+        """Rewrite any relative JVL paths (`/en/echo`, `/fr/echo`, …) to absolute URLs.
+
+        Belt-and-braces: prompts already instruct the model to emit absolute
+        URLs, but this defensive pass catches any straggling relative paths
+        from older drafts, knowledge-base examples, or model lapses.
+        """
+        if not text:
+            return text
+        return cls._JVL_RELATIVE_LINK_RE.sub(lambda m: f"{cls._JVL_BASE_URL}{m.group(1)}", text)
+
     @staticmethod
     def assemble_markdown(result: dict) -> str:
         """Assemble h1 + intro + sections into a single markdown string."""
@@ -356,7 +374,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
                 lines.append(f"- {todo}")
             lines.append("")
 
-        return "\n".join(lines).strip()
+        return WriterAgent._absolutize_jvl_links("\n".join(lines).strip())
 
     # ------------------------------------------------------------------
     # Auth mode 1: direct Anthropic SDK
