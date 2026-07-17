@@ -23,9 +23,9 @@ from src.faq_agent import FAQAgent
 from src.qa_agent import QAAgent
 from src.metadata_copy_agent import MetadataCopyAgent
 from src.article_diagnostic_agent import ArticleDiagnosticAgent
+from src.history_store import load_history, save_to_history, delete_from_history
 
 OUTPUT_ROOT = Path("outputs")
-HISTORY_PATH = OUTPUT_ROOT / "history.json"
 
 
 def slugify(text: str) -> str:
@@ -39,35 +39,6 @@ def _save_json(data: dict, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(data, fh, indent=2, ensure_ascii=False)
-
-
-# ─── History helpers ──────────────────────────────────────────────────────────
-
-def load_history() -> list[dict]:
-    if not HISTORY_PATH.exists():
-        return []
-    try:
-        with open(HISTORY_PATH, encoding="utf-8") as fh:
-            return json.load(fh)
-    except Exception:
-        return []
-
-
-def save_to_history(entry: dict) -> None:
-    history = load_history()
-    history = [h for h in history if h.get("id") != entry["id"]]
-    history.insert(0, entry)
-    OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
-    with open(HISTORY_PATH, "w", encoding="utf-8") as fh:
-        json.dump(history, fh, indent=2, ensure_ascii=False)
-
-
-def delete_from_history(article_id: str) -> None:
-    history = load_history()
-    history = [h for h in history if h.get("id") != article_id]
-    OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
-    with open(HISTORY_PATH, "w", encoding="utf-8") as fh:
-        json.dump(history, fh, indent=2, ensure_ascii=False)
 
 
 # ─── Pipeline helpers ─────────────────────────────────────────────────────────
@@ -421,10 +392,17 @@ def run_pipeline(
         "primary_keyword": primary_keyword,
         "created_at": datetime.utcnow().isoformat(),
         "qa_status": qa_report.get("status", "unknown") if qa_report else "unknown",
-        "md_path": str(draft_md_path),
-        "companion_path": str(draft_json_path),
-        "metadata_path": str(metadata_path) if metadata_path else None,
-        "faq_jsonld_path": str(faq_jsonld_path) if faq_jsonld_path else None,
+        # Full content lives in the entry so viewing/updating never depends on
+        # the ephemeral filesystem (Streamlit Cloud wipes local files on restart).
+        "markdown": draft_markdown,
+        "metadata": metadata,
+        "qa_report": qa_report,
+        "faq_json_ld": (
+            faq_jsonld_path.read_text(encoding="utf-8")
+            if faq_jsonld_path and faq_jsonld_path.exists()
+            else None
+        ),
+        "suggested_visuals": draft_result.get("suggested_visuals", []) or [],
     }
     save_to_history(history_entry)
     results["history_entry"] = history_entry
@@ -667,6 +645,28 @@ def run_update_pipeline(
     results["metadata"] = metadata
     yield {"step": 8, "label": "Metadata (refresh)", "status": "done"}
 
+    # Save the refreshed article to shared history (upserts the existing entry
+    # for this topic, so the history card reflects the latest version).
+    article_title = (
+        (metadata.get("h1") or metadata.get("title")) if metadata else None
+    ) or (previous_brief or {}).get("working_title") or topic
+    history_entry = {
+        "id": topic_slug,
+        "topic": topic,
+        "title": article_title,
+        "primary_keyword": primary_keyword,
+        "created_at": datetime.utcnow().isoformat(),
+        "updated_at": datetime.utcnow().isoformat(),
+        "qa_status": qa_report.get("status", "unknown") if qa_report else "unknown",
+        "markdown": draft_markdown,
+        "metadata": metadata,
+        "qa_report": qa_report,
+        "faq_json_ld": faq_json_ld or None,
+        "suggested_visuals": suggested_visuals,
+    }
+    save_to_history(history_entry)
+    results["history_entry"] = history_entry
+
     yield {"step": 0, "label": "done", "status": "done", "results": results}
 
 
@@ -847,56 +847,27 @@ if st.session_state.view_article:
     )
     st.divider()
 
-    md_path_str = entry.get("md_path")
-    draft_markdown = ""
-    if md_path_str and Path(md_path_str).exists():
-        draft_markdown = Path(md_path_str).read_text(encoding="utf-8")
-    else:
-        st.error("Article file not found on disk.")
+    # Content is stored in the entry itself. Fall back to disk only for legacy
+    # entries created before persistent storage was added.
+    draft_markdown = entry.get("markdown") or ""
+    metadata = entry.get("metadata")
+    qa_report = entry.get("qa_report")
+    faq_json_ld = entry.get("faq_json_ld") or ""
+    sidebar_visuals = entry.get("suggested_visuals") or []
 
-    metadata = None
-    meta_path_str = entry.get("metadata_path")
-    if meta_path_str and Path(meta_path_str).exists():
-        try:
-            with open(meta_path_str, encoding="utf-8") as fh:
-                metadata = json.load(fh)
-        except Exception:
-            pass
-
-    qa_report = None
-    if md_path_str:
-        qa_path = OUTPUT_ROOT / "qa" / f"{Path(md_path_str).stem}.json"
-        if qa_path.exists():
-            try:
-                with open(qa_path, encoding="utf-8") as fh:
-                    qa_report = json.load(fh)
-            except Exception:
-                pass
-
-    faq_json_ld = ""
-    jsonld_path_str = entry.get("faq_jsonld_path")
-    if jsonld_path_str and Path(jsonld_path_str).exists():
-        try:
-            faq_json_ld = Path(jsonld_path_str).read_text(encoding="utf-8")
-        except Exception:
-            pass
-
-    sidebar_visuals: list = []
-    companion_path_str = entry.get("companion_path")
-    if companion_path_str and Path(companion_path_str).exists():
-        try:
-            with open(companion_path_str, encoding="utf-8") as fh:
-                comp = json.load(fh)
-            sidebar_visuals = comp.get("suggested_visuals", []) or []
-        except Exception:
-            pass
+    if not draft_markdown:
+        md_path_str = entry.get("md_path")
+        if md_path_str and Path(md_path_str).exists():
+            draft_markdown = Path(md_path_str).read_text(encoding="utf-8")
 
     if draft_markdown:
-        filename = Path(md_path_str).name if md_path_str else f"{entry.get('id', 'article')}.md"
+        filename = f"{entry.get('id', 'article')}.md"
         _render_article(
             draft_markdown, metadata, qa_report, filename, faq_json_ld,
             suggested_visuals=sidebar_visuals,
         )
+    else:
+        st.error("Article content is unavailable for this entry.")
 
 # ─── Main area: generator ─────────────────────────────────────────────────────
 
@@ -1011,6 +982,8 @@ else:
                 st.error(f"Error: {error}")
             elif pipeline_results:
                 st.session_state.pipeline_results = pipeline_results
+                # Refresh so the just-saved article appears in the sidebar history.
+                st.rerun()
 
         if st.session_state.pipeline_results:
             res = st.session_state.pipeline_results
@@ -1055,28 +1028,17 @@ else:
         if source_choice != "(paste manually)":
             picked_index = history_options.index(source_choice) - 1
             picked = history_for_update[picked_index]
-            md_path_str = picked.get("md_path")
-            if md_path_str and Path(md_path_str).exists():
-                try:
-                    preloaded_md = Path(md_path_str).read_text(encoding="utf-8")
-                except Exception:
-                    pass
-            companion_path_str = picked.get("companion_path")
-            if companion_path_str and Path(companion_path_str).exists():
-                try:
-                    with open(companion_path_str, encoding="utf-8") as fh:
-                        comp = json.load(fh)
-                    preloaded_topic = picked.get("topic", "") or comp.get("topic", "")
-                    preloaded_keyword = (
-                        picked.get("primary_keyword")
-                        or comp.get("primary_keyword", "")
-                    )
-                    brief_path_str = (comp.get("source_inputs_used") or {}).get("brief")
-                    if brief_path_str and Path(brief_path_str).exists():
-                        with open(brief_path_str, encoding="utf-8") as bfh:
-                            preloaded_brief = json.load(bfh)
-                except Exception:
-                    pass
+            # Prefer content stored in the entry; fall back to disk for legacy entries.
+            preloaded_md = picked.get("markdown") or ""
+            preloaded_topic = picked.get("topic", "") or ""
+            preloaded_keyword = picked.get("primary_keyword") or ""
+            if not preloaded_md:
+                md_path_str = picked.get("md_path")
+                if md_path_str and Path(md_path_str).exists():
+                    try:
+                        preloaded_md = Path(md_path_str).read_text(encoding="utf-8")
+                    except Exception:
+                        pass
 
         update_topic = st.text_input(
             "Article topic",
@@ -1199,6 +1161,8 @@ else:
                 st.error(f"Error: {update_error}")
             elif update_results:
                 st.session_state.update_results = update_results
+                # Refresh so the refreshed article appears in the sidebar history.
+                st.rerun()
 
         if st.session_state.get("update_results"):
             res = st.session_state.update_results
