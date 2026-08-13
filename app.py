@@ -24,6 +24,8 @@ from src.qa_agent import QAAgent
 from src.metadata_copy_agent import MetadataCopyAgent
 from src.article_diagnostic_agent import ArticleDiagnosticAgent
 from src.history_store import load_history, save_to_history, delete_from_history
+from src.studio_export import to_studio_payload, validate_payload
+from src.studio_client import PublishConfigError, publish_draft
 
 OUTPUT_ROOT = Path("outputs")
 
@@ -684,6 +686,69 @@ def _build_unified_diff(original: str, updated: str) -> str:
 
 # ─── Shared article renderer ──────────────────────────────────────────────────
 
+# Bylines the site accepts (jvl `News::BYLINES`). None = "JVL Editorial Team".
+JVL_BYLINES = {
+    "JVL Editorial Team (default)": None,
+    "Sergey Vysotsky": "sergey-vysotsky",
+    "Andrei Klimovich": "andrei-klimovich",
+}
+
+
+def _render_publish_panel(draft_markdown: str, metadata: dict | None, key: str) -> None:
+    """Send the finished article to jvl.ca as a draft (news.active = 0)."""
+    with st.expander("Publish draft to JVL", expanded=False):
+        if not metadata:
+            st.info("Run the Metadata Copy Agent first — the site needs slug, title "
+                    "and meta description.")
+            return
+
+        st.caption(
+            "Creates an **unpublished** draft on jvl.ca. It is invisible to visitors "
+            "until an editor reviews it in AdminLTE and switches it live."
+        )
+
+        col_slug, col_author = st.columns(2)
+        slug = col_slug.text_input(
+            "Slug", value=metadata.get("slug", ""), key=f"pub_slug_{key}"
+        )
+        byline = col_author.selectbox(
+            "Author", list(JVL_BYLINES), key=f"pub_author_{key}"
+        )
+
+        result = to_studio_payload(
+            metadata, draft_markdown, slug=slug, author_key=JVL_BYLINES[byline]
+        )
+        blocking = validate_payload(result.payload)
+
+        st.markdown(
+            f"**{len(result.sections)} sections** · intro: "
+            f"{'yes' if result.payload['article'].get('intro_markdown') else 'no'} · "
+            f"H1: {result.payload['article']['h1']}"
+        )
+        for warning in result.warnings:
+            st.warning(warning, icon="⚠️")
+        if blocking:
+            st.error(f"The site would reject this payload: {blocking}")
+
+        if st.button(
+            "Publish draft to JVL",
+            type="primary",
+            disabled=bool(blocking),
+            key=f"pub_go_{key}",
+        ):
+            with st.spinner("Sending to jvl.ca…"):
+                try:
+                    outcome = publish_draft(result.payload)
+                except PublishConfigError as exc:
+                    st.error(str(exc))
+                    return
+            if outcome.ok:
+                st.success(outcome.admin_hint)
+                st.caption(f"page id {outcome.page_id} · news id {outcome.news_id}")
+            else:
+                st.error(outcome.error)
+
+
 def _render_article(
     draft_markdown: str,
     metadata: dict | None,
@@ -709,6 +774,8 @@ def _render_article(
             f"medium: {counts.get('medium', 0)}, "
             f"low: {counts.get('low', 0)}"
         )
+
+    _render_publish_panel(draft_markdown, metadata, key=filename)
 
     tab_labels = ["Rendered", "Markdown source", "Download .md"]
     if faq_json_ld:
