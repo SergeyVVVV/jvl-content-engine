@@ -25,7 +25,7 @@ from src.metadata_copy_agent import MetadataCopyAgent
 from src.article_diagnostic_agent import ArticleDiagnosticAgent
 from src.history_store import load_history, save_to_history, delete_from_history
 from src.studio_export import to_studio_payload, validate_payload
-from src.studio_client import PublishConfigError, publish_draft
+from src.studio_client import PublishConfigError, list_tags, publish_draft
 
 OUTPUT_ROOT = Path("outputs")
 
@@ -694,6 +694,17 @@ JVL_BYLINES = {
 }
 
 
+@st.cache_data(ttl=300, show_spinner=False)
+def _available_tags() -> tuple[list[str], str]:
+    """Tag vocabulary from the site. Cached — it changes rarely and every
+    widget interaction reruns this script."""
+    try:
+        ok, payload = list_tags()
+    except PublishConfigError as exc:
+        return [], str(exc)
+    return (payload, "") if ok else ([], str(payload))
+
+
 def _render_publish_panel(draft_markdown: str, metadata: dict | None, key: str) -> None:
     """Send the finished article to jvl.ca as a draft (news.active = 0)."""
     with st.expander("Publish draft to JVL", expanded=False):
@@ -715,8 +726,37 @@ def _render_publish_panel(draft_markdown: str, metadata: dict | None, key: str) 
             "Author", list(JVL_BYLINES), key=f"pub_author_{key}"
         )
 
+        col_type, col_tags = st.columns(2)
+        article_type = col_type.selectbox(
+            "Listing", ["blog", "news"], key=f"pub_type_{key}",
+            help="Which listing the article belongs to (news.type on the site).",
+        )
+
+        available_tags, tags_error = _available_tags()
+        if available_tags:
+            tags = col_tags.multiselect(
+                "Tags", available_tags, key=f"pub_tags_{key}",
+                help="Drives the listing filter and related articles.",
+            )
+        else:
+            # The site attaches existing tags only, so free text is a fallback,
+            # not a feature — say why the list is missing.
+            tags = [
+                t.strip()
+                for t in col_tags.text_input(
+                    "Tags (comma-separated)", key=f"pub_tags_raw_{key}"
+                ).split(",")
+                if t.strip()
+            ]
+            col_tags.caption(f"Tag list unavailable: {tags_error}")
+
         result = to_studio_payload(
-            metadata, draft_markdown, slug=slug, author_key=JVL_BYLINES[byline]
+            metadata,
+            draft_markdown,
+            slug=slug,
+            author_key=JVL_BYLINES[byline],
+            tags=tags,
+            article_type=article_type,
         )
         blocking = validate_payload(result.payload)
 
@@ -745,6 +785,15 @@ def _render_publish_panel(draft_markdown: str, metadata: dict | None, key: str) 
             if outcome.ok:
                 st.success(outcome.admin_hint)
                 st.caption(f"page id {outcome.page_id} · news id {outcome.news_id}")
+                if outcome.tags_attached:
+                    st.caption(f"Tags attached: {', '.join(outcome.tags_attached)}")
+                if outcome.tags_unknown:
+                    st.warning(
+                        "No such tag on the site, so nothing was attached: "
+                        f"{', '.join(outcome.tags_unknown)}. Add it in AdminLTE if it "
+                        "should exist.",
+                        icon="⚠️",
+                    )
             else:
                 st.error(outcome.error)
 

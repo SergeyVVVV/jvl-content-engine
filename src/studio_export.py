@@ -35,6 +35,12 @@ _FENCE_RE = re.compile(r"^\s*(?:```|~~~)")
 _LOCAL_IMAGE_RE = re.compile(r"!\[[^\]]*\]\((?!https?://|//|data:)([^)]+)\)")
 _FAQ_HEADING_RE = re.compile(r"^(faq|frequently asked questions)\b", re.I)
 
+#: Bylines the site accepts (`news.author_key`). None = "JVL Editorial Team".
+BYLINES = ("sergey-vysotsky", "andrei-klimovich")
+
+#: `news.type` on the site: which listing the article belongs to.
+ARTICLE_TYPES = ("news", "blog")
+
 
 @dataclass
 class StudioPayload:
@@ -178,6 +184,22 @@ def lint(payload: dict) -> list[str]:
             f"site: {local_images[:3]!r}. Upload the hero in AdminLTE."
         )
 
+    author_key = metadata.get("author_key")
+    if author_key and author_key not in BYLINES:
+        warnings.append(
+            f"author_key {author_key!r} is not one of {', '.join(BYLINES)} — "
+            "the site will reject the payload."
+        )
+    article_type = metadata.get("type")
+    if article_type and article_type not in ARTICLE_TYPES:
+        warnings.append(f"type {article_type!r} must be one of {', '.join(ARTICLE_TYPES)}.")
+
+    if not metadata.get("tags"):
+        warnings.append(
+            "No tags — the article will not appear in listing filters and will "
+            "have no related articles."
+        )
+
     description = metadata.get("meta_description") or ""
     if not 120 <= len(description) <= 160:
         warnings.append(f"meta_description is {len(description)} chars (want 120–160).")
@@ -191,15 +213,23 @@ def to_studio_payload(
     *,
     slug: str | None = None,
     author_key: str | None = None,
+    tags: list[str] | None = None,
+    article_type: str = "blog",
 ) -> StudioPayload:
     """Build the site's draft payload from a finished run.
 
     `metadata` is the Metadata Copy Agent's output; `draft_markdown` is the
     FINAL article markdown (after the FAQ block and any images were merged in).
 
-    `author_key` must be one of the bylines the site knows (`news.author_key`,
-    currently `sergey-vysotsky` / `andrei-klimovich`); `None` leaves the draft
-    on the default "JVL Editorial Team" byline.
+    `author_key` must be one of `BYLINES`; `None` leaves the draft on the
+    default "JVL Editorial Team" byline.
+
+    `tags` are matched against the site's existing vocabulary — see
+    `studio_client.list_tags()`. Names with no match are reported back in the
+    publish response rather than created.
+
+    `article_type` defaults to "blog": what this pipeline writes are guides and
+    explainers, which belong in the blog listing rather than in company news.
     """
     h1, intro, sections = split_markdown(draft_markdown)
 
@@ -222,6 +252,10 @@ def to_studio_payload(
             out_meta[optional] = metadata[optional]
     if author_key:
         out_meta["author_key"] = author_key
+    if article_type:
+        out_meta["type"] = article_type
+    if tags:
+        out_meta["tags"] = [t.strip() for t in tags if t and t.strip()]
 
     payload = {"metadata": out_meta, "article": article}
     return StudioPayload(payload=payload, warnings=lint(payload))

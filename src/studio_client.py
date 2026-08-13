@@ -13,11 +13,12 @@ from __future__ import annotations
 
 import json
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import requests
 
 DRAFT_PATH = "/api/content/draft"
+TAGS_PATH = "/api/content/tags"
 DEFAULT_TIMEOUT = 60
 
 
@@ -35,6 +36,10 @@ class PublishResult:
     slug: str | None = None
     page_id: int | None = None
     news_id: int | None = None
+    tags_attached: list[str] = field(default_factory=list)
+    #: Tag names the site had no match for. Nothing was created for them —
+    #: an editor adds the tag in AdminLTE if it should exist.
+    tags_unknown: list[str] = field(default_factory=list)
 
     @property
     def admin_hint(self) -> str:
@@ -124,6 +129,34 @@ def list_drafts(
     return False, _explain(response.status_code, body)
 
 
+def list_tags(
+    *,
+    url: str | None = None,
+    token: str | None = None,
+    timeout: int = DEFAULT_TIMEOUT,
+) -> tuple[bool, list[str] | str]:
+    """Tag names a draft may be published with.
+
+    The site attaches existing tags only, so offering this list is the
+    difference between picking a tag and typing one that silently won't match.
+    Returns (True, names) or (False, error message).
+    """
+    base_url, bearer = resolve_config(url, token)
+    try:
+        response = requests.get(
+            f"{base_url}{TAGS_PATH}",
+            headers={"Authorization": f"Bearer {bearer}"},
+            timeout=timeout,
+        )
+    except requests.RequestException as exc:
+        return False, f"Request failed: {exc}"
+
+    body = _json_or_none(response) or {}
+    if response.status_code == 200 and body.get("success"):
+        return True, body.get("tags", [])
+    return False, _explain(response.status_code, body)
+
+
 def _json_or_none(response: "requests.Response") -> dict | None:
     try:
         parsed = response.json()
@@ -140,6 +173,8 @@ def _interpret(status: int, body: dict | None) -> PublishResult:
             slug=body.get("slug"),
             page_id=body.get("pageId"),
             news_id=body.get("newsId"),
+            tags_attached=body.get("tagsAttached") or [],
+            tags_unknown=body.get("tagsUnknown") or [],
         )
     return PublishResult(ok=False, status=status, error=_explain(status, body or {}))
 
