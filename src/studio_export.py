@@ -196,8 +196,10 @@ def lint(payload: dict) -> list[str]:
 
     if not metadata.get("tags"):
         warnings.append(
-            "No tags — the article will not appear in listing filters and will "
-            "have no related articles."
+            "No tags — the article shows under 'All' in the listing but under no "
+            "category chip. The chips are built from the tags of published "
+            "articles, so pick at least one (today: Blog, News, Adventure, "
+            "Black Friday)."
         )
 
     description = metadata.get("meta_description") or ""
