@@ -33,7 +33,7 @@ from src.faq_agent import FAQAgent
 from src.qa_agent import QAAgent
 from src.metadata_copy_agent import MetadataCopyAgent
 from src.article_diagnostic_agent import ArticleDiagnosticAgent
-from src.history_store import save_to_history
+from src.history_store import HistoryUnavailable, save_to_history
 
 OUTPUT_ROOT = Path("outputs")
 
@@ -527,7 +527,13 @@ def run_pipeline(
         ),
         "suggested_visuals": draft_result.get("suggested_visuals", []) or [],
     }
-    save_to_history(history_entry)
+    try:
+        save_to_history(history_entry)
+    except HistoryUnavailable as exc:
+        # The article is finished and in `results`; losing it here because the
+        # history backend is down would waste the whole run.
+        results["history_error"] = str(exc)
+        print(f"Could not save to history: {exc}", file=sys.stderr)
     results["history_entry"] = history_entry
 
     yield {"step": 0, "label": "done", "status": "done", "results": results}
@@ -792,7 +798,13 @@ def run_update_pipeline(
         "faq_json_ld": faq_json_ld or None,
         "suggested_visuals": suggested_visuals,
     }
-    save_to_history(history_entry)
+    try:
+        save_to_history(history_entry)
+    except HistoryUnavailable as exc:
+        # The article is finished and in `results`; losing it here because the
+        # history backend is down would waste the whole run.
+        results["history_error"] = str(exc)
+        print(f"Could not save to history: {exc}", file=sys.stderr)
     results["history_entry"] = history_entry
 
     yield {"step": 0, "label": "done", "status": "done", "results": results}

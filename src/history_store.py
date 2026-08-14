@@ -24,6 +24,34 @@ _TIMEOUT = 15
 # Local fallback (used only when Supabase is not configured).
 _LOCAL_PATH = Path("outputs") / "history.json"
 
+#: Why the last remote call failed, for the UI to show. History is a
+#: convenience: the backing store being unreachable must never take down the
+#: generator, which is what happened when the Supabase project went away and
+#: load_history() raised straight out of app.py's module body.
+_last_error: str | None = None
+
+
+class HistoryUnavailable(RuntimeError):
+    """The history store is configured but could not be reached."""
+
+
+def history_last_error() -> str | None:
+    """Message from the most recent failed history call, or None."""
+    return _last_error
+
+
+def _describe(exc: Exception) -> str:
+    if isinstance(exc, requests.ConnectionError):
+        return (
+            "cannot reach the Supabase project — check that it still exists and "
+            "that the URL in secrets is current"
+        )
+    if isinstance(exc, requests.Timeout):
+        return f"Supabase did not answer within {_TIMEOUT}s"
+    if isinstance(exc, requests.HTTPError) and exc.response is not None:
+        return f"Supabase returned HTTP {exc.response.status_code}"
+    return str(exc) or exc.__class__.__name__
+
 
 def _config() -> Optional[tuple[str, str]]:
     """Return (base_url, service_key) from Streamlit secrets, or None."""
@@ -112,17 +140,42 @@ def _local_save_all(history: list[dict]) -> None:
 # ─── Public API ───────────────────────────────────────────────────────────────
 
 def load_history() -> list[dict]:
+    """Past articles, newest first. Never raises.
+
+    A history backend that is down is worth a warning, not an outage — this is
+    called from the top of app.py, so anything raised here takes the whole UI
+    with it.
+    """
+    global _last_error
     cfg = _config()
-    if cfg:
-        return _remote_load(*cfg)
-    return _local_load()
+    if not cfg:
+        _last_error = None
+        return _local_load()
+    try:
+        history = _remote_load(*cfg)
+    except Exception as exc:
+        _last_error = _describe(exc)
+        return []
+    _last_error = None
+    return history
 
 
 def save_to_history(entry: dict) -> None:
-    """Insert or update an entry (deduped by ``id``)."""
+    """Insert or update an entry (deduped by ``id``).
+
+    Raises HistoryUnavailable if the remote store cannot be reached, so the
+    caller can keep the finished article and report the failure rather than
+    losing a whole pipeline run at the last step.
+    """
+    global _last_error
     cfg = _config()
     if cfg:
-        _remote_upsert(*cfg, entry)
+        try:
+            _remote_upsert(*cfg, entry)
+        except Exception as exc:
+            _last_error = _describe(exc)
+            raise HistoryUnavailable(_last_error) from exc
+        _last_error = None
         return
     history = _local_load()
     history = [h for h in history if h.get("id") != entry["id"]]
@@ -131,9 +184,17 @@ def save_to_history(entry: dict) -> None:
 
 
 def delete_from_history(article_id: str) -> None:
+    """Remove an entry. Raises HistoryUnavailable if the store is unreachable,
+    so the UI can say the delete did not happen instead of implying it did."""
+    global _last_error
     cfg = _config()
     if cfg:
-        _remote_delete(*cfg, article_id)
+        try:
+            _remote_delete(*cfg, article_id)
+        except Exception as exc:
+            _last_error = _describe(exc)
+            raise HistoryUnavailable(_last_error) from exc
+        _last_error = None
         return
     history = [h for h in _local_load() if h.get("id") != article_id]
     _local_save_all(history)

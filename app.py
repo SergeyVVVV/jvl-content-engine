@@ -19,7 +19,12 @@ from src.orchestrator import (
     run_pipeline,
     run_update_pipeline,
 )
-from src.history_store import load_history, delete_from_history
+from src.history_store import (
+    HistoryUnavailable,
+    delete_from_history,
+    history_last_error,
+    load_history,
+)
 from src.studio_export import to_studio_payload, validate_payload
 from src.studio_client import PublishConfigError, list_tags, publish_draft
 
@@ -264,8 +269,15 @@ with st.sidebar:
     st.divider()
 
     history = load_history()
+    history_error = history_last_error()
 
-    if not history:
+    if history_error:
+        st.warning(
+            f"History unavailable: {history_error}. Generating and publishing "
+            "still work — past articles just aren't listed.",
+            icon="⚠️",
+        )
+    elif not history:
         st.caption("No articles yet. Generate one to get started.")
     else:
         for entry in history:
@@ -294,7 +306,11 @@ with st.sidebar:
                     st.session_state.pipeline_results = None
             with col_del:
                 if st.button("Delete", key=f"del_{article_id}"):
-                    delete_from_history(article_id)
+                    try:
+                        delete_from_history(article_id)
+                    except HistoryUnavailable as exc:
+                        st.error(f"Not deleted — {exc}")
+                        st.stop()
                     if (st.session_state.view_article or {}).get("id") == article_id:
                         st.session_state.view_article = None
                     st.rerun()
@@ -456,6 +472,14 @@ else:
             filename = draft_md_path.name if draft_md_path else "article.md"
 
             st.success("Article ready!")
+            if res.get("history_error"):
+                # The article itself is fine — say so, so nobody re-runs the
+                # pipeline thinking the result was lost.
+                st.warning(
+                    f"Not saved to history: {res['history_error']}. The article "
+                    "below is complete — download or publish it from here.",
+                    icon="⚠️",
+                )
             _render_article(
                 draft_markdown, metadata, qa_report, filename, faq_json_ld,
                 suggested_visuals=suggested_visuals,
