@@ -1,9 +1,9 @@
 """Brief Agent — JVL Content Engine.
 
 Auth modes (tried in order):
-  1. Direct Anthropic SDK — when ANTHROPIC_API_KEY is set in env / .env
-  2. Claude Agent SDK    — when running inside a Claude Code session
-                          (no API key needed; uses Claude Code CLI auth)
+  1. OpenAI (via src.llm_client) — when OPENAI_API_KEY is set in env / .env
+  2. Claude Agent SDK           — fallback when running inside a Claude Code session
+                                  (no API key needed; uses Claude Code CLI auth)
 """
 
 from __future__ import annotations
@@ -33,8 +33,9 @@ class BriefAgent:
     """Generates a structured article brief grounded in JVL repository knowledge."""
 
     def __init__(self) -> None:
-        self.api_key = os.environ.get("ANTHROPIC_API_KEY")
-        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-4-6")
+        self.api_key = os.environ.get("OPENAI_API_KEY")
+        self.tier = "standard"
+        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-4-6")  # agent-SDK fallback only
         self.repo_root = Path(__file__).parent.parent
 
     def _load_file(self, path: str) -> str:
@@ -120,25 +121,13 @@ CRITICAL OUTPUT RULES:
             print("Output was saved anyway — review the warnings above.", file=sys.stderr)
 
     # ------------------------------------------------------------------
-    # Auth mode 1: direct Anthropic SDK (requires ANTHROPIC_API_KEY)
+    # Auth mode 1: OpenAI (requires OPENAI_API_KEY)
     # ------------------------------------------------------------------
 
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:
-        import anthropic
+        from src import llm_client
 
-        client = anthropic.Anthropic(api_key=self.api_key)
-        response = client.messages.create(
-            model=self.model,
-            max_tokens=4096,
-            thinking={"type": "enabled", "budget_tokens": 4000},
-            system=system_prompt,
-            messages=[{"role": "user", "content": user_message}],
-        )
-        raw = next(
-            (block.text for block in response.content if block.type == "text"), ""
-        )
-        if not raw:
-            raise ValueError("Model returned no text content.")
+        raw = llm_client.chat(system_prompt, user_message, max_tokens=4096, tier=self.tier)
         return self._extract_json(raw)
 
     # ------------------------------------------------------------------
@@ -214,7 +203,7 @@ CRITICAL OUTPUT RULES:
         )
 
         if self.api_key:
-            print(f"Auth: Anthropic SDK (model: {self.model})", file=sys.stderr)
+            print(f"Auth: OpenAI (tier: {self.tier})", file=sys.stderr)
             result = self._run_via_sdk(system_prompt, user_message)
         else:
             print(f"Auth: Claude Agent SDK (model: {self.model})", file=sys.stderr)

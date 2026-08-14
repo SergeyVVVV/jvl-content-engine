@@ -44,8 +44,9 @@ class MetadataCopyAgent:
     """Generates final publish-support copy for a single article."""
 
     def __init__(self) -> None:
-        self.api_key = os.environ.get("ANTHROPIC_API_KEY")
-        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-4-6")
+        self.api_key = os.environ.get("OPENAI_API_KEY")
+        self.tier = "light"
+        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-4-6")  # agent-SDK fallback only
         self.repo_root = Path(__file__).parent.parent
 
     # ------------------------------------------------------------------
@@ -222,20 +223,9 @@ class MetadataCopyAgent:
     # ------------------------------------------------------------------
 
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:
-        import anthropic
+        from src import llm_client
 
-        client = anthropic.Anthropic(api_key=self.api_key)
-        response = client.messages.create(
-            model=self.model,
-            max_tokens=4096,
-            system=system_prompt,
-            messages=[{"role": "user", "content": user_message}],
-        )
-        raw = next(
-            (block.text for block in response.content if block.type == "text"), ""
-        )
-        if not raw:
-            raise ValueError("Model returned no text content.")
+        raw = llm_client.chat(system_prompt, user_message, max_tokens=4096, tier=self.tier)
         return self._extract_json(raw)
 
     # ------------------------------------------------------------------
@@ -322,7 +312,7 @@ class MetadataCopyAgent:
 
         if self.api_key:
             print(
-                f"Metadata Copy Agent auth: Anthropic SDK (model: {self.model})",
+                f"Metadata Copy Agent auth: OpenAI (tier: {self.tier})",
                 file=sys.stderr,
             )
             out = self._run_via_sdk(system_prompt, user_message)
