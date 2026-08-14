@@ -23,7 +23,7 @@ Writer Agent a full context package: topic brief + competitive landscape + JVL-s
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env          # add ANTHROPIC_API_KEY at minimum
+cp .env.example .env          # add OPENAI_API_KEY at minimum
 ```
 
 All three agents work without live SERP access. Mock mode is the default.
@@ -194,8 +194,11 @@ outputs/
 See `.env.example` for the full reference. Minimum required:
 
 ```
-ANTHROPIC_API_KEY=...
+OPENAI_API_KEY=...
 ```
+
+Text agents run on OpenAI (gpt-5 tiers) via `src/llm_client.py`; override models
+with `OPENAI_MODEL_HEAVY` / `OPENAI_MODEL_STANDARD` / `OPENAI_MODEL_LIGHT`.
 
 Optional for live SERP:
 
