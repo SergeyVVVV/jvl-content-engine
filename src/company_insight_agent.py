@@ -9,7 +9,7 @@ Purpose:
   structured package for the Writer Agent.
 
 Auth modes (tried in order):
-  1. Direct Anthropic SDK  — when ANTHROPIC_API_KEY is set in env / .env
+  1. OpenAI (via src.llm_client) — when OPENAI_API_KEY is set in env / .env
   2. Claude Agent SDK      — when running inside a Claude Code session
 """
 
@@ -155,7 +155,7 @@ CRITICAL OUTPUT RULES:
             print("Output was saved anyway — review the warnings above.", file=sys.stderr)
 
     # ------------------------------------------------------------------
-    # Auth mode 1: direct Anthropic SDK
+    # Auth mode 1: OpenAI (requires OPENAI_API_KEY)
     # ------------------------------------------------------------------
 
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:
