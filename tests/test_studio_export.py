@@ -16,6 +16,8 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from src.studio_client import PublishResult, _explain, _interpret  # noqa: E402
 from src.studio_export import (  # noqa: E402
+    ARTICLE_TYPES,
+    BYLINES,
     lint,
     normalize_slug,
     split_markdown,
@@ -280,7 +282,9 @@ class LintTests(unittest.TestCase):
 
     def test_clean_payload_has_no_warnings(self) -> None:
         payload = self.payload(
-            [self.sec("S")], article={"intro_markdown": "Lead."}
+            [self.sec("S")],
+            article={"intro_markdown": "Lead."},
+            metadata={"tags": ["Arcade"]},
         )
         self.assertEqual(lint(payload), [])
 
@@ -345,3 +349,73 @@ class RealRunRegressionTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TagsTypeAndBylineTests(unittest.TestCase):
+    METADATA = {
+        "meta_title": "T",
+        "slug": "s",
+        "meta_description": "d" * 140,
+    }
+
+    def build(self, **kwargs):
+        return to_studio_payload(self.METADATA, ARTICLE, **kwargs)
+
+    def test_articles_default_to_the_blog_listing(self) -> None:
+        # What this pipeline writes are guides, not company news.
+        self.assertEqual(self.build().payload["metadata"]["type"], "blog")
+
+    def test_listing_can_be_overridden(self) -> None:
+        self.assertEqual(self.build(article_type="news").payload["metadata"]["type"], "news")
+
+    def test_tags_are_passed_through_trimmed(self) -> None:
+        metadata = self.build(tags=[" Arcade ", "Home Bar"]).payload["metadata"]
+        self.assertEqual(metadata["tags"], ["Arcade", "Home Bar"])
+
+    def test_blank_tags_are_dropped(self) -> None:
+        metadata = self.build(tags=["Arcade", "  ", ""]).payload["metadata"]
+        self.assertEqual(metadata["tags"], ["Arcade"])
+
+    def test_tags_key_absent_when_none_given(self) -> None:
+        self.assertNotIn("tags", self.build().payload["metadata"])
+
+    def test_known_bylines_match_the_site(self) -> None:
+        self.assertEqual(BYLINES, ("sergey-vysotsky", "andrei-klimovich"))
+
+    def test_lint_flags_an_unknown_byline_before_the_server_does(self) -> None:
+        warnings = self.build(author_key="someone-else").warnings
+        self.assertTrue(any("not one of" in w for w in warnings))
+
+    def test_lint_accepts_a_known_byline(self) -> None:
+        warnings = self.build(author_key="sergey-vysotsky").warnings
+        self.assertFalse(any("not one of" in w for w in warnings))
+
+    def test_lint_warns_when_there_are_no_tags(self) -> None:
+        self.assertTrue(any("No tags" in w for w in self.build().warnings))
+
+    def test_lint_is_quiet_once_tags_are_picked(self) -> None:
+        warnings = self.build(tags=["Arcade"]).warnings
+        self.assertFalse(any("No tags" in w for w in warnings))
+
+    def test_lint_flags_a_bad_listing_type(self) -> None:
+        warnings = lint({
+            "metadata": {**self.METADATA, "type": "article", "tags": ["x"]},
+            "article": {"h1": "H", "intro_markdown": "i",
+                        "sections": [{"level": "h2", "heading": "S", "body_markdown": "b"}]},
+        })
+        self.assertTrue(any("must be one of" in w for w in warnings))
+
+
+class PublishTagResultTests(unittest.TestCase):
+    def test_attached_and_unknown_tags_come_back(self) -> None:
+        result = _interpret(201, {
+            "success": True, "slug": "s", "pageId": 1, "newsId": 2,
+            "tagsAttached": ["Arcade"], "tagsUnknown": ["Nope"],
+        })
+        self.assertEqual(result.tags_attached, ["Arcade"])
+        self.assertEqual(result.tags_unknown, ["Nope"])
+
+    def test_older_server_without_tag_fields_is_fine(self) -> None:
+        result = _interpret(201, {"success": True, "slug": "s", "pageId": 1, "newsId": 2})
+        self.assertEqual(result.tags_attached, [])
+        self.assertEqual(result.tags_unknown, [])
