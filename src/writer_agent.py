@@ -10,7 +10,7 @@ Purpose:
   — plus an assembled markdown string ready to save as a .md file.
 
 Auth modes (tried in order):
-  1. Direct Anthropic SDK  — when ANTHROPIC_API_KEY is set in env / .env
+  1. OpenAI (via src.llm_client) — when OPENAI_API_KEY is set in env / .env
   2. Claude Agent SDK      — when running inside a Claude Code session
 """
 
@@ -378,7 +378,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         return WriterAgent._absolutize_jvl_links("\n".join(lines).strip())
 
     # ------------------------------------------------------------------
-    # Auth mode 1: direct Anthropic SDK
+    # Auth mode 1: OpenAI (requires OPENAI_API_KEY)
     # ------------------------------------------------------------------
 
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:

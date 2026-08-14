@@ -13,7 +13,7 @@ Purpose:
   draft seen plus a full iteration report.
 
 Auth modes (mirrors WriterAgent):
-  1. Direct Anthropic SDK  — when ANTHROPIC_API_KEY is set
+  1. OpenAI (via src.llm_client) — when OPENAI_API_KEY is set
   2. Claude Agent SDK      — when running inside a Claude Code session
 """
 
@@ -170,7 +170,7 @@ class ReadabilityChecker:
         return json.loads(raw)
 
     # ------------------------------------------------------------------
-    # Auth mode 1: direct Anthropic SDK
+    # Auth mode 1: OpenAI (requires OPENAI_API_KEY)
     # ------------------------------------------------------------------
 
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:

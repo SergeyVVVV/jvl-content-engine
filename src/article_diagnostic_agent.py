@@ -12,7 +12,7 @@ Purpose:
   identifies as broken or stale.
 
 Auth modes (mirrors WriterAgent / QAAgent):
-  1. Direct Anthropic SDK  — when ANTHROPIC_API_KEY is set
+  1. OpenAI (via src.llm_client) — when OPENAI_API_KEY is set
   2. Claude Agent SDK      — when running inside a Claude Code session
 """
 
@@ -252,7 +252,7 @@ class ArticleDiagnosticAgent:
         return "\n".join(lines).strip()
 
     # ------------------------------------------------------------------
-    # Auth mode 1: direct Anthropic SDK
+    # Auth mode 1: OpenAI (requires OPENAI_API_KEY)
     # ------------------------------------------------------------------
 
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:

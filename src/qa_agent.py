@@ -9,7 +9,7 @@ Purpose:
   a structured JSON QA report. Review-only — never rewrites the article.
 
 Auth modes (mirrors WriterAgent):
-  1. Direct Anthropic SDK  — when ANTHROPIC_API_KEY is set
+  1. OpenAI (via src.llm_client) — when OPENAI_API_KEY is set
   2. Claude Agent SDK      — when running inside a Claude Code session
 """
 
@@ -183,7 +183,7 @@ class QAAgent:
         return report
 
     # ------------------------------------------------------------------
-    # Auth mode 1: direct Anthropic SDK
+    # Auth mode 1: OpenAI (requires OPENAI_API_KEY)
     # ------------------------------------------------------------------
 
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:
@@ -279,7 +279,7 @@ class QAAgent:
         )
 
         if self.api_key:
-            print(f"QA Agent auth: Anthropic SDK (model: {self.model})", file=sys.stderr)
+            print(f"QA Agent auth: OpenAI (tier: {self.tier})", file=sys.stderr)
             report = self._run_via_sdk(system_prompt, user_message)
         else:
             print(f"QA Agent auth: Claude Agent SDK (model: {self.model})", file=sys.stderr)
