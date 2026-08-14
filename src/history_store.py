@@ -17,6 +17,11 @@ from pathlib import Path
 from typing import Optional
 
 import requests
+# Bound at import so classifying an error never depends on the module
+# attribute, which tests replace to simulate failures.
+from requests import ConnectionError as _ConnectionError
+from requests import HTTPError as _HTTPError
+from requests import Timeout as _Timeout
 
 TABLE = "article_history"
 _TIMEOUT = 15
@@ -41,15 +46,25 @@ def history_last_error() -> str | None:
 
 
 def _describe(exc: Exception) -> str:
-    if isinstance(exc, requests.ConnectionError):
+    if isinstance(exc, _ConnectionError):
         return (
             "cannot reach the Supabase project — check that it still exists and "
             "that the URL in secrets is current"
         )
-    if isinstance(exc, requests.Timeout):
+    if isinstance(exc, _Timeout):
         return f"Supabase did not answer within {_TIMEOUT}s"
-    if isinstance(exc, requests.HTTPError) and exc.response is not None:
-        return f"Supabase returned HTTP {exc.response.status_code}"
+    if isinstance(exc, _HTTPError) and exc.response is not None:
+        status = exc.response.status_code
+        if status == 404:
+            # PostgREST answers 404 for an unknown relation, and also while a
+            # resuming project rebuilds its schema cache.
+            return (
+                f"table '{TABLE}' not visible yet — the Supabase project may "
+                "still be starting up, or the table is missing"
+            )
+        if status in (401, 403):
+            return "Supabase rejected the key — check service_key in secrets"
+        return f"Supabase returned HTTP {status}"
     return str(exc) or exc.__class__.__name__
 
 

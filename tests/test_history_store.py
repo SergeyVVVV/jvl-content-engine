@@ -67,6 +67,31 @@ class RemoteFailureTests(unittest.TestCase):
         store.load_history()
         self.assertIn("did not answer", store.history_last_error())
 
+    def test_a_resuming_project_is_explained_not_dumped_as_404(self) -> None:
+        # Observed for ~30s while a paused Supabase project came back up:
+        # PostgREST answers 404 until its schema cache is rebuilt.
+        class _Resp:
+            status_code = 404
+        self.fail_with(requests.HTTPError(response=_Resp()))
+        store.load_history()
+        message = store.history_last_error()
+        self.assertIn("article_history", message)
+        self.assertIn("still be starting up", message)
+
+    def test_a_bad_key_names_the_secret_to_check(self) -> None:
+        class _Resp:
+            status_code = 401
+        self.fail_with(requests.HTTPError(response=_Resp()))
+        store.load_history()
+        self.assertIn("service_key", store.history_last_error())
+
+    def test_an_unexpected_status_still_reports_the_code(self) -> None:
+        class _Resp:
+            status_code = 500
+        self.fail_with(requests.HTTPError(response=_Resp()))
+        store.load_history()
+        self.assertIn("500", store.history_last_error())
+
     def test_save_raises_a_typed_error_the_caller_can_catch(self) -> None:
         self.fail_with(requests.ConnectionError("dns"))
         with self.assertRaises(HistoryUnavailable):
