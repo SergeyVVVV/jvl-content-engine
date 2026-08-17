@@ -4,8 +4,13 @@ The site (jvl.ca, Next.js) accepts `POST /api/content/draft` with:
 
     {
       "metadata": {slug, title, meta_description, excerpt?, ...},
-      "article":  {h1, intro_markdown?, sections: [{level, heading, body_markdown}]}
+      "article":  {h1, intro_markdown?, faq?: [{q, a}],
+                   sections: [{level, heading, body_markdown}]}
     }
+
+The FAQ is lifted out of the body rather than left as sections: the site keeps
+it in `news.faq` and renders it as its own block with FAQPage structured data,
+which prose inside content1 would not get.
 
 The engine has no `sections` of its own — the Writer emits `draft_markdown`,
 and both the FAQ Agent (`append_to_article`) and the Visual Agent
@@ -135,6 +140,40 @@ def _tidy(text: str) -> str:
     return text.strip()
 
 
+def extract_faq(sections: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Split the FAQ out of the body into its own list.
+
+    The FAQ Agent appends `## FAQ` followed by one `### Question` per item, so
+    after `split_markdown` it is just more sections. Left there it would reach
+    the site as ordinary prose inside content1: no accordion, and no FAQPage
+    structured data, which is most of the point of having an FAQ.
+
+    Returns `(faq, sections_without_faq)` where each FAQ entry is `{"q", "a"}`
+    — the site's shape, not the agent's `{"question", "answer"}`.
+
+    An H3 with no answer, or an FAQ heading with no H3s under it, is dropped:
+    a blank accordion row is worse than a missing one.
+    """
+    faq: list[dict] = []
+    kept: list[dict] = []
+    in_faq = False
+
+    for section in sections:
+        if section["level"] == "h2":
+            in_faq = bool(_FAQ_HEADING_RE.match(section["heading"]))
+            if in_faq:
+                continue
+        elif in_faq:
+            q = section["heading"].strip()
+            a = section["body_markdown"].strip()
+            if q and a:
+                faq.append({"q": q, "a": a})
+            continue
+        kept.append(section)
+
+    return faq, kept
+
+
 def lint(payload: dict) -> list[str]:
     """Content problems worth showing the operator before they publish.
 
@@ -149,14 +188,10 @@ def lint(payload: dict) -> list[str]:
     if not sections:
         warnings.append("No sections parsed — the article body would be empty.")
 
-    faq_headings = [
-        s["heading"] for s in sections
-        if s["level"] == "h2" and _FAQ_HEADING_RE.match(s["heading"])
-    ]
-    if len(faq_headings) > 1:
+    if not article.get("faq"):
         warnings.append(
-            f"{len(faq_headings)} FAQ blocks in the body: {faq_headings!r}. "
-            "Expected one — check the FAQ Agent's dedup pass."
+            "No FAQ found — the article will publish without an FAQ block "
+            "or FAQPage structured data."
         )
 
     if not article.get("intro_markdown"):
@@ -235,12 +270,22 @@ def to_studio_payload(
     """
     h1, intro, sections = split_markdown(draft_markdown)
 
+    # Counted before extraction: two FAQ blocks merge into one list afterwards,
+    # which hides the dedup bug that produced them.
+    faq_headings = [
+        s["heading"] for s in sections
+        if s["level"] == "h2" and _FAQ_HEADING_RE.match(s["heading"])
+    ]
+    faq, sections = extract_faq(sections)
+
     article: dict = {
         "h1": h1 or metadata.get("h1") or metadata.get("meta_title") or "",
         "sections": sections,
     }
     if intro:
         article["intro_markdown"] = intro
+    if faq:
+        article["faq"] = faq
 
     out_meta = {
         "slug": slug or metadata.get("slug", ""),
@@ -260,7 +305,14 @@ def to_studio_payload(
         out_meta["tags"] = [t.strip() for t in tags if t and t.strip()]
 
     payload = {"metadata": out_meta, "article": article}
-    return StudioPayload(payload=payload, warnings=lint(payload))
+    warnings = lint(payload)
+    if len(faq_headings) > 1:
+        warnings.append(
+            f"{len(faq_headings)} FAQ blocks in the body: {faq_headings!r}. "
+            "Expected one — check the FAQ Agent's dedup pass. They were merged "
+            "into a single FAQ."
+        )
+    return StudioPayload(payload=payload, warnings=warnings)
 
 
 # ── Local mirror of the site's validator ────────────────────────────────────
@@ -288,6 +340,19 @@ def validate_payload(payload: object) -> str | None:
             return f"metadata.{key} (string) is required"
     if not isinstance(article.get("h1"), str) or not article["h1"]:
         return "article.h1 (string) is required"
+    faq = article.get("faq")
+    if faq is not None:
+        if not isinstance(faq, list):
+            return "article.faq must be an array of {q, a} objects when present"
+        for index, item in enumerate(faq):
+            if (
+                not isinstance(item, dict)
+                or not isinstance(item.get("q"), str)
+                or not isinstance(item.get("a"), str)
+            ):
+                return f"article.faq[{index}] must have {{q, a}} strings"
+            if not item["q"].strip() or not item["a"].strip():
+                return f"article.faq[{index}] has an empty question or answer"
     sections = article.get("sections")
     if not isinstance(sections, list) or not sections:
         return "article.sections (non-empty array) is required"

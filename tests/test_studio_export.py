@@ -249,13 +249,18 @@ class LintTests(unittest.TestCase):
     def sec(self, heading, body="body", level="h2"):
         return {"level": level, "heading": heading, "body_markdown": body}
 
-    def test_flags_duplicate_faq_blocks(self) -> None:
-        warnings = lint(self.payload([self.sec("FAQ"), self.sec("FAQ - Gifting")]))
-        self.assertTrue(any("2 FAQ blocks" in w for w in warnings))
+    # Duplicate FAQ blocks are counted in to_studio_payload, before extraction
+    # merges them — see FaqExtractionTests. What lint sees is the result.
 
-    def test_single_faq_is_not_flagged(self) -> None:
-        warnings = lint(self.payload([self.sec("FAQ"), self.sec("Other")]))
-        self.assertFalse(any("FAQ blocks" in w for w in warnings))
+    def test_flags_an_article_with_no_faq(self) -> None:
+        warnings = lint(self.payload([self.sec("Other")]))
+        self.assertTrue(any("No FAQ found" in w for w in warnings))
+
+    def test_an_article_with_an_faq_is_not_flagged(self) -> None:
+        warnings = lint(self.payload(
+            [self.sec("Other")], article={"faq": [{"q": "Q?", "a": "A."}]}
+        ))
+        self.assertFalse(any("No FAQ found" in w for w in warnings))
 
     def test_flags_local_image_paths(self) -> None:
         body = "![hero](images/hero-01.png)"
@@ -283,7 +288,7 @@ class LintTests(unittest.TestCase):
     def test_clean_payload_has_no_warnings(self) -> None:
         payload = self.payload(
             [self.sec("S")],
-            article={"intro_markdown": "Lead."},
+            article={"intro_markdown": "Lead.", "faq": [{"q": "Q?", "a": "A."}]},
             metadata={"tags": ["Arcade"]},
         )
         self.assertEqual(lint(payload), [])
@@ -419,3 +424,59 @@ class PublishTagResultTests(unittest.TestCase):
         result = _interpret(201, {"success": True, "slug": "s", "pageId": 1, "newsId": 2})
         self.assertEqual(result.tags_attached, [])
         self.assertEqual(result.tags_unknown, [])
+
+
+class FaqExtractionTests(unittest.TestCase):
+    """The FAQ must leave the body and arrive as its own list."""
+
+    def payload(self, markdown: str = ARTICLE) -> dict:
+        return to_studio_payload({"meta_title": "T", "meta_description": "D",
+                                  "slug": "best-gifts"}, markdown).payload
+
+    def test_faq_is_lifted_out_of_the_body(self) -> None:
+        article = self.payload()["article"]
+        self.assertEqual(article["faq"], [{"q": "Is a bartop hard to set up?", "a": "No."}])
+
+    def test_no_faq_heading_is_left_among_the_sections(self) -> None:
+        headings = [s["heading"] for s in self.payload()["article"]["sections"]]
+        self.assertNotIn("FAQ", headings)
+        self.assertNotIn("Is a bartop hard to set up?", headings)
+
+    def test_the_rest_of_the_article_survives(self) -> None:
+        headings = [s["heading"] for s in self.payload()["article"]["sections"]]
+        self.assertEqual(headings, ["Why Experience Beats Stuff", "The Finishing Touches"])
+
+    def test_an_h3_outside_the_faq_stays_a_section(self) -> None:
+        # "The Finishing Touches" sits under a normal H2 and must not be
+        # swallowed as a question just because H3s inside the FAQ are.
+        sections = self.payload()["article"]["sections"]
+        self.assertEqual(sections[-1]["heading"], "The Finishing Touches")
+        self.assertEqual(sections[-1]["level"], "h3")
+
+    def test_article_without_faq_omits_the_key_and_warns(self) -> None:
+        plain = "# T\n\nLead.\n\n## Only Section\n\nBody.\n"
+        result = to_studio_payload({"meta_title": "T", "meta_description": "D",
+                                    "slug": "s"}, plain)
+        self.assertNotIn("faq", result.payload["article"])
+        self.assertTrue(any("No FAQ found" in w for w in result.warnings))
+
+    def test_question_without_an_answer_is_dropped(self) -> None:
+        md = "# T\n\nLead.\n\n## FAQ\n\n### Unanswered?\n\n### Answered?\n\nYes.\n"
+        article = self.payload(md)["article"]
+        self.assertEqual(article["faq"], [{"q": "Answered?", "a": "Yes."}])
+
+    def test_two_faq_blocks_merge_but_are_reported(self) -> None:
+        md = ("# T\n\nLead.\n\n## FAQ\n\n### One?\n\nA.\n\n"
+              "## Frequently Asked Questions\n\n### Two?\n\nB.\n")
+        result = to_studio_payload({"meta_title": "T", "meta_description": "D",
+                                    "slug": "s"}, md)
+        self.assertEqual([i["q"] for i in result.payload["article"]["faq"]], ["One?", "Two?"])
+        self.assertTrue(any("2 FAQ blocks" in w for w in result.warnings))
+
+    def test_the_site_would_accept_the_result(self) -> None:
+        self.assertIsNone(validate_payload(self.payload()))
+
+    def test_validator_rejects_the_agents_own_shape(self) -> None:
+        p = self.payload()
+        p["article"]["faq"] = [{"question": "Q?", "answer": "A."}]
+        self.assertIn("must have {q, a} strings", validate_payload(p) or "")
