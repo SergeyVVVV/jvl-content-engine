@@ -79,3 +79,48 @@ class ModelTierTests(unittest.TestCase):
     def test_writer_runs_on_the_heavy_tier_by_default(self) -> None:
         os.environ.pop("OPENAI_MODEL_HEAVY", None)
         self.assertEqual(resolve_model("heavy"), "gpt-5")
+
+
+class DefaultBudgetTests(unittest.TestCase):
+    """Every agent now inherits one ceiling; it must clear a full reasoning pass."""
+
+    def setUp(self) -> None:
+        self._saved = os.environ.pop("OPENAI_MAX_TOKENS", None)
+
+    def tearDown(self) -> None:
+        os.environ.pop("OPENAI_MAX_TOKENS", None)
+        if self._saved is not None:
+            os.environ["OPENAI_MAX_TOKENS"] = self._saved
+
+    def test_default_clears_the_budget_that_starved_the_brief_agent(self) -> None:
+        from src.llm_client import default_max_tokens
+
+        # The Brief Agent died at 4096 with reasoning_tokens=4096 — the whole
+        # allowance spent thinking, nothing left to answer with.
+        self.assertGreater(default_max_tokens(), 4096)
+
+    def test_env_override_wins(self) -> None:
+        from src.llm_client import default_max_tokens
+
+        os.environ["OPENAI_MAX_TOKENS"] = "24000"
+        self.assertEqual(default_max_tokens(), 24000)
+
+    def test_nonsense_override_falls_back(self) -> None:
+        from src.llm_client import _DEFAULT_MAX_TOKENS, default_max_tokens
+
+        for bad in ("lots", "0", "-1"):
+            os.environ["OPENAI_MAX_TOKENS"] = bad
+            self.assertEqual(default_max_tokens(), _DEFAULT_MAX_TOKENS, bad)
+
+    def test_no_agent_pins_a_budget_that_cannot_fit_reasoning(self) -> None:
+        # A hardcoded 4096/8192 at a call site would silently opt that agent
+        # out of the shared ceiling, which is how this failure spread.
+        import re
+        from pathlib import Path
+
+        root = Path(__file__).resolve().parent.parent / "src"
+        pinned = [
+            p.name for p in root.glob("*.py")
+            if re.search(r"max_tokens=(?:4096|8192)\b", p.read_text(encoding="utf-8"))
+        ]
+        self.assertEqual(pinned, [])
