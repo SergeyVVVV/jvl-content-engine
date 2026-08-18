@@ -42,6 +42,28 @@ _KNOWLEDGE_FILES: list[tuple[str, str]] = [
     ),
 ]
 
+#: Completion budget for the Writer, overridable with WRITER_MAX_TOKENS.
+#:
+#: The default was 8192, which is the whole article plus the reasoning that
+#: precedes it — on a gpt-5 tier the thinking is billed from this same budget,
+#: and a full draft leaves it nothing. When it runs out the API returns an
+#: empty message with finish_reason="length" rather than an error, which is
+#: what surfaced in the UI as "Model returned no text content".
+_DEFAULT_MAX_TOKENS = 32000
+
+
+def _max_tokens() -> int:
+    raw = os.environ.get("WRITER_MAX_TOKENS")
+    if not raw:
+        return _DEFAULT_MAX_TOKENS
+    try:
+        value = int(raw)
+    except ValueError:
+        print(f"  WRITER_MAX_TOKENS={raw!r} is not a number — using "
+              f"{_DEFAULT_MAX_TOKENS}", file=sys.stderr)
+        return _DEFAULT_MAX_TOKENS
+    return value if value > 0 else _DEFAULT_MAX_TOKENS
+
 
 class WriterAgent:
     """Generates a structured first-draft article from upstream pipeline inputs.
@@ -388,7 +410,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         last_exc: Exception | None = None
         for attempt in range(max_attempts):
             raw = llm_client.chat(
-                system_prompt, user_message, max_tokens=8192, tier=self.tier
+                system_prompt, user_message, max_tokens=_max_tokens(), tier=self.tier
             )
             try:
                 return self._extract_json(raw)
