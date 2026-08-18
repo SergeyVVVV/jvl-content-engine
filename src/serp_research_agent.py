@@ -23,13 +23,7 @@ from pathlib import Path
 
 import jsonschema
 
-# Allow both `from src.serp_research_agent import ...` (from repo root)
-# and `python src/serp_research_agent.py` (direct execution).
-_SRC_DIR = Path(__file__).parent
-if str(_SRC_DIR) not in sys.path:
-    sys.path.insert(0, str(_SRC_DIR))
-
-from serp_providers import MockSerpProvider, SerpProvider, get_provider  # noqa: E402
+from src.serp_providers import MockSerpProvider, SerpProvider, get_provider
 
 
 # Knowledge files injected into the SERP agent's context.
