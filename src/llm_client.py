@@ -23,6 +23,28 @@ def resolve_model(tier: str = "standard") -> str:
     return models.get(tier, models["standard"])
 
 
+#: Completion budget when a caller does not ask for a specific one.
+#:
+#: This is a ceiling, not a spend: the API bills what the call actually uses,
+#: so a generous one costs nothing. It has to cover the reasoning as well as
+#: the answer — on a gpt-5 tier both come out of the same allowance, and at
+#: 4096 a high reasoning effort consumed the whole budget before a single
+#: token of prose, which the API reports as an empty message rather than an
+#: error. Overridable with OPENAI_MAX_TOKENS.
+_DEFAULT_MAX_TOKENS = 16000
+
+
+def default_max_tokens() -> int:
+    raw = os.environ.get("OPENAI_MAX_TOKENS")
+    if not raw:
+        return _DEFAULT_MAX_TOKENS
+    try:
+        value = int(raw)
+    except ValueError:
+        return _DEFAULT_MAX_TOKENS
+    return value if value > 0 else _DEFAULT_MAX_TOKENS
+
+
 def empty_response_error(response: object, model: str, max_tokens: int) -> str:
     """Explain an empty completion using what the response itself reports.
 
@@ -61,7 +83,7 @@ def empty_response_error(response: object, model: str, max_tokens: int) -> str:
 def chat(
     system: str,
     user: str,
-    max_tokens: int = 4096,
+    max_tokens: int | None = None,
     tier: str = "standard",
     reasoning_effort: str | None = None,
 ) -> str:
@@ -74,6 +96,7 @@ def chat(
     if not api_key:
         raise EnvironmentError("OPENAI_API_KEY is required for llm_client.chat().")
     model = resolve_model(tier)
+    max_tokens = max_tokens or default_max_tokens()
     client = OpenAI(api_key=api_key)
 
     kwargs = {}

@@ -303,7 +303,7 @@ class FAQAgent:
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:
         from src import llm_client
 
-        raw = llm_client.chat(system_prompt, user_message, max_tokens=4096, tier=self.tier)
+        raw = llm_client.chat(system_prompt, user_message, tier=self.tier)
         return self._extract_json(raw)
 
     # ------------------------------------------------------------------
