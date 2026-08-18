@@ -21,7 +21,13 @@ markdown, and this module parses it back into sections.
 Nothing here does I/O or talks to the network — see `studio_client` for that.
 """
 
-from __future__ import annotations
+# NOTE: deliberately no `from __future__ import annotations` here.
+# It turns every annotation into a string, which makes @dataclass resolve
+# them through sys.modules[cls.__module__].__dict__ at class-creation time.
+# Streamlit leaves that entry as None while hot-reloading after a push, and
+# the whole app then dies on import with
+#   AttributeError: 'NoneType' object has no attribute '__dict__'
+# Real annotation objects need no such lookup. See tests/test_dataclass_imports.py
 
 import re
 from dataclasses import dataclass, field
