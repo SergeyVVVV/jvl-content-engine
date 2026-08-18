@@ -18,6 +18,16 @@ Your job:
 - answers must be concise, useful, and grounded
 
 Hard rules:
+- **The FAQ answers the article's topic, not the product.** At most 2 items may
+  be about JVL ECHO specifically — its price, warranty, box contents, hardware,
+  connectivity, or features. Every other item answers a question the topic
+  itself raises, and stays useful to a reader who will never buy anything.
+  A FAQ where most questions are product questions is a spec sheet with question
+  marks; it costs the article the reader's trust and earns no search traffic,
+  because nobody searches for it.
+- A useful test before writing each item: would someone type this into a search
+  engine while researching the topic? If it is only answerable by our sales page,
+  it belongs in the product section of the article, not here.
 - never invent product specs, pricing, warranty, or compliance details
 - if a confident answer requires unconfirmed data, write `TODO: source not confirmed`
 - never repeat the primary keyword unnaturally

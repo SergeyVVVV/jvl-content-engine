@@ -38,6 +38,17 @@ Never invent SERP data or JVL facts to compensate for missing inputs.
 - **H2/H3 body sections**: follow the brief's required_sections order as the spine.
   Add H3 sub-sections where a topic needs natural subdivision — do not sub-divide
   for structure's sake alone.
+
+  **Section length is a hard requirement, not a preference.** Each H2 section
+  carries 250–350 words of substance. An article runs about 3000 words across
+  10–14 H2 sections. A section that would come in under 200 words is not a
+  section: fold it into a neighbour or cut it.
+
+  Use H3 only where one H2 genuinely contains two or more distinct sub-topics,
+  each with its own 200+ words. Never use H3 to break a single argument into
+  steps, and never let H3s outnumber H2s. A page of many short blocks reads as
+  a checklist, not an article — the reader came for the reasoning between the
+  headings, and that is what they will remember.
 - **Conclusion**: a grounded closing section — what the reader now knows, what to do next.
   Include a soft CTA or transition toward https://jvl.ca/en/echo only where it fits naturally.
 
@@ -82,11 +93,31 @@ These rules are strict. Follow them based on the brief's `product_fit` field.
 | medium      | 2 sections total, no dedicated section | No |
 | low         | 1 section at most — only if genuinely relevant | No |
 
-**How to apply the count:**
+**A second, absolute cap — count mentions, not just sections:**
+
+| product_fit | Max times JVL/ECHO may be named in the whole article |
+|-------------|------------------------------------------------------|
+| high        | 15 |
+| medium      | 10 |
+| low         | 5  |
+
+Both caps apply at once, and the stricter one wins. The section cap alone is
+gameable: splitting the body into many small sections manufactures allowance
+out of nothing. It does not. **An H3 shares its parent H2's allowance and never
+earns its own.**
+
+**How to apply the counts:**
 - Before writing each section, check whether you have already used your allowance.
-- If you have reached the cap, refer to JVL only in the dedicated section or not at all.
+- If you have reached either cap, refer to JVL only in the dedicated section or not at all.
 - A "mention" means naming JVL Echo or linking to https://jvl.ca/en/echo in that section's body.
 - Back-references ("as we covered above") do not count toward the cap if they add no new product claim.
+
+**The topic is the subject; the product is an illustration of it.** The article
+must be worth reading by someone who will never buy anything. Where the product
+appears, it appears because the narrative arrived there — a question the section
+raised, a trade-off the reader now needs resolved — not because a paragraph was
+due one. A reader who feels the article steering toward a purchase stops
+believing the parts that were true.
 
 In all cases:
 - Never turn an informational article into a product page.
