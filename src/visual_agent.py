@@ -250,6 +250,30 @@ CRITICAL OUTPUT RULES:
         return assets
 
     # ------------------------------------------------------------------
+    # Phase 2b: durable storage
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def _store_images(assets: list[dict], slug: str) -> None:
+        """Upload each downloaded image and record its public URL in-place.
+
+        Failure is not fatal: the asset keeps its local path, the article still
+        renders here, and only durability is lost — which is strictly better
+        than failing a run nine steps in over a storage hiccup.
+        """
+        from src import image_store
+
+        for asset in assets:
+            local = asset.get("local_path")
+            if not local:
+                continue
+            dest = f"{slug}/{Path(local).name}"
+            url = image_store.upload(local, dest)
+            if url:
+                asset["url"] = url
+                print(f"  Stored → {url}", file=sys.stderr)
+
+    # ------------------------------------------------------------------
     # Phase 3: Markdown injection
     # ------------------------------------------------------------------
 
@@ -271,13 +295,15 @@ CRITICAL OUTPUT RULES:
         ]
 
         def _image_block(asset: dict) -> list[str]:
-            local_path = asset.get("local_path")
+            # The uploaded URL wins over the local path: a local path is
+            # meaningless to jvl.ca and gone from this disk after a restart.
+            src = asset.get("url") or asset.get("local_path")
             alt = asset.get("alt_text", "")
             caption = asset.get("caption", "")
             desc = asset.get("description", asset.get("type", "image"))
 
-            if local_path:
-                block = [f"![{alt}]({local_path})"]
+            if src:
+                block = [f"![{alt}]({src})"]
                 if caption:
                     block.append(f"*{caption}*")
                 block.append("")
@@ -366,6 +392,9 @@ CRITICAL OUTPUT RULES:
         # Phase 2: Image acquisition
         print("Visual Agent: acquiring images...", file=sys.stderr)
         assets = self._acquire_images(specs.get("assets", []), output_dir)
+
+        # Phase 2b: put the images somewhere that outlives this process
+        self._store_images(assets, output_dir.name)
 
         # Phase 3: Markdown injection
         print("Visual Agent: injecting images into draft...", file=sys.stderr)
