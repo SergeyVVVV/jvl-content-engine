@@ -12,7 +12,7 @@ Purpose:
   block. Grounded in knowledge files — never invents specs, pricing, warranty.
 
 Auth modes (mirrors WriterAgent / QAAgent):
-  1. OpenAI (via src.llm_client) — when OPENAI_API_KEY is set
+  1. Anthropic (via src.llm_client) — when ANTHROPIC_API_KEY is set
   2. Claude Agent SDK      — when running inside a Claude Code session
 """
 
@@ -40,9 +40,9 @@ class FAQAgent:
     """Generates a structured FAQ block grounded in the knowledge base."""
 
     def __init__(self) -> None:
-        self.api_key = os.environ.get("OPENAI_API_KEY")
+        self.api_key = os.environ.get("ANTHROPIC_API_KEY")
         self.tier = "standard"
-        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-4-6")  # agent-SDK fallback only
+        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-5")  # agent-SDK fallback only
         self.repo_root = Path(__file__).parent.parent
 
     # ------------------------------------------------------------------
@@ -297,7 +297,7 @@ class FAQAgent:
         return f'<script type="application/ld+json">\n{raw_json}\n</script>'
 
     # ------------------------------------------------------------------
-    # Auth mode 1: OpenAI (requires OPENAI_API_KEY)
+    # Auth mode 1: Anthropic (requires ANTHROPIC_API_KEY)
     # ------------------------------------------------------------------
 
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:
@@ -393,7 +393,7 @@ class FAQAgent:
         )
 
         if self.api_key:
-            print(f"Auth: OpenAI (tier: {self.tier})", file=sys.stderr)
+            print(f"Auth: Anthropic (tier: {self.tier})", file=sys.stderr)
             result = self._run_via_sdk(system_prompt, user_message)
         else:
             print(f"Auth: Claude Agent SDK (model: {self.model})", file=sys.stderr)

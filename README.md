@@ -23,7 +23,7 @@ Writer Agent a full context package: topic brief + competitive landscape + JVL-s
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env          # add OPENAI_API_KEY at minimum
+cp .env.example .env          # add ANTHROPIC_API_KEY at minimum
 ```
 
 All three agents work without live SERP access. Mock mode is the default.
@@ -194,11 +194,17 @@ outputs/
 See `.env.example` for the full reference. Minimum required:
 
 ```
-OPENAI_API_KEY=...
+ANTHROPIC_API_KEY=...
 ```
 
-Text agents run on OpenAI (gpt-5 tiers) via `src/llm_client.py`; override models
-with `OPENAI_MODEL_HEAVY` / `OPENAI_MODEL_STANDARD` / `OPENAI_MODEL_LIGHT`.
+Text agents run on Anthropic via `src/llm_client.py`, on a heavy/standard/light
+tier: `claude-opus-5` for the writer, QA and article diagnostic; `claude-sonnet-5`
+for the middle of the pipeline; `claude-haiku-4-5` for visual and metadata copy.
+Override with `ANTHROPIC_MODEL_HEAVY` / `_STANDARD` / `_LIGHT`, and set
+`ANTHROPIC_EFFORT` (low…max) to control how hard they think.
+
+Image generation is the one thing still on OpenAI — Anthropic has no image
+model — so `OPENAI_API_KEY` remains optional, for DALL-E in the Visual Agent.
 
 Optional for live SERP:
 

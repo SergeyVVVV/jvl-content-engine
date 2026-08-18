@@ -12,7 +12,7 @@ Purpose:
   publishing logic, no variant generation.
 
 Auth modes (mirrors WriterAgent / QAAgent):
-  1. OpenAI (via src.llm_client) — when OPENAI_API_KEY is set
+  1. Anthropic (via src.llm_client) — when ANTHROPIC_API_KEY is set
   2. Claude Agent SDK      — when running inside a Claude Code session
 """
 
@@ -44,9 +44,9 @@ class MetadataCopyAgent:
     """Generates final publish-support copy for a single article."""
 
     def __init__(self) -> None:
-        self.api_key = os.environ.get("OPENAI_API_KEY")
+        self.api_key = os.environ.get("ANTHROPIC_API_KEY")
         self.tier = "light"
-        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-4-6")  # agent-SDK fallback only
+        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-5")  # agent-SDK fallback only
         self.repo_root = Path(__file__).parent.parent
 
     # ------------------------------------------------------------------
@@ -219,7 +219,7 @@ class MetadataCopyAgent:
         return warnings
 
     # ------------------------------------------------------------------
-    # Auth mode 1: OpenAI (requires OPENAI_API_KEY)
+    # Auth mode 1: Anthropic (requires ANTHROPIC_API_KEY)
     # ------------------------------------------------------------------
 
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:

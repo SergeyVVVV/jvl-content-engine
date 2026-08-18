@@ -10,7 +10,7 @@ Purpose:
   — plus an assembled markdown string ready to save as a .md file.
 
 Auth modes (tried in order):
-  1. OpenAI (via src.llm_client) — when OPENAI_API_KEY is set in env / .env
+  1. Anthropic (via src.llm_client) — when ANTHROPIC_API_KEY is set in env / .env
   2. Claude Agent SDK      — when running inside a Claude Code session
 """
 
@@ -44,11 +44,10 @@ _KNOWLEDGE_FILES: list[tuple[str, str]] = [
 
 #: Completion budget for the Writer, overridable with WRITER_MAX_TOKENS.
 #:
-#: The default was 8192, which is the whole article plus the reasoning that
-#: precedes it — on a gpt-5 tier the thinking is billed from this same budget,
-#: and a full draft leaves it nothing. When it runs out the API returns an
-#: empty message with finish_reason="length" rather than an error, which is
-#: what surfaced in the UI as "Model returned no text content".
+#: Thinking and the answer share this allowance, so it has to hold both. At
+#: 8192 a full draft left nothing for the prose, and the API returned an empty
+#: message rather than an error — which surfaced in the UI as "Model returned
+#: no text content". Above 16000 llm_client streams, which this exceeds.
 _DEFAULT_MAX_TOKENS = 32000
 
 
@@ -73,9 +72,9 @@ class WriterAgent:
     """
 
     def __init__(self) -> None:
-        self.api_key = os.environ.get("OPENAI_API_KEY")
+        self.api_key = os.environ.get("ANTHROPIC_API_KEY")
         self.tier = "heavy"
-        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-4-6")  # agent-SDK fallback only
+        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-5")  # agent-SDK fallback only
         self.repo_root = Path(__file__).parent.parent
 
     # ------------------------------------------------------------------
@@ -400,7 +399,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         return WriterAgent._absolutize_jvl_links("\n".join(lines).strip())
 
     # ------------------------------------------------------------------
-    # Auth mode 1: OpenAI (requires OPENAI_API_KEY)
+    # Auth mode 1: Anthropic (requires ANTHROPIC_API_KEY)
     # ------------------------------------------------------------------
 
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:
@@ -565,7 +564,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         )
 
         if self.api_key:
-            print(f"Auth: OpenAI (tier: {self.tier})", file=sys.stderr)
+            print(f"Auth: Anthropic (tier: {self.tier})", file=sys.stderr)
             result = self._run_via_sdk(system_prompt, user_message)
         else:
             print(f"Auth: Claude Agent SDK (model: {self.model})", file=sys.stderr)
