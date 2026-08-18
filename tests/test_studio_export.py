@@ -480,3 +480,65 @@ class FaqExtractionTests(unittest.TestCase):
         p = self.payload()
         p["article"]["faq"] = [{"question": "Q?", "answer": "A."}]
         self.assertIn("must have {q, a} strings", validate_payload(p) or "")
+
+
+class HeroExtractionTests(unittest.TestCase):
+    """The hero belongs in the media library, not in the prose."""
+
+    MD = ("# T\n\n![A bartop arcade in a basement lounge]"
+          "(https://example.supabase.co/storage/v1/object/public/article-images/t/hero-01.png)\n\n"
+          "Lead paragraph.\n\n## One\n\nBody.\n")
+
+    def build(self, markdown=None):
+        return to_studio_payload({"meta_title": "T", "meta_description": "D", "slug": "t"},
+                                 markdown or self.MD)
+
+    def test_hero_url_and_alt_move_into_metadata(self) -> None:
+        meta = self.build().payload["metadata"]
+        self.assertTrue(meta["hero_image"].endswith("hero-01.png"))
+        self.assertEqual(meta["hero_image_alt"], "A bartop arcade in a basement lounge")
+
+    def test_hero_is_gone_from_the_body(self) -> None:
+        p = self.build().payload
+        blob = (p["article"].get("intro_markdown", "")
+                + "".join(s["body_markdown"] for s in p["article"]["sections"]))
+        self.assertNotIn("hero-01.png", blob)
+
+    def test_the_lead_survives_the_removal(self) -> None:
+        self.assertIn("Lead paragraph.", self.build().payload["article"]["intro_markdown"])
+
+    def test_only_the_first_image_is_taken(self) -> None:
+        md = self.MD + "\n![inline](https://example.com/inline-01.png)\n"
+        p = self.build(md).payload
+        body = "".join(s["body_markdown"] for s in p["article"]["sections"])
+        self.assertIn("inline-01.png", body)
+        self.assertTrue(p["metadata"]["hero_image"].endswith("hero-01.png"))
+
+    def test_an_article_without_images_carries_no_hero(self) -> None:
+        meta = self.build("# T\n\nLead.\n\n## One\n\nBody.\n").payload["metadata"]
+        self.assertNotIn("hero_image", meta)
+
+    def test_a_local_path_is_not_treated_as_a_hero(self) -> None:
+        # A local path means the upload failed; the site cannot fetch it.
+        md = "# T\n\n![x](images/hero-01.png)\n\nLead.\n\n## One\n\nBody.\n"
+        self.assertNotIn("hero_image", self.build(md).payload["metadata"])
+
+
+class HeroPublishResultTests(unittest.TestCase):
+    def test_hero_success_is_reported(self) -> None:
+        r = _interpret(201, {"success": True, "slug": "s", "pageId": 1, "newsId": 2,
+                             "heroAttached": True})
+        self.assertTrue(r.hero_attached)
+        self.assertIsNone(r.hero_error)
+
+    def test_hero_failure_carries_the_reason(self) -> None:
+        r = _interpret(201, {"success": True, "slug": "s", "pageId": 1, "newsId": 2,
+                             "heroAttached": False,
+                             "heroError": "Hero image fetch failed: HTTP 404"})
+        self.assertFalse(r.hero_attached)
+        self.assertIn("404", r.hero_error)
+
+    def test_an_older_server_without_the_field_is_fine(self) -> None:
+        r = _interpret(201, {"success": True, "slug": "s", "pageId": 1, "newsId": 2})
+        self.assertFalse(r.hero_attached)
+        self.assertIsNone(r.hero_error)

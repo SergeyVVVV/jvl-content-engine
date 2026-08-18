@@ -410,6 +410,18 @@ else:
                 key="create_funnel",
             )
 
+            generate_images = st.checkbox(
+                "Generate images",
+                value=True,
+                help=(
+                    "Draws the visuals the Writer proposed and places them in the "
+                    "article body. Costs a DALL-E call per image and adds a step "
+                    "to the run. Without an OPENAI_API_KEY the agent still runs "
+                    "but inserts placeholders instead of pictures."
+                ),
+                key="create_visuals",
+            )
+
         st.divider()
 
         secondary_keywords = [kw.strip() for kw in secondary_raw.splitlines() if kw.strip()][:10]
@@ -417,7 +429,7 @@ else:
         if st.button("Generate article", type="primary", disabled=not (topic and keyword), key="create_btn"):
             # Labels come from the orchestrator so the progress list can never
             # drift from the steps that actually run.
-            STEP_LABELS = pipeline_steps()
+            STEP_LABELS = pipeline_steps(with_visuals=generate_images)
 
             step_placeholders = []
             progress_col, _ = st.columns([3, 1])
@@ -439,7 +451,8 @@ else:
 
             try:
                 for event in run_pipeline(
-                    topic, keyword, funnel_stage, secondary_keywords, custom_requirements
+                    topic, keyword, funnel_stage, secondary_keywords, custom_requirements,
+                    with_visuals=generate_images,
                 ):
                     step_idx = event["step"] - 1
                     if event["step"] == 0:

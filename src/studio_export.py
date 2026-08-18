@@ -45,6 +45,7 @@ _H3_RE = re.compile(r"^###\s+(?P<text>.+?)\s*$")
 _FENCE_RE = re.compile(r"^\s*(?:```|~~~)")
 _LOCAL_IMAGE_RE = re.compile(r"!\[[^\]]*\]\((?!https?://|//|data:)([^)]+)\)")
 _FAQ_HEADING_RE = re.compile(r"^(faq|frequently asked questions)\b", re.I)
+_REMOTE_IMAGE_RE = re.compile(r"!\[([^\]]*)\]\((https?://[^)\s]+)\)")
 
 #: Bylines the site accepts (`news.author_key`). None = "JVL Editorial Team".
 BYLINES = ("sergey-vysotsky", "andrei-klimovich")
@@ -144,6 +145,35 @@ def _tidy(text: str) -> str:
     text = text.strip()
     text = re.sub(r"(?:\n\s*-{3,}\s*)+$", "", text)
     return text.strip()
+
+
+def extract_hero(intro: str, sections: list[dict]) -> tuple[dict | None, str, list[dict]]:
+    """Lift the first image out of the article and return it as the hero.
+
+    The Visual Agent puts the hero image at the very top, ahead of the first
+    heading. The site does not render it from the body: its hero comes from the
+    media library, keyed to the page. Left inline it would publish twice — once
+    as the page hero once an editor sets one, and once as the first thing in
+    the prose.
+
+    Returns (hero, intro, sections) with the image removed from wherever it was.
+    """
+    hero: dict | None = None
+
+    def _take(text: str) -> str:
+        nonlocal hero
+        if hero is not None:
+            return text
+        match = _REMOTE_IMAGE_RE.search(text)
+        if not match:
+            return text
+        hero = {"url": match.group(2), "alt": match.group(1)}
+        return _tidy(text[: match.start()] + text[match.end():])
+
+    intro = _take(intro)
+    for section in sections:
+        section["body_markdown"] = _take(section["body_markdown"])
+    return hero, intro, sections
 
 
 def extract_faq(sections: list[dict]) -> tuple[list[dict], list[dict]]:
@@ -283,6 +313,7 @@ def to_studio_payload(
         if s["level"] == "h2" and _FAQ_HEADING_RE.match(s["heading"])
     ]
     faq, sections = extract_faq(sections)
+    hero, intro, sections = extract_hero(intro, sections)
 
     article: dict = {
         "h1": h1 or metadata.get("h1") or metadata.get("meta_title") or "",
@@ -303,6 +334,10 @@ def to_studio_payload(
     for optional in ("excerpt", "primary_keyword", "secondary_keywords"):
         if metadata.get(optional):
             out_meta[optional] = metadata[optional]
+    if hero:
+        out_meta["hero_image"] = hero["url"]
+        if hero.get("alt"):
+            out_meta["hero_image_alt"] = hero["alt"]
     if author_key:
         out_meta["author_key"] = author_key
     if article_type:
