@@ -522,3 +522,23 @@ class HeroExtractionTests(unittest.TestCase):
         # A local path means the upload failed; the site cannot fetch it.
         md = "# T\n\n![x](images/hero-01.png)\n\nLead.\n\n## One\n\nBody.\n"
         self.assertNotIn("hero_image", self.build(md).payload["metadata"])
+
+
+class HeroPublishResultTests(unittest.TestCase):
+    def test_hero_success_is_reported(self) -> None:
+        r = _interpret(201, {"success": True, "slug": "s", "pageId": 1, "newsId": 2,
+                             "heroAttached": True})
+        self.assertTrue(r.hero_attached)
+        self.assertIsNone(r.hero_error)
+
+    def test_hero_failure_carries_the_reason(self) -> None:
+        r = _interpret(201, {"success": True, "slug": "s", "pageId": 1, "newsId": 2,
+                             "heroAttached": False,
+                             "heroError": "Hero image fetch failed: HTTP 404"})
+        self.assertFalse(r.hero_attached)
+        self.assertIn("404", r.hero_error)
+
+    def test_an_older_server_without_the_field_is_fine(self) -> None:
+        r = _interpret(201, {"success": True, "slug": "s", "pageId": 1, "newsId": 2})
+        self.assertFalse(r.hero_attached)
+        self.assertIsNone(r.hero_error)

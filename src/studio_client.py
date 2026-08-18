@@ -46,6 +46,11 @@ class PublishResult:
     #: Tag names the site had no match for. Nothing was created for them —
     #: an editor adds the tag in AdminLTE if it should exist.
     tags_unknown: list[str] = field(default_factory=list)
+    #: Whether the generated hero image made it into the site's media library.
+    hero_attached: bool = False
+    #: Why it did not. The draft is fine without one — an editor can set the
+    #: hero in AdminLTE — so this is a note, not a failure.
+    hero_error: str | None = None
 
     @property
     def admin_hint(self) -> str:
@@ -181,6 +186,8 @@ def _interpret(status: int, body: dict | None) -> PublishResult:
             news_id=body.get("newsId"),
             tags_attached=body.get("tagsAttached") or [],
             tags_unknown=body.get("tagsUnknown") or [],
+            hero_attached=bool(body.get("heroAttached")),
+            hero_error=body.get("heroError"),
         )
     return PublishResult(ok=False, status=status, error=_explain(status, body or {}))
 
