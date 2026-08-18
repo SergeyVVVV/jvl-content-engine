@@ -9,7 +9,7 @@ Purpose:
   downstream writing.
 
 Auth modes (tried in order):
-  1. OpenAI (via src.llm_client) — when OPENAI_API_KEY is set in env / .env
+  1. Anthropic (via src.llm_client) — when ANTHROPIC_API_KEY is set in env / .env
   2. Claude Agent SDK      — when running inside a Claude Code session
 """
 
@@ -44,9 +44,9 @@ class SerpResearchAgent:
     """
 
     def __init__(self, provider: SerpProvider | None = None) -> None:
-        self.api_key = os.environ.get("OPENAI_API_KEY")
+        self.api_key = os.environ.get("ANTHROPIC_API_KEY")
         self.tier = "standard"
-        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-4-6")  # agent-SDK fallback only
+        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-5")  # agent-SDK fallback only
         self.repo_root = Path(__file__).parent.parent
         self.provider = provider or get_provider()
 
@@ -172,7 +172,7 @@ CRITICAL OUTPUT RULES:
             print("Output was saved anyway — review the warnings above.", file=sys.stderr)
 
     # ------------------------------------------------------------------
-    # Auth mode 1: OpenAI (requires OPENAI_API_KEY)
+    # Auth mode 1: Anthropic (requires ANTHROPIC_API_KEY)
     # ------------------------------------------------------------------
 
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:
@@ -286,7 +286,7 @@ CRITICAL OUTPUT RULES:
         )
 
         if self.api_key:
-            print(f"Auth: OpenAI (tier: {self.tier})", file=sys.stderr)
+            print(f"Auth: Anthropic (tier: {self.tier})", file=sys.stderr)
             result = self._run_via_sdk(system_prompt, user_message)
         else:
             print(f"Auth: Claude Agent SDK (model: {self.model})", file=sys.stderr)

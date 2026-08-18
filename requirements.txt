@@ -1,3 +1,6 @@
+anthropic>=0.69.0
+# Text generation runs on Anthropic. openai is still required, but only for
+# DALL-E image generation in the Visual Agent — Anthropic has no image model.
 openai>=1.30.0
 python-dotenv>=1.0.1
 jsonschema>=4.0.0

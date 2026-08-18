@@ -1,41 +1,59 @@
-"""Thin OpenAI wrapper used by all content-engine agents.
+"""Thin Anthropic wrapper used by all content-engine agents.
 
 Tiers (env-configurable):
-  OPENAI_MODEL_HEAVY    — complex generation  (default: gpt-5)
-  OPENAI_MODEL_STANDARD — balanced tasks      (default: gpt-5-mini)
-  OPENAI_MODEL_LIGHT    — cheap/fast tasks    (default: gpt-5-nano)
+  ANTHROPIC_MODEL_HEAVY    — complex generation  (default: claude-opus-5)
+  ANTHROPIC_MODEL_STANDARD — balanced tasks      (default: claude-sonnet-5)
+  ANTHROPIC_MODEL_LIGHT    — cheap/fast tasks    (default: claude-haiku-4-5)
+
+Three shape differences from the OpenAI wrapper this replaces, none of which
+the agents have to know about — they still call chat(system, user, ...):
+
+* The system prompt is a top-level parameter, not a message with role="system".
+* Thinking depth is output_config.effort, not a token budget. These models
+  reject budget_tokens outright, and thinking is on by default.
+* The response is a list of content blocks. Thinking arrives as its own block
+  type and must be skipped — concatenating it would corrupt the JSON every
+  agent parses.
 """
 
 from __future__ import annotations
 
 import os
 
-from openai import OpenAI
+from anthropic import Anthropic
+
+#: Tier → default model. Opus for the Writer and QA, Sonnet through the middle
+#: of the pipeline, Haiku for the metadata copy pass.
+_DEFAULT_MODELS = {
+    "heavy": "claude-opus-5",
+    "standard": "claude-sonnet-5",
+    "light": "claude-haiku-4-5",
+}
+
+#: Output budget when a caller does not ask for a specific one.
+#:
+#: A ceiling, not a spend: the API bills what a call actually uses, so a
+#: generous one costs nothing. It has to cover the thinking as well as the
+#: answer — both come out of this same allowance — and at 4096 a deep think
+#: consumed the whole budget before a single token of prose.
+#: Overridable with ANTHROPIC_MAX_TOKENS.
+_DEFAULT_MAX_TOKENS = 16000
+
+#: Above this, stream. A non-streaming request that large can hit the SDK's own
+#: HTTP timeout with the generation already paid for; the Writer asks for 32000.
+_STREAM_ABOVE = 16000
+
+_EFFORT_LEVELS = ("low", "medium", "high", "xhigh", "max")
 
 
 def resolve_model(tier: str = "standard") -> str:
-    """Return the configured OpenAI model id for a tier."""
-    models = {
-        "heavy":    os.environ.get("OPENAI_MODEL_HEAVY", "gpt-5"),
-        "standard": os.environ.get("OPENAI_MODEL_STANDARD", "gpt-5-mini"),
-        "light":    os.environ.get("OPENAI_MODEL_LIGHT", "gpt-5-nano"),
-    }
-    return models.get(tier, models["standard"])
-
-
-#: Completion budget when a caller does not ask for a specific one.
-#:
-#: This is a ceiling, not a spend: the API bills what the call actually uses,
-#: so a generous one costs nothing. It has to cover the reasoning as well as
-#: the answer — on a gpt-5 tier both come out of the same allowance, and at
-#: 4096 a high reasoning effort consumed the whole budget before a single
-#: token of prose, which the API reports as an empty message rather than an
-#: error. Overridable with OPENAI_MAX_TOKENS.
-_DEFAULT_MAX_TOKENS = 16000
+    """Return the configured model id for a tier."""
+    default = _DEFAULT_MODELS.get(tier, _DEFAULT_MODELS["standard"])
+    return os.environ.get(f"ANTHROPIC_MODEL_{tier.upper()}", default)
 
 
 def default_max_tokens() -> int:
-    raw = os.environ.get("OPENAI_MAX_TOKENS")
+    raw = os.environ.get("ANTHROPIC_MAX_TOKENS")
     if not raw:
         return _DEFAULT_MAX_TOKENS
     try:
@@ -45,39 +63,58 @@ def default_max_tokens() -> int:
     return value if value > 0 else _DEFAULT_MAX_TOKENS
 
 
-def empty_response_error(response: object, model: str, max_tokens: int) -> str:
-    """Explain an empty completion using what the response itself reports.
+def resolve_effort(explicit: str | None = None) -> str | None:
+    """Resolve the effort level, ignoring a value the API would reject.
 
-    The gpt-5 tiers are reasoning models: their thinking is billed as
-    completion tokens and drawn from the same `max_completion_tokens` budget as
-    the prose. A budget large enough for the article but not for the thinking
-    in front of it returns `finish_reason="length"` and an empty message — no
-    error, no partial text. Repeating the call unchanged reproduces it exactly,
-    so the message has to say what to change.
+    Returning None simply omits the parameter, which runs the model at its own
+    default — better than failing a nine-step pipeline over a typo in a secret.
     """
-    choice = getattr(response, "choices", [None])[0]
-    finish = getattr(choice, "finish_reason", None)
-    usage = getattr(response, "usage", None)
-    details = getattr(usage, "completion_tokens_details", None)
-    reasoning = getattr(details, "reasoning_tokens", None)
+    value = explicit or os.environ.get("ANTHROPIC_EFFORT")
+    if not value:
+        return None
+    value = value.strip().lower()
+    return value if value in _EFFORT_LEVELS else None
+
+
+def extract_text(message: object) -> str:
+    """Join the text blocks of a response, skipping thinking blocks."""
+    parts = []
+    for block in getattr(message, "content", None) or []:
+        if getattr(block, "type", None) == "text":
+            parts.append(getattr(block, "text", "") or "")
+    return "".join(parts)
+
+
+def empty_response_error(message: object, model: str, max_tokens: int) -> str:
+    """Explain a response that carried no usable text, using what it reports.
+
+    Repeating the call unchanged reproduces it exactly, so the message has to
+    say what to change rather than what happened.
+    """
+    stop = getattr(message, "stop_reason", None)
+    usage = getattr(message, "usage", None)
 
     parts = [f"Model {model} returned no text content"]
-    if finish:
-        parts.append(f"finish_reason={finish}")
+    if stop:
+        parts.append(f"stop_reason={stop}")
     if usage is not None:
-        spent = getattr(usage, "completion_tokens", None)
-        parts.append(f"completion_tokens={spent}/{max_tokens}")
-    if reasoning is not None:
-        parts.append(f"reasoning_tokens={reasoning}")
+        parts.append(f"output_tokens={getattr(usage, 'output_tokens', None)}/{max_tokens}")
 
-    message = ", ".join(parts) + "."
-    if finish == "length":
-        message += (
-            " The completion budget ran out before any prose was emitted"
-            f" — raise max_tokens above {max_tokens}, or lower"
-            " OPENAI_REASONING_EFFORT so less of it goes to thinking."
+    text = ", ".join(parts) + "."
+    if stop == "max_tokens":
+        text += (
+            " The output budget ran out before any prose was emitted — thinking"
+            " and the answer share it. Raise max_tokens above"
+            f" {max_tokens}, or lower ANTHROPIC_EFFORT."
         )
-    return message
+    elif stop == "refusal":
+        category = getattr(getattr(message, "stop_details", None), "category", None)
+        text += (
+            " The request was declined by the model's safety classifiers"
+            + (f" (category: {category})." if category else ".")
+            + " Rewording the brief is likelier to help than retrying."
+        )
+    return text
 
 
 def chat(
@@ -85,35 +122,34 @@ def chat(
     user: str,
     max_tokens: int | None = None,
     tier: str = "standard",
-    reasoning_effort: str | None = None,
+    effort: str | None = None,
 ) -> str:
-    """Call OpenAI chat completions and return the raw text response.
-
-    `reasoning_effort` is forwarded only when set, here or via
-    OPENAI_REASONING_EFFORT, so the default behaviour is the model's own.
-    """
-    api_key = os.environ.get("OPENAI_API_KEY")
+    """Call the Messages API and return the raw text response."""
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
-        raise EnvironmentError("OPENAI_API_KEY is required for llm_client.chat().")
+        raise EnvironmentError("ANTHROPIC_API_KEY is required for llm_client.chat().")
+
     model = resolve_model(tier)
     max_tokens = max_tokens or default_max_tokens()
-    client = OpenAI(api_key=api_key)
+    client = Anthropic(api_key=api_key)
 
-    kwargs = {}
-    effort = reasoning_effort or os.environ.get("OPENAI_REASONING_EFFORT")
-    if effort:
-        kwargs["reasoning_effort"] = effort
+    request = {
+        "model": model,
+        "max_tokens": max_tokens,
+        "system": system,
+        "messages": [{"role": "user", "content": user}],
+    }
+    level = resolve_effort(effort)
+    if level:
+        request["output_config"] = {"effort": level}
 
-    response = client.chat.completions.create(
-        model=model,
-        max_completion_tokens=max_tokens,
-        messages=[
-            {"role": "system", "content": system},
-            {"role": "user", "content": user},
-        ],
-        **kwargs,
-    )
-    text = response.choices[0].message.content
+    if max_tokens > _STREAM_ABOVE:
+        with client.messages.stream(**request) as stream:
+            message = stream.get_final_message()
+    else:
+        message = client.messages.create(**request)
+
+    text = extract_text(message)
     if not text:
-        raise ValueError(empty_response_error(response, model, max_tokens))
+        raise ValueError(empty_response_error(message, model, max_tokens))
     return text

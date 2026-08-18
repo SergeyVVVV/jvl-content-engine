@@ -36,7 +36,7 @@ class DalleProvider:
     """Generates images via OpenAI DALL-E 3."""
 
     def __init__(self) -> None:
-        api_key = os.environ.get("OPENAI_API_KEY")
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
         if not api_key:
             raise EnvironmentError("OPENAI_API_KEY is required for DalleProvider.")
         import openai
@@ -72,7 +72,7 @@ class DalleProvider:
 
 def get_image_provider() -> MockImageProvider | DalleProvider:
     """Return DalleProvider if OPENAI_API_KEY is set, else MockImageProvider."""
-    if os.environ.get("OPENAI_API_KEY"):
+    if os.environ.get("ANTHROPIC_API_KEY"):
         print("Image provider: DALL-E 3 (OpenAI)", file=sys.stderr)
         return DalleProvider()
     print("Image provider: mock (set OPENAI_API_KEY for real generation)", file=sys.stderr)

@@ -13,7 +13,7 @@ Purpose:
   draft seen plus a full iteration report.
 
 Auth modes (mirrors WriterAgent):
-  1. OpenAI (via src.llm_client) — when OPENAI_API_KEY is set
+  1. Anthropic (via src.llm_client) — when ANTHROPIC_API_KEY is set
   2. Claude Agent SDK      — when running inside a Claude Code session
 """
 
@@ -122,9 +122,9 @@ class ReadabilityChecker:
         target_score: float = TARGET_SCORE,
         max_iterations: int = MAX_ITERATIONS,
     ) -> None:
-        self.api_key = os.environ.get("OPENAI_API_KEY")
+        self.api_key = os.environ.get("ANTHROPIC_API_KEY")
         self.tier = "standard"
-        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-4-6")  # agent-SDK fallback only
+        self.model = os.environ.get("ANTHROPIC_MODEL", "claude-opus-5")  # agent-SDK fallback only
         self.repo_root = Path(__file__).parent.parent
         self.target_score = float(target_score)
         self.max_iterations = int(max_iterations)
@@ -170,7 +170,7 @@ class ReadabilityChecker:
         return json.loads(raw)
 
     # ------------------------------------------------------------------
-    # Auth mode 1: OpenAI (requires OPENAI_API_KEY)
+    # Auth mode 1: Anthropic (requires ANTHROPIC_API_KEY)
     # ------------------------------------------------------------------
 
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:
