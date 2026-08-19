@@ -415,7 +415,8 @@ else:
                 value=True,
                 help=(
                     "Draws the visuals the Writer proposed and places them in the "
-                    "article body. Costs a DALL-E call per image and adds a step "
+                    "article body. Costs an image-generation call per image and adds a "
+                    "step "
                     "to the run. Without an OPENAI_API_KEY the agent still runs "
                     "but inserts placeholders instead of pictures."
                 ),

@@ -16,7 +16,7 @@ Examples
     python run_article.py --topic "..." --primary-keyword "..." \\
         --skip "SERP Research" --skip "QA Review"
 
-    # include DALL-E images (costs money)
+    # include generated images (costs money)
     python run_article.py --topic "..." --primary-keyword "..." --with-visuals
 """
 
@@ -65,7 +65,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--with-visuals", dest="with_visuals", action="store_true",
-        help="Run the Visual Agent (generates images via DALL-E — costs money)",
+        help="Run the Visual Agent (generates images via gpt-image — costs money)",
     )
     parser.add_argument(
         "--output-root", dest="output_root", default="outputs",
