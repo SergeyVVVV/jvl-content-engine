@@ -112,7 +112,8 @@ CRITICAL OUTPUT RULES:
 - The JSON must be parseable by json.loads() with no pre-processing.
 - assets array must contain EXACTLY 3 items: one "hero" and two "inline".
 - generation_prompt must be a detailed, specific image-generation prompt matching
-  the visual style rules: warm lighting, real adult home setting, no gamer clichés.
+  the visual style rules: bright, naturally lit interior, warm lighting only when
+  the article calls for it, real adult home setting, no gamer clichés.
 - alt_text must describe the image for accessibility — no keyword stuffing.
 - Do not invent product features not confirmed by knowledge files."""
 
