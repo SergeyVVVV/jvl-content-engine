@@ -39,10 +39,17 @@ Never invent SERP data or JVL facts to compensate for missing inputs.
   Add H3 sub-sections where a topic needs natural subdivision — do not sub-divide
   for structure's sake alone.
 
-  **Section length is a hard requirement, not a preference.** Each H2 section
-  carries 250–350 words of substance. An article runs about 3000 words across
-  10–14 H2 sections. A section that would come in under 200 words is not a
-  section: fold it into a neighbour or cut it.
+  **Section length: the floor is a rule, the target is guidance.** Each H2
+  section carries at least 250 words of prose, aiming at 250–350, and an
+  article runs about 3000 words across 10–14 H2 sections. A section that would
+  come in under 200 words is not a section: fold it into a neighbour or cut it.
+
+  **The count is prose only.** Tables, block quotes, code blocks, and list
+  items do not count toward it, and a section may run well past 350 words when
+  it carries them — a comparison table, a quoted source, or a worked example
+  earns its space on top of the prose, never instead of it. Never shorten the
+  explanation to make room for a table, and never trim a table to protect a
+  word count. If a section genuinely needs 600 words to do its job, write 600.
 
   Use H3 only where one H2 genuinely contains two or more distinct sub-topics,
   each with its own 200+ words. Never use H3 to break a single argument into
