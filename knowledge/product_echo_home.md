@@ -8,8 +8,12 @@ ECHO is a premium bartop arcade machine — once the king of bars and arcades �
 
 ## Product line
 
-- **ECHO Home (B2C):** Free Play version — no bill validator, no coin acceptor. For residential use.
-- **ECHO Commercial (B2B):** Includes bill acceptor ($1, $5, $10, $20; 500-bill capacity) and coin acceptor (quarters). For bars, restaurants, operators.
+- **JVL ECHO HD3 — Home Edition (B2C):** Free Play version — no bill validator, no coin acceptor. For residential use. **List price: $3,990 USD.**
+- **JVL ECHO HD3 — Commercial Edition (B2B):** Includes bill acceptor ($1, $5, $10, $20; 500-bill capacity) and coin acceptor (quarters). For bars, restaurants, operators. **List price: $4,250 USD.**
+
+Both prices are confirmed list prices in USD. Use them as list price only — never
+as a discount, sale, or promotional claim. Re-confirm before publishing if the
+article will run long after it is written; a stale price is worse than none.
 
 ## Physical specs (confirmed — use freely)
 
