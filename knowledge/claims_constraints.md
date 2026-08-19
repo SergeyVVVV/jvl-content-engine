@@ -53,6 +53,11 @@
 Use this exact framing:
 > "ECHO is built on 30+ years of JVL bartop expertise. JVL bartops have been awarded 'Best Bartop Video Game of the Year' by RePlay Magazine multiple times."
 
+"Multiple awards and mentions" is also permitted where the sentence needs the
+broader form. It is the ceiling, not a starting point:
+
+- Do NOT give a count, a year, or a list — the business has confirmed that no
+  exact figure exists to cite. "Multiple" is as specific as this claim gets.
 - Do NOT claim the RePlay Magazine award for ECHO directly
 - Do NOT use the RePlay Magazine logo without separate approval
 - The heritage claim is about JVL's track record across its bartop line, not a specific ECHO accolade
