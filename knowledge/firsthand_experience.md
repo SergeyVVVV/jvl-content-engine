@@ -211,10 +211,15 @@ but `verified_by` is still mandatory.
   usage_notes: Qualitative only — no share, count or rate was given. Never turn this into a percentage or a "most operators" claim.
   relevant_topics: commercial, operators, repeat purchase, multi-unit
 
-**TODO: requires business confirmation — RePlay Magazine awards.** The intake
-could not confirm how many awards or which years. Until it can, the only
-permitted wording is the heritage framing already fixed in
-`claims_constraints.md`; no count and no years.
+- id: replay-awards-and-mentions
+  type: data_point
+  claim: "JVL bartop machines have received multiple RePlay Magazine awards and mentions over the line's history."
+  source: business intake questionnaire, 2026-08-19; count and years confirmed as unavailable
+  date_added: 2026-08-19
+  consent_status: not_required
+  verified_by: null
+  usage_notes: "Multiple awards and mentions" is the ceiling — the business confirmed no exact count or years exist to cite, so never give a number, a year, or a specific title beyond the approved framing in claims_constraints.md. The record belongs to the JVL bartop line, not to the ECHO. Logo use still needs separate approval.
+  relevant_topics: heritage, awards, JVL history, trust, industry recognition
 
 ---
 
