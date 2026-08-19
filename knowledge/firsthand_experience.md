@@ -37,148 +37,220 @@ Every entry is a YAML-style block:
 
 Real customer experiences with the ECHO. Requires written/recorded consent from the customer (email, support ticket, signed release). Anonymisation is allowed and preferred — use first name + region, not full identity.
 
-**Status: EMPTY. Awaiting input from Customer Success team.**
+**Status: EMPTY.** Confirmed 2026-08-19: no customer has yet given written consent. Nothing may be written here until one does — a paraphrased "typical customer" is a fabricated testimonial, not a summary.
 
-Suggested intake process:
-1. Insert opt-in card in every shipped ECHO unit ("Share how ECHO lives in your home — bonus offer for verified reviewers").
-2. Customer Success collects responses (3-month follow-up email).
-3. Get explicit written consent for use in marketing content.
+Intake process, when it starts:
+1. Opt-in card in every shipped ECHO unit.
+2. Customer Success collects responses at the 3-month follow-up.
+3. Explicit written consent recorded before any use in content.
 4. Anonymise per usage_notes.
-5. Add entry below with `consent_status: confirmed` once consent is recorded.
-
-<!-- EXAMPLE — DO NOT USE — for format reference only:
-
-- id: example-do-not-use
-  type: story
-  claim: "EXAMPLE PLACEHOLDER — replace with real customer story before use"
-  source: PLACEHOLDER
-  date_added: 1970-01-01
-  consent_status: pending
-  verified_by: null
-  usage_notes: This is a format example. Writer Agent must not select entries where consent_status != confirmed.
-  relevant_topics: example
-
--->
+5. Entry added here with `consent_status: confirmed`.
 
 ---
 
-## SECTION 2 — Founder and team quotes
+## SECTION 2 — Product and design rationale
 
-Real quotes from JVL leadership and engineering team. Gather via a 30-minute interview with CEO, Head of Product, Chief Engineer, or veteran assembly staff. One interview can produce 10-20 usable anchors.
+Why the ECHO is built the way it is. Gathered 2026-08-19 through the business
+intake questionnaire rather than a recorded interview, so these are **not
+quotable as attributed statements** — the Writer may use the reasoning, not put
+it in someone's mouth. Attaching a name requires an actual interview.
 
-**Status: EMPTY. Awaiting interview with JVL leadership.**
+**Status: PARTIAL — reasoning captured, no attributable speaker.**
 
-Suggested questions to ask in the interview (one round, ~30 min):
-- Why did we make ECHO a 22" touchscreen specifically?
-- Why offline-only? Why no Wi-Fi?
-- What's the hardest manufacturing step?
-- How long does one unit take from raw frame to packaging?
-- What's the story behind the swivel base?
-- Who tests each unit and what do they check for?
-- What's something a customer would never guess about how ECHO is built?
-- What's the longest-serving piece of JVL bartop heritage that lives in ECHO?
-
-<!-- EXAMPLE — DO NOT USE:
-
-- id: example-founder-offline-first
-  type: founder_quote
-  claim: "EXAMPLE PLACEHOLDER — replace with real founder quote from verified interview"
-  source: PLACEHOLDER
-  date_added: 1970-01-01
-  consent_status: pending
+- id: why-22-inch-touchscreen
+  type: quote
+  claim: "The 22-inch screen is the balance point between a comfortable play area and a machine that still belongs on a counter — large enough to read the interface and play properly, small enough not to take over the bar top. The touchscreen removes the space a joystick and buttons would need, makes the controls obvious to someone approaching the machine for the first time, and cuts the number of moving parts that wear out and need servicing."
+  source: business intake questionnaire, 2026-08-19
+  date_added: 2026-08-19
+  consent_status: not_required
   verified_by: null
-  usage_notes: This is a format example. Do not use.
-  relevant_topics: example
+  usage_notes: Paraphrase as product reasoning. Do not attribute to a named person or present as a quote until an interview is on record.
+  relevant_topics: touchscreen vs joystick, choosing a home arcade, maintenance, countertop fit
 
--->
+- id: why-offline-by-design
+  type: quote
+  claim: "Running fully offline is a design decision, not a limitation. All 149 games, the leaderboards and the tournaments run locally, so there is no account, no Wi-Fi setup, no download, no subscription and no waiting. For a home owner that is simplicity; for a venue it is one less thing that can take the machine out of service."
+  source: business intake questionnaire, 2026-08-19
+  date_added: 2026-08-19
+  consent_status: not_required
+  verified_by: null
+  usage_notes: Paraphrase only, no named attribution. The offline claim itself is already a confirmed product fact in claims_constraints.md.
+  relevant_topics: offline play, plug-and-play, reliability, venue uptime
+
+- id: hardest-production-step
+  type: craftsmanship
+  claim: "The hardest step is final integration and QC — display, touchscreen, computer, audio, power, cabinet and the swivel mechanism all have to behave as one system. Assembling the individual components is comparatively straightforward; guaranteeing that the finished unit runs stably and looks flawless is not."
+  source: business intake questionnaire, 2026-08-19
+  date_added: 2026-08-19
+  consent_status: not_required
+  verified_by: null
+  usage_notes: Strong build-quality anchor. Paraphrase; no named attribution.
+  relevant_topics: build quality, manufacturing, QC, premium positioning
+
+- id: why-swivel-base
+  type: quote
+  claim: "The 360-degree base comes straight out of how a countertop machine actually gets used. The ECHO sits in the middle of a bar or a table with several people around it, so instead of moving a heavy machine or swapping seats, you turn the screen to the next player."
+  source: business intake questionnaire, 2026-08-19
+  date_added: 2026-08-19
+  consent_status: not_required
+  verified_by: null
+  usage_notes: Paraphrase only. The 360-degree base and head-to-head play are already confirmed product facts.
+  relevant_topics: two-player, social play, swivel base, bar placement
+
+- id: industrial-not-consumer
+  type: craftsmanship
+  claim: "Inside, the ECHO is closer to a piece of purpose-built commercial equipment than to a home computer or a tablet in a case. What the owner sees is a simple touchscreen appliance; behind it sit a dedicated frame, power system, audio, controllers and cooling designed for years of continuous use. All 149 games live on 4 GB of onboard storage, and access to the system settings is protected by a physical key."
+  source: business intake questionnaire, 2026-08-19
+  date_added: 2026-08-19
+  consent_status: not_required
+  verified_by: null
+  usage_notes: The 4 GB storage figure is new to the knowledge base and is not yet in claims_constraints.md — do not state it as a spec until it is added there.
+  relevant_topics: build quality, durability, what is inside, commercial-grade
+
+- id: bartop-heritage-continuity
+  type: quote
+  claim: "What carries over from the JVL bartops of thirty years ago is the format itself: a compact machine, a touchscreen as the main interface, a large library in one unit, and people playing around a single screen. The display, the electronics and the design have all changed; the shape of the product has not."
+  source: business intake questionnaire, 2026-08-19
+  date_added: 2026-08-19
+  consent_status: not_required
+  verified_by: null
+  usage_notes: Heritage framing only. The RePlay Magazine award wording in claims_constraints.md still applies and must not be attached to the ECHO directly.
+  relevant_topics: heritage, JVL history, bartop arcade, brand trust
 
 ---
 
 ## SECTION 3 — Craftsmanship and process details
 
-JVL's manufacturing process, materials, and quality control. Internal data, but still must be verified by Production/Engineering lead before publication. Use to support claims like "individually tested" or "30+ years of bartop expertise."
+JVL's manufacturing process and quality control. Internal data — no external
+consent needed, but each entry still needs the production lead's name in
+`verified_by` before the Writer may use it.
 
-**Status: EMPTY. Awaiting input from Production team.**
+**Status: PARTIAL — process captured, signature pending.**
 
-Suggested data points to gather:
-- Average labour-hours per unit (assembly + testing combined).
-- Number of QC checkpoints between raw frame and packaging.
-- Average years of experience of assembly line staff.
-- Materials/suppliers used for the cabinet, display, speakers (where shareable).
-- Burn-in test duration before shipping.
-- Defect rate caught at QC (the figure itself proves the QC is real).
-
-<!-- EXAMPLE — DO NOT USE:
-
-- id: example-qc-checkpoints
+- id: full-cycle-seven-working-days
   type: craftsmanship
-  claim: "EXAMPLE PLACEHOLDER — replace with real QC data confirmed by Production lead"
-  source: PLACEHOLDER
-  date_added: 1970-01-01
-  consent_status: pending
+  claim: "Physical assembly of a unit takes hours once every component has passed incoming inspection. The full cycle from assembly to a unit ready to ship can run up to seven working days — configuration, manual and automated testing, burn-in, a second QC pass, and packing."
+  source: business intake questionnaire, 2026-08-19
+  date_added: 2026-08-19
+  consent_status: not_required
   verified_by: null
-  usage_notes: This is a format example. Do not use.
-  relevant_topics: example
+  usage_notes: The strongest process anchor available. Always give both halves — hours of assembly against up to seven days of the full cycle — because the gap between them is the point.
+  relevant_topics: build quality, individually tested, QC, lead time, premium manufacturing
 
--->
+- id: pre-shipment-test-coverage
+  type: craftsmanship
+  claim: "Every ECHO is powered on and tested individually before it leaves the factory. The pass covers at minimum system boot, the touchscreen across its whole surface, image, sound, game loading, controls, system settings, power, the swivel mechanism and the condition of the cabinet."
+  source: business intake questionnaire, 2026-08-19
+  date_added: 2026-08-19
+  consent_status: not_required
+  verified_by: null
+  usage_notes: "Individually tested before shipping" is already a confirmed claim; this entry is what makes it concrete. Keep the "at minimum" hedge — the list was given as a floor, not an exhaustive protocol.
+  relevant_topics: individually tested, QC, reliability, what you get
+
+- id: materials-publicly-nameable
+  type: craftsmanship
+  claim: "Reinforced plastic case and a precision-built frame, a 22-inch LCD, 4 GB of onboard storage, and a 25-watt four-speaker audio system with a subwoofer."
+  source: business intake questionnaire, 2026-08-19
+  date_added: 2026-08-19
+  consent_status: not_required
+  verified_by: null
+  usage_notes: Component suppliers are not public — never name them. Do not give a pixel resolution for the display; the panel is described by size and type only.
+  relevant_topics: materials, build quality, specs, audio
+
+**Resolved 2026-08-19 — the display is not described by resolution.** An earlier
+intake answer gave a pixel figure that did not match the 16:9 panel described in
+`product_echo_home.md`. The business has settled it by dropping the number: the
+screen is a 22-inch 16:9 HD LCD and nothing finer than that is claimed.
 
 ---
 
 ## SECTION 4 — Operational data points
 
-Real numbers about JVL operations that the Writer can cite to demonstrate authority. `consent_status: not_required` is allowed here, but `verified_by` is still mandatory — these must be confirmed by the relevant JVL team member.
+Real numbers about JVL operations. `consent_status: not_required` applies here,
+but `verified_by` is still mandatory.
 
-**Status: EMPTY. Awaiting input from Operations / Sales.**
+**Status: PARTIAL — figures captured, signature pending.**
 
-Suggested data points to gather:
-- Total ECHO units shipped (per year, lifetime).
-- Number of countries served.
-- Number of language localisations (already known: 7).
-- Number of bartop models JVL has produced over the company's history.
-- Number of RePlay Magazine awards (heritage claim — see claims_constraints.md for exact wording rules).
-- Number of returning customers / multi-unit households.
-
-<!-- EXAMPLE — DO NOT USE:
-
-- id: example-units-shipped-2025
+- id: units-shipped-1000-plus
   type: data_point
-  claim: "EXAMPLE PLACEHOLDER — replace with real operations figure confirmed by Ops lead"
-  source: PLACEHOLDER
-  date_added: 1970-01-01
+  claim: "More than 1,000 ECHO units shipped."
+  source: business intake questionnaire, 2026-08-19
+  date_added: 2026-08-19
   consent_status: not_required
   verified_by: null
-  usage_notes: This is a format example. Do not use.
-  relevant_topics: example
+  usage_notes: Use as "more than 1,000" — the figure is a floor, not a count. No per-year breakdown was given, so do not imply an annual rate.
+  relevant_topics: track record, trust, scale, proof
 
--->
+- id: markets-us-and-canada
+  type: data_point
+  claim: "The ECHO is sold in the United States and Canada. The machine itself runs in seven languages."
+  source: business intake questionnaire, 2026-08-19
+  date_added: 2026-08-19
+  consent_status: not_required
+  verified_by: null
+  usage_notes: Do not imply availability outside the US and Canada. Buyers elsewhere should be pointed at JVL directly. Seven languages is already a confirmed product fact.
+  relevant_topics: availability, shipping, international, languages
+
+- id: eleventh-generation-since-1995
+  type: data_point
+  claim: "JVL has been building bartop machines since 1995, and the ECHO is the eleventh generation of that line — the ECHO Evolution timeline marks 1995, 1997, 1999, 2001, 2003, 2004, 2005, 2006, 2008, 2010 and the present."
+  source: business intake questionnaire, 2026-08-19
+  date_added: 2026-08-19
+  consent_status: not_required
+  verified_by: null
+  usage_notes: This is what makes "30+ years of bartop expertise" checkable rather than a slogan. The eleven dates are the strongest form; use them when the article has room.
+  relevant_topics: heritage, JVL history, 30 years, trust, generations
+
+- id: commercial-repeat-buyers
+  type: data_point
+  claim: "Commercial buyers commonly take more than one unit for different venues, and come back for repeat orders."
+  source: business intake questionnaire, 2026-08-19
+  date_added: 2026-08-19
+  consent_status: not_required
+  verified_by: null
+  usage_notes: Qualitative only — no share, count or rate was given. Never turn this into a percentage or a "most operators" claim.
+  relevant_topics: commercial, operators, repeat purchase, multi-unit
+
+- id: replay-awards-and-mentions
+  type: data_point
+  claim: "JVL bartop machines have received multiple RePlay Magazine awards and mentions over the line's history."
+  source: business intake questionnaire, 2026-08-19; count and years confirmed as unavailable
+  date_added: 2026-08-19
+  consent_status: not_required
+  verified_by: null
+  usage_notes: "Multiple awards and mentions" is the ceiling — the business confirmed no exact count or years exist to cite, so never give a number, a year, or a specific title beyond the approved framing in claims_constraints.md. The record belongs to the JVL bartop line, not to the ECHO. Logo use still needs separate approval.
+  relevant_topics: heritage, awards, JVL history, trust, industry recognition
 
 ---
 
 ## SECTION 5 — Review aggregates
 
-Aggregated signals from real public reviews (Amazon, Trustpilot, Google reviews, retailer reviews). Individual review text is NOT pasted here — only aggregate counts, averages, and recurring themes that the Writer can reference without exposing individual reviewer identities.
+Aggregated signals from real public reviews. Individual review text is NOT
+pasted here — only counts, averages and recurring themes.
 
-**Status: EMPTY. Awaiting review audit by Marketing.**
+**Status: EMPTY — and deliberately so.**
 
-Suggested data points to gather:
-- Number of public reviews across all platforms.
-- Average rating (per platform and combined).
-- Most frequently mentioned positive themes (3-5 phrases).
-- Most frequently mentioned objections (so we can address them honestly in content).
+The intake reported that a total review count across platforms cannot be
+compiled and that no average rating is available. What it did offer were themes
+drawn from the four reviews JVL displays on its own site, with the honest note
+that this "cannot yet be called an aggregate". It cannot: four testimonials
+selected for a product page are marketing copy, not a sample, and treating them
+as evidence of what customers generally say is exactly the failure this file
+exists to prevent.
 
-<!-- EXAMPLE — DO NOT USE:
+The list of common objections in the same answer was explicitly framed as the
+*most likely* complaints for a product of this kind — an inference, not an
+observation. Guessed objections are not review data, and an article that
+answered them as if they were real would be inventing customer sentiment.
 
-- id: example-amazon-aggregate
-  type: review_aggregate
-  claim: "EXAMPLE PLACEHOLDER — replace with real verified review aggregate"
-  source: PLACEHOLDER
-  date_added: 1970-01-01
-  consent_status: not_required
-  verified_by: null
-  usage_notes: This is a format example. Do not use.
-  relevant_topics: example
+Nothing is entered until there is a real review audit. What would make this
+section usable:
+- review counts and average rating per platform, from the platforms themselves
+- recurring positive themes across that whole set, not a curated four
+- recurring objections **actually observed** in reviews and support tickets
 
--->
+Support tickets are the fastest honest route to the objections list — they are
+first-party, they already exist, and nobody has to guess.
 
 ---
 
@@ -187,3 +259,5 @@ Suggested data points to gather:
 | Date       | Section | Change                | By |
 |------------|---------|-----------------------|----|
 | 2026-05-14 | all     | Skeleton created      | content-engine |
+| 2026-08-19 | 2, 3, 4 | 13 entries added from the business intake questionnaire; all `verified_by: null` until a name is on record | content-engine |
+| 2026-08-19 | 5       | Left empty on purpose — the themes offered came from four reviews on JVL's own site, and the objections were inferred rather than observed | content-engine |
