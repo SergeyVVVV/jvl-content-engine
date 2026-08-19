@@ -14,7 +14,7 @@ Model and quality are per role and env-overridable:
 
   role    env vars                                    default
   hero    IMAGE_MODEL_HERO   / IMAGE_QUALITY_HERO     gpt-image-2 / medium
-  inline  IMAGE_MODEL_INLINE / IMAGE_QUALITY_INLINE   gpt-image-1-mini / medium
+  inline  IMAGE_MODEL_INLINE / IMAGE_QUALITY_INLINE   gpt-image-1-mini / high
 """
 
 from __future__ import annotations
@@ -29,12 +29,13 @@ from pathlib import Path
 #:
 #: The hero is the one image every reader sees, so it gets the flagship. The
 #: inline images sit mid-article and get the mini, which costs roughly a
-#: quarter as much at the same quality tier. Quality matters more than model
-#: for the bill: low→high is a ~30x spread within one model, where the models
-#: differ by at most ~4x at a fixed tier.
+#: quarter as much at the same quality tier — cheap enough to run at high,
+#: where it still comes in under the flagship at medium. Quality matters more
+#: than model for the bill: low→high is a ~30x spread within one model, where
+#: the models differ by at most ~4x at a fixed tier.
 _ROLE_DEFAULTS: dict[str, tuple[str, str]] = {
     "hero":   ("gpt-image-2", "medium"),
-    "inline": ("gpt-image-1-mini", "medium"),
+    "inline": ("gpt-image-1-mini", "high"),
 }
 
 
