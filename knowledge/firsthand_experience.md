@@ -154,13 +154,13 @@ consent needed, but each entry still needs the production lead's name in
   date_added: 2026-08-19
   consent_status: not_required
   verified_by: null
-  usage_notes: Component suppliers are not public — never name them. The screen resolution given in the same answer (1680x1050) is held back deliberately, see TODO below.
+  usage_notes: Component suppliers are not public — never name them. Do not give a pixel resolution for the display; the panel is described by size and type only.
   relevant_topics: materials, build quality, specs, audio
 
-**TODO: requires business confirmation — display aspect ratio.** The intake gave
-the resolution as 1680x1050, which is 16:10. `product_echo_home.md` describes
-the panel as 16:9 in three places. One of the two is wrong; neither figure may
-be used in an article until the business says which.
+**Resolved 2026-08-19 — the display is not described by resolution.** An earlier
+intake answer gave a pixel figure that did not match the 16:9 panel described in
+`product_echo_home.md`. The business has settled it by dropping the number: the
+screen is a 22-inch 16:9 HD LCD and nothing finer than that is claimed.
 
 ---
 
