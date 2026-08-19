@@ -204,7 +204,7 @@ Override with `ANTHROPIC_MODEL_HEAVY` / `_STANDARD` / `_LIGHT`, and set
 `ANTHROPIC_EFFORT` (low…max) to control how hard they think.
 
 Image generation is the one thing still on OpenAI — Anthropic has no image
-model — so `OPENAI_API_KEY` remains optional, for DALL-E in the Visual Agent.
+model — so `OPENAI_API_KEY` remains optional, for gpt-image in the Visual Agent.
 
 Optional for live SERP:
 

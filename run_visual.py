@@ -2,8 +2,9 @@
 """JVL Content Engine — Visual Agent CLI.
 
 Specifies 3 image assets (1 hero + 2 inline) for an article draft,
-generates them via DALL-E 3 (or mock placeholders), downloads locally,
-and injects image markdown into the draft at fixed H2-based positions.
+generates them via OpenAI's gpt-image models (or mock placeholders), saves
+them locally, and injects image markdown into the draft at fixed H2-based
+positions.
 
 Required:
   --topic           Article topic
@@ -165,15 +166,20 @@ def main() -> int:
     # Summary
     # ----------------------------------------------------------------
     assets = result.get("assets", [])
-    dalle_count = sum(1 for a in assets if a.get("source") == "dalle3")
-    mock_count = sum(1 for a in assets if a.get("source") == "mock")
-    failed_count = sum(
-        1 for a in assets if a.get("source") == "dalle3_download_failed"
-    )
+    # source is the model that drew the image, so the summary counts by
+    # whatever came back rather than by one hard-coded model name.
+    by_model: dict[str, int] = {}
+    for asset in assets:
+        by_model[asset.get("source", "unknown")] = (
+            by_model.get(asset.get("source", "unknown"), 0) + 1
+        )
+    mock_count = by_model.pop("mock", 0)
+    failed_count = by_model.pop("save_failed", 0)
 
     print(f"\nVisual Agent complete.", file=sys.stderr)
     print(f"  Assets   : {len(assets)}", file=sys.stderr)
-    print(f"  dalle3   : {dalle_count}", file=sys.stderr)
+    for model, count in sorted(by_model.items()):
+        print(f"  {model:9s}: {count}", file=sys.stderr)
     print(f"  mock     : {mock_count}", file=sys.stderr)
     if failed_count:
         print(f"  failed   : {failed_count}", file=sys.stderr)

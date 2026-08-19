@@ -15,7 +15,16 @@ from types import SimpleNamespace
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
-from src.llm_client import empty_response_error, resolve_model  # noqa: E402
+from src.llm_client import (  # noqa: E402
+    _DEFAULT_MAX_RETRIES,
+    _DEFAULT_TIMEOUT,
+    _STREAM_AT_OR_ABOVE,
+    default_max_retries,
+    default_max_tokens,
+    default_timeout,
+    empty_response_error,
+    resolve_model,
+)
 from src.writer_agent import _DEFAULT_MAX_TOKENS, _max_tokens  # noqa: E402
 
 
@@ -132,3 +141,59 @@ class DefaultBudgetTests(unittest.TestCase):
             if re.search(r"max_tokens=(?:4096|8192)\b", p.read_text(encoding="utf-8"))
         ]
         self.assertEqual(pinned, [])
+
+
+class TimeoutAndRetryTests(unittest.TestCase):
+    """A wedged request must end by itself.
+
+    Without a timeout the client inherits the SDK's generous defaults, so a
+    request that never completes is never abandoned: one held a nine-step
+    pipeline for 47 minutes at 0% CPU, and the retries queued behind it made it
+    worse. These pin the bound and the env escape hatch.
+    """
+
+    def setUp(self) -> None:
+        self._saved = {
+            name: os.environ.pop(name, None)
+            for name in ("ANTHROPIC_TIMEOUT", "ANTHROPIC_MAX_RETRIES")
+        }
+
+    def tearDown(self) -> None:
+        for name, value in self._saved.items():
+            if value is None:
+                os.environ.pop(name, None)
+            else:
+                os.environ[name] = value
+
+    def test_a_request_cannot_wait_forever(self) -> None:
+        self.assertLess(default_timeout(), 600)
+        self.assertGreater(default_timeout(), 0)
+
+    def test_retries_are_bounded(self) -> None:
+        self.assertLessEqual(default_max_retries(), 3)
+
+    def test_worst_case_is_minutes_not_the_better_part_of_an_hour(self) -> None:
+        worst = default_timeout() * (default_max_retries() + 1)
+        self.assertLess(worst, 20 * 60)
+
+    def test_env_overrides_win(self) -> None:
+        os.environ["ANTHROPIC_TIMEOUT"] = "45"
+        os.environ["ANTHROPIC_MAX_RETRIES"] = "0"
+        self.assertEqual(default_timeout(), 45.0)
+        self.assertEqual(default_max_retries(), 0)
+
+    def test_nonsense_overrides_fall_back_instead_of_crashing_the_run(self) -> None:
+        os.environ["ANTHROPIC_TIMEOUT"] = "soon"
+        os.environ["ANTHROPIC_MAX_RETRIES"] = "-1"
+        self.assertEqual(default_timeout(), _DEFAULT_TIMEOUT)
+        self.assertEqual(default_max_retries(), _DEFAULT_MAX_RETRIES)
+
+
+class StreamingThresholdTests(unittest.TestCase):
+    def test_the_default_budget_streams(self) -> None:
+        # The hang landed on a call at exactly the default budget, which the old
+        # strictly-greater comparison sent down the non-streaming path.
+        self.assertGreaterEqual(default_max_tokens(), _STREAM_AT_OR_ABOVE)
+
+    def test_the_writers_budget_streams(self) -> None:
+        self.assertGreaterEqual(_DEFAULT_MAX_TOKENS, _STREAM_AT_OR_ABOVE)

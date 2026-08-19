@@ -5,15 +5,16 @@ Pipeline position:
 
 Purpose:
   Given a draft article, produce exactly 3 image specifications (1 hero + 2 inline),
-  generate them via DALL-E 3 (or mock placeholders), download locally, and inject
-  image markdown into the draft at fixed slot positions.
+  generate them via OpenAI's gpt-image models (or mock placeholders), save them
+  locally, and inject image markdown into the draft at fixed slot positions.
 
 Auth modes for the LLM specification phase (tried in order):
   1. Anthropic (via src.llm_client) — when ANTHROPIC_API_KEY is set in env / .env
   2. Claude Agent SDK      — when running inside a Claude Code session
 
 Image generation:
-  DALL-E 3 via OpenAI API when OPENAI_API_KEY is set; mock mode otherwise.
+  gpt-image via OpenAI API when OPENAI_API_KEY is set; mock mode otherwise.
+  Model and quality per role live in src.image_providers.
 """
 
 from __future__ import annotations
@@ -26,7 +27,7 @@ from pathlib import Path
 
 import jsonschema
 
-from src.image_providers import download_image, get_image_provider
+from src.image_providers import get_image_provider, resolve_model, save_image
 
 
 # Knowledge files loaded into the Visual Agent's LLM context.
@@ -36,9 +37,10 @@ _KNOWLEDGE_FILES: list[tuple[str, str]] = [
     ("brand_voice.md",        "BRAND VOICE AND TONE"),
 ]
 
-# DALL-E 3 size per asset type.
-_DALLE_SIZE: dict[str, str] = {
-    "hero":      "1792x1024",
+# Image size per asset type. 1536x1024 is the landscape size the whole
+# gpt-image family accepts; DALL-E 3's 1792x1024 is not one of them.
+_IMAGE_SIZE: dict[str, str] = {
+    "hero":      "1536x1024",
     "inline":    "1024x1024",
     "detail":    "1024x1024",
     "lifestyle": "1024x1024",
@@ -50,7 +52,7 @@ class VisualAgent:
     """Specifies, generates, and injects 3 images into a draft article.
 
     Phase 1 — LLM (Claude): produces 3 asset specs (hero + 2 inline).
-    Phase 2 — DALL-E 3: generates and downloads each image.
+    Phase 2 — gpt-image: generates and saves each image.
     Phase 3 — Python: inserts image markdown into the draft at fixed positions.
     """
 
@@ -109,8 +111,9 @@ CRITICAL OUTPUT RULES:
 - Output ONLY the raw JSON object. No markdown. No code fences. No preamble.
 - The JSON must be parseable by json.loads() with no pre-processing.
 - assets array must contain EXACTLY 3 items: one "hero" and two "inline".
-- generation_prompt must be a detailed, specific DALL-E 3 prompt that matches
-  the visual style rules: warm lighting, real adult home setting, no gamer clichés.
+- generation_prompt must be a detailed, specific image-generation prompt matching
+  the visual style rules: bright, naturally lit interior, warm lighting only when
+  the article calls for it, real adult home setting, no gamer clichés.
 - alt_text must describe the image for accessibility — no keyword stuffing.
 - Do not invent product features not confirmed by knowledge files."""
 
@@ -212,7 +215,7 @@ CRITICAL OUTPUT RULES:
     # ------------------------------------------------------------------
 
     def _acquire_images(self, assets: list[dict], output_dir: Path) -> list[dict]:
-        """Generate and download images for each asset spec.
+        """Generate and save images for each asset spec.
 
         Modifies each asset in-place to add 'local_path' and 'source'.
         Returns the modified list.
@@ -229,20 +232,21 @@ CRITICAL OUTPUT RULES:
                 inline_count += 1
                 filename = f"inline-{inline_count:02d}.png"
 
-            size = _DALLE_SIZE.get(asset_type, "1024x1024")
+            role = "hero" if asset_type == "hero" else "inline"
+            size = _IMAGE_SIZE.get(asset_type, "1024x1024")
             dest = output_dir / filename
 
-            url = provider.generate(asset.get("generation_prompt", ""), size)
-            if url:
+            data = provider.generate(asset.get("generation_prompt", ""), size, role)
+            if data:
                 try:
-                    local_path = download_image(url, dest)
+                    local_path = save_image(data, dest)
                     asset["local_path"] = str(local_path)
-                    asset["source"] = "dalle3"
-                    print(f"  Downloaded → {local_path}", file=sys.stderr)
+                    asset["source"] = resolve_model(role)
+                    print(f"  Saved → {local_path}", file=sys.stderr)
                 except Exception as exc:
-                    print(f"  Download failed for {filename}: {exc}", file=sys.stderr)
+                    print(f"  Save failed for {filename}: {exc}", file=sys.stderr)
                     asset["local_path"] = None
-                    asset["source"] = "dalle3_download_failed"
+                    asset["source"] = "save_failed"
             else:
                 asset["local_path"] = None
                 asset["source"] = "mock"
