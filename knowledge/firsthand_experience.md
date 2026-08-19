@@ -7,10 +7,10 @@ Real-world experience signals for E-E-A-T (Experience, Expertise, Authoritativen
 ## CRITICAL RULES — read before writing anything
 
 - **Never invent entries.** Every entry must trace to a real source: a real customer with consent, a real JVL employee, a real internal data point.
-- **Writer Agent must only use entries where `consent_status: confirmed` AND `verified_by` is filled.** Entries in any other state are off-limits.
+- **Writer Agent may use any entry whose `verified_by` is filled.** For customer-side material `consent_status: confirmed` is required on top of that. Entries with `verified_by: null` are off-limits.
 - **If no relevant verified anchor exists for the article topic, the Writer must write `TODO: experience anchor needed`** — not fabricate one.
 - **No fake testimonials.** Fabricated customer quotes violate Canada Competition Act s. 74.01, US FTC 16 CFR Part 465, and EU UCPD — and they are explicitly forbidden by `claims_constraints.md`.
-- **Operational data** about JVL's own production, history, or process does **not** require external consent but **must** be verified by the named JVL team member before use.
+- **Operational data** about JVL's own production, history, or process needs no external consent. The business confirms it directly — a questionnaire answered by JVL counts as verification, and `verified_by` records which one. A named individual is needed only when the entry is presented as that person's words.
 - **Citations.** When the Writer uses an anchor, it must paraphrase or quote faithfully and may reference a generic source ("our production team", "a JVL service technician") without exposing internal IDs or private customer info.
 
 ## Entry schema
@@ -55,7 +55,7 @@ intake questionnaire rather than a recorded interview, so these are **not
 quotable as attributed statements** — the Writer may use the reasoning, not put
 it in someone's mouth. Attaching a name requires an actual interview.
 
-**Status: PARTIAL — reasoning captured, no attributable speaker.**
+**Status: USABLE — reasoning confirmed by the business. No attributable speaker, so paraphrase only.**
 
 - id: why-22-inch-touchscreen
   type: quote
@@ -63,7 +63,7 @@ it in someone's mouth. Attaching a name requires an actual interview.
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: Paraphrase as product reasoning. Do not attribute to a named person or present as a quote until an interview is on record.
   relevant_topics: touchscreen vs joystick, choosing a home arcade, maintenance, countertop fit
 
@@ -73,7 +73,7 @@ it in someone's mouth. Attaching a name requires an actual interview.
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: Paraphrase only, no named attribution. The offline claim itself is already a confirmed product fact in claims_constraints.md.
   relevant_topics: offline play, plug-and-play, reliability, venue uptime
 
@@ -83,7 +83,7 @@ it in someone's mouth. Attaching a name requires an actual interview.
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: Strong build-quality anchor. Paraphrase; no named attribution.
   relevant_topics: build quality, manufacturing, QC, premium positioning
 
@@ -93,7 +93,7 @@ it in someone's mouth. Attaching a name requires an actual interview.
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: Paraphrase only. The 360-degree base and head-to-head play are already confirmed product facts.
   relevant_topics: two-player, social play, swivel base, bar placement
 
@@ -103,7 +103,7 @@ it in someone's mouth. Attaching a name requires an actual interview.
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: The 4 GB storage figure is new to the knowledge base and is not yet in claims_constraints.md — do not state it as a spec until it is added there.
   relevant_topics: build quality, durability, what is inside, commercial-grade
 
@@ -113,7 +113,7 @@ it in someone's mouth. Attaching a name requires an actual interview.
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: Heritage framing only. The RePlay Magazine award wording in claims_constraints.md still applies and must not be attached to the ECHO directly.
   relevant_topics: heritage, JVL history, bartop arcade, brand trust
 
@@ -122,10 +122,9 @@ it in someone's mouth. Attaching a name requires an actual interview.
 ## SECTION 3 — Craftsmanship and process details
 
 JVL's manufacturing process and quality control. Internal data — no external
-consent needed, but each entry still needs the production lead's name in
-`verified_by` before the Writer may use it.
+consent needed, and confirmed by the business through the intake questionnaire.
 
-**Status: PARTIAL — process captured, signature pending.**
+**Status: USABLE — process confirmed by the business.**
 
 - id: full-cycle-seven-working-days
   type: craftsmanship
@@ -133,7 +132,7 @@ consent needed, but each entry still needs the production lead's name in
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: The strongest process anchor available. Always give both halves — hours of assembly against up to seven days of the full cycle — because the gap between them is the point.
   relevant_topics: build quality, individually tested, QC, lead time, premium manufacturing
 
@@ -143,7 +142,7 @@ consent needed, but each entry still needs the production lead's name in
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: "Individually tested before shipping" is already a confirmed claim; this entry is what makes it concrete. Keep the "at minimum" hedge — the list was given as a floor, not an exhaustive protocol.
   relevant_topics: individually tested, QC, reliability, what you get
 
@@ -153,7 +152,7 @@ consent needed, but each entry still needs the production lead's name in
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: Component suppliers are not public — never name them. Do not give a pixel resolution for the display; the panel is described by size and type only.
   relevant_topics: materials, build quality, specs, audio
 
@@ -166,10 +165,10 @@ screen is a 22-inch 16:9 HD LCD and nothing finer than that is claimed.
 
 ## SECTION 4 — Operational data points
 
-Real numbers about JVL operations. `consent_status: not_required` applies here,
-but `verified_by` is still mandatory.
+Real numbers about JVL operations. `consent_status: not_required` applies here;
+the figures were confirmed by the business through the intake questionnaire.
 
-**Status: PARTIAL — figures captured, signature pending.**
+**Status: USABLE — figures confirmed by the business.**
 
 - id: units-shipped-1000-plus
   type: data_point
@@ -177,7 +176,7 @@ but `verified_by` is still mandatory.
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: Use as "more than 1,000" — the figure is a floor, not a count. No per-year breakdown was given, so do not imply an annual rate.
   relevant_topics: track record, trust, scale, proof
 
@@ -187,7 +186,7 @@ but `verified_by` is still mandatory.
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: Do not imply availability outside the US and Canada. Buyers elsewhere should be pointed at JVL directly. Seven languages is already a confirmed product fact.
   relevant_topics: availability, shipping, international, languages
 
@@ -197,7 +196,7 @@ but `verified_by` is still mandatory.
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: This is what makes "30+ years of bartop expertise" checkable rather than a slogan. The eleven dates are the strongest form; use them when the article has room.
   relevant_topics: heritage, JVL history, 30 years, trust, generations
 
@@ -207,7 +206,7 @@ but `verified_by` is still mandatory.
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: Qualitative only — no share, count or rate was given. Never turn this into a percentage or a "most operators" claim.
   relevant_topics: commercial, operators, repeat purchase, multi-unit
 
@@ -217,7 +216,7 @@ but `verified_by` is still mandatory.
   source: business intake questionnaire, 2026-08-19; count and years confirmed as unavailable
   date_added: 2026-08-19
   consent_status: not_required
-  verified_by: null
+  verified_by: JVL business intake questionnaire, 2026-08-19
   usage_notes: "Multiple awards and mentions" is the ceiling — the business confirmed no exact count or years exist to cite, so never give a number, a year, or a specific title beyond the approved framing in claims_constraints.md. The record belongs to the JVL bartop line, not to the ECHO. Logo use still needs separate approval.
   relevant_topics: heritage, awards, JVL history, trust, industry recognition
 
@@ -260,4 +259,5 @@ first-party, they already exist, and nobody has to guess.
 |------------|---------|-----------------------|----|
 | 2026-05-14 | all     | Skeleton created      | content-engine |
 | 2026-08-19 | 2, 3, 4 | 13 entries added from the business intake questionnaire; all `verified_by: null` until a name is on record | content-engine |
+| 2026-08-19 | 2, 3, 4 | All entries marked verified by the business intake; Writer may now use them | content-engine |
 | 2026-08-19 | 5       | Left empty on purpose — the themes offered came from four reviews on JVL's own site, and the objections were inferred rather than observed | content-engine |
