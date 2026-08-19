@@ -6,7 +6,10 @@ Pipeline position:
 Purpose:
   Inspect a generated article draft (markdown or Writer JSON wrapper) plus
   optional upstream context (brief, SERP research, company insight) and return
-  a structured JSON QA report. Review-only — never rewrites the article.
+  a structured JSON QA report. The agent never edits the article itself, but
+  `format_for_writer()` renders its findings as revision instructions the
+  Writer consumes through `revision_feedback` — so a failing report now causes
+  a fix instead of only recording one.
 
 Auth modes (mirrors WriterAgent):
   1. Anthropic (via src.llm_client) — when ANTHROPIC_API_KEY is set
@@ -22,6 +25,31 @@ import sys
 from pathlib import Path
 
 import jsonschema
+
+
+#: Knowledge loaded into the QA system prompt.
+#:
+#: The claims rules have to come from the source file, not from the Company
+#: Insight agent's extract of it. That extract is a per-topic shortlist — ten
+#: or so facts — and QA was judging the article against it as if it were the
+#: whole truth. Both directions were wrong: it called the 22-inch display and
+#: the box contents inventions when both are confirmed claims, and it could not
+#: have caught a trademarked game title, a competitor comparison, or a B2B
+#: framing on B2C copy, because none of those rules were in front of it.
+_KNOWLEDGE_FILES: list[tuple[str, str]] = [
+    ("claims_constraints.md", "ALLOWED AND FORBIDDEN CLAIMS — the authority on what may be said"),
+]
+
+#: Issues the Writer cannot act on, matched against the issue's `location`.
+#:
+#: The Writer owns the article body and nothing else. An image caption belongs
+#: to the Visual Agent, an FAQ answer to the FAQ Agent, wrapper metadata to the
+#: pipeline. Handing it those anyway would invite it to invent an edit it has
+#: no way to make, and to report success.
+_NOT_WRITERS_TO_FIX = (
+    "faq", "image", "caption", "hero", "inline-", "visual", "alt text",
+    "wrapper metadata", "metadata /",
+)
 
 
 class QAAgent:
@@ -50,7 +78,31 @@ class QAAgent:
     def _build_system_prompt(self) -> str:
         prompt = self._load_file("prompts/qa_agent.md")
         schema = self._load_file("schemas/qa_report_schema.json")
-        return f"{prompt}\n\n---\n\n# QA REPORT JSON SCHEMA\n\n{schema}\n"
+
+        knowledge_sections: list[str] = []
+        for filename, label in _KNOWLEDGE_FILES:
+            try:
+                content = self._load_file(f"knowledge/{filename}")
+            except FileNotFoundError:
+                print(f"QA Agent: knowledge/{filename} not found", file=sys.stderr)
+                continue
+            knowledge_sections.append(f"## {label}\n\n{content}")
+
+        knowledge_block = ""
+        if knowledge_sections:
+            knowledge_block = (
+                "\n\n---\n\n# KNOWLEDGE BASE\n\n"
+                "This is the source of truth for what the article may claim. A fact\n"
+                "listed here as allowed is not an invention, however it reached the\n"
+                "draft, and a rule listed here as forbidden holds even when no\n"
+                "upstream agent repeated it.\n\n"
+                + "\n\n".join(knowledge_sections)
+            )
+
+        return (
+            f"{prompt}{knowledge_block}\n\n---\n\n"
+            f"# QA REPORT JSON SCHEMA\n\n{schema}\n"
+        )
 
     def _build_user_message(
         self,
@@ -125,6 +177,87 @@ class QAAgent:
         )
 
         return "\n".join(parts)
+
+    # ------------------------------------------------------------------
+    # Feedback for the Writer
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def writer_can_fix(issue: dict) -> bool:
+        """Whether the Writer is the agent that owns this issue.
+
+        Ownership is read off the issue's `location`, which the schema requires
+        and which QA fills with the section or element it is talking about.
+        """
+        location = (issue.get("location") or "").lower()
+        return not any(marker in location for marker in _NOT_WRITERS_TO_FIX)
+
+    @staticmethod
+    def format_for_writer(report: dict) -> str:
+        """Render a QA report as an instruction block for `revision_feedback`.
+
+        Returns an empty string when there is nothing the Writer can act on,
+        which the caller reads as "do not spend a rewrite on this".
+        """
+        issues = report.get("issues", []) or []
+        actionable = [i for i in issues if QAAgent.writer_can_fix(i)]
+        if not actionable:
+            return ""
+
+        rank = {"high": 0, "medium": 1, "low": 2}
+        actionable.sort(key=lambda i: rank.get(i.get("severity", "low"), 3))
+
+        lines: list[str] = [
+            "# QA REVISION INSTRUCTIONS",
+            "",
+            "A reviewer read the finished draft and found the problems below. You are "
+            "correcting an existing article, not writing a new one. Change only what "
+            "each item asks for and leave every other sentence exactly as it is — "
+            "a rewrite that fixes the arithmetic and quietly restyles four sections "
+            "has failed.",
+            "",
+        ]
+
+        summary = report.get("summary")
+        if summary:
+            lines += ["## Reviewer's summary", "", summary, ""]
+
+        lines += ["## Required edits", ""]
+        for n, issue in enumerate(actionable, 1):
+            severity = issue.get("severity", "unknown").upper()
+            lines.append(f"### {n}. [{severity}] {issue.get('location', 'unspecified location')}")
+            lines.append("")
+            lines.append(f"**Problem:** {issue.get('problem', '(not described)')}")
+            fix = issue.get("recommended_fix")
+            if fix:
+                lines.append(f"**Required fix:** {fix}")
+            lines.append("")
+
+        skipped = [i for i in issues if not QAAgent.writer_can_fix(i)]
+        if skipped:
+            lines += [
+                "## Not yours to fix",
+                "",
+                "These belong to other agents and are listed so you do not try to "
+                "reach them from the article body:",
+                "",
+            ]
+            lines += [f"- {i.get('location', 'unspecified')}" for i in skipped]
+            lines.append("")
+
+        lines += [
+            "## Rules for this pass",
+            "",
+            "- Recompute every figure you touch and check it against the numbers it "
+            "is derived from. A number that contradicts its own inputs is the defect, "
+            "not a rounding preference.",
+            "- No `TODO:` string may survive in reader-facing prose. Editorial notes "
+            "belong in the todos array.",
+            "- Do not add new claims while fixing old ones.",
+            "- Return the FULL article as JSON in the usual shape — not a diff, not "
+            "the changed sections alone.",
+        ]
+        return "\n".join(lines)
 
     # ------------------------------------------------------------------
     # JSON extraction and validation
