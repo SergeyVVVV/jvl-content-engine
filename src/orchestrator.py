@@ -18,6 +18,7 @@ nothing at all — without this module knowing anything about a UI.
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 from datetime import datetime
@@ -36,6 +37,64 @@ from src.article_diagnostic_agent import ArticleDiagnosticAgent
 from src.history_store import HistoryUnavailable, save_to_history
 
 OUTPUT_ROOT = Path("outputs")
+
+#: How many times a failing QA report may send the article back to the Writer.
+#:
+#: One is the useful setting. The first pass fixes the concrete defects — an
+#: arithmetic slip, a leaked TODO, an unhedged claim. Past that the reviewer
+#: starts trading one wording for another, and each round costs a full Writer
+#: and QA call on the heavy tier. Set QA_MAX_REVISIONS=0 to record the verdict
+#: without acting on it, which is how the pipeline behaved before.
+_DEFAULT_QA_MAX_REVISIONS = 1
+
+#: A revision that returns less than this share of the original is treated as
+#: damage, not an edit.
+_MIN_REVISION_LENGTH_RATIO = 0.75
+
+_IMAGE_URL_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
+
+
+def qa_max_revisions() -> int:
+    """How many Writer passes a failing QA report may trigger."""
+    raw = os.environ.get("QA_MAX_REVISIONS")
+    if not raw:
+        return _DEFAULT_QA_MAX_REVISIONS
+    try:
+        value = int(raw)
+    except ValueError:
+        return _DEFAULT_QA_MAX_REVISIONS
+    return value if value >= 0 else _DEFAULT_QA_MAX_REVISIONS
+
+
+def revision_damage(before: str, after: str) -> str | None:
+    """Return why a revision must be rejected, or None if it is safe to accept.
+
+    The Writer is handed the finished article — images injected, FAQ appended —
+    and asked to change only what QA named. It is capable of returning a clean
+    article that quietly dropped the pictures or the Q&A block along the way,
+    and a silent loss is worse than the defect being fixed. So the revision has
+    to prove it kept what it was given before it replaces anything.
+    """
+    if not after or not after.strip():
+        return "the revision came back empty"
+
+    if len(after) < len(before) * _MIN_REVISION_LENGTH_RATIO:
+        return (
+            f"the revision is {len(after)} characters against {len(before)} — "
+            "too much of the article went missing to call it an edit"
+        )
+
+    lost_images = [
+        url for url in _IMAGE_URL_RE.findall(before) if url not in after
+    ]
+    if lost_images:
+        return f"{len(lost_images)} image(s) dropped, first was {lost_images[0]}"
+
+    if "## FAQ" in before and "## FAQ" not in after:
+        return "the FAQ section was dropped"
+
+    return None
+
 
 #: Canonical step order. Callers render progress from this list, so a step can
 #: never be added to the pipeline without appearing in the UI, or vice versa.
@@ -450,31 +509,102 @@ def run_pipeline(
     yield _event(steps, "FAQ Agent", "done")
 
     # Step 8 — QA (reviews full draft including FAQ block)
+    #
+    # A failing report used to end here: it was written to disk, shown as a
+    # status, and nothing acted on it. The Writer never saw it. So the loop
+    # below sends the findings back and re-reviews the result — the same
+    # arrangement the Readability Checker and the update pipeline already use.
     yield _event(steps, "QA Review", "running")
     qa_report: dict | None = None
     qa_path: Path | None = None
-    try:
-        _guard(skip, "QA Review")
-        qa_agent = QAAgent()
-        qa_report = qa_agent.run(
+    qa_history: list[dict] = []
+    qa_source_inputs = {
+        "draft": str(draft_json_path),
+        "brief": str(brief_path),
+        "serp_research": str(serp_path) if serp_path else None,
+        "company_insight": str(insight_path) if insight_path else None,
+    }
+
+    def _review(markdown: str) -> dict:
+        return QAAgent().run(
             topic=topic,
-            draft_markdown=draft_markdown,
+            draft_markdown=markdown,
             draft_wrapper=companion,
             brief=brief,
             serp_data=serp_data,
             insight_data=insight_data,
-            source_inputs_used={
-                "draft": str(draft_json_path),
-                "brief": str(brief_path),
-                "serp_research": str(serp_path) if serp_path else None,
-                "company_insight": str(insight_path) if insight_path else None,
-            },
+            source_inputs_used=qa_source_inputs,
         )
+
+    try:
+        _guard(skip, "QA Review")
+        qa_report = _review(draft_markdown)
         qa_path = root / "qa" / f"{topic_slug}.json"
         _save_json(qa_report, qa_path)
-    except Exception:
+        qa_history.append(qa_report)
+
+        budget = qa_max_revisions()
+        attempt = 0
+        while (
+            attempt < budget
+            and qa_report.get("status") in {"fail", "revise"}
+        ):
+            feedback = QAAgent.format_for_writer(qa_report)
+            if not feedback:
+                print(
+                    "QA: nothing in this report is the Writer's to fix — "
+                    "leaving the draft alone.",
+                    file=sys.stderr,
+                )
+                break
+
+            attempt += 1
+            print(
+                f"QA: status={qa_report.get('status')} — revision {attempt}/{budget}",
+                file=sys.stderr,
+            )
+            revised_result = writer_agent.run(
+                topic=topic,
+                brief=brief,
+                serp_context=serp_context,
+                insight_context=insight_context,
+                seo_structure_context=seo_structure_context,
+                revision_feedback=feedback,
+                original_article=draft_markdown,
+            )
+            revised_markdown = writer_agent.assemble_markdown(revised_result)
+
+            damage = revision_damage(draft_markdown, revised_markdown)
+            if damage:
+                print(
+                    f"QA: revision {attempt} rejected — {damage}. "
+                    "Keeping the reviewed draft.",
+                    file=sys.stderr,
+                )
+                break
+
+            draft_result = revised_result
+            draft_markdown = revised_markdown
+            companion["draft_markdown"] = draft_markdown
+            draft_md_path.write_text(draft_markdown, encoding="utf-8")
+            _save_json(companion, draft_json_path)
+
+            qa_report = _review(draft_markdown)
+            qa_path = root / "qa" / f"{topic_slug}-revision-{attempt}.json"
+            _save_json(qa_report, qa_path)
+            qa_history.append(qa_report)
+            print(
+                f"QA: after revision {attempt} status={qa_report.get('status')}",
+                file=sys.stderr,
+            )
+    except _StepSkipped:
         pass
+    except Exception as exc:
+        print(f"QA Review failed: {exc}", file=sys.stderr)
     results["qa_report"] = qa_report
+    results["qa_history"] = qa_history
+    results["draft_markdown"] = draft_markdown
+    results["companion"] = companion
     yield _event(steps, "QA Review", "done")
 
     # Step 9 — Metadata
