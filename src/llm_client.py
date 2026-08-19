@@ -39,9 +39,31 @@ _DEFAULT_MODELS = {
 #: Overridable with ANTHROPIC_MAX_TOKENS.
 _DEFAULT_MAX_TOKENS = 16000
 
-#: Above this, stream. A non-streaming request that large can hit the SDK's own
-#: HTTP timeout with the generation already paid for; the Writer asks for 32000.
-_STREAM_ABOVE = 16000
+#: At or above this, stream.
+#:
+#: A non-streaming call has to deliver its whole response inside one timeout
+#: window, and while it waits there is nothing to see: the socket stays open and
+#: a wedged request is indistinguishable from a slow one. Streaming resets the
+#: read timeout on every chunk, so a live generation is never mistaken for a
+#: hang and a dead one trips the timeout instead of holding the line.
+#:
+#: The old threshold was 16000 and the comparison was strictly greater, which
+#: put the default budget — also 16000 — on the non-streaming path. The common
+#: call was the exposed one.
+_STREAM_AT_OR_ABOVE = 8000
+
+#: Per-request timeout in seconds, and how many times the SDK may retry.
+#:
+#: Without these the client runs on the SDK's own generous defaults, so a
+#: request that never completes is never abandoned either. That is not
+#: hypothetical: one wedged call held a nine-step pipeline for 47 minutes with
+#: no output and half a second of CPU burnt, and the retries queued up behind it
+#: made it worse rather than better. Bounded, the same failure costs at most
+#: three windows and then says so.
+#:
+#: Overridable with ANTHROPIC_TIMEOUT and ANTHROPIC_MAX_RETRIES.
+_DEFAULT_TIMEOUT = 300.0
+_DEFAULT_MAX_RETRIES = 2
 
 _EFFORT_LEVELS = ("low", "medium", "high", "xhigh", "max")
 
@@ -61,6 +83,30 @@ def default_max_tokens() -> int:
     except ValueError:
         return _DEFAULT_MAX_TOKENS
     return value if value > 0 else _DEFAULT_MAX_TOKENS
+
+
+def default_timeout() -> float:
+    """Seconds to wait on one request before giving up."""
+    raw = os.environ.get("ANTHROPIC_TIMEOUT")
+    if not raw:
+        return _DEFAULT_TIMEOUT
+    try:
+        value = float(raw)
+    except ValueError:
+        return _DEFAULT_TIMEOUT
+    return value if value > 0 else _DEFAULT_TIMEOUT
+
+
+def default_max_retries() -> int:
+    """How many times the SDK may retry a failed request."""
+    raw = os.environ.get("ANTHROPIC_MAX_RETRIES")
+    if not raw:
+        return _DEFAULT_MAX_RETRIES
+    try:
+        value = int(raw)
+    except ValueError:
+        return _DEFAULT_MAX_RETRIES
+    return value if value >= 0 else _DEFAULT_MAX_RETRIES
 
 
 def resolve_effort(explicit: str | None = None) -> str | None:
@@ -131,7 +177,11 @@ def chat(
 
     model = resolve_model(tier)
     max_tokens = max_tokens or default_max_tokens()
-    client = Anthropic(api_key=api_key)
+    client = Anthropic(
+        api_key=api_key,
+        timeout=default_timeout(),
+        max_retries=default_max_retries(),
+    )
 
     request = {
         "model": model,
@@ -143,7 +193,7 @@ def chat(
     if level:
         request["output_config"] = {"effort": level}
 
-    if max_tokens > _STREAM_ABOVE:
+    if max_tokens >= _STREAM_AT_OR_ABOVE:
         with client.messages.stream(**request) as stream:
             message = stream.get_final_message()
     else:
