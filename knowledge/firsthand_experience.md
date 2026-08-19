@@ -59,13 +59,13 @@ it in someone's mouth. Attaching a name requires an actual interview.
 
 - id: why-22-inch-touchscreen
   type: quote
-  claim: "The 22-inch screen is the balance point between a comfortable play area and a machine that still belongs on a counter — large enough to read the interface and play properly, small enough not to take over the bar top. The touchscreen removes the space a joystick and buttons would need, makes the controls obvious to someone approaching the machine for the first time, and cuts the number of moving parts that wear out and need servicing."
+  claim: "22\" is the sweet spot between playability and footprint. It provides enough screen space for comfortable gameplay while keeping ECHO compact enough for a bar top, counter, or table. Touchscreen controls also eliminate the space required for joysticks and button panels, reduce reliance on heavily used mechanical controls, and make the machine immediately understandable to first-time players."
   source: business intake questionnaire, 2026-08-19
   date_added: 2026-08-19
   consent_status: not_required
   verified_by: JVL business intake questionnaire, 2026-08-19
-  usage_notes: Paraphrase as product reasoning. Do not attribute to a named person or present as a quote until an interview is on record.
-  relevant_topics: touchscreen vs joystick, choosing a home arcade, maintenance, countertop fit
+  usage_notes: Paraphrase as product reasoning. Do not attribute to a named person or present as a quote until an interview is on record. Keep the durability point relative — "reduces reliance on heavily used mechanical controls", never "cannot fail" or "never breaks". A touchscreen can fail too, and one reader who has seen one fail discards the whole article; the hedged version is also the stronger argument, because it survives that reader.
+  relevant_topics: touchscreen vs joystick, choosing a home arcade, maintenance, countertop fit, durability
 
 - id: why-offline-by-design
   type: quote
