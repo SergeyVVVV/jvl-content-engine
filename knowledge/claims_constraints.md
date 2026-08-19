@@ -32,6 +32,12 @@
 - Tournaments and leaderboards built in
 - 1-player and 2-player modes
 
+### Pricing (confirmed list prices — USD)
+- JVL ECHO HD3 — Home Edition: $3,990
+- JVL ECHO HD3 — Commercial Edition: $4,250
+- List price only. Do not present either figure as a discount, sale, or limited offer.
+- Which edition a price belongs to must always be stated; the two are not interchangeable.
+
 ### Purchase experience
 - What's in the box: ECHO unit, power cord, USB stick with software, warranty card
 - 1-Year All-Inclusive Manufacturer Warranty
@@ -65,7 +71,7 @@ Use this exact framing:
 - "#1", "best on the market", "leading" claims without sourced evidence
 - Comparisons against named competitors without sourced evidence
 - Specific game titles by trademark name — even descriptively
-- Pricing, discounts, or promotional claims
+- Discounts, sale pricing, or promotional claims (confirmed list prices are allowed — see Pricing above)
 - Health, safety, legal, or compliance statements
 - Environmental or sustainability claims
 - Statistics or "studies show" style claims without a verified source
