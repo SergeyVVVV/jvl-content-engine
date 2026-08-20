@@ -114,7 +114,11 @@ CRITICAL OUTPUT RULES:
 - generation_prompt must be a detailed, specific image-generation prompt matching
   the visual style rules: bright, naturally lit interior, warm lighting only when
   the article calls for it, real adult home setting, no gamer clichés.
-- alt_text must describe the image for accessibility — no keyword stuffing.
+- alt_text: 60-150 characters, literal and specific — the subject, what it is
+  doing, and the one distinguishing detail. Name JVL ECHO HD3 only if our
+  machine is actually in the frame; otherwise describe what is. No "image of",
+  no keyword strings, and never a word-for-word repeat of the caption.
+  Follow the alt text section of the system prompt in full.
 - Do not invent product features not confirmed by knowledge files."""
 
     def _build_user_message(self, topic: str, brief: dict, draft_markdown: str) -> str:

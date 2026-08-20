@@ -331,7 +331,7 @@ Return a single valid JSON object. No markdown fences. No commentary outside the
       "section_heading": "string — heading of the section the placeholder is in (or 'intro')",
       "type": "image | video | diagram | chart | screenshot",
       "purpose": "string — what this visual would communicate to the reader",
-      "alt_text_proposal": "string — SEO-friendly alt text",
+      "alt_text_proposal": "string — literal, specific description of the image, 60-150 chars; not keywords",
       "production_note": "string — practical hint for the visual producer (e.g. 'real photo of ECHO in a home bar', 'simple side-by-side diagram of form factors', '15s screen-capture of game library scroll')"
     }
   ],
