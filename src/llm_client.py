@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import os
 import sys
+import time
 
 from anthropic import Anthropic
 
@@ -52,6 +53,59 @@ _DEFAULT_MAX_TOKENS = 16000
 #: put the default budget — also 16000 — on the non-streaming path. The common
 #: call was the exposed one.
 _STREAM_AT_OR_ABOVE = 8000
+
+#: Wall-clock ceiling on a single streaming call, in seconds.
+#:
+#: The HTTP timeout below is a *read* timeout: the longest gap between two
+#: chunks. That protects a request that goes silent, and protects nothing at all
+#: against a stream that trickles — every chunk resets the clock, so a slow
+#: stream runs as long as it likes. Once #43 moved every agent onto the
+#: streaming path, that became the common case rather than the exception, and a
+#: Writer call ran thirty-five minutes before anything stopped it.
+#:
+#: This is the ceiling on the whole call, measured from the first byte. A real
+#: 32000-token generation finishes well inside it; nothing legitimate takes ten
+#: minutes. Overridable with ANTHROPIC_STREAM_DEADLINE.
+#:
+#: It deliberately raises out of the stream context rather than returning, so
+#: the SDK does not treat it as a retryable transport error and try twice more.
+_DEFAULT_STREAM_DEADLINE = 600.0
+
+
+class StreamDeadlineExceeded(TimeoutError):
+    """A streaming call outran its wall-clock budget."""
+
+
+def stream_deadline() -> float:
+    """Seconds a single streaming call may run in total."""
+    raw = os.environ.get("ANTHROPIC_STREAM_DEADLINE")
+    if not raw:
+        return _DEFAULT_STREAM_DEADLINE
+    try:
+        value = float(raw)
+    except ValueError:
+        return _DEFAULT_STREAM_DEADLINE
+    return value if value > 0 else _DEFAULT_STREAM_DEADLINE
+
+
+def _stream_within_deadline(client: Anthropic, request: dict) -> object:
+    """Consume a stream, abandoning it if it outruns the wall clock."""
+    limit = stream_deadline()
+    started = time.monotonic()
+    with client.messages.stream(**request) as stream:
+        for _ in stream:
+            elapsed = time.monotonic() - started
+            if elapsed > limit:
+                raise StreamDeadlineExceeded(
+                    f"the response streamed for {elapsed:.0f}s against a "
+                    f"{limit:.0f}s ceiling and was abandoned. Chunks kept "
+                    "arriving, so the HTTP read timeout never fired — this is "
+                    "the ceiling on the whole call. Raise "
+                    "ANTHROPIC_STREAM_DEADLINE if a generation this long is "
+                    "expected."
+                )
+        return stream.get_final_message()
+
 
 #: Per-request timeout in seconds, and how many times the SDK may retry.
 #:
@@ -283,8 +337,7 @@ def chat_with_search(
     seen_urls: set[str] = set()
 
     for _ in range(_MAX_PAUSE_RESUMES + 1):
-        with client.messages.stream(**request, messages=messages) as stream:
-            message = stream.get_final_message()
+        message = _stream_within_deadline(client, {**request, "messages": messages})
 
         texts.append(extract_text(message))
         searches += search_count(message)
@@ -334,8 +387,7 @@ def chat(
         request["output_config"] = {"effort": level}
 
     if max_tokens >= _STREAM_AT_OR_ABOVE:
-        with client.messages.stream(**request) as stream:
-            message = stream.get_final_message()
+        message = _stream_within_deadline(client, request)
     else:
         message = client.messages.create(**request)
 

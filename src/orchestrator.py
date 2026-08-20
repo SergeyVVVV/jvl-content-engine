@@ -412,14 +412,32 @@ def run_pipeline(
     facts_context = _build_facts_context(facts) if facts else ""
     seo_structure_context = json.dumps(seo_data, indent=2, ensure_ascii=False) if seo_data else ""
     writer_agent = WriterAgent()
-    draft_result = writer_agent.run(
-        topic=topic,
-        brief=brief,
-        serp_context=serp_context,
-        insight_context=insight_context,
-        seo_structure_context=seo_structure_context,
-        facts_context=facts_context,
-    )
+    try:
+        draft_result = writer_agent.run(
+            topic=topic,
+            brief=brief,
+            serp_context=serp_context,
+            insight_context=insight_context,
+            seo_structure_context=seo_structure_context,
+            facts_context=facts_context,
+        )
+    except Exception as exc:
+        # Every other step catches its own failure and lets the run continue;
+        # this one could not, and a Writer timeout therefore threw a traceback
+        # and discarded the whole run — twelve paid searches, five completed
+        # steps, and half an hour, with the intermediate files left on disk in
+        # a state nothing could resume from.
+        #
+        # There is still no article without a draft, so the pipeline stops. But
+        # it stops by reporting, with the research it already has attached, so
+        # the next attempt can reuse the expensive part.
+        print(f"Writer failed: {exc}", file=sys.stderr)
+        results["error"] = f"Writer failed: {exc}"
+        results["failed_step"] = "Writer"
+        results["draft_markdown"] = ""
+        yield _event(steps, "Writer", "done")
+        yield {"step": 0, "label": "failed", "status": "failed", "results": results}
+        return
     draft_markdown = writer_agent.assemble_markdown(draft_result)
     yield _event(steps, "Writer", "done")
 
