@@ -150,7 +150,9 @@ Emphasize:
 ## Writing style rules
 - Use a short dash '-' instead of a long dash '—'
 - Keep sentences clean and direct
-- Prefer one strong idea per line or paragraph
+- Prefer one strong idea per paragraph, developed rather than merely stated.
+  Not one idea per *line* — that is the shape of a list, and a stack of
+  one-line ideas reads as a checklist even when nothing is bulleted.
 - Avoid over-stacked claims
 - Keep emotional language human and specific
 - Keep practical language simple and useful

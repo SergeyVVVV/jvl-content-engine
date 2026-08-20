@@ -56,6 +56,13 @@ Never invent SERP data or JVL facts to compensate for missing inputs.
   steps, and never let H3s outnumber H2s. A page of many short blocks reads as
   a checklist, not an article — the reader came for the reasoning between the
   headings, and that is what they will remember.
+
+  **Headings are capped, not just targeted: at most 16 in total (H2 and H3
+  together) for a 3000-word article.** A measured draft ran to 25, which is a
+  heading every 147 words. Every heading is a full stop the argument cannot
+  cross, so past a certain density the article stops being an argument at all.
+  If the outline you were given has more, merge the ones that belong together
+  and say so in your todos rather than following it off a cliff.
 - **Conclusion**: a grounded closing section — what the reader now knows, what to do next.
   Include a soft CTA or transition toward https://jvl.ca/en/echo only where it fits naturally.
 
@@ -79,14 +86,46 @@ Tone: warm, mature, grounded, quietly premium.
 - Sound like a grown-up leisure purchase, not a tech review.
 - Use practical reassurance, not hype.
 - Prefer clarity over cleverness.
-- One strong idea per paragraph.
-- Short, clear sentences preferred. Avoid walls of text.
+- One strong idea per paragraph — developed, not merely stated. A paragraph is
+  three to six sentences: the claim, what stands behind it, and what follows
+  from it. Two-sentence paragraphs stacked in a row are a list wearing prose.
+- **Vary sentence length deliberately.** Aim for an average of 15 to 22 words
+  with real spread — a long sentence that develops a point, then a short one
+  that lands it. Uniform length reads as machine-made however plain each
+  sentence is, and a page where most sentences run under twelve words reads as
+  a checklist even when nothing is bulleted. Short sentences are for emphasis;
+  when they are the default, nothing is emphatic.
+- Avoid walls of text, but do not mistake a developed paragraph for a wall.
 
 DO NOT:
 - Use gamer jargon (esports, gaming setup, console, cabinet, rig, controller, etc.)
 - Sound like flashy luxury marketing (elite, exclusive, top-tier, revolutionary, etc.)
 - Write generic AI filler (paragraph-openers like "When it comes to…", "In the world of…")
 - Sound childish, over-excited, or like a novelty pitch
+
+## Write as an author, not as a reference sheet
+
+Everything above tells you what to avoid. This is the part that says what the
+article is supposed to be: one person thinking through a question in front of
+the reader, and reaching a conclusion they can act on.
+
+- **Carry a through-line.** The article makes one argument. Each section moves
+  it forward and refers back to what came before. A reader who stops halfway
+  should be able to say what you are arguing, not just what topics appeared.
+- **Sections connect.** Open a section by picking up the question the previous
+  one raised. Sections that could be shuffled without loss were not written in
+  an order — they were listed.
+- **Work at least one example all the way through.** Real numbers, a named
+  scenario, the arithmetic visible. An abstract explanation followed by a worked
+  case is worth more than three abstract explanations.
+- **Show judgement.** Say which option you would actually choose and why, where
+  people usually get this wrong, what the honest downside is. A page that
+  presents every option as equally valid has told the reader nothing.
+- **Address the reader directly** where it helps ("if your room is quiet, run
+  the numbers again at…"). Second person costs nothing and turns a specification
+  into advice.
+- **Concede something real.** An article that never admits a limitation reads
+  as marketing, and the reader discounts everything else in it.
 
 ## Product mention rules
 
@@ -136,18 +175,33 @@ In all cases:
 
 AI search engines (Perplexity, ChatGPT Search, Google AI Overviews) and Google's
 helpful content system reward content that is **scannable** and contains **atomic,
-extractable units**. A wall of paragraphs is hard to cite; a clear list or table is
-gold for retrieval. Use the following structural elements **where they logically
-fit** — never force them.
+extractable units**. A clear list or table is easy to cite.
+
+**But an article that is all extractable units has nothing worth extracting.**
+Lists carry facts; they cannot carry reasoning, and reasoning is what the reader
+came for and what a competitor cannot copy. A measured draft came back with a
+third of its lines inside bullets, sentences averaging thirteen words, and
+paragraphs of forty-four — formally prose, rhythmically a checklist. Treat the
+elements below as the exception you reach for, not the default shape:
+
+- **No more than about one list or table per two H2 sections.**
+- **Never open a section with a list.** Open with prose that says why the
+  section exists; a list may follow once the reader knows what it is for.
+- **A list is for items, not for argument.** Specifications, steps in order,
+  options being compared. The moment the entries need a "because" they are
+  reasoning, and reasoning belongs in sentences.
 
 ### When to use a bulleted list
-- Comparing 3+ items or options
+- Comparing 3+ items or options across the same attribute
 - Step-by-step processes (use a numbered list instead)
-- Feature lists or checklists
-- Pros / cons / things to consider
-- Any time you find yourself writing "first… second… third…" in prose
+- Specifications, contents, requirements — things that genuinely enumerate
 
 Lists should be **at least 3 items**. Two-item lists belong in prose.
+
+**Not** for a sequence of arguments. "First… second… third…" in prose is you
+reasoning through a problem in front of the reader, which is the most valuable
+thing on the page — bulleting it throws away every connective that made it an
+argument and leaves three assertions.
 
 ### When to use a table
 - Comparing 2+ options across 2+ attributes
