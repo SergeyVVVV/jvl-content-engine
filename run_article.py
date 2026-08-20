@@ -68,6 +68,15 @@ def build_parser() -> argparse.ArgumentParser:
         help="Run the Visual Agent (generates images via gpt-image — costs money)",
     )
     parser.add_argument(
+        "--resume", dest="resume", action="store_true",
+        help=(
+            "Reuse the brief, facts, SERP research, insight and outline already "
+            "in --output-root instead of regenerating them. For picking a run "
+            "back up after it failed at the Writer or later — the steps before "
+            "it are the expensive half, and Fact Research pays per search."
+        ),
+    )
+    parser.add_argument(
         "--output-root", dest="output_root", default="outputs",
         help="Root output directory (default: outputs)",
     )
@@ -101,6 +110,7 @@ def main(argv: list[str] | None = None) -> int:
         with_visuals=args.with_visuals,
         country=args.country,
         language=args.language,
+        reuse=args.resume,
     ):
         if event["step"] == 0:
             results = event["results"]

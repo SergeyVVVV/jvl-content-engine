@@ -56,6 +56,30 @@ _MIN_REVISION_LENGTH_RATIO = 0.75
 _IMAGE_URL_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
 
 
+def _reuse(path: Path, label: str, reuse: bool) -> dict | None:
+    """Return a previous run's output for a step, if we are allowed to.
+
+    The steps before the Writer are the expensive half — Fact Research pays for
+    web searches, and four more agents run before a single word is written. When
+    the Writer then times out, the whole run is thrown away and paid for again
+    from the top. This lets an attempt pick up what the last one already
+    established.
+
+    Deliberately narrow: only the steps whose output is a function of the topic
+    and keyword, nothing downstream of the draft. A stale brief for the same
+    topic is the same brief; a stale draft is a different article.
+    """
+    if not reuse or not path.exists():
+        return None
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"  {label}: could not reuse {path.name} ({exc}) — running it", file=sys.stderr)
+        return None
+    print(f"  {label}: reusing {path}", file=sys.stderr)
+    return data
+
+
 def fact_research_enabled() -> bool:
     """Whether to spend searches establishing the article's figures.
 
@@ -265,6 +289,7 @@ def run_pipeline(
     output_root: Path | None = None,
     skip: set[str] | None = None,
     with_visuals: bool = False,
+    reuse: bool = False,
     country: str = "US",
     language: str = "en",
 ):
@@ -287,18 +312,21 @@ def run_pipeline(
     # Step 1 — Brief
     yield _event(steps, "Brief", "running")
     brief_agent = BriefAgent()
-    brief = brief_agent.run(
-        topic=topic,
-        primary_keyword=primary_keyword,
-        content_goal=content_goal,
-        funnel_stage=funnel_stage,
-        audience="Mark & Linda Reynolds",
-        country=country,
-        language=language,
-    )
-    brief_slug = slugify(brief.get("primary_keyword", primary_keyword))
-    brief_path = root / "briefs" / f"{brief_slug}.json"
-    _save_json(brief, brief_path)
+    brief_path = root / "briefs" / f"{slugify(primary_keyword)}.json"
+    brief = _reuse(brief_path, "Brief", reuse)
+    if brief is None:
+        brief = brief_agent.run(
+            topic=topic,
+            primary_keyword=primary_keyword,
+            content_goal=content_goal,
+            funnel_stage=funnel_stage,
+            audience="Mark & Linda Reynolds",
+            country=country,
+            language=language,
+        )
+        brief_slug = slugify(brief.get("primary_keyword", primary_keyword))
+        brief_path = root / "briefs" / f"{brief_slug}.json"
+        _save_json(brief, brief_path)
     results["brief"] = brief
     results["brief_path"] = brief_path
     yield _event(steps, "Brief", "done")
@@ -316,13 +344,16 @@ def run_pipeline(
     facts_path: Path | None = None
     try:
         _guard(skip, "Fact Research")
-        if not fact_research_enabled():
-            raise _StepSkipped("Fact Research")
-        facts = FactResearchAgent().run(
-            topic=topic, brief=brief, country=country, language=language
-        )
         facts_path = root / "facts" / f"{topic_slug}.json"
-        _save_json(facts, facts_path)
+        facts = _reuse(facts_path, "Fact Research", reuse)
+        if facts is None:
+            if not fact_research_enabled():
+                facts_path = None
+                raise _StepSkipped("Fact Research")
+            facts = FactResearchAgent().run(
+                topic=topic, brief=brief, country=country, language=language
+            )
+            _save_json(facts, facts_path)
     except _StepSkipped:
         pass
     except Exception as exc:
@@ -337,19 +368,20 @@ def run_pipeline(
     serp_path: Path | None = None
     try:
         _guard(skip, "SERP Research")
-        serp_agent = SerpResearchAgent()
-        serp_data = serp_agent.run(
-            primary_keyword=primary_keyword,
-            topic=topic,
-            brief=brief,
-            country="us",
-            language="en",
-            top_n=5,
-            paa_questions=brief.get("questions_to_answer", []),
-        )
-        serp_slug = slugify(primary_keyword)
-        serp_path = root / "serp_research" / f"{serp_slug}.json"
-        _save_json(serp_data, serp_path)
+        serp_path = root / "serp_research" / f"{slugify(primary_keyword)}.json"
+        serp_data = _reuse(serp_path, "SERP Research", reuse)
+        if serp_data is None:
+            serp_agent = SerpResearchAgent()
+            serp_data = serp_agent.run(
+                primary_keyword=primary_keyword,
+                topic=topic,
+                brief=brief,
+                country="us",
+                language="en",
+                top_n=5,
+                paa_questions=brief.get("questions_to_answer", []),
+            )
+            _save_json(serp_data, serp_path)
     except Exception:
         pass
     results["serp_data"] = serp_data
@@ -376,14 +408,16 @@ def run_pipeline(
         )
     try:
         _guard(skip, "Company Insight")
-        insight_agent = CompanyInsightAgent()
-        insight_data = insight_agent.run(
-            topic=topic,
-            brief=brief,
-            extra_context=extra_context,
-        )
         insight_path = root / "company_insight" / f"{topic_slug}.json"
-        _save_json(insight_data, insight_path)
+        insight_data = _reuse(insight_path, "Company Insight", reuse)
+        if insight_data is None:
+            insight_agent = CompanyInsightAgent()
+            insight_data = insight_agent.run(
+                topic=topic,
+                brief=brief,
+                extra_context=extra_context,
+            )
+            _save_json(insight_data, insight_path)
     except Exception:
         pass
     results["insight_data"] = insight_data
@@ -396,10 +430,12 @@ def run_pipeline(
     seo_path: Path | None = None
     try:
         _guard(skip, "SEO Structure")
-        seo_agent = SeoStructureAgent()
-        seo_data = seo_agent.run(topic=topic, brief=brief)
         seo_path = root / "seo_structure" / f"{topic_slug}.json"
-        _save_json(seo_data, seo_path)
+        seo_data = _reuse(seo_path, "SEO Structure", reuse)
+        if seo_data is None:
+            seo_agent = SeoStructureAgent()
+            seo_data = seo_agent.run(topic=topic, brief=brief)
+            _save_json(seo_data, seo_path)
     except Exception:
         pass
     results["seo_data"] = seo_data
