@@ -21,7 +21,7 @@
 - 360° swivel base
 - Dynamic multi-colour halo lighting
 - Reinforced plastic case and precision-built frame
-- Touch controls — no mechanical parts, no lag
+- Touch controls — no mechanical controls to wear out; responsive, with no perceptible lag
 
 ### Games and software
 - 149 pre-installed games
@@ -74,6 +74,12 @@ broader form. It is the ceiling, not a starting point:
 ## Forbidden / do not claim
 
 - "#1", "best on the market", "leading" claims without sourced evidence
+- Absolute reliability or perfection claims — "never breaks", "cannot fail",
+  "flawless", "no failures", "zero downtime". The touchscreen advantage is
+  relative and must stay relative: it removes the controls most exposed to
+  mechanical wear, it does not remove failure. One reader who has seen a
+  touchscreen fail discards the whole article over an absolute, and the hedged
+  version is the stronger argument for surviving that reader.
 - Comparisons against named competitors without sourced evidence
 - Specific game titles by trademark name — even descriptively
 - Discounts, sale pricing, or promotional claims (confirmed list prices are allowed — see Pricing above)
