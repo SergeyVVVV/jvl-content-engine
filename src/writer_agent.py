@@ -197,6 +197,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         serp_context: str,
         insight_context: str,
         seo_structure_context: str = "",
+        facts_context: str = "",
         revision_feedback: str = "",
         original_article: str = "",
     ) -> str:
@@ -230,6 +231,22 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
             f"# The FAQ section will be produced by a separate agent — write a placeholder.\n\n"
             f"{seo_structure_context}\n"
             if seo_structure_context
+            else ""
+        )
+
+        facts_block = (
+            f"\n# RESEARCHED FIGURES — sourced, use these instead of inventing\n"
+            f"# Each figure below was found by search and carries its source.\n"
+            f"# Build scenarios on the bounds of a range: the pessimistic case at\n"
+            f"# the low end, the base case at the typical, the optimistic at the\n"
+            f"# high end. Name the source in the text where a figure carries the\n"
+            f"# argument. A source of kind 'vendor' or 'own_site' is selling the\n"
+            f"# product: it may set an upper bound, never the typical case, and\n"
+            f"# whose number it is must be stated. Questions listed under\n"
+            f"# 'unanswered' were searched and not answered — say so plainly\n"
+            f"# rather than inventing a figure to fill the gap.\n\n"
+            f"{facts_context}\n"
+            if facts_context
             else ""
         )
 
@@ -268,6 +285,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         return (
             f"{opening}\n"
             f"{brief_block}"
+            f"{facts_block}"
             f"{serp_block}"
             f"{insight_block}"
             f"{seo_block}"
@@ -534,6 +552,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         serp_context: str = "",
         insight_context: str = "",
         seo_structure_context: str = "",
+        facts_context: str = "",
         revision_feedback: str = "",
         original_article: str = "",
     ) -> dict:
@@ -559,6 +578,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
             serp_context=serp_context,
             insight_context=insight_context,
             seo_structure_context=seo_structure_context,
+            facts_context=facts_context,
             revision_feedback=revision_feedback,
             original_article=original_article,
         )
