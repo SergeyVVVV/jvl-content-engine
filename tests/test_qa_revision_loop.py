@@ -196,3 +196,41 @@ class QAKnowledgeTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FAQSurvivalTests(unittest.TestCase):
+    """A QA revision must not cost the article its FAQ.
+
+    Observed on a live run: QA returned `fail`, the loop asked the Writer to
+    fix it, the Writer came back without the FAQ block, `revision_damage`
+    rejected the whole revision, and every fix was lost with it. The Writer
+    behaves that way by instruction — its own system prompt says a separate
+    agent owns the FAQ and to leave a placeholder — so hoping is not a
+    strategy. The block is re-attached deterministically instead.
+    """
+
+    FAQ = "## FAQ\n\n### Is it worth it?\n\nThat depends on the room.\n"
+
+    def test_a_revision_without_an_faq_gets_one_back(self) -> None:
+        from src.faq_agent import FAQAgent
+
+        revised = "# T\n\n" + ("Body prose that survived the revision. " * 40)
+        restored = FAQAgent.append_to_article(revised, self.FAQ)
+        self.assertIn("## FAQ", restored)
+        self.assertIn("That depends on the room.", restored)
+
+    def test_restoring_does_not_duplicate_an_faq_the_writer_kept(self) -> None:
+        from src.faq_agent import FAQAgent
+
+        revised = "# T\n\n" + ("Body prose. " * 40) + "\n\n" + self.FAQ
+        restored = FAQAgent.append_to_article(revised, self.FAQ)
+        self.assertEqual(restored.count("## FAQ"), 1)
+
+    def test_a_restored_revision_passes_the_damage_check(self) -> None:
+        from src.faq_agent import FAQAgent
+
+        before = "# T\n\n" + ("Original prose here. " * 60) + "\n\n" + self.FAQ
+        revised = "# T\n\n" + ("Corrected prose here. " * 60)
+        self.assertIsNotNone(revision_damage(before, revised))  # without the FAQ
+        restored = FAQAgent.append_to_article(revised, self.FAQ)
+        self.assertIsNone(revision_damage(before, restored))    # with it

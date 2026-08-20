@@ -140,6 +140,35 @@ Preferred people scenarios:
 - friends / guests in a game-room or home-bar setting
 - calm solo decompression scene
 
+## Branding in generated images — hard rules
+
+Generated images are not product photography. Three things go wrong without a
+rule, and all three have happened:
+
+**No third-party brands, logos, or intellectual property. Ever.**
+A generated bar scene came back with a cabinet marked PANDORA'S BOX — a real
+competitor — running a game list of licensed SNK titles. Another put Marvel and
+film posters on the wall. `claims_constraints.md` forbids trademarked game
+titles in text; the same rule holds for anything visible in an image, including
+screens, cabinet art, posters, packaging and signage. If a machine appears, its
+cabinet and screen carry no readable brand, no recognisable character, and no
+identifiable game.
+
+**Editorial articles show unbranded machines above the product section.**
+An article analysing whether an arcade machine pays for itself must not be
+illustrated with our own machine at the top. That makes the product look like
+the subject of the analysis rather than one option in it, and a reader who
+notices stops trusting the numbers. Generic, unbranded venue and cabinet
+imagery everywhere except the closing product section, which may show the real
+product properly.
+
+**Captions describe, they do not sell.**
+A caption states what is in the frame. It does not assert specifications, name
+editions, or make performance claims — the image cannot evidence any of that,
+and captions are read as fact rather than as marketing. "A touchscreen arcade
+cabinet on a bar counter" is a caption. "ECHO Commercial is built for bars and
+event venues" is an advertisement in a place the reader does not expect one.
+
 ## Realism rules
 - Preserve realistic proportions
 - Preserve realistic materials

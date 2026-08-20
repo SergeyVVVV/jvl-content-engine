@@ -38,6 +38,7 @@ import jsonschema
 #: framing on B2C copy, because none of those rules were in front of it.
 _KNOWLEDGE_FILES: list[tuple[str, str]] = [
     ("claims_constraints.md", "ALLOWED AND FORBIDDEN CLAIMS — the authority on what may be said"),
+    ("firsthand_experience.md", "VERIFIED EXPERIENCE ANCHORS — confirmed operational and process facts"),
 ]
 
 #: Issues the Writer cannot act on, matched against the issue's `location`.
