@@ -574,6 +574,19 @@ def run_pipeline(
             )
             revised_markdown = writer_agent.assemble_markdown(revised_result)
 
+            # Put the FAQ back rather than hoping the Writer kept it. It does
+            # not: its own system prompt tells it a separate agent owns the FAQ
+            # and to leave a placeholder, so a revision reliably comes back
+            # without one, the damage check rejects it, and the fixes are lost
+            # along with it. append_to_article strips whatever FAQ-shaped
+            # section survived and re-inserts the canonical block in the right
+            # place, which makes the outcome the same whether the Writer
+            # dropped it, mangled it, or left it alone.
+            if faq_markdown:
+                revised_markdown = FAQAgent.append_to_article(
+                    revised_markdown, faq_markdown
+                )
+
             damage = revision_damage(draft_markdown, revised_markdown)
             if damage:
                 print(
