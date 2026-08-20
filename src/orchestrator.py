@@ -32,6 +32,7 @@ from src.seo_structure_agent import SeoStructureAgent
 from src.writer_agent import WriterAgent
 from src.readability_agent import ReadabilityChecker
 from src.faq_agent import FAQAgent
+from src import sources_block
 from src.qa_agent import QAAgent
 from src.metadata_copy_agent import MetadataCopyAgent
 from src.article_diagnostic_agent import ArticleDiagnosticAgent
@@ -562,6 +563,20 @@ def run_pipeline(
     companion["source_inputs_used"]["faq_json_ld"] = (
         str(faq_jsonld_path) if faq_jsonld_path else None
     )
+
+    # Sources, after the FAQ so it closes the article, and before QA so the
+    # reviewer sees what a reader will. Empty unless the research found enough
+    # to be worth listing — a bibliography under a piece that needed one figure
+    # is imitation scholarship.
+    sources_markdown = sources_block.render(facts) if facts else ""
+    if sources_markdown:
+        draft_markdown = sources_block.append_to_article(draft_markdown, sources_markdown)
+        companion["draft_markdown"] = draft_markdown
+        print(
+            f"  Sources block: {len(sources_block.select_sources(facts))} listed",
+            file=sys.stderr,
+        )
+    results["sources_markdown"] = sources_markdown
 
     draft_md_path = root / "drafts" / f"{topic_slug}.md"
     draft_json_path = root / "drafts" / f"{topic_slug}.json"
