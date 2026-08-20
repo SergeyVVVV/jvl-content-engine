@@ -44,7 +44,7 @@ article will run long after it is written; a stale price is worse than none.
 ## Key USPs (confirmed — use freely)
 
 - Compact footprint — fits corners, bar counters, basements, game rooms, cabins
-- Touch controls — no mechanical failures, no lag; flawless real-time response
+- Touch controls — no mechanical controls to wear out; responsive, with no perceptible lag
 - 149 pre-installed games — no downloads, no installs, no Wi-Fi required
 - Pure plug-and-play — no setup or installation needed
 - Designed in Canada, made in the USA
