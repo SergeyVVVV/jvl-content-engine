@@ -72,10 +72,11 @@ class SelectionTests(unittest.TestCase):
 
 
 class RenderTests(unittest.TestCase):
-    def test_one_source_gets_no_block(self) -> None:
-        # A bibliography under a piece that needed one figure is imitation
-        # scholarship, and readers notice.
-        self.assertEqual(render(facts(src("https://a.com"))), "")
+    def test_one_source_still_gets_a_block(self) -> None:
+        # If the article leaned on something, the reader gets to see what.
+        out = render(facts(src("https://a.com", title="The one source")))
+        self.assertIn("## Sources", out)
+        self.assertIn("The one source", out)
 
     def test_no_research_gets_no_block(self) -> None:
         self.assertEqual(render({}), "")

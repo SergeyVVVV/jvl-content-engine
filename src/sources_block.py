@@ -11,17 +11,19 @@ judgement; a long one reads as an automated dump, and the second is worse than
 having none. And a bare URL demonstrates nothing — what a person and a machine
 both read is a descriptive title, the publisher, and a date.
 
-The block is also conditional. An article that needed one figure does not get a
-bibliography: a list of sources under a piece with nothing to source is
-imitation scholarship, and readers notice.
+The block appears whenever the article leaned on anything at all, down to a
+single entry. It disappears only when there was no research to show — a heading
+over an empty list is worse than no heading.
 """
 
 from __future__ import annotations
 
 from urllib.parse import urlparse
 
-#: Fewer than this and a list adds nothing a sentence could not carry.
-MIN_SOURCES = 2
+#: One source is enough to list. If the article leaned on something, the
+#: reader gets to see what — the alternative is a figure the reader is invited
+#: to trust and cannot check, which is the problem this block exists to solve.
+MIN_SOURCES = 1
 
 #: More than this and it stops looking chosen.
 MAX_SOURCES = 7
