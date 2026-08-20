@@ -124,6 +124,14 @@ the reader, and reaching a conclusion they can act on.
 - **Address the reader directly** where it helps ("if your room is quiet, run
   the numbers again at…"). Second person costs nothing and turns a specification
   into advice.
+- **A model must name what it leaves out.** Any article that computes an
+  outcome — payback, savings, capacity, time to result — is a model, and every
+  model excludes things that matter. Say which. An arcade machine's coin drop
+  is not its whole contribution to a bar: guests who stay for another round,
+  come back on a Friday, or leave a review are worth money the model never
+  counted. Naming those makes the number more trustworthy, not less, because a
+  reader who has thought of them already knows the model is incomplete and is
+  waiting to see whether you know it too.
 - **Concede something real.** An article that never admits a limitation reads
   as marketing, and the reader discounts everything else in it.
 
