@@ -111,7 +111,25 @@ def main(argv: list[str] | None = None) -> int:
 
     draft_path = results.get("draft_md_path")
     if not draft_path:
-        print("\nPipeline finished without producing a draft.", file=sys.stderr)
+        error = results.get("error")
+        failed = results.get("failed_step")
+        if error:
+            print(f"\n{failed or 'Pipeline'} failed: {error}", file=sys.stderr)
+        else:
+            print("\nPipeline finished without producing a draft.", file=sys.stderr)
+
+        # Say what survived. The expensive steps run before the Writer, and a
+        # run that dies there should not look like it produced nothing.
+        for label, key in (
+            ("brief", "brief_path"),
+            ("facts", "facts_path"),
+            ("serp", "serp_path"),
+            ("insight", "insight_path"),
+            ("outline", "seo_path"),
+        ):
+            path = results.get(key)
+            if path:
+                print(f"  {label:8s}: {path}", file=sys.stderr)
         return 1
 
     metadata = results.get("metadata") or {}
