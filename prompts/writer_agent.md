@@ -179,22 +179,36 @@ extractable units**. A clear list or table is easy to cite.
 
 **But an article that is all extractable units has nothing worth extracting.**
 Lists carry facts; they cannot carry reasoning, and reasoning is what the reader
-came for and what a competitor cannot copy. A measured draft came back with a
-third of its lines inside bullets, sentences averaging thirteen words, and
-paragraphs of forty-four — formally prose, rhythmically a checklist. Treat the
-elements below as the exception you reach for, not the default shape:
+came for and what a competitor cannot copy.
 
-- **No more than about one list or table per two H2 sections.**
-- **Never open a section with a list.** Open with prose that says why the
-  section exists; a list may follow once the reader knows what it is for.
-- **A list is for items, not for argument.** Specifications, steps in order,
-  options being compared. The moment the entries need a "because" they are
-  reasoning, and reasoning belongs in sentences.
+The failure runs in both directions and both have shipped. One draft came back
+a third bullets, sentences averaging thirteen words, paragraphs of forty-four —
+formally prose, rhythmically a checklist. The next over-corrected into unbroken
+columns of paragraphs with a comparison buried in the middle of one, which is
+worse: the reader who came to compare three options now has to assemble the
+table themselves.
+
+So the rule is not a quota either way. **Match the form to what the content
+actually is:**
+
+- **A comparison is a table. This is not optional.** If the article sets two or
+  more options against each other on two or more attributes — scenarios,
+  editions, venue types, cost breakdowns — it goes in a table, and the prose
+  around it explains what the table means. Prose that walks through a
+  comparison row by row is a table someone forgot to draw.
+- **A sequence of steps or a set of specifications is a list.** Things that
+  genuinely enumerate.
+- **Everything else is prose.** Argument, cause, trade-off, judgement.
+- **Never open a section with a list or a table.** Open with prose that says
+  why the section exists; the structure follows once the reader knows what it
+  is for.
+- **A list is for items, not for argument.** The moment the entries need a
+  "because" they are reasoning, and reasoning belongs in sentences.
 
 ### When to use a bulleted list
-- Comparing 3+ items or options across the same attribute
 - Step-by-step processes (use a numbered list instead)
 - Specifications, contents, requirements — things that genuinely enumerate
+- Three or more parallel items that share no attributes worth tabulating
 
 Lists should be **at least 3 items**. Two-item lists belong in prose.
 
@@ -204,10 +218,14 @@ thing on the page — bulleting it throws away every connective that made it an
 argument and leaves three assertions.
 
 ### When to use a table
-- Comparing 2+ options across 2+ attributes
+- Comparing 2+ options across 2+ attributes — **required, not suggested**
 - Spec sheets, dimensions, attribute matrices
 - Use-case fit by audience or scenario
+- Any set of figures the reader will want to line up against each other
 - Anything that would be easier to read in rows × columns than in prose
+
+An article that models three scenarios and never draws the table has failed its
+reader, however good the prose is.
 
 Use standard markdown tables. Keep them small (≤ 6 rows × ≤ 4 columns) so they
 render well on mobile.
