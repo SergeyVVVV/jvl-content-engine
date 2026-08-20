@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from src.markdown_render import escape_dollars
 from src.orchestrator import (
     UPDATE_STEPS,
     _extract_topic_from_markdown,
@@ -192,7 +193,7 @@ def _render_article(
     tabs = st.tabs(tab_labels)
 
     with tabs[0]:
-        st.markdown(draft_markdown)
+        st.markdown(escape_dollars(draft_markdown))
 
     with tabs[1]:
         st.code(draft_markdown, language="markdown")
@@ -696,7 +697,7 @@ else:
             update_tabs = st.tabs(tab_labels)
 
             with update_tabs[0]:
-                st.markdown(updated_md)
+                st.markdown(escape_dollars(updated_md))
                 st.download_button(
                     "Download updated.md",
                     data=updated_md.encode("utf-8"),
@@ -705,7 +706,7 @@ else:
                     key="dl_updated",
                 )
             with update_tabs[1]:
-                st.markdown(original_md)
+                st.markdown(escape_dollars(original_md))
             with update_tabs[2]:
                 diff_text = _build_unified_diff(original_md, updated_md)
                 if diff_text:
