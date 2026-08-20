@@ -60,7 +60,27 @@ MIN_SENTENCE_STDEV = 6.0
 #: Most being short is the defect.
 MAX_SHORT_SENTENCE_SHARE = 0.45
 
+#: How far outside a boundary still counts as inside it.
+#:
+#: Every threshold here is a judgement dressed as a number, and enforcing them
+#: exactly costs more than it buys. A draft once sat at 14.29 words against a
+#: floor of 15 — seven tenths of a word — with its reading ease already in band,
+#: and paid for a full Writer pass on the heavy tier to close the gap. The pass
+#: overshot to 26.66 and made things worse. Ten percent of the boundary is the
+#: width of the doubt in the boundary itself.
+_TOLERANCE = 0.10
+
 MAX_ITERATIONS = 3
+
+
+def _below(value: float, floor: float) -> bool:
+    """Meaningfully below a floor, not merely under it."""
+    return value < floor * (1 - _TOLERANCE)
+
+
+def _above(value: float, ceiling: float) -> bool:
+    """Meaningfully above a ceiling."""
+    return value > ceiling * (1 + _TOLERANCE)
 
 
 def _strip_markdown(md: str) -> str:
@@ -172,35 +192,44 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
     stdev = stats.get("sentence_length_stdev", 0.0)
     short_share = stats.get("short_sentence_share", 0.0)
 
-    if score < TARGET_MIN:
+    if _below(score, TARGET_MIN):
         problems.append(
-            f"Reading ease is {score}, below {TARGET_MIN}. The prose is harder work "
-            "than it needs to be. Break the densest sentences and replace jargon "
-            "where a plain word carries the same meaning — do not flatten the whole "
-            "article to reach a number."
+            f"Reading ease is {score}, below {TARGET_MIN}. Touch only the densest "
+            f"sentences — those over {int(MAX_MEAN_SENTENCE)} words — and split each "
+            "at its natural joint, or replace a piece of jargon where a plain word "
+            "carries the same meaning. Leave every other sentence exactly as it is. "
+            "Flattening the whole article to move a number is the failure this "
+            "check exists to catch, not the fix for it."
         )
-    elif score > TARGET_MAX:
+    elif _above(score, TARGET_MAX):
         problems.append(
             f"Reading ease is {score}, above {TARGET_MAX}. The prose has been "
-            "simplified past plain into choppy. Rejoin sentences that belong "
-            "together, restore the connective words that carry an argument "
-            "(because, which, even though), and let the reasoning run."
+            "simplified past plain into choppy. Rejoin adjacent short sentences "
+            f"— those under {int(MIN_MEAN_SENTENCE) - 3} words — that carry one "
+            "idea between them, and restore the connective words an argument needs "
+            "(because, which, even though). Do not lengthen a sentence that is "
+            "already comfortable."
         )
 
-    if mean < MIN_MEAN_SENTENCE:
+    if _below(mean, MIN_MEAN_SENTENCE):
         problems.append(
             f"Sentences average {mean} words, under {MIN_MEAN_SENTENCE}. That is "
             "checklist cadence: a paragraph of short declaratives reads as a list "
-            "with the bullets removed. Combine related sentences so the reasoning "
-            "between them is visible instead of implied."
+            "with the bullets removed. Combine adjacent sentences that carry one "
+            f"idea between them — the ones under {int(MIN_MEAN_SENTENCE) - 3} words "
+            "— so the reasoning between them becomes visible instead of implied. "
+            f"Leave anything already over {int(MIN_MEAN_SENTENCE)} words alone; the "
+            "goal is a mixture, not a uniformly longer article."
         )
-    elif mean > MAX_MEAN_SENTENCE:
+    elif _above(mean, MAX_MEAN_SENTENCE):
         problems.append(
-            f"Sentences average {mean} words, over {MAX_MEAN_SENTENCE}. Split the "
-            "longest ones at their natural joints."
+            f"Sentences average {mean} words, over {MAX_MEAN_SENTENCE}. Split only "
+            f"the sentences over {int(MAX_MEAN_SENTENCE) + 6} words, at their "
+            "natural joints. Leave the rest untouched — splitting everything "
+            "trades one failure for its opposite."
         )
 
-    if stdev < MIN_SENTENCE_STDEV:
+    if _below(stdev, MIN_SENTENCE_STDEV):
         problems.append(
             f"Sentence length barely varies (spread {stdev}, floor "
             f"{MIN_SENTENCE_STDEV}). Every sentence being the same size reads as "
@@ -208,7 +237,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
             "sentence that develops a point, then a short one that lands it."
         )
 
-    if short_share > MAX_SHORT_SENTENCE_SHARE:
+    if _above(short_share, MAX_SHORT_SENTENCE_SHARE):
         problems.append(
             f"{round(short_share * 100)}% of sentences are under twelve words, over "
             f"the {round(MAX_SHORT_SENTENCE_SHARE * 100)}% ceiling. Short sentences "
@@ -460,6 +489,7 @@ class ReadabilityChecker:
 
         iterations: list[dict] = []
         best_rank: tuple[int, float] = (10**6, 0.0)
+        previous_problems: int | None = None
         best_score = -1.0
         best_idx = 0
         best_result = draft_result
@@ -480,6 +510,30 @@ class ReadabilityChecker:
                 f"{len(problems)} out of range",
                 file=sys.stderr,
             )
+
+            # A pass that does not reduce the problem count is not converging,
+            # and the next one has no better prospects. Observed: 22.97 words ->
+            # 14.29 -> 26.66, each correction overshooting harder than the last,
+            # the third draft worse than the first, and the whole budget spent.
+            # The rule is "fewer than before or stop" rather than "worse than
+            # before", because standing still is how an oscillation looks when it
+            # happens to trade one problem for another.
+            if previous_problems is not None and len(problems) >= previous_problems:
+                verdict = (
+                    "worse than" if len(problems) > previous_problems else "no better than"
+                )
+                print(
+                    f"  Iteration {i} is {verdict} the last "
+                    f"({len(problems)} problems against {previous_problems}) — "
+                    "the loop is not converging. Stopping and keeping the best draft.",
+                    file=sys.stderr,
+                )
+                iterations.append(
+                    {"iteration": i, "stats": stats, "instructions": None,
+                     "used": False, "diverged": True}
+                )
+                break
+            previous_problems = len(problems)
 
             rank = (len(problems), -score)
             if rank < best_rank:

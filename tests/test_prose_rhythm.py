@@ -54,7 +54,7 @@ class BandTests(unittest.TestCase):
 
     def test_dense_prose_is_flagged(self) -> None:
         problems = prose_problems(stats(score=TARGET_MIN - 10))
-        self.assertTrue(any("harder work" in p for p in problems))
+        self.assertTrue(any("densest sentences" in p for p in problems))
 
     def test_over_simplified_prose_is_flagged_too(self) -> None:
         # The direction that used to be the goal is now a defect.
@@ -73,7 +73,7 @@ class RhythmTests(unittest.TestCase):
 
     def test_rambling_is_flagged(self) -> None:
         problems = prose_problems(stats(mean=MAX_MEAN_SENTENCE + 5))
-        self.assertTrue(any("Split the" in p for p in problems))
+        self.assertTrue(any("Split only" in p for p in problems))
 
     def test_uniform_sentence_length_is_flagged(self) -> None:
         problems = prose_problems(stats(stdev=MIN_SENTENCE_STDEV - 3))
@@ -131,3 +131,92 @@ class MeasuredProseTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ToleranceTests(unittest.TestCase):
+    """A boundary is a judgement, not a measurement.
+
+    Observed on a live run: a draft at 14.29 words against a floor of 15, with
+    reading ease already in band, spent a full Writer pass on the heavy tier to
+    close a gap of seven tenths of a word. The pass overshot to 26.66 and made
+    the article worse. The thresholds are not precise enough to be worth
+    enforcing to the decimal.
+    """
+
+    def test_a_hairsbreadth_miss_is_not_a_problem(self) -> None:
+        # The exact draft that triggered the wasted pass.
+        self.assertEqual(prose_problems(stats(score=65.17, mean=14.29, stdev=12.1, short=0.42)), [])
+
+    def test_the_draft_before_it_would_also_have_passed(self) -> None:
+        # Iteration 0: reading ease a third of a point under the floor.
+        self.assertEqual(prose_problems(stats(score=54.7, mean=22.97, stdev=17.24, short=0.18)), [])
+
+    def test_a_real_miss_still_fails(self) -> None:
+        # Iteration 2, the draft the loop diverged into.
+        problems = prose_problems(stats(score=49.25, mean=26.66, stdev=15.76, short=0.16))
+        self.assertEqual(len(problems), 2)
+
+    def test_tolerance_does_not_swallow_the_checklist_case(self) -> None:
+        # The failure the whole band exists to catch must still be caught.
+        problems = prose_problems(stats(score=74.5, mean=13.2, stdev=7.6, short=0.64))
+        self.assertTrue(problems)
+
+
+class BoundedInstructionTests(unittest.TestCase):
+    """Each instruction must say which sentences to leave alone.
+
+    The loop oscillated 22.97 -> 14.29 -> 26.66 words because the feedback named
+    a direction without a limit, so the Writer moved every sentence rather than
+    the ones at fault.
+    """
+
+    def test_splitting_names_a_threshold_and_a_stop(self) -> None:
+        problem = prose_problems(stats(mean=MAX_MEAN_SENTENCE + 5))[0]
+        self.assertIn("Split only", problem)
+        self.assertIn("Leave the rest untouched", problem)
+
+    def test_combining_names_a_threshold_and_a_stop(self) -> None:
+        problem = prose_problems(stats(mean=MIN_MEAN_SENTENCE - 5))[0]
+        self.assertIn("Leave anything already over", problem)
+
+    def test_the_dense_instruction_limits_its_own_scope(self) -> None:
+        problem = prose_problems(stats(score=TARGET_MIN - 10))[0]
+        self.assertIn("Leave every other sentence exactly as it is", problem)
+
+
+class DivergenceTests(unittest.TestCase):
+    """The loop must notice when it is making things worse.
+
+    Live run: 22.97 words -> 14.29 -> 26.66, each correction overshooting harder
+    than the last and the third draft worse than the first. The loop spent its
+    whole budget on that, three Writer passes on the heavy tier, and was saved
+    only by best-draft selection at the end.
+    """
+
+    def test_the_loop_stops_instead_of_spending_the_rest_of_its_budget(self) -> None:
+        from src.readability_agent import ReadabilityChecker
+
+        # Each rewrite returns a draft with more problems than the last.
+        drafts = [
+            "Sentence one is of a perfectly reasonable and unremarkable length here. " * 30,
+            "Short. Very short. Tiny. Terse. Blunt. Curt. Clipped. Brief. Small. " * 30,
+        ]
+        calls = {"n": 0}
+
+        def rewrite(feedback: str) -> dict:
+            calls["n"] += 1
+            return {"draft": drafts[min(calls["n"], len(drafts) - 1)]}
+
+        checker = ReadabilityChecker(max_iterations=3)
+        checker.generate_instructions = lambda md, stats: {"instructions_for_writer": []}
+
+        report = checker.run(
+            draft_result={"draft": drafts[0]},
+            draft_markdown=drafts[0],
+            rewrite_fn=rewrite,
+            assemble_markdown_fn=lambda r: r["draft"],
+        )
+        # One rewrite is allowed; the second must not happen once the first
+        # failed to reduce the problem count.
+        self.assertLessEqual(calls["n"], 1, "the loop kept rewriting without converging")
+        self.assertIn("iterations", report)
