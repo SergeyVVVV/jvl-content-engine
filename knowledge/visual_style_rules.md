@@ -162,6 +162,16 @@ notices stops trusting the numbers. Generic, unbranded venue and cabinet
 imagery everywhere except the closing product section, which may show the real
 product properly.
 
+**Never generate an image of a table, a chart, or anything made of numbers.**
+An image model draws something that looks like a table; it does not reproduce
+the figures. A generated "comparison of three payback scenarios" came back
+showing $1,000 and $1,500 a week for an article whose scenarios were $30, $75
+and $160 — wrong by a factor of thirteen, sitting beside the real markdown table
+it duplicated. Numbers inside an image are also unreadable to screen readers,
+uncopyable, and invisible to search. Tables belong in markdown. If the shape of
+a relationship genuinely needs showing, that is a chart built from the data, not
+a picture of one — propose it and leave it to be produced properly.
+
 **Captions describe, they do not sell.**
 A caption states what is in the frame. It does not assert specifications, name
 editions, or make performance claims — the image cannot evidence any of that,

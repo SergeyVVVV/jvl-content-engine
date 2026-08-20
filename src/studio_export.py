@@ -47,6 +47,34 @@ _LOCAL_IMAGE_RE = re.compile(r"!\[[^\]]*\]\((?!https?://|//|data:)([^)]+)\)")
 _FAQ_HEADING_RE = re.compile(r"^(faq|frequently asked questions)\b", re.I)
 _REMOTE_IMAGE_RE = re.compile(r"!\[([^\]]*)\]\((https?://[^)\s]+)\)")
 
+#: Editorial markers that must never reach a reader.
+#:
+#: Two kinds got through to a finished payload. The Writer marks where a visual
+#: would help with a `> **[VISUAL]** *chart — …*` blockquote, a note addressed
+#: to whoever makes the picture; nothing removed them, so three sat in the live
+#: article as italic instructions to nobody. And the FAQ agent was told to write
+#: `TODO: source not confirmed` when an answer needed data nobody had — it did,
+#: inside two customer-facing answers.
+#:
+#: Both are useful in the preview, where an editor should see what still needs
+#: attention. Neither survives publication. The stripping happens here, at the
+#: boundary, because that is the one place every publish must pass through.
+_VISUAL_PLACEHOLDER_RE = re.compile(
+    r"^\s*>\s*\*\*\[VISUAL\]\*\*.*(?:\n(?:\s*>.*)?)*\n?", re.MULTILINE
+)
+
+#: A TODO note and the sentence carrying it, wherever it sits in prose.
+_TODO_SENTENCE_RE = re.compile(r"\s*TODO:[^.!?\n]*[.!?]?", re.IGNORECASE)
+
+
+def strip_editorial_markers(markdown: str) -> str:
+    """Remove notes written for the team from text written for the reader."""
+    text = _VISUAL_PLACEHOLDER_RE.sub("", markdown)
+    text = _TODO_SENTENCE_RE.sub("", text)
+    # Collapse the blank runs the removals leave behind.
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text
+
 #: Bylines the site accepts (`news.author_key`). None = "JVL Editorial Team".
 BYLINES = ("sergey-vysotsky", "andrei-klimovich")
 
@@ -304,7 +332,7 @@ def to_studio_payload(
     `article_type` defaults to "blog": what this pipeline writes are guides and
     explainers, which belong in the blog listing rather than in company news.
     """
-    h1, intro, sections = split_markdown(draft_markdown)
+    h1, intro, sections = split_markdown(strip_editorial_markers(draft_markdown))
 
     # Counted before extraction: two FAQ blocks merge into one list afterwards,
     # which hides the dedup bug that produced them.

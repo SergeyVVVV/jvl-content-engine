@@ -29,7 +29,11 @@ Hard rules:
   engine while researching the topic? If it is only answerable by our sales page,
   it belongs in the product section of the article, not here.
 - never invent product specs, pricing, warranty, or compliance details
-- if a confident answer requires unconfirmed data, write `TODO: source not confirmed`
+- never write `TODO:` inside an answer. An answer is read by the customer; a
+  TODO is a note to an editor, and one published inside an FAQ reads as a broken
+  page. If a confident answer needs data nobody has confirmed, write the answer
+  without that data — say plainly what is not known, which is more useful than a
+  fabricated figure — and put the note in the `todos` array instead
 - never repeat the primary keyword unnaturally
 - do not duplicate content already covered in main article sections
 
