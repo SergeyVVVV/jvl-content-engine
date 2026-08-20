@@ -84,7 +84,11 @@ class FAQAgent:
             "- At least 5 items.\n"
             "- Each answer 2–4 sentences, concrete, no marketing fluff.\n"
             "- Do not repeat questions already answered in the draft's H2/H3 sections.\n"
-            "- If an answer requires unconfirmed data, write `TODO: source not confirmed`.\n"
+            "- NEVER write `TODO:` inside an answer. Answers are read by "
+            "customers; TODOs are notes to an editor. If an answer needs data "
+            "nobody has confirmed, write it without that data — saying plainly "
+            "what is unknown beats inventing a figure — and put the note in the "
+            "`todos` array instead.\n"
         )
 
     def _build_user_message(
