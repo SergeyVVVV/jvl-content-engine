@@ -25,6 +25,7 @@ from datetime import datetime
 from pathlib import Path
 
 from src.agents import BriefAgent
+from src.fact_research_agent import FactResearchAgent
 from src.serp_research_agent import SerpResearchAgent
 from src.company_insight_agent import CompanyInsightAgent
 from src.seo_structure_agent import SeoStructureAgent
@@ -52,6 +53,16 @@ _DEFAULT_QA_MAX_REVISIONS = 1
 _MIN_REVISION_LENGTH_RATIO = 0.75
 
 _IMAGE_URL_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
+
+
+def fact_research_enabled() -> bool:
+    """Whether to spend searches establishing the article's figures.
+
+    Off unless asked. Search is billed per query on top of tokens, and a caller
+    writing a piece with no quantities in it should not pay for research it will
+    not use.
+    """
+    return os.environ.get("FACT_RESEARCH", "false").strip().lower() == "true"
 
 
 def qa_max_revisions() -> int:
@@ -100,6 +111,7 @@ def revision_damage(before: str, after: str) -> str | None:
 #: never be added to the pipeline without appearing in the UI, or vice versa.
 PIPELINE_STEPS = [
     "Brief",
+    "Fact Research",
     "SERP Research",
     "Company Insight",
     "SEO Structure",
@@ -111,7 +123,7 @@ PIPELINE_STEPS = [
 ]
 
 #: Steps a caller may skip. Everything else always runs.
-SKIPPABLE = {"SERP Research", "Company Insight", "SEO Structure",
+SKIPPABLE = {"Fact Research", "SERP Research", "Company Insight", "SEO Structure",
              "Readability Checker", "Visual Agent", "FAQ Agent",
              "QA Review", "Metadata"}
 
@@ -171,6 +183,37 @@ def _save_json(data: dict, path: Path) -> None:
 
 
 # ─── Pipeline helpers ─────────────────────────────────────────────────────────
+
+def _build_facts_context(facts: dict) -> str:
+    """Render researched figures for the Writer.
+
+    Kept narrow on purpose. The Writer needs the number, its bounds, where it
+    came from and how far to trust it — not the whole record.
+    """
+    findings = []
+    for f in facts.get("findings", []) or []:
+        findings.append({
+            "question": f.get("question"),
+            "range": f.get("range"),
+            "confidence": f.get("confidence"),
+            "caveats": f.get("caveats"),
+            "sources": [
+                {
+                    "kind": s.get("kind"),
+                    "url": s.get("url"),
+                    "said": s.get("figure"),
+                    "date": s.get("date"),
+                }
+                for s in (f.get("sources") or [])
+            ],
+        })
+    payload = {
+        "findings": findings,
+        "unanswered": facts.get("unanswered", []),
+        "notes_for_writer": facts.get("notes_for_writer", []),
+    }
+    return json.dumps(payload, indent=2, ensure_ascii=False)
+
 
 def _build_serp_context(serp_data: dict) -> str:
     fields = {
@@ -261,7 +304,33 @@ def run_pipeline(
 
     topic_slug = slugify(topic)
 
-    # Step 2 — SERP Research
+    # Step 2 — Fact Research
+    #
+    # What the article's numbers actually are, with sources. Distinct from SERP
+    # research, which is about what competitors published. Off by default: it
+    # costs a cent a search on top of tokens, and a caller who does not need
+    # sourced figures should not pay for them.
+    yield _event(steps, "Fact Research", "running")
+    facts: dict | None = None
+    facts_path: Path | None = None
+    try:
+        _guard(skip, "Fact Research")
+        if not fact_research_enabled():
+            raise _StepSkipped("Fact Research")
+        facts = FactResearchAgent().run(
+            topic=topic, brief=brief, country=country, language=language
+        )
+        facts_path = root / "facts" / f"{topic_slug}.json"
+        _save_json(facts, facts_path)
+    except _StepSkipped:
+        pass
+    except Exception as exc:
+        print(f"Fact Research failed: {exc}", file=sys.stderr)
+    results["facts"] = facts
+    results["facts_path"] = facts_path
+    yield _event(steps, "Fact Research", "done")
+
+    # Step 3 — SERP Research
     yield _event(steps, "SERP Research", "running")
     serp_data: dict | None = None
     serp_path: Path | None = None
@@ -339,6 +408,7 @@ def run_pipeline(
     yield _event(steps, "Writer", "running")
     serp_context = _build_serp_context(serp_data) if serp_data else ""
     insight_context = _build_insight_context(insight_data) if insight_data else ""
+    facts_context = _build_facts_context(facts) if facts else ""
     seo_structure_context = json.dumps(seo_data, indent=2, ensure_ascii=False) if seo_data else ""
     writer_agent = WriterAgent()
     draft_result = writer_agent.run(
@@ -347,6 +417,7 @@ def run_pipeline(
         serp_context=serp_context,
         insight_context=insight_context,
         seo_structure_context=seo_structure_context,
+        facts_context=facts_context,
     )
     draft_markdown = writer_agent.assemble_markdown(draft_result)
     yield _event(steps, "Writer", "done")
@@ -366,6 +437,7 @@ def run_pipeline(
                 serp_context=serp_context,
                 insight_context=insight_context,
                 seo_structure_context=seo_structure_context,
+                facts_context=facts_context,
                 revision_feedback=feedback,
             )
 
@@ -569,6 +641,7 @@ def run_pipeline(
                 serp_context=serp_context,
                 insight_context=insight_context,
                 seo_structure_context=seo_structure_context,
+                facts_context=facts_context,
                 revision_feedback=feedback,
                 original_article=draft_markdown,
             )

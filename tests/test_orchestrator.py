@@ -29,8 +29,9 @@ class StepRegistryTests(unittest.TestCase):
     def test_default_order(self) -> None:
         self.assertEqual(
             pipeline_steps(),
-            ["Brief", "SERP Research", "Company Insight", "SEO Structure", "Writer",
-             "Readability Checker", "FAQ Agent", "QA Review", "Metadata"],
+            ["Brief", "Fact Research", "SERP Research", "Company Insight",
+             "SEO Structure", "Writer", "Readability Checker", "FAQ Agent",
+             "QA Review", "Metadata"],
         )
 
     def test_visuals_run_before_the_faq_block_is_appended(self) -> None:
@@ -227,3 +228,42 @@ class UpdatePipelineTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FactResearchStepTests(unittest.TestCase):
+    """Research runs before anything reads the topic for meaning.
+
+    An article modelled three payback scenarios on $30, $75 and $160 a week,
+    every figure invented. One live search found published ranges of $50-$150,
+    "a minimum of $200 per week", and an operator with two thousand machines
+    reporting EUR 45-60 on weekend days. Nothing in the pipeline was looking.
+    """
+
+    def test_it_runs_before_the_writer_needs_the_numbers(self) -> None:
+        steps = pipeline_steps()
+        self.assertLess(steps.index("Fact Research"), steps.index("Writer"))
+
+    def test_it_runs_after_the_brief_that_tells_it_what_to_ask(self) -> None:
+        steps = pipeline_steps()
+        self.assertGreater(steps.index("Fact Research"), steps.index("Brief"))
+
+    def test_it_can_be_skipped(self) -> None:
+        from src.orchestrator import SKIPPABLE
+        self.assertIn("Fact Research", SKIPPABLE)
+
+    def test_it_is_off_unless_asked(self) -> None:
+        import os
+        from src.orchestrator import fact_research_enabled
+
+        saved = os.environ.pop("FACT_RESEARCH", None)
+        try:
+            # Search is billed per query on top of tokens.
+            self.assertFalse(fact_research_enabled())
+            os.environ["FACT_RESEARCH"] = "true"
+            self.assertTrue(fact_research_enabled())
+            os.environ["FACT_RESEARCH"] = "yes please"
+            self.assertFalse(fact_research_enabled())
+        finally:
+            os.environ.pop("FACT_RESEARCH", None)
+            if saved is not None:
+                os.environ["FACT_RESEARCH"] = saved

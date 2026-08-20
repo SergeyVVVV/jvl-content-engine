@@ -19,6 +19,7 @@ the agents have to know about — they still call chat(system, user, ...):
 from __future__ import annotations
 
 import os
+import sys
 
 from anthropic import Anthropic
 
@@ -66,6 +67,77 @@ _DEFAULT_TIMEOUT = 300.0
 _DEFAULT_MAX_RETRIES = 2
 
 _EFFORT_LEVELS = ("low", "medium", "high", "xhigh", "max")
+
+#: Server-side web search. The dated variant carries its own result filtering,
+#: which runs code execution under the hood — so code_execution must NOT be
+#: declared alongside it, or the model gets two execution environments and
+#: behaves worse.
+#:
+#: The newer type needs Opus 4.6+ / Sonnet 4.6+; Haiku 4.5 only has the basic
+#: one. Tiers are resolved per model rather than assumed, because the light tier
+#: is a Haiku and silently sending it a type it cannot use fails the whole step.
+_SEARCH_TOOL_MODERN = "web_search_20260209"
+_SEARCH_TOOL_BASIC = "web_search_20250305"
+_BASIC_SEARCH_MODELS = ("haiku",)
+
+#: Searches allowed in one call. Each is billed at $10 per thousand, so the cap
+#: is a budget as much as a limit.
+_DEFAULT_MAX_SEARCHES = 8
+
+#: How many times a paused searching turn may be resumed before giving up.
+_MAX_PAUSE_RESUMES = 3
+
+
+def search_tool(max_uses: int | None = None, tier: str = "standard") -> dict:
+    """The web search tool definition appropriate to a tier's model."""
+    model = resolve_model(tier)
+    tool_type = (
+        _SEARCH_TOOL_BASIC
+        if any(name in model for name in _BASIC_SEARCH_MODELS)
+        else _SEARCH_TOOL_MODERN
+    )
+    return {
+        "type": tool_type,
+        "name": "web_search",
+        "max_uses": max_uses or _DEFAULT_MAX_SEARCHES,
+    }
+
+
+def extract_sources(message: object) -> list[dict]:
+    """Every result the search returned, flattened and de-duplicated by URL.
+
+    A server tool that fails does not raise: the API answers 200 with an error
+    object where the result list would be, so the block is inspected rather than
+    indexed.
+    """
+    sources: list[dict] = []
+    seen: set[str] = set()
+    for block in getattr(message, "content", []) or []:
+        if getattr(block, "type", "") != "web_search_tool_result":
+            continue
+        content = getattr(block, "content", None)
+        if not isinstance(content, list):
+            code = getattr(content, "error_code", None)
+            print(f"  web search returned an error: {code or content}", file=sys.stderr)
+            continue
+        for result in content:
+            url = getattr(result, "url", "") or ""
+            if not url or url in seen:
+                continue
+            seen.add(url)
+            sources.append({
+                "title": getattr(result, "title", "") or "",
+                "url": url,
+                "page_age": getattr(result, "page_age", None),
+            })
+    return sources
+
+
+def search_count(message: object) -> int:
+    """How many searches the API actually billed for."""
+    usage = getattr(message, "usage", None)
+    server = getattr(usage, "server_tool_use", None)
+    return int(getattr(server, "web_search_requests", 0) or 0)
 
 
 def resolve_model(tier: str = "standard") -> str:
@@ -161,6 +233,74 @@ def empty_response_error(message: object, model: str, max_tokens: int) -> str:
             + " Rewording the brief is likelier to help than retrying."
         )
     return text
+
+
+def chat_with_search(
+    system: str,
+    user: str,
+    max_tokens: int | None = None,
+    tier: str = "standard",
+    effort: str | None = None,
+    max_searches: int | None = None,
+) -> tuple[str, list[dict], int]:
+    """Call the Messages API with server-side web search enabled.
+
+    Returns (text, sources, searches_performed). The search runs on Anthropic's
+    infrastructure, which is the point: our own fetcher gets 6 characters back
+    from Reddit and 82 from Facebook, and those are the places where operators
+    discuss real takings rather than sell machines.
+
+    Long searching turns can come back with stop_reason "pause_turn", which is
+    the API asking to be resumed rather than an error. The loop continues that
+    turn instead of treating a half-finished answer as the answer.
+    """
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        raise EnvironmentError("ANTHROPIC_API_KEY is required for llm_client.chat_with_search().")
+
+    model = resolve_model(tier)
+    max_tokens = max_tokens or default_max_tokens()
+    client = Anthropic(
+        api_key=api_key,
+        timeout=default_timeout(),
+        max_retries=default_max_retries(),
+    )
+
+    messages: list[dict] = [{"role": "user", "content": user}]
+    request = {
+        "model": model,
+        "max_tokens": max_tokens,
+        "system": system,
+        "tools": [search_tool(max_searches, tier)],
+    }
+    level = resolve_effort(effort)
+    if level:
+        request["output_config"] = {"effort": level}
+
+    texts: list[str] = []
+    sources: list[dict] = []
+    searches = 0
+    seen_urls: set[str] = set()
+
+    for _ in range(_MAX_PAUSE_RESUMES + 1):
+        with client.messages.stream(**request, messages=messages) as stream:
+            message = stream.get_final_message()
+
+        texts.append(extract_text(message))
+        searches += search_count(message)
+        for source in extract_sources(message):
+            if source["url"] not in seen_urls:
+                seen_urls.add(source["url"])
+                sources.append(source)
+
+        if getattr(message, "stop_reason", None) != "pause_turn":
+            break
+        messages = messages + [{"role": "assistant", "content": message.content}]
+
+    text = "\n".join(t for t in texts if t).strip()
+    if not text:
+        raise ValueError(empty_response_error(message, model, max_tokens))
+    return text, sources, searches
 
 
 def chat(
