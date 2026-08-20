@@ -6,11 +6,23 @@ Pipeline position:
   QA → Metadata
 
 Purpose:
-  Score a draft article with Flesch Reading Ease (textstat). If the score is
-  below the target (default 90), call an LLM to produce surgical rewrite
-  instructions, then ask the Writer Agent to regenerate the draft. Repeat
-  until the target is met or max_iterations is reached. Returns the best
-  draft seen plus a full iteration report.
+  Score a draft article for readability AND for rhythm, then ask the Writer to
+  fix whichever is off. Repeat until both are in range or max_iterations is
+  reached. Returns the best draft seen plus a full iteration report.
+
+  Readability is a band, not a floor. The target used to be Flesch Reading Ease
+  >= 90, which is a fifth-grade reading level and — for this subject matter —
+  arithmetically out of reach: at 90 the text may average about 1.24 syllables
+  per word, and "payback" is 2, "maintenance" 3, "optimistic" 4, "electricity"
+  5, "profitability" 6. A measured article came in at 1.47 and 67.0. So the
+  target could never be met, the loop never terminated satisfied, and every
+  iteration told the Writer to cut again. What came back read like a checklist
+  with the bullets removed: 13.2 words per sentence, 64% of them under fifteen,
+  44-word paragraphs. Narrative voice lives in subordinate clauses and varying
+  sentence length, and neither survives that pressure.
+
+  So too simple now fails the same way too dense does, and sentence rhythm is
+  measured alongside the score.
 
 Auth modes (mirrors WriterAgent):
   1. Anthropic (via src.llm_client) — when ANTHROPIC_API_KEY is set
@@ -27,7 +39,27 @@ from pathlib import Path
 from typing import Any, Callable
 
 
-TARGET_SCORE = 90.0
+#: Flesch Reading Ease band. Below the floor the prose is hard work; above the
+#: ceiling it has been sanded into staccato. Plain, confident business English
+#: sits between them — the measured article scored 67.0, which is where an
+#: article about payback periods should land.
+TARGET_MIN = 55.0
+TARGET_MAX = 70.0
+
+#: Kept for callers that pass an explicit floor.
+TARGET_SCORE = TARGET_MIN
+
+#: Sentence rhythm, in words. A mean below the floor is the checklist cadence;
+#: a standard deviation below its floor means every sentence is the same length,
+#: which reads as machine-made however plain each one is.
+MIN_MEAN_SENTENCE = 15.0
+MAX_MEAN_SENTENCE = 24.0
+MIN_SENTENCE_STDEV = 6.0
+
+#: Share of sentences under twelve words. Some are good — they land a point.
+#: Most being short is the defect.
+MAX_SHORT_SENTENCE_SHARE = 0.45
+
 MAX_ITERATIONS = 3
 
 
@@ -69,6 +101,8 @@ def score_markdown(md: str) -> dict[str, Any]:
             "avg_syllables_per_word": 0.0,
             "word_count": 0,
             "sentence_count": 0,
+            "sentence_length_stdev": 0.0,
+            "short_sentence_share": 0.0,
             "longest_sentences": [],
             "hardest_words": [],
         }
@@ -81,6 +115,16 @@ def score_markdown(md: str) -> dict[str, Any]:
     sentence_count = int(textstat.sentence_count(prose))
 
     sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", prose) if s.strip()]
+
+    # Rhythm. The mean says how long a sentence runs; the spread says whether
+    # the writer ever changes gear. Prose can be plain and still varied, and it
+    # is the variation a reader hears as a voice.
+    lengths = [len(s.split()) for s in sentences] or [0]
+    mean_len = sum(lengths) / len(lengths)
+    variance = sum((n - mean_len) ** 2 for n in lengths) / len(lengths)
+    stdev = variance ** 0.5
+    short_share = sum(1 for n in lengths if n < 12) / len(lengths)
+
     sentences_sorted = sorted(sentences, key=lambda s: len(s.split()), reverse=True)
     longest = [
         {"length_words": len(s.split()), "text": s[:240]}
@@ -109,9 +153,76 @@ def score_markdown(md: str) -> dict[str, Any]:
         "avg_syllables_per_word": round(avg_syll, 3),
         "word_count": word_count,
         "sentence_count": sentence_count,
+        "sentence_length_stdev": round(stdev, 2),
+        "short_sentence_share": round(short_share, 3),
         "longest_sentences": longest,
         "hardest_words": hardest,
     }
+
+
+def prose_problems(stats: dict[str, Any]) -> list[str]:
+    """Everything out of range in a draft, phrased as an instruction.
+
+    Empty means the prose is fine. Each entry is written to be handed straight
+    to the Writer, which is why they say what to do rather than what is wrong.
+    """
+    problems: list[str] = []
+    score = stats.get("flesch_reading_ease", 0.0)
+    mean = stats.get("avg_sentence_length", 0.0)
+    stdev = stats.get("sentence_length_stdev", 0.0)
+    short_share = stats.get("short_sentence_share", 0.0)
+
+    if score < TARGET_MIN:
+        problems.append(
+            f"Reading ease is {score}, below {TARGET_MIN}. The prose is harder work "
+            "than it needs to be. Break the densest sentences and replace jargon "
+            "where a plain word carries the same meaning — do not flatten the whole "
+            "article to reach a number."
+        )
+    elif score > TARGET_MAX:
+        problems.append(
+            f"Reading ease is {score}, above {TARGET_MAX}. The prose has been "
+            "simplified past plain into choppy. Rejoin sentences that belong "
+            "together, restore the connective words that carry an argument "
+            "(because, which, even though), and let the reasoning run."
+        )
+
+    if mean < MIN_MEAN_SENTENCE:
+        problems.append(
+            f"Sentences average {mean} words, under {MIN_MEAN_SENTENCE}. That is "
+            "checklist cadence: a paragraph of short declaratives reads as a list "
+            "with the bullets removed. Combine related sentences so the reasoning "
+            "between them is visible instead of implied."
+        )
+    elif mean > MAX_MEAN_SENTENCE:
+        problems.append(
+            f"Sentences average {mean} words, over {MAX_MEAN_SENTENCE}. Split the "
+            "longest ones at their natural joints."
+        )
+
+    if stdev < MIN_SENTENCE_STDEV:
+        problems.append(
+            f"Sentence length barely varies (spread {stdev}, floor "
+            f"{MIN_SENTENCE_STDEV}). Every sentence being the same size reads as "
+            "machine-made however plain each one is. Vary the gear: a long "
+            "sentence that develops a point, then a short one that lands it."
+        )
+
+    if short_share > MAX_SHORT_SENTENCE_SHARE:
+        problems.append(
+            f"{round(short_share * 100)}% of sentences are under twelve words, over "
+            f"the {round(MAX_SHORT_SENTENCE_SHARE * 100)}% ceiling. Short sentences "
+            "are for emphasis. When most of them are short, none of them are "
+            "emphatic and the article reads as a series of assertions rather than "
+            "an argument."
+        )
+
+    return problems
+
+
+def prose_is_in_range(stats: dict[str, Any]) -> bool:
+    """Whether the draft needs no rewrite on readability or rhythm grounds."""
+    return not prose_problems(stats)
 
 
 class ReadabilityChecker:
@@ -147,7 +258,9 @@ class ReadabilityChecker:
         stats_block = json.dumps(stats, indent=2, ensure_ascii=False)
         return (
             f"Analyse the following article draft. Flesch Reading Ease is "
-            f"{stats['flesch_reading_ease']} (target: >= {self.target_score}).\n\n"
+            f"{stats['flesch_reading_ease']} (target band: "
+            f"{TARGET_MIN}-{TARGET_MAX}). Out of range now: "
+            f"{'; '.join(prose_problems(stats)) or 'nothing'}.\n\n"
             f"# READABILITY STATS\n\n{stats_block}\n\n"
             f"# DRAFT MARKDOWN\n\n{draft_markdown}\n\n"
             "Return only a valid JSON object matching the schema in the system "
@@ -238,18 +351,27 @@ class ReadabilityChecker:
     def format_writer_feedback(instructions: dict, stats: dict, target: float) -> str:
         """Render ReadabilityChecker output into a user-message addendum
         that the Writer Agent will receive on its next pass."""
+        problems = prose_problems(stats)
         lines: list[str] = [
-            "# READABILITY REVISION REQUEST",
+            "# PROSE REVISION REQUEST",
             "",
-            f"The previous draft scored {stats['flesch_reading_ease']} on Flesch "
-            f"Reading Ease. Target is >= {target}.",
+            f"Reading ease {stats['flesch_reading_ease']} (target band "
+            f"{TARGET_MIN}-{TARGET_MAX}); sentences average "
+            f"{stats.get('avg_sentence_length')} words, spread "
+            f"{stats.get('sentence_length_stdev')}, "
+            f"{round(stats.get('short_sentence_share', 0) * 100)}% under twelve.",
             "",
-            "Rewrite the draft so the score reaches the target. Keep the same "
-            "structure (H1, sections, internal links), the same facts, and the "
-            "same brand voice. Simplify language: shorter sentences, fewer "
-            "polysyllabic words, active voice.",
+            "Keep the same structure (H1, sections, internal links), the same "
+            "facts, and the same brand voice. Fix only what is listed below — "
+            "and note the direction of each item. Simplifying further when the "
+            "text is already plain is what produced the problem being fixed.",
             "",
         ]
+
+        if problems:
+            lines += ["## What is out of range", ""]
+            lines += [f"- {p}" for p in problems]
+            lines.append("")
 
         diagnosis = instructions.get("diagnosis", {})
         if diagnosis.get("summary"):
@@ -330,12 +452,14 @@ class ReadabilityChecker:
             }
         """
         print(
-            f"ReadabilityChecker: target Flesch Reading Ease >= "
-            f"{self.target_score}, max iterations = {self.max_iterations}",
+            f"ReadabilityChecker: reading-ease band {TARGET_MIN}-{TARGET_MAX}, "
+            f"sentence mean {MIN_MEAN_SENTENCE}-{MAX_MEAN_SENTENCE} words, "
+            f"max iterations = {self.max_iterations}",
             file=sys.stderr,
         )
 
         iterations: list[dict] = []
+        best_rank: tuple[int, float] = (10**6, 0.0)
         best_score = -1.0
         best_idx = 0
         best_result = draft_result
@@ -347,19 +471,25 @@ class ReadabilityChecker:
         for i in range(self.max_iterations + 1):
             stats = score_markdown(current_markdown)
             score = stats["flesch_reading_ease"]
+            problems = prose_problems(stats)
             print(
-                f"  Iteration {i}: Flesch Reading Ease = {score} "
-                f"(words: {stats['word_count']}, sentences: {stats['sentence_count']})",
+                f"  Iteration {i}: reading ease {score}, sentences avg "
+                f"{stats['avg_sentence_length']} words (spread "
+                f"{stats['sentence_length_stdev']}, "
+                f"{round(stats['short_sentence_share'] * 100)}% short) — "
+                f"{len(problems)} out of range",
                 file=sys.stderr,
             )
 
-            if score > best_score:
+            rank = (len(problems), -score)
+            if rank < best_rank:
+                best_rank = rank
                 best_score = score
                 best_idx = i
                 best_result = current_result
                 best_markdown = current_markdown
 
-            if score >= self.target_score:
+            if not problems:
                 iterations.append(
                     {"iteration": i, "stats": stats, "instructions": None, "used": False}
                 )
@@ -419,7 +549,7 @@ class ReadabilityChecker:
             "final_markdown": best_markdown,
             "final_score": best_score,
             "target_score": self.target_score,
-            "passed": best_score >= self.target_score,
+            "passed": best_rank[0] == 0,
             "iterations": iterations,
             "best_iteration": best_idx,
         }
