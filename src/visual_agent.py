@@ -4,7 +4,7 @@ Pipeline position:
   Writer Agent → Visual Agent → QA Agent
 
 Purpose:
-  Given a draft article, produce exactly 3 image specifications (1 hero + 2 inline),
+  Given a draft article, decide which images it actually needs — zero to three —
   generate them via OpenAI's gpt-image models (or mock placeholders), save them
   locally, and inject image markdown into the draft at fixed slot positions.
 
@@ -49,7 +49,7 @@ _IMAGE_SIZE: dict[str, str] = {
 
 
 class VisualAgent:
-    """Specifies, generates, and injects 3 images into a draft article.
+    """Specifies, generates, and injects up to 3 images into a draft article.
 
     Phase 1 — LLM (Claude): produces 3 asset specs (hero + 2 inline).
     Phase 2 — gpt-image: generates and saves each image.
@@ -110,7 +110,17 @@ Your response must be a single valid JSON object matching this schema exactly:
 CRITICAL OUTPUT RULES:
 - Output ONLY the raw JSON object. No markdown. No code fences. No preamble.
 - The JSON must be parseable by json.loads() with no pre-processing.
-- assets array must contain EXACTLY 3 items: one "hero" and two "inline".
+- assets array holds ZERO to THREE items. At most one "hero"; the rest "inline".
+
+  Zero is a real answer and sometimes the right one. An image earns its place by
+  answering a question the text leaves open — what something looks like, how big
+  it is, what shape a relationship has — and an article where nothing is open
+  needs no pictures. A decorative photograph of a subject the reader has already
+  understood costs money to make, slows the page, and tells them nothing; it is
+  worse than the empty space it fills.
+
+  So propose an image only when you can name the open question it closes. If you
+  cannot, return fewer, or none. Do not pad to three.
 - generation_prompt must be a detailed, specific image-generation prompt matching
   the visual style rules: bright, naturally lit interior, warm lighting only when
   the article calls for it, real adult home setting, no gamer clichés.
@@ -130,7 +140,9 @@ CRITICAL OUTPUT RULES:
             f"Topic: {topic}\n\n"
             f"# ARTICLE BRIEF\n\n{brief_block}\n\n"
             f"# DRAFT ARTICLE (excerpt — headings and intro)\n\n{draft_excerpt}\n\n"
-            "Return exactly 3 assets: one hero (cover) and two inline (body).\n"
+            "Return only the assets this article genuinely needs — zero to "
+            "three, at most one hero. For each, be able to say which question "
+            "the text leaves open that the image answers. Do not pad.\n"
             "Return only a valid JSON object. No markdown, no commentary."
         )
 
