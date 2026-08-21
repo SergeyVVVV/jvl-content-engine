@@ -125,8 +125,14 @@ def append_to_article(draft_markdown: str, sources_markdown: str) -> str:
 
     import re
 
+    # Any heading a writer might reach for when it decides to list its links.
+    # A QA revision does not drop this block, it *rewrites* it: shown an article
+    # that ends in a list of links, the Writer produces its own list. Matching
+    # only "Sources" would leave a "References" section beside the real one.
     existing = re.compile(
-        r"(?ms)^##\s+Sources\b.*?(?=^##\s|\n---\s*\n+##\s+(?:Claims to Verify|Open TODOs)|\Z)"
+        r"(?ms)^##\s+(?:Sources|References|Citations|Further\s+reading)\b"
+        r".*?(?=^##\s|\n---\s*\n+##\s+(?:Claims to Verify|Open TODOs)|\Z)",
+        re.IGNORECASE,
     )
     stripped = existing.sub("", draft_markdown).rstrip() + "\n"
 

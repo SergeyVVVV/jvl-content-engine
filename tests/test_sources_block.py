@@ -159,3 +159,46 @@ class WriterRuleTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SurvivesRevisionTests(unittest.TestCase):
+    """A QA revision must not be able to replace the chosen list with its own.
+
+    Observed on a live run: the selector produced seven entries, QA asked for a
+    fix, the Writer rewrote the article including its own sources list, and the
+    published block had ten entries with four from a single publisher. The
+    selection rules live in this module; the Writer has never seen them.
+    """
+
+    BLOCK = (
+        "## Sources\n\n"
+        "- [Chosen one](https://a.com) — a.com, 2025\n"
+        "- [Chosen two](https://b.com) — b.com, 2026"
+    )
+
+    WRITERS_OWN = (
+        "## Sources\n\n"
+        "- [Something](https://dojobusiness.com/one)\n"
+        "- [Something else](https://dojobusiness.com/two)\n"
+        "- [A third](https://dojobusiness.com/three)\n"
+    )
+
+    def test_a_rewritten_block_is_replaced_not_joined(self) -> None:
+        article = "# T\n\nBody.\n\n" + self.WRITERS_OWN
+        out = append_to_article(article, self.BLOCK)
+        self.assertEqual(out.count("## Sources"), 1)
+        self.assertNotIn("dojobusiness.com", out)
+        self.assertIn("Chosen one", out)
+
+    def test_it_is_replaced_under_another_name_too(self) -> None:
+        # A revision may call it References or Further reading.
+        for heading in ("References", "Further reading", "Citations"):
+            article = f"# T\n\nBody.\n\n## {heading}\n\n- [x](https://x.com)\n"
+            out = append_to_article(article, self.BLOCK)
+            self.assertNotIn(heading, out, heading)
+            self.assertIn("Chosen one", out)
+
+    def test_the_orchestrator_restores_it_after_a_revision(self) -> None:
+        source = (REPO_ROOT / "src" / "orchestrator.py").read_text(encoding="utf-8")
+        loop = source[source.index("revision_damage(draft_markdown") - 2000 :]
+        self.assertIn("sources_block.append_to_article", loop)
