@@ -56,7 +56,7 @@ A premium, plug-and-play bartop arcade machine made for real adult homes — nos
 - 22" HD touchscreen, 39.4 lbs, 15 × 19.5 × 18.5 inches
 - 25-watt 4-speaker sound system with subwoofer
 - 360° swivel base
-- 1-year all-inclusive warranty; JVL covers shipping both ways
+- 1-year all-inclusive warranty, Home and Commercial editions alike
 - 149 pre-installed proprietary games
 
 ## Who ECHO is for
