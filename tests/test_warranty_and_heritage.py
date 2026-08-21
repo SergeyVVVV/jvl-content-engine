@@ -84,3 +84,32 @@ class AcceptorAndCaptionTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PaymentHardwareEditionTests(unittest.TestCase):
+    """Half the product line has no payment hardware at all.
+
+    "The ECHO takes bills and quarters" is wrong about the Home Edition, and
+    wrong in the direction that puts coin-operation in front of a home buyer —
+    which the B2C/B2B rule forbids for its own, separate reasons.
+    """
+
+    def setUp(self) -> None:
+        self.claims = read("knowledge/claims_constraints.md")
+
+    def test_the_hardware_is_marked_commercial_only(self) -> None:
+        self.assertIn("**Commercial Edition only**", self.claims)
+
+    def test_the_home_edition_is_recorded_as_having_neither(self) -> None:
+        self.assertIn("**Home Edition has neither**", self.claims)
+
+    def test_free_play_is_framed_as_the_design_not_a_gap(self) -> None:
+        self.assertIn("that is the design, not an omission", self.claims)
+
+    def test_the_edition_must_be_named_every_time(self) -> None:
+        self.assertIn("Name the\n  edition every time", self.claims)
+
+    def test_the_denominations_are_exact(self) -> None:
+        self.assertIn("U.S. quarters", self.claims)
+        for note in ("$1,", "$5,", "$10 and $20"):
+            self.assertIn(note, self.claims, note)

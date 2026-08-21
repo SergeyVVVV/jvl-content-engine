@@ -26,8 +26,16 @@
 - Dynamic multi-colour halo lighting
 - Reinforced plastic case and precision-built frame
 - Touch controls — no mechanical controls to wear out; responsive, with no perceptible lag
-- Commercial Edition payment hardware: bill acceptor taking $1, $5, $10 and $20
-  notes with a 500-bill capacity, and a coin acceptor for quarters
+- **Commercial Edition only** — payment hardware: a bill validator accepting $1,
+  $5, $10 and $20 bills with a 500-bill capacity, and a coin acceptor supporting
+  U.S. quarters
+- **Home Edition has neither** — no bill validator, no coin acceptor. It is a
+  Free Play machine, and that is the design, not an omission: a machine in
+  somebody's basement has nobody to take money from
+- Payment hardware must never be attributed to the ECHO in general. Name the
+  edition every time. "The ECHO takes bills and quarters" is wrong about half
+  the product line, and wrong in the direction that puts coin-operation in front
+  of a home buyer — which the B2C/B2B rule below forbids for its own reasons
 
 ### Games and software
 - 149 pre-installed games
