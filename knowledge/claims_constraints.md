@@ -7,7 +7,11 @@
 - The only 22" touchscreen bartop arcade on the market
 - Modern revival of the classic ECHO bartop arcade format
 - Designed in Canada, made in the USA
-- Built on 30+ years of JVL bartop expertise
+- 40+ years of JVL as a company
+- 30+ years of JVL **bartop** expertise — the bartop line began in 1995
+- These are different spans and must not be swapped. The product page says
+  "40+ years of JVL bartop expertise", which mixes them: 40+ belongs to the
+  company, 30+ to the bartops. Write whichever the sentence is actually about.
 - JVL bartops have been awarded "Best Bartop Video Game of the Year" by RePlay Magazine multiple times (heritage claim — see rules below)
 
 ### Physical specs
@@ -22,6 +26,16 @@
 - Dynamic multi-colour halo lighting
 - Reinforced plastic case and precision-built frame
 - Touch controls — no mechanical controls to wear out; responsive, with no perceptible lag
+- **Commercial Edition only** — payment hardware: a bill validator accepting $1,
+  $5, $10 and $20 bills with a 500-bill capacity, and a coin acceptor supporting
+  U.S. quarters
+- **Home Edition has neither** — no bill validator, no coin acceptor. It is a
+  Free Play machine, and that is the design, not an omission: a machine in
+  somebody's basement has nobody to take money from
+- Payment hardware must never be attributed to the ECHO in general. Name the
+  edition every time. "The ECHO takes bills and quarters" is wrong about half
+  the product line, and wrong in the direction that puts coin-operation in front
+  of a home buyer — which the B2C/B2B rule below forbids for its own reasons
 
 ### Games and software
 - 149 pre-installed games
@@ -40,13 +54,39 @@
 
 ### Purchase experience
 - What's in the box: ECHO unit, power cord, USB stick with software, warranty card
-- 1-Year All-Inclusive Manufacturer Warranty
-- JVL covers shipping both ways for warranty service
+- 1-Year All-Inclusive Manufacturer Warranty, on **both** the Home Edition and
+  the Commercial Edition, on the same terms — commercial installation in a bar
+  or venue is covered exactly as residential use is
+- Direct manufacturer support: the team that engineers and builds the machine
+- TODO: requires business confirmation — whether JVL covers shipping both ways
+  for warranty service. This was in the knowledge base from a April 2026 import
+  and has not been re-confirmed. Until it is, do not state who pays return
+  shipping. It is a promise settled in money, not in words.
+- TODO: requires business confirmation — purchase delivery terms. Free Standard
+  Delivery on shop.jvl.ca and free standard shipping on Amazon were described
+  by the business but not yet recorded here; do not state delivery terms until
+  they are.
 - Each unit individually tested before shipping
 
 ### Links and pages
 - Product page: https://jvl.ca/en/echo
 - Home overview page: https://jvl.ca/en/home
+
+## Warranty claim rules
+
+State the term (one year), that it is all-inclusive, and that it covers both
+editions on the same terms. **Say nothing else about it.**
+
+Anything beyond that — what counts as fair wear, whether heavy daily operation
+changes anything, who pays return shipping, how a claim is made — is a condition
+of the contract, and no article may infer one. An article once reasoned that
+"all-inclusive" plus "there is a Commercial Edition" must mean commercial use is
+covered, and happened to be right. The next inference will not be, and a reader
+holding our page while a manufacturer refuses a claim is a different kind of
+problem from a wrong statistic.
+
+If an article needs to go further, it says the reader should confirm current
+terms with JVL directly.
 
 ## Heritage claim rules
 

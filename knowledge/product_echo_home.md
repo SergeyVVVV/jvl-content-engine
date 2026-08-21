@@ -86,7 +86,7 @@ article will run long after it is written; a stale price is worse than none.
 ## Warranty and support
 
 - 1-Year All-Inclusive Manufacturer Warranty
-- JVL covers shipping both ways for warranty service
+- TODO: requires business confirmation — who pays shipping for warranty service
 
 ## Best home environments
 

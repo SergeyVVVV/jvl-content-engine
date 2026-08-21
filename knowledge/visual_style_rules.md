@@ -172,6 +172,13 @@ uncopyable, and invisible to search. Tables belong in markdown. If the shape of
 a relationship genuinely needs showing, that is a chart built from the data, not
 a picture of one — propose it and leave it to be produced properly.
 
+**A caption may not name the product outside the closing product section.**
+An editorial article mentions the machine once, in its own section at the end.
+A caption is part of the article, and putting "ECHO HD3 Commercial Edition"
+under a picture halfway up puts the product back where the rules just removed
+it — twice now, in consecutive runs. Above that closing section a caption
+describes what is in the frame in generic terms and names nothing.
+
 **Captions describe, they do not sell.**
 A caption states what is in the frame. It does not assert specifications, name
 editions, or make performance claims — the image cannot evidence any of that,
