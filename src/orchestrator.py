@@ -729,6 +729,18 @@ def run_pipeline(
                     revised_markdown, faq_markdown
                 )
 
+            # And the sources, for the same reason and with a worse failure.
+            # The Writer does not drop this block, it rewrites it: given an
+            # article that ends in a list of links, a revision produces its own
+            # list. Observed once — a selected seven became ten, four of them
+            # from a single publisher, because the selection rules live here and
+            # the Writer has never seen them. Re-applying restores the chosen
+            # set, one entry per publisher, our own site excluded.
+            if sources_markdown:
+                revised_markdown = sources_block.append_to_article(
+                    revised_markdown, sources_markdown
+                )
+
             damage = revision_damage(draft_markdown, revised_markdown)
             if damage:
                 print(
