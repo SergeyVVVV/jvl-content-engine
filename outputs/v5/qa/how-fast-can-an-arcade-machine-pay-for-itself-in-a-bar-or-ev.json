@@ -1,0 +1,95 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "status": "fail",
+  "summary": "This is a strong, unusually disciplined draft: the payback model is transparent, every borrowed figure is attributed and hedged, product mentions are contained to two sections, and all four firsthand experience anchors used (pre-shipment testing, seven-working-day cycle, 1,000+ units shipped, eleventh generation since 1995) trace to verified entries. Editions are named correctly throughout and the RePlay heritage framing is exact. It fails on one item: the cost-baseline section infers a warranty condition — that repair cost is excluded from year one because the warranty is all-inclusive — and folds that inference into the financial model. The knowledge base forbids inferring any warranty condition beyond the term, its all-inclusive nature, and equal treatment of both editions. Two MEDIUM issues follow: the ECHO Home section opens by leaning on commercial revenue potential as its justification (B2C/B2B separation), and one FAQ makes licensing/tax landscape statements the guardrails place off-limits. Everything else is polish.",
+  "severity_counts": {
+    "high": 1,
+    "medium": 2,
+    "low": 4
+  },
+  "issues": [
+    {
+      "severity": "high",
+      "category": "unsupported_claim",
+      "location": "The cost baseline — \"One line the first year does not carry is repair cost: both editions come with a one-year all-inclusive manufacturer warranty on the same terms, so the maintenance figure used below is routine upkeep only.\"",
+      "problem": "This infers a warranty condition — that repairs are financially covered in year one — and then builds that inference into the payback model, so a reader's purchase arithmetic rests on it. The knowledge base permits only three warranty statements (one year, all-inclusive, both editions on the same terms) and explicitly forbids inferring any further condition: what is covered, how a claim is made, who pays transit. The inference may well be correct, but it is not confirmed, it is not in claims_to_verify, and the harm case here is a reader holding this page while a claim is disputed.",
+      "recommended_fix": "Drop the causal link. Replace with something like: \"The $40 figure below covers routine upkeep only; it does not attempt to model repair cost, which varies with use and with warranty status. Both editions carry a one-year all-inclusive manufacturer warranty on the same terms — confirm current terms with JVL directly.\" Add the repair-cost exclusion to the list of things sitting outside the model."
+    },
+    {
+      "severity": "medium",
+      "category": "company_insight",
+      "location": "Bringing the same machine home — \"A well-placed bartop arcade in a commercial room can return several thousand dollars a year of its own accord. That is not the profile of a novelty item...\"",
+      "problem": "The home-facing section opens by using commercial revenue potential as the justification for a residential purchase. Both the company insight and the writer's own risks list flag this: the B2C section must be framed on ownership value and craftsmanship, not on revenue or investment logic. The later \"at home the payback question simply dissolves\" partly repairs it, but the bridge itself is built out of dollars returned.",
+      "recommended_fix": "Rewrite the bridge to carry build standard rather than earnings — e.g. \"A machine specified to survive a commercial room is specified well past what a basement asks of it\" — and move the \"payback question dissolves\" line up so the section opens on ownership framing rather than closing on it."
+    },
+    {
+      "severity": "medium",
+      "category": "grounding",
+      "location": "FAQ — \"Does a bar need a special license to operate a coin-operated arcade machine?\"",
+      "problem": "The answer characterises the regulatory landscape (\"can cover anything from amusement device permits to how coin income is taxed\") without a source. Legal, licensing and tax statements are on the forbidden list regardless of how they are hedged, and the deferral to local authorities at the end does not neutralise the description that precedes it.",
+      "recommended_fix": "Either cut this FAQ entirely, or reduce it to a single non-descriptive line: \"Requirements for commercially operated amusement machines vary by jurisdiction. Check with your local licensing authority before installing one.\" Remove the permit/tax enumeration and the sentence about home machines."
+    },
+    {
+      "severity": "low",
+      "category": "factual",
+      "location": "The cost baseline — \"That payment hardware ... is why the same product line carries two prices\"",
+      "problem": "Attributes the $260 price difference between editions specifically to the payment hardware. The knowledge base confirms both prices and confirms which edition has the acceptors, but says nothing about what accounts for the gap. It is a small unsupported causal claim.",
+      "recommended_fix": "Change to \"and it is the clearest difference between the two editions\" — state the distinction without explaining the pricing."
+    },
+    {
+      "severity": "low",
+      "category": "tone",
+      "location": "Pessimistic scenario and \"How probable is each scenario\" — \"my own view is that ... you should either not buy the machine outright or not buy it at all\"; \"This is the figure I would plan around\"",
+      "problem": "The first-person singular narrator gives direct purchase and capital advice on a manufacturer-published page. The candour reads well, but an unnamed \"I\" telling a reader not to buy outright sits awkwardly for a brand-owned article and creates an author identity the page cannot substantiate.",
+      "recommended_fix": "Convert to impersonal editorial voice — \"the disciplined reading is that...\", \"the figure worth planning around is...\" — keeping the same conclusions without a first-person adviser."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Writer metadata todos — \"the FAQ section from the outline has been omitted deliberately, per pipeline rules, for the FAQ Agent to generate\"",
+      "problem": "The metadata states the FAQ was omitted, but the draft contains a full seven-question FAQ block. Downstream agents reading the metadata rather than the body may duplicate the section.",
+      "recommended_fix": "Correct the metadata note to reflect that the FAQ is present in the draft, or remove the FAQ block if the FAQ Agent is meant to own it."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Whole draft / writer wrapper metadata",
+      "problem": "Three inline [VISUAL] placeholders appear in the body (bar counter photo, placement diagram, home bar photo) and all three are well chosen and logically placed, but the wrapper metadata contains no `suggested_visuals` array, so nothing downstream can act on them. Cosmetic mismatch only — the article's structural variety is otherwise good (three markdown tables, a variable checklist, scenario sub-sections).",
+      "recommended_fix": "Add a `suggested_visuals` array with the three existing placeholders described, so inline count and metadata count match."
+    }
+  ],
+  "strengths": [
+    "Experience grounding is genuinely strong and correctly sourced: pre-shipment test coverage (with the 'at minimum' hedge preserved), the hours-vs-seven-working-days pairing given in both halves as the anchor requires, 1,000+ units shipped as a floor, and the eleventh-generation-since-1995 timeline. No fabricated customer stories, and the writer correctly noted none are consented.",
+    "Edition discipline is maintained everywhere — every price, the bill validator, the coin acceptor and the free-play framing are attributed to a named edition, including inside the comparison table.",
+    "RePlay heritage framing is exact: attributed to the JVL bartop line, 'multiple times', no count, no year, not attached to ECHO.",
+    "The methodology section does the thing the SERP research identified as the whole differentiation opportunity — it names its sources, states the arcade/FEC provenance problem openly, labels the 15% discount as judgement rather than measurement, and hands the reader the arithmetic to rerun.",
+    "The 'what this model does not count' section holds the line the brief drew: goodwill is described as real and left unquantified, and the downside column (opportunity cost of covers, sound, a visibly unplayed machine) is included rather than buried.",
+    "Claims-to-verify list is unusually honest and complete — it flags the modelled revenue figures, the derived $40 cost, the low-confidence revenue-share range and the stale-price risk without being asked twice.",
+    "Product mentions are contained to two sections as instructed; the first eight sections read as neutral analysis with no promotional drift.",
+    "Fills every content gap the SERP research identified, including the commercial-vs-home distinction no ranking page makes explicit."
+  ],
+  "recommended_fixes": [
+    "Remove the warranty-to-repair-cost inference in the cost baseline; state the maintenance figure covers routine upkeep only, list repair cost as an explicit model exclusion, and keep the warranty statement to the three permitted facts plus 'confirm current terms with JVL directly'.",
+    "Re-frame the opening of 'Bringing the same machine home' on build standard and ownership rather than on several-thousand-dollars-a-year, and lead with the 'payback question dissolves' point.",
+    "Cut or reduce the licensing FAQ to a single non-descriptive deferral line, removing the permit and taxation enumeration.",
+    "Soften FAQ 7's 'A manufacturer warranty typically covers the machine and the underlying issue' to avoid restating a warranty condition even generically.",
+    "Replace the first-person adviser voice with impersonal editorial voice in the pessimistic scenario, base case and scenario-probability sections.",
+    "Change the 'why the product line carries two prices' clause to a plain statement of the edition difference.",
+    "Add a `suggested_visuals` array to the wrapper metadata matching the three inline [VISUAL] placeholders, and correct the metadata note that says the FAQ was omitted."
+  ],
+  "claims_to_verify_ok": false,
+  "source_inputs_used": {
+    "draft": "outputs/v5/drafts/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json",
+    "brief": "outputs/v5/briefs/arcade-machine-for-bar.json",
+    "serp_research": "outputs/v5/serp_research/arcade-machine-for-bar.json",
+    "company_insight": "outputs/v5/company_insight/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json"
+  },
+  "todos": [
+    "claims_to_verify_ok is false only because of the warranty/repair-cost inference — that claim is load-bearing in the financial model and is not listed. Every other uncertain figure in the draft is correctly flagged; adding the warranty exclusion resolves this.",
+    "The company insight asserts 'JVL covers shipping both ways for warranty service', which the knowledge base flags as unconfirmed since the April 2026 import. The writer correctly kept it out of the draft — this conflict should be resolved upstream so future articles are not left arbitrating it.",
+    "TODO: requires business confirmation — whether JVL is comfortable publishing modelled bar revenue scenarios derived from arcade/FEC source data with a stated 15% judgement discount and no bar-specific study behind them. This is an editorial-risk decision, not a factual one, and QA cannot settle it.",
+    "TODO: requires business confirmation — both list prices ($4,250 Commercial, $3,990 Home) should be re-confirmed as current immediately before publication, since the entire model is anchored to one of them.",
+    "The 'gap between those two figures is mostly testing' gloss on the seven-working-day anchor is a reasonable reading (the anchor lists configuration, testing, burn-in, second QC and packing) but is slightly narrower than the source. Not flagged as an issue; worth a glance from editorial.",
+    "No brand_voice.md was supplied to QA, so first-person narration was assessed on general premium-B2C fit rather than against the documented voice rules. Confirm against brand_voice.md before acting on that LOW issue."
+  ]
+}

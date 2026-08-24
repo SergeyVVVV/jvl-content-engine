@@ -1,0 +1,54 @@
+{
+  "items": [
+    {
+      "question": "Are arcade machines still profitable now that most people have smartphones?",
+      "answer": "Yes, in venues with genuine dwell time — the machine competes for idle attention while people wait for a drink or a table, not for screen time on a phone already in someone's pocket. Bars, taprooms, and rec venues with steady foot traffic still generate a consistent average weekly drop, though the effect is narrower than it was decades ago. Venues without natural waiting time — fast turnover, no standing room, no queue — don't have this dynamic and shouldn't plan around it.",
+      "keywords_used": [
+        "arcade profitability",
+        "coin-op arcade profit"
+      ]
+    },
+    {
+      "question": "How many arcade machines does a typical bar need?",
+      "answer": "Most bars start with one and only add a second if the first clearly earns its keep, because additional machines compete with each other for the same pool of idle customers rather than adding proportional new drop. A large venue with genuinely separate waiting zones — say, near the bar and near a pool table — can sometimes support two, but doubling machine count rarely doubles revenue. Track the first unit's drop for several months before considering another.",
+      "keywords_used": [
+        "arcade profitability",
+        "arcade machine for bar"
+      ]
+    },
+    {
+      "question": "What's the difference between a bartop arcade machine and a full-size cabinet for bar revenue?",
+      "answer": "A bartop unit sits on an existing counter or a small stand, so it adds a revenue source without claiming dedicated floor space — a real advantage where square footage is already committed to seating. A full-size cabinet needs its own footprint and, because it typically costs more upfront, needs a higher weekly drop to match the same payback period. For most bar and small-venue placements, the smaller footprint of a bartop machine gives it a payback edge independent of the games themselves.",
+      "keywords_used": [
+        "bartop vs full-size arcade",
+        "commercial arcade machine cost"
+      ]
+    },
+    {
+      "question": "Can a bar negotiate the revenue split with an arcade machine operator?",
+      "answer": "Yes — the roughly 50/50 split used for modelling in this article is a common starting point, not a fixed industry rate, and operators typically adjust it based on the venue's foot traffic, exclusivity, and floor space offered. A venue with strong, provable traffic has real negotiating leverage; a new or unproven room has less. Get the agreed split, contract length, and who carries service costs written down before the machine is installed.",
+      "keywords_used": [
+        "arcade machine revenue split",
+        "arcade rate of return"
+      ]
+    },
+    {
+      "question": "Do bars need a permit or license to operate a coin-operated arcade machine?",
+      "answer": "Requirements vary widely by city, county, and state, and often depend on whether the machine accepts cash at all, so this isn't something a general article can answer correctly for every reader. TODO: source not confirmed — check local amusement-device licensing and tax rules with your municipality before installing a cash-accepting machine.",
+      "keywords_used": [
+        "arcade machine for bar"
+      ]
+    },
+    {
+      "question": "Is an arcade machine a good fit for a venue that only hosts events occasionally, like a banquet hall?",
+      "answer": "It depends on whether the venue runs the machine for cash payment or offers it as a free-play amenity bundled into event packages. A hall with infrequent, clustered bookings rarely generates enough cash drop across a full year to make coin-operated payback math work, so most occasional-event venues get more value treating it as part of the guest experience rather than as a revenue line. TODO: source not confirmed for typical event-venue coin-op drop rates, since no verified figures exist for this use case.",
+      "keywords_used": [
+        "arcade machine for event venue"
+      ]
+    }
+  ],
+  "todos": [
+    "TODO: source not confirmed — local licensing/permit requirements for cash-accepting arcade machines vary by jurisdiction and are not addressed in the knowledge base.",
+    "TODO: source not confirmed — no verified data exists on typical coin-op drop rates for occasional-use event venues (e.g., banquet halls)."
+  ]
+}

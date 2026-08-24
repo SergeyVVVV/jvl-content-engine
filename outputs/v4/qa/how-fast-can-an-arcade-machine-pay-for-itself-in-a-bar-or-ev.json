@@ -1,0 +1,111 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "status": "revise",
+  "summary": "A strong, unusually disciplined draft. Every derived figure was recomputed by hand and all of it checks out (weekly → monthly → annual → payback → 5-year net → expected value → operator variant), all financial inputs are explicitly labelled as assumptions and mirrored in claims_to_verify, the RePlay heritage claim uses the approved framing with no count or year, the touchscreen durability argument stays properly relative, and the Home/Commercial distinction is stated plainly three separate times. Experience anchors are drawn faithfully from verified entries (pre-shipment test coverage, hours-vs-seven-days build cycle, 1,000+ units shipped, eleventh generation since 1995). No HIGH issues. What blocks a pass is a cluster of MEDIUM problems: literal 'TODO: source not confirmed' text sitting in two reader-facing FAQ answers (an explicit brief prohibition), a draft/metadata contradiction where the wrapper claims the FAQ was omitted while the draft contains one, a payment-hardware spec (500-bill capacity, denominations, quarter acceptor) that does not appear in the allowed-claims list and is used to derive an operational recommendation, one unsupported comparative assertion, and a table row that duplicates another row verbatim in an article whose entire value proposition is rigour.",
+  "severity_counts": {
+    "high": 0,
+    "medium": 5,
+    "low": 4
+  },
+  "issues": [
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "FAQ — 'Do bars need a permit or license...' and 'Is an arcade machine a good fit for a venue that only hosts events occasionally...'",
+      "problem": "Both answers end with literal internal pipeline text: 'TODO: source not confirmed — check local amusement-device licensing...' and 'TODO: source not confirmed for typical event-venue coin-op drop rates'. The brief explicitly forbids leaving literal 'TODO' text in any reader-facing sentence or FAQ answer.",
+      "recommended_fix": "Strip the 'TODO:' prefix and rewrite as reader-facing guidance ('Licensing rules vary by municipality; confirm requirements with your city or county before installing a cash-accepting machine.'), and move the sourcing gap into the Open TODOs block where it already partly lives."
+    },
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "Wrapper metadata todos vs. '## FAQ' section in draft",
+      "problem": "The writer's own TODOs state 'FAQ section omitted per pipeline rules — FAQ Agent to cover the seven brief questions' and 'Outline heading Frequently Asked Questions intentionally not written', but the draft contains a six-question FAQ section. Downstream agents acting on the metadata will either duplicate the FAQ or drop it. The existing FAQ also covers only two of the seven brief questions not already answered in the body.",
+      "recommended_fix": "Decide ownership: either delete the FAQ and leave it to the FAQ Agent, or keep it and correct the two contradicting TODO lines in the wrapper metadata."
+    },
+    {
+      "severity": "medium",
+      "category": "grounding",
+      "location": "'A Real Machine to Anchor the Math' — 'a bill acceptor that takes $1, $5, $10, and $20 notes with a 500-bill capacity, and a coin acceptor for quarters'",
+      "problem": "These payment-hardware specs do not appear in the allowed factual claims list in claims_constraints.md. They come from the company-insight file only, and the 500-bill capacity is then used to derive an operational recommendation ('the box needs emptying about every six weeks'). The writer flagged the derived arithmetic in claims_to_verify but not the underlying spec itself.",
+      "recommended_fix": "Add a claims_to_verify line confirming the Commercial Edition bill/coin acceptor specification (denominations, 500-bill capacity, quarter acceptor) is an approved published claim, or hold the six-week cash-out note until the spec is added to claims_constraints.md."
+    },
+    {
+      "severity": "medium",
+      "category": "unsupported_claim",
+      "location": "Scenario 2 — 'As a rate of return on capital that is strong — better than most equipment a bar buys'",
+      "problem": "An unhedged comparative assertion about the relative return of other bar equipment, presented as fact. No source exists for it and it is not listed in claims_to_verify, which is inconsistent with the article's own standard of labelling every other judgement.",
+      "recommended_fix": "Tie it to the model rather than the market: 'On these assumptions that is a strong rate of return on capital — though the comparison to other bar equipment is a judgement, not a measured one.'"
+    },
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "Ownership table — rows 'Venue-owned' and 'Venue-owned, staff-managed'",
+      "problem": "The text says 'Three arrangements dominate', but rows one and three are identical in all four columns (venue pays, venue keeps 100%, venue carries service). The third row conveys no information and visibly contradicts the sentence introducing the table — damaging in a piece whose whole premise is checkable rigour.",
+      "recommended_fix": "Either drop the duplicate row and say 'Two arrangements dominate', or differentiate it properly (e.g. venue-owned with a third-party service contract, showing a service-cost line the fully self-managed case does not carry)."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Wrapper metadata / three inline '[VISUAL]' placeholders",
+      "problem": "The draft contains three inline [VISUAL] placeholders (payback curve chart, cost waterfall diagram, product image) plus two already-rendered images, but no `suggested_visuals` array is present in the writer wrapper metadata, so placeholder-to-array parity cannot be verified.",
+      "recommended_fix": "Add a `suggested_visuals` array with one entry per inline [VISUAL] placeholder, matching type and description."
+    },
+    {
+      "severity": "low",
+      "category": "tone",
+      "location": "Throughout — 'my assumption', 'my judgement', 'I would give that experiment two months'",
+      "problem": "Heavy first-person singular implies a named individual analyst with venue experience. On a manufacturer-published article with no byline, this creates an authorship expectation the piece cannot meet, and 'my judgement' on the likelihood weighting implicitly claims personal placement experience that no verified anchor supports.",
+      "recommended_fix": "Either attach a real byline, or shift to an editorial voice ('this model assumes', 'we weight the base case at roughly 55%') while keeping the same transparency about the figures being estimates."
+    },
+    {
+      "severity": "low",
+      "category": "product_fit",
+      "location": "Whole article — revenue, coin-drop and investment framing",
+      "problem": "The knowledge base separates B2C and B2B content strictly: revenue potential, investment framing and coin-operation features must not surface in home-buyer content. The article is legitimately B2B and the brief approved it, but the closing paragraph links to the B2C home overview page, so placement matters. If this piece is published inside an Echo-for-Home content hub the separation rule is breached.",
+      "recommended_fix": "Confirm the publication location is a general/commercial blog surface, not the Echo for Home B2C page or hub; keep the home-page link as a disambiguating aside only, which is how it currently reads."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "'How Arcade Machine Revenue Actually Works' — inline-01 scenario comparison image",
+      "problem": "A rendered image of the three-scenario comparison table sits immediately under the H2, before any body text and one section ahead of the actual scenario table it duplicates. It pre-empts figures the reader has not yet been given assumptions for, and repeats a table that appears in full shortly after.",
+      "recommended_fix": "Move the image into the three-scenarios section directly beneath the assumptions table, or replace it with a visual that supports the ownership/revenue-split content of the section it currently sits in."
+    }
+  ],
+  "strengths": [
+    "Every arithmetic chain was independently recomputed and is correct: 52-week annualisation, /12 monthly, 5% reserve, net figures, payback months, 5-year net, the ~$327 probability-weighted expected value, the 29-month operator variant, and the ~325-notes-per-month cash-out derivation. No drift anywhere.",
+    "Financial inputs are labelled as assumptions in the prose, in the table, and again in the claims_to_verify block — the discipline the brief demanded, sustained across the whole piece.",
+    "The three scenarios are explicitly weighted rather than presented as equally likely, and the base case is repeatedly named as the planning point.",
+    "RePlay Magazine heritage claim uses the approved wording, attributes the record to the bartop line rather than the ECHO, and gives no count or year.",
+    "Touchscreen durability argument stays properly relative and actively warns the reader against absolute reliability claims — stronger than a hedge, it turns the constraint into a credibility signal.",
+    "Verified experience anchors used faithfully and without invented attribution: individual pre-shipment test coverage (with the 'at minimum' spirit preserved), hours-of-assembly against up to seven working days with both halves given, 1,000+ units shipped as a floor, eleventh generation since 1995.",
+    "Home vs Commercial Edition distinction stated in the intro, in the product section, and in the closing — closing the exact SERP gap the research identified.",
+    "The operator-placement honesty ('an article anchored to a purchase price has an obvious incentive not to say it') and the un-modelled indirect drink-revenue caveat both build trust and differentiate hard from the catalog pages ranking today.",
+    "All seven brief questions are answered, all required sections present, and every SERP content gap is closed — including the net-profit-after-payback breakdown no competitor attempts."
+  ],
+  "recommended_fixes": [
+    "Remove the literal 'TODO:' strings from the two FAQ answers and rewrite them as plain reader guidance, keeping the sourcing gap in the internal Open TODOs block.",
+    "Resolve the FAQ contradiction: keep the FAQ and correct the wrapper TODOs, or delete it and hand the seven brief questions to the FAQ Agent.",
+    "Add a claims_to_verify line for the Commercial Edition bill/coin acceptor specification itself (denominations, 500-bill capacity, quarter acceptor), since it is not in the allowed-claims list and carries the six-week cash-out inference.",
+    "Hedge 'better than most equipment a bar buys' back to the model's own assumptions.",
+    "Fix or remove the duplicated 'Venue-owned, staff-managed' table row and reconcile it with the 'Three arrangements dominate' sentence.",
+    "Add a suggested_visuals array matching the three inline [VISUAL] placeholders.",
+    "Decide the authorial voice — real byline or editorial 'we' — and apply it consistently.",
+    "Relocate the inline-01 scenario comparison image to sit with the scenario table it summarises."
+  ],
+  "claims_to_verify_ok": false,
+  "source_inputs_used": {
+    "draft": "outputs/v4/drafts/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json",
+    "brief": "outputs/v4/briefs/arcade-machine-for-bar.json",
+    "serp_research": "outputs/v4/serp_research/arcade-machine-for-bar.json",
+    "company_insight": "outputs/v4/company_insight/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json"
+  },
+  "todos": [
+    "claims_to_verify is thorough on the financial assumptions but incomplete: it omits the bill/coin acceptor specification, the 'better than most equipment a bar buys' comparative, and the FAQ's general-market assertions (full-size cabinets 'typically cost more upfront', multi-machine cannibalisation). Marked claims_to_verify_ok = false on those grounds only.",
+    "Cannot inspect the two rendered images. Verify the hero image and inline-01 show no JVL branding, per the brief's rule against branded product imagery above the dedicated product section — alt text and caption suggest compliance but the assets themselves were not reviewable here.",
+    "Confirm the publication surface for this article. It is fully B2B in framing (coin drop, revenue split, payback), which is correct for the brief but must not sit on or inside the Echo for Home B2C page per the B2C/B2B separation rule.",
+    "Business sign-off is still outstanding on every financial input ($30/$75/$160 weekly, 50/50 split, 5% service reserve, $5 electricity placeholder, 25/55/20 likelihood weighting) and on using the $4,250 list price as an ROI anchor outside the product page — the writer flagged all of these correctly.",
+    "The ECHO's actual power draw remains unsourced; the $5/month line is a declared placeholder. Sourcing it would remove the weakest input in the model.",
+    "No verified venue placement or customer revenue data exists in the knowledge base, so no real-world case study could be included. This article is the highest-value destination for such data if it is ever collected with consent — the writer flagged this honestly rather than inventing a placement anecdote."
+  ]
+}

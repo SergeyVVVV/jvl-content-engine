@@ -1,0 +1,104 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "brief_alignment": "Moderate fit with a notable positioning tension that the writer must manage carefully. The topic itself (venue ROI, revenue split, coin-op economics) is inherently a B2B investment framing, which claims_constraints.md explicitly says must NOT be surfaced to home buyers or appear on B2C-facing content ('revenue potential, investment framing, coin-operation features'). The persona (Mark & Linda Reynolds) is a home-leisure buyer, not a commercial operator, and the messaging ladder in positioning_uvp.md is nostalgia-and-togetherness-led, not investment-led. The brief resolves this by keeping the ROI math generic/illustrative (not JVL-specific) and only introducing JVL near the end as a factual price anchor and natural next step - this is workable, but the writer must not let the JVL section drift into positioning ECHO as an income-generating device, and should ultimately pivot the CTA toward the Home Edition / personal-use decision rather than the coin-operated Commercial Edition as an investment pitch.",
+  "relevant_jvl_angles": [
+    "Nostalgia and togetherness (UVP pillar 1 and messaging priority 1-2) can explain, at a category level, why arcade formats still draw guests in venues - without attributing any specific revenue outcome to JVL",
+    "Plug-and-play / ease of ownership (UVP pillar 3) is relevant when discussing operational risk reduction for venue owners: no Wi-Fi, no installs, works offline",
+    "Curated library value (UVP pillar 2, 149 proprietary games) supports discussion of what drives guest engagement and repeat play, described by gameplay style only",
+    "Quietly premium / adult-home fit (UVP pillar 5) is the right lens for the closing section - reframe from 'investment' to 'a well-made piece worth owning', which is the only ECHO-appropriate emotional register per brand_voice.md",
+    "Heritage claim (30+ years of JVL bartop expertise) supports a 'this format is proven, not just trendy' framing for the comeback narrative, using the exact approved phrasing"
+  ],
+  "relevant_product_facts": [
+    "JVL ECHO HD3 - Commercial Edition: includes bill acceptor ($1, $5, $10, $20; 500-bill capacity) and coin acceptor (quarters); list price $4,250 USD; built for bars, restaurants, operators",
+    "JVL ECHO HD3 - Home Edition: Free Play, no bill/coin acceptor; for residential use; list price $3,990 USD",
+    "149 pre-installed, proprietary games across 6 categories (Action, Classic, Cards, Puzzle, Quiz, Adult); no licensed third-party titles",
+    "Plug-and-play; works 100% offline; no Wi-Fi or downloads required",
+    "1-Year All-Inclusive Manufacturer Warranty; JVL covers shipping both ways for warranty service",
+    "Each unit individually tested before shipping",
+    "Designed in Canada, made in the USA",
+    "Reinforced plastic case and precision-built frame - built to withstand tough arcade and bar environments",
+    "Touch controls - no mechanical parts, no lag",
+    "Built on 30+ years of JVL bartop expertise; JVL bartops have been awarded 'Best Bartop Video Game of the Year' by RePlay Magazine multiple times (heritage claim about the bartop line, not ECHO specifically)"
+  ],
+  "natural_product_injection_points": [
+    "In the 'why arcade machines are making a comeback' section - use the heritage/proof angle (30+ years of bartop expertise) to explain the format's durability as a category, without naming ECHO's revenue potential",
+    "In the venue-durability or maintenance-cost discussion - reference the reinforced case/precision frame and touch controls (no mechanical failure) as reasons build quality affects total cost of ownership, staying generic to the category until the closing section",
+    "In the dedicated closing 'where JVL ECHO fits' section - introduce the Echo line as a whole (Home and Commercial editions), state the $4,250 Commercial Edition list price plainly as the real, checkable anchor used in the earlier math, and clarify how it differs from the $3,990 Home Edition",
+    "In the same closing section - pivot the CTA toward the Home Edition and https://jvl.ca/en/home for a reader evaluating ECHO for personal enjoyment rather than as an income vehicle, consistent with the B2C separation rule",
+    "In an FAQ answer about 'do arcade machines still make money for bars today' - a brief, factual mention that JVL still manufactures a bartop-format commercial unit today can support the 'this format still exists and is actively made' point, without implying guaranteed returns"
+  ],
+  "unique_brand_perspective": [
+    "JVL can anchor abstract ROI content to one real, named, checkable list price ($4,250 USD Commercial Edition) - something generic competitor content never offers - which directly matches the brand's proof-aware posture from brand_voice.md",
+    "JVL's operating rule that 'emotion opens interest, proof closes the sale' (brand_voice.md, positioning_uvp.md) maps directly onto this article's structure: nostalgia/comeback narrative opens interest, and grounded, itemised numbers close credibility - a structure JVL is uniquely positioned to model given its stated tone rules",
+    "JVL's 30+ years of bartop expertise (heritage claim) lets the brand credibly speak to why the bartop arcade format persists in venues, without needing to invent statistics or case studies",
+    "JVL's quiet-premium, non-hype tone (explicitly rejecting 'passive income' language per brand_voice.md's Do Not list) is a natural fit for this SERP gap where competitors lean on hype - JVL can differentiate purely by tone discipline"
+  ],
+  "eeat_signals": [
+    "Built on 30+ years of JVL bartop expertise (confirmed heritage claim, correctly framed as bartop-line track record, not an ECHO-specific award)",
+    "Each unit individually tested before shipping (confirmed manufacturing quality signal)",
+    "1-Year All-Inclusive Manufacturer Warranty with JVL covering shipping both ways (confirmed ownership-cost trust signal, relevant to TCO discussion)",
+    "Designed in Canada, made in the USA (confirmed origin/heritage trust signal)",
+    "TODO: requires business confirmation - any real operator or customer revenue/usage data that could replace hypothetical scenario assumptions",
+    "TODO: requires business confirmation - whether JVL has documented average revenue-share terms, maintenance costs, or electricity costs from real commercial deployments"
+  ],
+  "persona_hooks": [
+    "Fear of paying for something that feels gimmicky, fragile, or that never delivers promised value - directly relevant to a reader skeptical of inflated arcade-ROI claims",
+    "Desire for numbers-honest, checkable proof over marketing gloss - matches the persona's 'proof over hype' trait and this topic's core demand for a real price anchor",
+    "Concern about durability and reliability holding up under real-world (bar/venue) use, which maps to the reinforced case, touch controls, and warranty facts",
+    "Interest in nostalgia and shared social play as the reason arcade formats still draw crowds - even when read through a venue lens, this softens the topic back into JVL's core emotional territory",
+    "The persona's context of possibly renting out a home bar occasionally - relevant to treating this as a real, cautious financial decision rather than a guaranteed income scheme, consistent with their 'grounded nostalgia buyer' profile"
+  ],
+  "trust_signals": [
+    "Plug-and-play setup with no Wi-Fi or installation friction - reduces perceived operational risk for a venue-style deployment",
+    "149 pre-installed proprietary games as a ready-to-use engagement signal, described by gameplay style (cards, puzzle, trivia, bar-sports classics) rather than named titles",
+    "1-year all-inclusive warranty plus JVL covering return shipping - supports a total-cost-of-ownership discussion without needing invented cost figures",
+    "Each unit individually tested before shipping - reliability signal relevant to minimising downtime/maintenance risk",
+    "Designed in Canada, made in the USA - origin signal supporting build-quality claims",
+    "30+ years of bartop expertise (heritage framing only) - supports the 'this format is proven, not a fad' narrative arc"
+  ],
+  "claims_to_verify": [
+    "TODO: requires business confirmation - all weekly revenue figures, foot-traffic assumptions, revenue-split percentages, maintenance costs, and electricity cost estimates used in the three scenarios must be confirmed as illustrative modelling assumptions before publishing, and labelled as estimates/ranges, not sourced statistics",
+    "TODO: requires business confirmation - the probability weighting assigned to pessimistic/neutral/optimistic scenarios is an editorial judgement call and should be reviewed to ensure it does not overpromise returns",
+    "TODO: requires business confirmation - the $4,250 USD list price for the JVL ECHO HD3 Commercial Edition must be re-confirmed as current at time of publishing",
+    "TODO: requires business confirmation - whether JVL or the business has any real operator/customer revenue data that could replace hypothetical assumptions with actual figures",
+    "TODO: requires business confirmation - whether featuring Commercial Edition investment-style content (revenue split, coin-op economics) in a blog article read by a home-buyer persona is acceptable under the B2B/B2C separation rule, or requires additional framing safeguards"
+  ],
+  "forbidden_claims": [
+    "Do not attribute the RePlay Magazine 'Best Bartop Video Game of the Year' award directly to ECHO - it is a heritage claim about JVL's bartop line only",
+    "Do not present the $4,250 or $3,990 prices as a discount, sale, or limited-time offer - state once, plainly, as list price, and always specify which edition it belongs to",
+    "Do not name or imply any trademarked/licensed game titles (e.g., Pac-Man, Donkey Kong, Galaga, Space Invaders, Frogger) anywhere, even descriptively - all 149 games are JVL proprietary titles",
+    "Do not use '#1', 'best', or 'leading' language regarding arcade ROI, JVL, or ECHO without sourced evidence",
+    "Do not include health, safety, legal, or compliance statements, or environmental/sustainability claims",
+    "Do not present any modelled revenue, payback, or profit figure as a verified statistic or cite an unverified 'study' or data source",
+    "Do not imply the ECHO Home Edition includes bill/coin acceptors or is designed for coin-operated revenue generation - only the Commercial Edition has these features",
+    "Do not treat the pessimistic and optimistic scenarios as equally likely as the neutral base case"
+  ],
+  "risks_to_avoid": [
+    "Core risk: this topic's investment/coin-op framing conflicts with the B2B/B2C separation rule when read by a home-buyer persona - keep the ROI math generic and non-JVL-specific until the closing section, and end on a home-use pivot rather than an investment pivot",
+    "Do not let any image above the closing product section show a branded JVL/ECHO machine - use generic cabinet, bar-interior, or data/ROI concept visuals with neutral captions",
+    "Do not let the closing JVL section read as a hard sales pitch or as encouragement to set up a coin-operated income stream - keep it proof-aware and understated per brand_voice.md",
+    "Do not use hype language such as 'passive income', 'set it and forget it', or gamer/esports jargon anywhere in the piece",
+    "Do not blur or omit the named recurring costs (revenue share, maintenance, electricity) in the net-monthly-profit section - each figure must show its subtraction line by line, clearly labelled as an estimate",
+    "Do not leave raw TODO strings in any reader-facing heading, prose, or FAQ answer - all unresolved items must be resolved editorially or removed before publishing, not surfaced to the reader",
+    "Avoid implying JVL has real-world case-study data on arcade machine profitability in venues unless separately confirmed by the business"
+  ],
+  "notes_for_writer": [
+    "Use the $4,250 USD Commercial Edition price strictly as a factual, checkable anchor for the reader's own arithmetic - do not use it to imply guaranteed returns, and always name the edition explicitly alongside it",
+    "Keep the three-scenario ROI model, revenue-split percentages, and maintenance/electricity cost figures clearly labelled throughout as illustrative estimates, not verified industry data - repeat this framing at least once per scenario",
+    "State plainly, once and early, that the neutral/base-case scenario is what a typical operator should plan around, and that pessimistic and optimistic outcomes are not equally probable",
+    "In the net-monthly-profit-after-payback section, subtract named recurring costs (assumed revenue share, maintenance, electricity) line by line for each of the three scenarios so the reader can verify the math",
+    "Reserve all JVL/ECHO branding and imagery for the single dedicated closing section; use generic, unbranded visuals (bar interior, generic cabinet, data/chart concepts) everywhere earlier in the article",
+    "In the closing JVL section, introduce both editions (Home $3,990 / Commercial $4,250) for factual clarity, then steer the final CTA toward https://jvl.ca/en/home and the Home Edition as the natural next step for this persona, rather than positioning the Commercial Edition as an investment purchase"
+  ],
+  "internal_link_targets": [
+    "https://jvl.ca/en/echo",
+    "https://jvl.ca/en/home"
+  ],
+  "todos": [
+    "TODO: requires business confirmation - all illustrative revenue, foot-traffic, revenue-split, maintenance, and electricity figures used in the scenario model",
+    "TODO: requires business confirmation - probability weighting assigned to each of the three scenarios",
+    "TODO: requires business confirmation - current accuracy of the $4,250 USD Commercial Edition list price at time of publishing",
+    "TODO: requires business confirmation - availability of any real operator/customer revenue data to replace hypothetical assumptions",
+    "TODO: requires business confirmation - sign-off on featuring B2B investment/coin-op framing in content aimed at the B2C home-buyer persona, given the B2B/B2C separation rule in claims_constraints.md"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "suggested_visuals": [
+    {
+      "section_heading": "Why Arcade Machines Are Making a Comeback in Bars and Event Venues",
+      "type": "image",
+      "purpose": "Ground the reader in the venue context without showing any branded machine, per the image restriction for sections above the closing product section",
+      "alt_text_proposal": "Quiet adult bar interior in the evening with small groups of guests seated near the counter",
+      "production_note": "Generic, unbranded bar interior. No JVL or ECHO machine visible. Neutral caption, no marketing language."
+    },
+    {
+      "section_heading": "How Arcade Machine ROI Actually Works",
+      "type": "diagram",
+      "purpose": "Make the payback formula visually scannable so readers can follow the arithmetic before seeing the scenarios",
+      "alt_text_proposal": "Diagram showing arcade machine payback calculation from weekly plays to weeks to payback",
+      "production_note": "Simple left-to-right flow: plays per week to gross weekly take to your share to minus costs to weeks-to-payback. No branding."
+    },
+    {
+      "section_heading": "Seasonality, Maintenance, and Electricity Costs",
+      "type": "chart",
+      "purpose": "Show at a glance how small recurring costs are relative to each other, especially electricity",
+      "alt_text_proposal": "Bar chart comparing estimated monthly arcade machine costs for repairs, cleaning, and electricity",
+      "production_note": "Three bars only. Label clearly as illustrative estimates. Neutral data-visual style, no product imagery."
+    },
+    {
+      "section_heading": "What the Machine Earns After It Pays for Itself",
+      "type": "chart",
+      "purpose": "Compare net monthly profit after payback across the three scenarios so the post-payback picture is instantly readable",
+      "alt_text_proposal": "Chart comparing estimated net monthly arcade profit after payback across pessimistic, neutral, and optimistic scenarios",
+      "production_note": "Three grouped bars ($70 / $249 / $629). Must carry an 'illustrative estimate' label in the chart itself."
+    },
+    {
+      "section_heading": "Which Venue Types Tend to See the Strongest Arcade Returns",
+      "type": "image",
+      "purpose": "Give scale-in-room proof of a bartop format on a bar counter without branding it",
+      "alt_text_proposal": "Unbranded bartop arcade machine positioned at the end of a bar counter showing its compact footprint",
+      "production_note": "Generic or heavily neutral bartop unit. No JVL or ECHO logo visible. Focus on scale against the counter."
+    },
+    {
+      "section_heading": "Where the JVL ECHO Fits Into This Picture",
+      "type": "image",
+      "purpose": "Provide credible product and room-fit proof in the single section where branded imagery is permitted",
+      "alt_text_proposal": "JVL ECHO bartop arcade machine on a home bar counter with warm evening lighting",
+      "production_note": "Real photo of the ECHO in a residential home bar. Show the 22-inch screen and the swivel base. This is the only branded visual in the article."
+    }
+  ]
+}

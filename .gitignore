@@ -26,3 +26,9 @@ data/runs/*
 
 # Generated brief outputs (tracked separately after review)
 outputs/briefs/*.json
+
+# Generated article images. The markdown references Supabase Storage, never a
+# local path, so the article renders without these — and 14 files already come
+# to 23 MB against a 4.5 MB repository. Git never forgets a blob, so every run
+# would add another few megabytes for good.
+outputs/**/images/

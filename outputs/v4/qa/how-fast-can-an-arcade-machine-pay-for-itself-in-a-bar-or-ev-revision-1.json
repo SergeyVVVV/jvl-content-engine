@@ -1,0 +1,104 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "status": "revise",
+  "summary": "Strong, unusually disciplined draft. Every derived figure checks out arithmetically against its stated weekly assumption, all financial inputs are explicitly labelled as assumptions, the touchscreen durability argument stays properly relative, the RePlay heritage framing matches the approved wording, and the Home/Commercial distinction — the exact gap the SERP research flags in competitors — is stated plainly and repeatedly. Verified experience anchors (eleventh generation since 1995, 1,000+ units shipped, seven-working-day full cycle, individual pre-shipment testing) are used accurately and in the right section. No HIGH issues: nothing appears fabricated. What blocks a pass is the FAQ section, which is both internally contradicted by the writer's own TODO list (which states the FAQ was omitted) and contains literal 'TODO: source not confirmed' text in two reader-facing answers — a risk the brief names explicitly — plus unsourced industry generalisations that abandon the assumption-labelling discipline the body maintains. Separately, the Commercial Edition payment-hardware spec (bill denominations, 500-bill capacity, quarter acceptor) does not appear in the allowed factual claims list; it is honestly flagged in claims_to_verify, but it is presented in-article as an unhedged spec and a derived cash-out interval, so it must be approved or struck before publication.",
+  "severity_counts": {
+    "high": 0,
+    "medium": 4,
+    "low": 4
+  },
+  "issues": [
+    {
+      "severity": "medium",
+      "category": "grounding",
+      "location": "A Real Machine to Anchor the Math — spec table row 'Payment hardware' and the following 500-bill / six-week paragraph",
+      "problem": "The bill acceptor denominations ($1/$5/$10/$20), the 500-bill capacity and the quarter coin acceptor are not in the approved allowed-claims list. They reach the draft via the company insight file only. In the article they are presented as hard specification, unhedged, and a derived operational conclusion (cash-out roughly every six weeks) is built on top of them. The writer flagged this correctly in claims_to_verify, which is why it is not HIGH, but as written it reads to the reader as confirmed product fact.",
+      "recommended_fix": "Either get the payment-hardware spec added to claims_constraints.md before publish, or strike the table row and the six-week cash-out paragraph and replace with the generic, already-approved statement that the Commercial Edition is the coin/bill-accepting configuration."
+    },
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "FAQ — 'Do bars need a permit or license...' and 'Is an arcade machine a good fit for a venue that only hosts events occasionally...'",
+      "problem": "Two FAQ answers contain literal 'TODO: source not confirmed' text inside reader-facing prose. The brief lists this as an explicit risk to avoid, and the writer's own TODO list says these exact answers 'must not be reinstated as written' — yet they are present.",
+      "recommended_fix": "Rewrite both answers without the TODO token: state the variability plainly ('licensing rules vary by municipality; confirm locally before installing a cash-accepting machine') and move the sourcing gap into the claims_to_verify list where it belongs."
+    },
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "FAQ section vs. 'Open TODOs for Human Review' bullet 'FAQ section omitted per pipeline rules'",
+      "problem": "The draft contains a six-question FAQ while its own metadata states the FAQ was deliberately omitted for a downstream FAQ Agent to write. Downstream stages will either duplicate the section or skip it entirely, and no human reader can tell which version is intended.",
+      "recommended_fix": "Resolve the handoff explicitly: either keep the FAQ and delete the contradicting TODO bullets, or remove the FAQ section and leave the heading for the FAQ Agent. Do not ship both states."
+    },
+    {
+      "severity": "medium",
+      "category": "grounding",
+      "location": "FAQ — 'Most bars start with one and only add a second...', 'operators typically adjust it based on...', 'because it typically costs more upfront'",
+      "problem": "The FAQ asserts industry norms as fact ('most bars', 'typically', 'still generate a consistent average weekly drop') with none of the labelled-assumption discipline the body maintains throughout, and none of these appear in the claims_to_verify list. The body's entire credibility rests on never doing this, so the FAQ undercuts it.",
+      "recommended_fix": "Hedge each generalisation to reasoning rather than observation ('the structural reason a second machine rarely doubles drop is that it competes for the same idle customers') and add any remaining assertion to claims_to_verify."
+    },
+    {
+      "severity": "low",
+      "category": "grounding",
+      "location": "A Real Machine to Anchor the Math — 'an individual pre-shipment test covering system boot, the touchscreen across its whole surface...'",
+      "problem": "The verified anchor for the pre-shipment test list requires the 'at minimum' hedge, because the list was given as a floor rather than an exhaustive protocol. The draft drops it and reads as a complete protocol.",
+      "recommended_fix": "Insert the hedge: 'a pre-shipment test covering, at minimum, system boot, the touchscreen across its whole surface...'."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "[VISUAL] diagram placeholder in 'The Recurring Costs That Quietly Erode Arcade Profit'",
+      "problem": "The waterfall placeholder describes $325 gross reducing 'through revenue share, service reserve, and electricity to $303.75 net' — but the base case assumes 0% revenue share, and $325 − $16.25 − $5.00 = $303.75 with no share deducted. The illustration brief contradicts the arithmetic it illustrates.",
+      "recommended_fix": "Drop 'revenue share' from the base-case waterfall description, or specify a second waterfall for the operator-placement case where the share actually applies."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Writer wrapper metadata",
+      "problem": "No suggested_visuals array is present in the wrapper metadata, although the draft carries two rendered images and three inline [VISUAL] placeholders, so placeholder-to-array parity cannot be checked.",
+      "recommended_fix": "Populate suggested_visuals with the three [VISUAL] entries (payback curve chart, cost waterfall diagram, product/bill-acceptor image) so downstream stages can pick them up."
+    },
+    {
+      "severity": "low",
+      "category": "grounding",
+      "location": "FAQ — 'Do bars need a permit or license to operate a coin-operated arcade machine?'",
+      "problem": "Claims constraints tell this content to stay out of legal and compliance territory. The answer handles it responsibly by deferring entirely to the reader's municipality, but the question itself invites a compliance statement and a future edit could easily cross the line.",
+      "recommended_fix": "Keep the deferral wording tight and non-advisory, or drop the question — the body already routes licensing to local authorities without raising it as a headline."
+    }
+  ],
+  "strengths": [
+    "All arithmetic verifies: 30/75/160 weekly figures roll correctly to $118.50 / $303.75 / $653.66 net monthly, to 35.9 / 14.0 / 6.5-month paybacks, to the annual and five-year figures, and the probability-weighted $327 expected value is correct against the stated 25/55/20 weights.",
+    "Every revenue, split, cost and likelihood figure is explicitly framed as a stated modeling assumption, and the likelihood column is called out in-article as reasoned estimation rather than measured probability — exactly what the brief and company insight demanded.",
+    "The Home vs Commercial Edition distinction is made in the intro, in the anchor section, and again in the closing — closing the single biggest SERP content gap without blurring the two SKUs or their prices.",
+    "The touchscreen maintenance argument stays relative ('it does not remove failure — screens, power supplies, and audio hardware all fail eventually'), which matches the required hedge and reads as engineering honesty rather than a sales claim.",
+    "RePlay Magazine framing is verbatim-correct, with the explicit note that the recognition belongs to the bartop line rather than the ECHO, and no count or year is given.",
+    "Verified experience anchors are used well and in the right places: since-1995 eleventh generation, more than 1,000 units shipped, hours-of-assembly against a seven-working-day full cycle, individual pre-shipment testing.",
+    "The article volunteers the argument against its own commercial interest (operator placement is often the better decision; $300 a month will not rescue a struggling room), which is the strongest trust signal in the piece.",
+    "Strong structural variety for a financial piece: four tables, step-by-step numbered arithmetic, an ordered planning checklist, and three visual placeholders.",
+    "Product presence is contained to the dedicated anchor section and the planning section, with the price used earlier without branding — matching the medium product_fit instruction."
+  ],
+  "recommended_fixes": [
+    "Remove the literal 'TODO: source not confirmed' strings from the two FAQ answers and rewrite those answers as clean reader-facing prose.",
+    "Resolve the FAQ contradiction — keep the section and delete the metadata bullets claiming it was omitted, or delete the section and leave it to the FAQ Agent.",
+    "Confirm the Commercial Edition payment-hardware spec against claims_constraints.md; if it is not approved, strike the spec table row and the six-week cash-out paragraph.",
+    "Hedge the unsourced industry generalisations in the FAQ ('most bars', 'typically costs more upfront') to match the assumption-labelling discipline of the body, and add anything remaining to claims_to_verify.",
+    "Restore the 'at minimum' hedge on the pre-shipment test list.",
+    "Correct the base-case waterfall visual brief to drop the inapplicable revenue-share step.",
+    "Populate suggested_visuals with the three inline [VISUAL] entries."
+  ],
+  "claims_to_verify_ok": false,
+  "source_inputs_used": {
+    "draft": "outputs/v4/drafts/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json",
+    "brief": "outputs/v4/briefs/arcade-machine-for-bar.json",
+    "serp_research": "outputs/v4/serp_research/arcade-machine-for-bar.json",
+    "company_insight": "outputs/v4/company_insight/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json"
+  },
+  "todos": [
+    "claims_to_verify covers the body thoroughly but does not cover any FAQ assertion — the writer appears to have believed the FAQ was omitted. Extend the list once the FAQ question is resolved.",
+    "Confirm publication surface before publish: this is a B2B/commercial analysis and must not sit on the Echo for Home B2C page or inside a home content hub. The /en/home link is retained only as a disambiguating aside, which is acceptable, but placement is not.",
+    "Hero and inline images could not be inspected — verify the hero image is not a branded JVL machine, per the editorial-imagery rule barring branded product imagery above the dedicated product section.",
+    "funnel_stage is empty in the writer wrapper metadata; populate it (commercial investigation / decision support) for downstream metadata generation.",
+    "Business sign-off still outstanding on every financial assumption ($30/$75/$160 weekly, 50/50 split, 5% service reserve, 25/55/20 weighting) and on using the $4,250 list price as the sole ROI anchor outside the product page.",
+    "The $5/month electricity line is an acknowledged placeholder; ECHO's actual rated draw is not in the knowledge base and must not be published as a spec until sourced.",
+    "Confirm both list prices are current at publication date and consider a 'figures accurate as of [date]' line, since a stale price invalidates every calculation in the article."
+  ]
+}

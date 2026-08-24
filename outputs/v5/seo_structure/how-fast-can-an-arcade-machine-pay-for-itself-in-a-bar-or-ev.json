@@ -1,0 +1,136 @@
+{
+  "h1": "Arcade Machine for Bar ROI: How Fast Does It Pay Off?",
+  "slug": "arcade-machine-bar-roi",
+  "primary_keyword": "arcade machine for bar",
+  "secondary_keywords": [
+    "arcade machine for bar ROI",
+    "arcade ROI",
+    "arcade profitability",
+    "arcade rate of return",
+    "arcade machine payback period",
+    "how much does an arcade machine make",
+    "commercial arcade machine cost",
+    "bartop arcade for bar",
+    "arcade machine revenue per week",
+    "home arcade machine"
+  ],
+  "search_intent": "commercial_investigation",
+  "outline": [
+    {
+      "level": "h2",
+      "heading": "Why payback period is the right question to ask before buying an arcade machine",
+      "purpose": "Frame the article around payback period as the honest, checkable metric, rather than vague ROI marketing claims, and set reader expectations for a transparent walkthrough.",
+      "keywords_to_use": [
+        "arcade machine for bar",
+        "arcade machine payback period",
+        "arcade ROI"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "The cost baseline: anchoring the analysis to a real machine price",
+      "purpose": "Establish the commercial arcade machine cost used as the fixed input for all scenarios, so the math is checkable.",
+      "keywords_to_use": [
+        "commercial arcade machine cost",
+        "arcade machine for bar"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "How this model is built: methodology and assumptions behind the three scenarios",
+      "purpose": "Explain the deliberately conservative, bar-specific methodology and why bar guest attention differs from dedicated arcade/FEC foot traffic, so readers understand the logic before seeing numbers.",
+      "keywords_to_use": [
+        "arcade profitability",
+        "arcade rate of return"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Three scenarios: pessimistic, base case, and optimistic weekly revenue",
+      "purpose": "Present the three labeled, transparent scenarios side by side so the reader can compare assumptions and payback periods at a glance.",
+      "keywords_to_use": [
+        "arcade machine revenue per week",
+        "how much does an arcade machine make",
+        "arcade machine payback period"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Pessimistic scenario: weekly revenue, assumptions, and payback period",
+      "purpose": "Walk through the low-end weekly revenue assumption, state it clearly as a modeled assumption pending source verification, and calculate the resulting payback period.",
+      "keywords_to_use": [
+        "arcade machine revenue per week",
+        "arcade machine payback period"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Base case (most likely) scenario: the $170/week figure and why the article assumes it",
+      "purpose": "Justify the $170/week base case as a disciplined planning figure, explain the reasoning behind it without sounding defensive, and show the payback math.",
+      "keywords_to_use": [
+        "arcade machine for bar ROI",
+        "arcade machine revenue per week"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Optimistic scenario: weekly revenue, assumptions, and payback period",
+      "purpose": "Present the higher-end weekly revenue assumption, label it clearly as modeled and unverified, and calculate the resulting payback period.",
+      "keywords_to_use": [
+        "arcade machine revenue per week",
+        "how much does an arcade machine make"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "How probable is each scenario, and which one should an operator actually plan around",
+      "purpose": "Help the reader weigh likelihood of each scenario and recommend planning around the conservative base case rather than best-case assumptions.",
+      "keywords_to_use": [
+        "arcade rate of return",
+        "arcade ROI"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "After payback: net monthly profit by scenario, with recurring costs named and subtracted",
+      "purpose": "Show what profit looks like once the machine is paid off, naming recurring costs and clearly flagging any figures that need business confirmation before publishing.",
+      "keywords_to_use": [
+        "arcade profitability",
+        "arcade machine for bar ROI"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "What this model does not count: goodwill, repeat visits, and spend the machine influences but the coin drop never shows",
+      "purpose": "Honestly acknowledge the real but unquantified value of extra rounds, repeat visits, and referrals without inventing a dollar figure for them.",
+      "keywords_to_use": [
+        "arcade profitability"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Bringing the same machine home: where the ECHO Home edition fits for a private leisure space",
+      "purpose": "Transition from venue economics to home ownership value, clearly distinguishing the Commercial Edition from the Home Edition, and linking naturally to the ECHO product page as the next step.",
+      "keywords_to_use": [
+        "home arcade machine",
+        "bartop arcade for bar"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Frequently asked questions",
+      "purpose": "Placeholder for FAQ Agent to fill with at least 5 FAQs addressing real user questions from the brief's questions_to_answer list.",
+      "keywords_to_use": []
+    }
+  ],
+  "internal_link_targets": [
+    "https://jvl.ca/en/echo",
+    "https://jvl.ca/en/home"
+  ],
+  "todos": [
+    "TODO: source not confirmed - pessimistic and optimistic weekly revenue figures need citable industry data before publishing",
+    "TODO: source not confirmed - recurring monthly costs (electricity, maintenance, location revenue share) need real figures confirmed by the business",
+    "TODO: source not confirmed - general industry benchmark figures for arcade/FEC earnings need an actual citable reference",
+    "TODO: confirm with JVL that Commercial Edition price ($4,250 USD) can be used as cost anchor while CTA points to Home Edition, with clear reader distinction maintained throughout"
+  ]
+}

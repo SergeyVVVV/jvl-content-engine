@@ -1,0 +1,57 @@
+{
+  "items": [
+    {
+      "question": "Does the type of bar affect how profitable an arcade machine is?",
+      "answer": "Yes — bar type shapes both traffic and dwell time, the two biggest levers in any revenue model. A sports bar or pub with regulars who linger performs differently than a fast-turnover cocktail bar where guests rarely stay long enough to play. Venues that already run darts, pool, or trivia nights tend to see stronger arcade usage, because customers already expect an activity, not just a drink.",
+      "keywords_used": [
+        "arcade profitability",
+        "arcade machine for bar"
+      ]
+    },
+    {
+      "question": "Should a bar buy a used arcade machine to shorten the payback period?",
+      "answer": "A used machine can lower the upfront cost, but it usually comes with an unknown maintenance history and no manufacturer warranty, which shifts risk rather than removing it. A single repair bill mid-lifespan can erase months of the savings a lower purchase price appeared to offer. Buying new with a full warranty trades a slightly higher commercial arcade machine cost for a payback period you can actually plan around.",
+      "keywords_used": [
+        "commercial arcade machine cost",
+        "arcade machine payback period"
+      ]
+    },
+    {
+      "question": "How much floor or counter space does a bar need to fit an arcade machine?",
+      "answer": "Bartop-style cabinets are built to sit on an existing counter or a small stand rather than require a dedicated floor footprint, which is what makes a bartop arcade for bar use practical in rooms with limited square footage. The real space question is less about the machine's size and more about clearance for a player to stand without blocking a walkway or service area. A corner, the end of the bar, or a wall away from the main service flow usually works better than the centre of the room.",
+      "keywords_used": [
+        "bartop arcade for bar"
+      ]
+    },
+    {
+      "question": "Does a bar need a special license to operate a coin-operated arcade machine?",
+      "answer": "Rules vary by city, county, and state, and can cover anything from amusement device permits to how coin income is taxed, so no single article can answer this for every location. It is worth checking with local licensing authorities before installing a coin- or bill-operated machine commercially. This question does not apply to a home arcade machine with no payment hardware, since there is no cash being collected.",
+      "keywords_used": [
+        "home arcade machine"
+      ]
+    },
+    {
+      "question": "Can an arcade machine take up space that would otherwise seat paying customers?",
+      "answer": "In a small room, yes — a machine placed where a stool or a two-top would otherwise go has a real opportunity cost that a coin-drop figure never captures. The trade-off tends to work in the machine's favour near a bar counter, doorway, or waiting area where seating wasn't practical anyway. It works against the machine if it displaces even one or two covers a night in a room already running near capacity.",
+      "keywords_used": []
+    },
+    {
+      "question": "Is a bartop arcade machine a good fit for a restaurant rather than a bar?",
+      "answer": "The economics depend on dwell time rather than the label on the venue — a restaurant with a bar area or a regular waiting crowd can perform similarly to a bar with comparable foot traffic. A fast-turnover dining room with little standing space or wait time gives guests less opportunity to play, which pulls results toward the pessimistic end of any revenue range. The placement variables that matter — visibility, staff mention, existing games culture — apply the same way regardless of whether the venue serves food or drinks.",
+      "keywords_used": [
+        "arcade machine for bar"
+      ]
+    },
+    {
+      "question": "What happens to bar revenue from an arcade machine if it needs repair?",
+      "answer": "Every day the machine is down is a day of lost coin-drop revenue, which is why service turnaround matters as much as the repair itself for any income projection. Neither this article's model nor most public industry sources quantify typical downtime for a bar machine, so it isn't built into the payback figures above. A manufacturer warranty typically covers the machine and the underlying issue, but who pays for transit and how long that step takes are separate questions worth confirming with the manufacturer before buying.",
+      "keywords_used": [
+        "arcade rate of return"
+      ]
+    }
+  ],
+  "todos": [
+    "Local licensing and tax treatment of coin-operated machines varies by jurisdiction and was answered generically; no JVL-specific or legal guidance was invented.",
+    "No public source quantifies typical repair downtime for a bar-placed arcade machine; the FAQ answer states this gap plainly rather than estimating a figure."
+  ]
+}

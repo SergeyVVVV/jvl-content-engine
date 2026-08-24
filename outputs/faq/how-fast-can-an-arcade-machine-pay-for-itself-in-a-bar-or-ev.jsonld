@@ -1,0 +1,56 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much revenue can a bar owner realistically expect from an arcade machine each week?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no dependable industry-average figure for this, and any source that gives you one number without stating its traffic assumption should be treated skeptically. Weekly drop in a real venue can range from very light in a quiet room to strong in a high-traffic spot with good placement, and the gap between those outcomes is large. The only reliable approach is to build your own estimate from your actual foot traffic rather than borrowing someone else's number."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What counts as a good payback period or rate of return for a bar amusement machine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A useful benchmark is to compare the payback period against how long the machine is likely to keep working reliably. A payback well within the machine's expected useful life leaves a real window of profit afterward; a payback that stretches close to that lifespan leaves little margin for anything to go wrong. There is no single sourced ROI percentage that applies across venues, so this comparison, not a fixed target number, is the more honest test."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are arcade machines still relevant in bars given how much people play games on their phones?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Phones compete for individual attention, but a bar arcade machine sells something phones do not: a shared, physical, side-by-side moment between two people waiting on drinks or a table. That social pull is why the format has persisted through multiple waves of home gaming technology rather than disappearing with them. Relevance in any given venue still depends on traffic and placement, not on the format's popularity in general."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does adding a second arcade machine to a venue increase total revenue, or do machines compete with each other for the same players?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In most bars, one well-placed machine already captures the bulk of customers willing to play, so a second machine mainly adds cost without adding much new drop. A second unit only tends to make sense in venues with genuinely high, sustained traffic where the first machine is regularly occupied and people are turned away. Below that traffic level, a second machine is more likely to split the same pool of players than to grow it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What can a bar or venue owner do if an arcade machine isn't earning enough after a few months?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Relocating the machine to a busier or more visible spot in the room is the first and cheapest fix, since placement drives drop more than almost any other factor. If the drop still doesn't improve, secondhand and route-operator markets exist for reselling commercial units, though resale value depreciates the way most commercial equipment does. Catching this early, rather than waiting a year to act, limits how much the underperformance costs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a commercial-grade arcade machine typically last in a bar before it needs replacing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TODO: source not confirmed - no verified industry figure exists for average commercial arcade machine lifespan under bar-level use. In general terms, build quality and how heavily a unit is played both affect how long it stays reliable, and machines with fewer mechanical wear points tend to hold up longer under constant handling. Any specific year figure should be treated as a vendor claim rather than a sourced statistic until independently verified."
+      }
+    }
+  ]
+}
+</script>

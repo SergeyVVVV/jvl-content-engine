@@ -1,0 +1,149 @@
+{
+  "h1": "Arcade Machine for Bar: A Realistic Payback Timeline",
+  "slug": "arcade-machine-for-bar-roi",
+  "primary_keyword": "arcade machine for bar",
+  "secondary_keywords": [
+    "arcade machine for bar ROI",
+    "arcade ROI",
+    "arcade profitability",
+    "arcade rate of return",
+    "arcade machine payback period",
+    "coin-operated arcade profit",
+    "arcade machine revenue split",
+    "bar arcade machine cost"
+  ],
+  "search_intent": "commercial investigation (decision support)",
+  "outline": [
+    {
+      "level": "h2",
+      "heading": "Does an Arcade Machine Actually Pay for Itself in a Bar?",
+      "purpose": "Frame the real question honestly, set reader expectations that this article uses labeled assumptions rather than vague income claims, and establish the analytical, no-hype tone.",
+      "keywords_to_use": [
+        "arcade machine for bar",
+        "arcade profitability"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "How Arcade Machine Revenue Works in a Bar or Venue",
+      "purpose": "Explain the core variables that drive every payback scenario - foot traffic, venue type, revenue split, seasonality, maintenance, and electricity - so the reader understands the inputs before seeing the scenarios.",
+      "keywords_to_use": [
+        "arcade machine revenue split",
+        "bar arcade machine cost"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Revenue Split: What Bar Owners and Machine Owners Typically Negotiate",
+      "purpose": "Describe how revenue-split arrangements generally work as a planning concept, clearly framed as an illustrative assumption, not a sourced industry figure.",
+      "keywords_to_use": [
+        "arcade machine revenue split"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Maintenance and Electricity: The Recurring Costs Often Left Out",
+      "purpose": "Introduce maintenance and electricity as recurring costs that must be subtracted later, flagged as illustrative planning ranges.",
+      "keywords_to_use": [
+        "arcade machine payback period"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Three Payback Scenarios: Pessimistic, Neutral, and Optimistic",
+      "purpose": "Present three explicitly labeled, probability-weighted scenarios with named assumptions, avoiding any implication that they are equally likely.",
+      "keywords_to_use": [
+        "arcade machine payback period",
+        "arcade ROI"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Pessimistic Scenario: Low Traffic, Longer Payback",
+      "purpose": "Model the low-traffic case with stated assumptions and resulting payback period, clearly marked as illustrative.",
+      "keywords_to_use": []
+    },
+    {
+      "level": "h3",
+      "heading": "Neutral / Base Case: What a Realistic Operator Should Plan Around",
+      "purpose": "Model the base case as the primary planning scenario, with stated assumptions and payback period.",
+      "keywords_to_use": [
+        "arcade rate of return"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Optimistic Scenario: High Traffic, Faster Payback",
+      "purpose": "Model the best-case scenario with stated assumptions, explicitly framed as less likely than the base case.",
+      "keywords_to_use": []
+    },
+    {
+      "level": "h2",
+      "heading": "Comparing the Three Scenarios Side by Side",
+      "purpose": "Provide a comparison table summarizing weekly revenue assumption, key assumptions, payback period, and likelihood for each scenario.",
+      "keywords_to_use": [
+        "arcade machine payback period",
+        "coin-operated arcade profit"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Why the Base Case - Not the Optimistic One - Should Guide Your Decision",
+      "purpose": "Explain plainly why realistic operators should plan around the neutral scenario rather than the best-case numbers often used in marketing.",
+      "keywords_to_use": [
+        "arcade ROI",
+        "arcade profitability"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Net Monthly Profit After Payback: What's Left Once Costs Are Subtracted",
+      "purpose": "Move beyond gross coin drop to model net monthly profit per scenario, subtracting revenue split, maintenance, electricity, and other named recurring costs.",
+      "keywords_to_use": [
+        "coin-operated arcade profit",
+        "arcade rate of return"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Key Variables That Can Shift These Numbers Up or Down",
+      "purpose": "Discuss real-world factors - foot traffic changes, venue type, seasonality, upkeep - that can move a given venue's actual results away from the modeled scenarios.",
+      "keywords_to_use": [
+        "arcade profitability",
+        "bar arcade machine cost"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "A Practical Decision Framework for Bar and Venue Owners",
+      "purpose": "Give the reader a structured way to evaluate their own venue against the scenarios and decide whether the investment makes sense for them.",
+      "keywords_to_use": [
+        "arcade machine for bar ROI"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Where a Machine Like the JVL Echo Fits Into the Math",
+      "purpose": "Use the Echo as a single, soft, factual price anchor in the worked example; do not imply ECHO Home is intended for coin-operated bar deployment. TODO: source not confirmed - no purchase price or ECHO Commercial vs Home clarification exists in the knowledge base; business must confirm before drafting.",
+      "keywords_to_use": [
+        "arcade machine for bar"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Frequently Asked Questions About Arcade Machine ROI in Bars",
+      "purpose": "Placeholder for the FAQ Agent - to be filled with real user questions addressing objections and follow-ups (e.g., typical revenue splits, maintenance costs, seasonality effects, whether it's worth it in 2025).",
+      "keywords_to_use": []
+    }
+  ],
+  "internal_link_targets": [
+    "https://jvl.ca/en/echo",
+    "https://jvl.ca/en/home"
+  ],
+  "todos": [
+    "TODO: source not confirmed - no purchase price for JVL Echo (Home or Commercial) exists in the knowledge base; required for the worked payback example.",
+    "TODO: source not confirmed - clarify whether the Echo mention should reference ECHO Commercial (bill/coin acceptor, bar-appropriate) or be reframed to avoid implying ECHO Home is used in coin-operated bar deployment.",
+    "TODO: source not confirmed - all weekly revenue figures, revenue-split percentages, foot-traffic assumptions, maintenance costs, and electricity costs are illustrative only and must be reviewed for real-world plausibility before publishing.",
+    "TODO: source not confirmed - no industry-average arcade profitability, payback period, or ROI statistics exist in the knowledge base; any such figures used must be independently sourced and cited, not invented."
+  ]
+}

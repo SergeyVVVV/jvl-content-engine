@@ -1,0 +1,893 @@
+{
+  "final_result": {
+    "h1": "Arcade Machine for Bar: A Realistic Payback Timeline",
+    "intro": "Ask a supplier how fast an arcade machine pays for itself in a bar. You will usually get one number. Six months. Nine months. A year. The number sounds precise. It almost never comes with a single stated assumption behind it.\n\nThat is the problem with most arcade ROI content. It gives you an answer without showing the math. You cannot check it. You cannot apply it to your own room. And you certainly cannot plan around it.\n\nThis article does the opposite. It builds three payback scenarios and labels each one: pessimistic, neutral, and optimistic. Every dollar figure below is an illustrative planning assumption, not an industry statistic. None of these numbers are sourced from published data. They are here so you can swap in your own.\n\nThe article also goes one step further than most. It models what the machine earns per month **after** payback, with recurring costs subtracted. Gross coin drop is not profit. The gap between the two is where a lot of bad decisions get made.",
+    "sections": [
+      {
+        "level": "h2",
+        "heading": "Does an Arcade Machine Actually Pay for Itself in a Bar?",
+        "body_markdown": "Yes, it can. But \"can\" is doing a lot of work in that sentence.\n\nAn arcade machine for a bar is a small capital purchase. You pay once. Then it either earns or it sits there. Nothing about the machine guarantees the earning part. The venue does that. Your foot traffic does that. Your placement does that.\n\nSo the honest question is not \"is arcade profitability real?\" It is \"how long, in my venue, at my traffic level, on my split?\" That question has a different answer in every room.\n\nHere is what this article will and will not do.\n\nIt will state every assumption in plain view. It will show three payback timelines side by side. It will name the recurring costs most content leaves out. It will say clearly which scenario you should plan around.\n\nIt will not give you a single confident figure. It will not cite an industry average, because no verified one is used here. It will not tell you that arcade machines are a reliable income stream. Some are. Many are not.\n\nOne more thing to set expectations. Every dollar amount below is illustrative. That includes the machine price, the weekly drop, the revenue split, the maintenance cost, and the electricity cost. They are planning placeholders, chosen to be plausible and to keep the math readable. They are not measured results from real venues.\n\nIf that sounds like less certainty than you wanted, good. That is the actual state of the information. Anyone offering more certainty is guessing too. They are just not telling you.\n\n> **[VISUAL]** *diagram — the six variables that drive arcade payback (foot traffic, venue type, revenue split, seasonality, maintenance, electricity) feeding into a single payback figure*"
+      },
+      {
+        "level": "h2",
+        "heading": "How Arcade Machine Revenue Works in a Bar or Venue",
+        "body_markdown": "The money model is simple. People play. Coins and bills go in. Someone collects. Someone splits it.\n\nWhat is not simple is how much goes in. That number moves with six things. Every scenario later in this article is just these six inputs with different values.\n\n- **Foot traffic.** How many people are in the room, and for how long. Dwell time matters more than headcount. A packed room where nobody waits produces less drop than a moderate room where people wait ten minutes for a table.\n- **Venue type.** A sports bar, a family entertainment venue, a brewery taproom, and a late-night cocktail bar all behave differently. So does an event venue that is only busy on booked nights.\n- **Revenue split.** Who owns the machine, and what share the venue keeps.\n- **Seasonality.** Slow months are real. They stretch payback.\n- **Maintenance.** Parts, service calls, cleaning, and your own time.\n- **Electricity.** Small, but not zero, and easy to forget.\n\nPlacement sits underneath all of this. A machine near the restroom line or beside the pool table gets played. A machine in a corner nobody walks past does not. Same machine. Same games. Very different drop.\n\nThe honest way to read any bar arcade machine cost estimate is this. The purchase price is the easy part to know. The revenue is the hard part. Most content flips that around. It treats revenue as a known figure and the rest as detail.\n\nThe next two sections cover the inputs that get skipped most often: the split, and the recurring costs."
+      },
+      {
+        "level": "h3",
+        "heading": "Revenue Split: What Bar Owners and Machine Owners Typically Negotiate",
+        "body_markdown": "There are two common setups.\n\nIn the first, the bar owner buys the machine. All the drop is theirs. There is no arcade machine revenue split to negotiate. The trade-off is that they carry the full purchase cost and the full risk.\n\nIn the second, a route operator places the machine in the venue. The operator owns and services it. The venue provides space, power, and customers. The two sides split the drop on an agreed percentage.\n\nThis article models a 50/50 split. That is an illustrative planning assumption. It is not a published industry standard, and this article does not claim one exists. Splits get negotiated. They move with traffic, with who services the machine, and with who wants the deal more.\n\nWhy does this matter so much? Because it halves your revenue line. A 50/50 split doubles your payback period compared with owning the machine outright at the same drop. That is arithmetic, not opinion.\n\nMuch of the published arcade ROI content quietly assumes no split. It still presents itself as general guidance. That is a framing problem, and it makes the numbers look far better than a placement deal would actually deliver.\n\nSo before you compare any two payback claims, ask one question. Who is keeping the money in that example? If the answer is not stated, the figure cannot be compared to anything.\n\nIf you own your venue and buy the machine yourself, run the math below with the split removed. Your payback roughly halves. If you are placing a machine in someone else's room, run it as written."
+      },
+      {
+        "level": "h3",
+        "heading": "Maintenance and Electricity: The Recurring Costs Often Left Out",
+        "body_markdown": "Two costs get dropped from almost every arcade ROI article. Both are small. Neither is zero.\n\n**Maintenance.** Machines wear. Some wear faster than others. Machines with mechanical parts have more that can fail. Physical buttons, joysticks, coin mechs, and moving assemblies all take direct abuse from customers. A machine built around a sealed touchscreen has fewer of those failure points.\n\nThis article assumes $30 to $50 a month, averaged across the year. That is an illustrative planning range. It is not a measured figure, and it is not a performance claim about any particular unit. Real maintenance is lumpy. You will have quiet months and then one service call that eats a quarter's worth of budget.\n\nDo not forget your own labour either. Collection, cleaning, screen wipes, and the occasional reset all take time. If you value your time at anything, put it in the model.\n\n**Electricity.** A bartop-size machine running 12 hours a day, seven days a week, uses a modest amount of power. At a rough illustrative draw and a common residential-scale rate, that lands somewhere near $5 to $10 a month. Again, illustrative. Your rate and your hours will differ.\n\nDoes electricity change the ROI answer? Almost never on its own. It shifts payback by a few weeks at most.\n\nSo why include it? Because a model that quietly ignores small costs is training you to ignore the bigger ones. If a payback figure cannot survive $5 a month, it was never a real figure."
+      },
+      {
+        "level": "h2",
+        "heading": "Three Payback Scenarios: Pessimistic, Neutral, and Optimistic",
+        "body_markdown": "Now the math. Three scenarios, all built on the same skeleton, all clearly labelled.\n\nThese assumptions are shared across all three cases:\n\n- Machine cost: **$4,000**, paid outright, illustrative placeholder only\n- Revenue split: **50/50** with the venue, illustrative\n- Venue open seven days a week, year round\n- Monthly figures use 4.33 weeks per month\n- No financing cost, no interest, no depreciation modelled\n- Electricity: **$5 per month**, illustrative\n\nOne note on the $4,000. It is a round number chosen to make the math easy to follow. It is not a JVL price, and it is not an average market price. If your quote is $2,500 or $6,000, scale everything below accordingly. Payback moves in direct proportion to the purchase price.\n\nWhat changes between the three scenarios is the weekly gross drop and the maintenance line. The drop is the single most powerful variable in the whole model. Everything else is a rounding adjustment by comparison.\n\nA quick word on likelihood before the numbers. These three cases are not equally probable. The neutral case is the one to plan around. The optimistic case describes a strong room with strong placement and steady traffic. It happens. It is not the default outcome, and treating it as one is how operators end up disappointed.\n\nRead each scenario as a sentence, not a promise. It says: *at this level of play, with this split, in this cost structure, the arcade machine payback period looks like this.* Change any input and the answer changes with it.\n\nAll dollar figures below are illustrative planning assumptions."
+      },
+      {
+        "level": "h3",
+        "heading": "Pessimistic Scenario: Low Traffic, Longer Payback",
+        "body_markdown": "This is the quiet room. Modest foot traffic. Average placement. A crowd that drinks and talks more than it plays.\n\n**Stated assumptions (illustrative):**\n\n- Weekly gross drop: **$100**\n- Revenue split: 50/50, so the machine owner keeps **$50 per week**\n- Monthly share to machine owner: **$217**\n- Maintenance: **$30 per month**\n- Electricity: **$5 per month**\n- Net monthly: **$182**\n- Machine cost: $4,000\n- **Payback: about 22 months**\n\nTwenty-two months is nearly two years of no return at all. And that is on a machine that is being used lightly.\n\nThere is a small silver lining here. Light use is good for the hardware. But it also means the machine sits in valuable floor space earning very little.\n\nThat second point is the real cost of this scenario. Floor space in a bar is not free. A machine occupying a spot that could hold two more seats has to beat what those seats would earn. At $182 a month net, in many rooms it does not.\n\nThis case is more common than vendor content suggests. It shows up in quiet neighbourhood bars, in venues with low dwell time, and anywhere the machine is placed out of the main traffic path.\n\nIf your honest read of your own room lands here, the answer is not necessarily no. It might be a smaller purchase price, a better placement, or a placement deal where you carry no capital risk at all."
+      },
+      {
+        "level": "h3",
+        "heading": "Neutral / Base Case: What a Realistic Operator Should Plan Around",
+        "body_markdown": "This is the working assumption. A reasonably busy venue. Decent placement. A crowd with some waiting time and some competitive streak.\n\n**Stated assumptions (illustrative):**\n\n- Weekly gross drop: **$250**\n- Revenue split: 50/50, so the machine owner keeps **$125 per week**\n- Monthly share to machine owner: **$542**\n- Maintenance: **$35 per month**\n- Electricity: **$5 per month**\n- Net monthly: **$502**\n- Machine cost: $4,000\n- **Payback: about 8 months**\n\nEight months is the raw math. It assumes nothing goes wrong for eight straight months.\n\nSomething usually goes wrong. Add a buffer for a repair, a slow quarter, or a weaker split than you hoped for. A realistic planning number is 8 to 10 months.\n\nThat range is the number to write on your own spreadsheet. Not the fastest case. Not the horror case. This one.\n\nWhy plan here? Because this scenario needs the fewest things to go right. It does not assume a flawless placement. It does not assume a novelty bump that lasts forever. It does not assume every month behaves like your best month.\n\nOne honest caveat on the arcade rate of return here. The drop in many venues falls after the first few months, as novelty fades and the regulars move on. This model holds the drop flat. Treat every figure in it as a ceiling rather than a floor.\n\nIf you want one takeaway from this article, it is this range and the reasoning behind it."
+      },
+      {
+        "level": "h3",
+        "heading": "Optimistic Scenario: High Traffic, Faster Payback",
+        "body_markdown": "This is the strong room. High traffic. Prime placement. A crowd that plays, competes, and comes back.\n\n**Stated assumptions (illustrative):**\n\n- Weekly gross drop: **$400**\n- Revenue split: 50/50, so the machine owner keeps **$200 per week**\n- Monthly share to machine owner: **$867**\n- Maintenance: **$50 per month**, higher because heavy use wears parts faster\n- Electricity: **$5 per month**\n- Net monthly: **$812**\n- Machine cost: $4,000\n- **Payback: about 5 months**\n\nFive months is a strong result. It is also the least likely of the three.\n\nNotice that maintenance rises in this case. Heavy play is good for revenue and hard on hardware. Any model that raises the drop without raising the upkeep is not being consistent with itself.\n\nThere is also a ceiling here that is easy to miss. One machine can only be played by one group at a time. Past a certain traffic level, more customers do not mean more drop. The machine is already occupied at peak.\n\nSo the optimistic case is not simply \"busier is better forever.\" It describes a room busy enough to keep the machine in use, but not so busy that people give up and walk away.\n\nTreat this scenario as a description of a good outcome, not a target. If you get it, excellent. If you planned your cash flow around it and landed in the base case instead, you have a problem the machine did not cause."
+      },
+      {
+        "level": "h2",
+        "heading": "Comparing the Three Scenarios Side by Side",
+        "body_markdown": "Here are the three cases in one place. Every figure is an illustrative planning assumption.\n\n| Scenario | Weekly gross drop | Payback | How likely |\n|---|---|---|---|\n| Pessimistic | $100 | ~22 months | Common in quiet or poorly placed rooms |\n| Neutral / base case | $250 | ~8 months (plan for 8-10) | The realistic planning assumption |\n| Optimistic | $400 | ~5 months | Possible, not typical |\n\nShared across all three: $4,000 machine cost, 50/50 revenue split, $5 monthly electricity, maintenance of $30 to $50 depending on use.\n\nLook at the spread. The same machine, the same price, the same split. Payback runs from five months to nearly two years. The only thing that really changed was the room.\n\nThat spread is the whole point. Any article that gives you a single payback figure without stating its traffic assumption is not telling you much. It is quoting one row of this table and hiding the other two.\n\nOne more caution about reading the fast end of the range. A $4,000 machine that pays back in eight months is a good outcome. That only holds if the machine keeps working for years afterward. Payback speed and durability are separate questions. A cheap machine that breaks in month nine has a lovely payback figure and a terrible return.\n\nSo use the table as a range finder, not as a forecast. Find the row that matches your honest read of your own venue. Then adjust the inputs to your real quote and your real split.\n\n> **[VISUAL]** *chart — simple horizontal bar chart showing illustrative payback in months for the pessimistic, neutral, and optimistic scenarios*"
+      },
+      {
+        "level": "h2",
+        "heading": "Why the Base Case - Not the Optimistic One - Should Guide Your Decision",
+        "body_markdown": "Sales content almost always quotes the optimistic case. It rarely labels it that way.\n\nThat is why so many operators feel misled later. Nobody lied to them exactly. They were shown the best row of the table and told it was the whole table.\n\nThere are three reasons to plan on the base case instead.\n\n**First, the base case needs fewer things to go right.** The optimistic case stacks assumptions. Prime placement. Strong steady traffic. A crowd that plays. Every stacked assumption is another chance to be wrong. The base case depends on fewer moving parts. So it is more likely to survive contact with a real year.\n\n**Second, the downside is worse than the upside is good.** If you plan for eight months and get five, you are pleasantly ahead. If you plan for five months and get twenty-two, your cash flow is wrong for a year and a half. Those two errors are not the same size.\n\n**Third, you can always be upgraded by reality.** You cannot easily be rescued by it. A machine that outperforms your plan costs you nothing. A machine that underperforms your plan costs you the difference every single month.\n\nThere is a simple test you can apply to any arcade profitability claim you read, including this one. Ask what traffic level it assumes. Ask what split it assumes. Ask what it subtracts.\n\nOnce you know that, a confident single figure should read differently. With no stated assumptions behind it, it is a warning rather than information."
+      },
+      {
+        "level": "h2",
+        "heading": "Net Monthly Profit After Payback: What's Left Once Costs Are Subtracted",
+        "body_markdown": "Payback is only half the question. The other half is what the machine earns once it has paid for itself.\n\nThis is where most content stops, or worse, quietly swaps gross for net. Coin drop is not profit. Here is the difference, using the same illustrative assumptions.\n\n| Scenario | Monthly gross drop | Your net after split, maintenance, electricity |\n|---|---|---|\n| Pessimistic | ~$433 | **$182** |\n| Neutral / base case | ~$1,083 | **$502** |\n| Optimistic | ~$1,733 | **$812** |\n\nRead the two columns next to each other. In the base case, a machine taking in roughly $1,083 a month leaves you about $502. Less than half of the headline number reaches you.\n\nThat gap is the most misused number in this whole category. Someone can honestly say a machine earns $1,083 a month. They may be telling the truth about the drop. They may be saying nothing useful about your profit.\n\nOver a full year, the base case nets around $6,024 on a $4,000 machine. That looks like a strong coin-operated arcade profit. Treat it carefully for two reasons.\n\nFirst, the model holds the drop flat all year. In many venues the drop falls after the first few months as novelty fades. Second, it ignores machine lifespan. A return that looks excellent in year one looks different if the unit needs replacing in year three.\n\nSo the fair summary is this. After payback, a well-placed machine can produce a modest, steady monthly income. It is not a large income. It is not passive either. Somebody still has to collect, clean, and service it."
+      },
+      {
+        "level": "h2",
+        "heading": "Key Variables That Can Shift These Numbers Up or Down",
+        "body_markdown": "Your real venue will not match any of the three scenarios exactly. Here is what moves you between rows.\n\n- **Placement.** The single biggest lever after traffic. A machine in a waiting area or beside another game gets played. A machine in a dead corner does not.\n- **Dwell time.** People play when they are waiting. Long table waits, slow kitchen nights, and busy pool tables all help.\n- **Venue type.** A brewery taproom with families behaves differently from a late-night cocktail bar. An event venue may be dark four nights a week.\n- **Revenue split.** Owning outright roughly halves your payback at the same drop. A 60/40 split against you extends it.\n- **Purchase price.** Payback scales directly with price. A cheaper machine pays back faster if it lasts.\n- **Machine reliability.** Downtime earns nothing. A unit out of service for two weeks loses half a month of drop.\n\nSeasonality deserves its own paragraph. Most venues have slow months. A patio bar in a cold climate can lose most of its traffic for a quarter. That does not change the total annual drop much. It does change when the drop arrives.\n\nIt is a real effect. And it matters most if you buy right before your slow season rather than right before your busy one.\n\nOne last variable is novelty. New machines get attention. Attention fades. Plan on your first two months being better than your sixth. Rotating the machine's position occasionally, or refreshing what is on it, can help. That is a general operating observation, not a measured result."
+      },
+      {
+        "level": "h2",
+        "heading": "A Practical Decision Framework for Bar and Venue Owners",
+        "body_markdown": "Here is a way to run this decision yourself, in order. It takes about twenty minutes and a notepad.\n\n1. **Count your real traffic.** Not your busiest Saturday. A normal week. How many people are in the room, and how long do they stay?\n2. **Find the spot.** Walk your floor and pick the actual place the machine would go. If you cannot find a good one, stop here. Placement decides the outcome more than the machine does.\n3. **Price the floor space.** What does that square footage earn today as seating or standing room? The machine has to beat that, not just beat zero.\n4. **Decide who owns it.** Buying outright means full risk and full revenue. A placement deal means less risk and a split. Neither is automatically better.\n5. **Pick your row.** Look at the comparison table and choose honestly. Most rooms are base case or pessimistic.\n6. **Run your own numbers.** Use your real quote, your real split, and your real electricity rate. Do not use the illustrative figures in this article as your final inputs.\n7. **Set a review date.** Ninety days out. If the drop is far below your chosen row, move the machine before you write off the investment.\n\nOne extra question is worth asking, and it has nothing to do with money. Does the machine make the room better? A game that gives waiting customers something to do can lift the whole visit. That value is real even when it does not show up in the coin box.\n\nIf the arcade machine for bar ROI math is marginal, that softer benefit can tip the decision. If the math is bad, it should not."
+      },
+      {
+        "level": "h2",
+        "heading": "Where a Machine Like the JVL Echo Fits Into the Math",
+        "body_markdown": "The worked example above used a generic $4,000 machine on purpose. A payback model should not lean on one brand's price tag. It should lean on your traffic and your split.\n\n*TODO: source not confirmed - no purchase price is available to anchor this worked example to a real unit. TODO: experience anchor needed - no verified operator or service data exists to cite here.*\n\nThere is one distinction worth knowing before you shop, because it confuses a lot of buyers. Not every arcade machine is built for the same job.\n\nJVL makes two Echo machines for two different buyers. The commercial version includes a bill acceptor and a coin acceptor, and it is built for bars, restaurants, and operators. That is the type of machine the math above describes. Echo Home is the Free Play version. It has no bill acceptor and no coin acceptor. It is made for residential use.\n\nThat matters when you compare quotes. A residential Free Play unit cannot be dropped into a venue and run as a coin-op. If a listing does not make that clear, ask.\n\nAnd if this whole topic has been interesting for personal reasons rather than business ones, the math changes shape entirely. There is no payback period on something you own for your own enjoyment. A home bar, a basement lounge, a den, or a cabin is a different kind of purchase.\n\nFor that reader, [the Echo Home product page](https://jvl.ca/en/echo) covers what the residential version is. It comes with 149 pre-installed games, no downloads and no Wi-Fi needed, and it works fully offline. Each unit is individually tested before shipping. It carries a 1-Year All-Inclusive Manufacturer Warranty, with shipping covered both ways for warranty service. Designed in Canada, made in the USA. The [home arcade overview](https://jvl.ca/en/home) has the wider picture.\n\n> **[VISUAL]** *image — a bartop arcade machine sitting on a home bar counter in a warm, low-lit basement lounge, with two adults playing*"
+      },
+      {
+        "level": "h2",
+        "heading": "The Honest Bottom Line on Arcade ROI",
+        "body_markdown": "You now have three labelled scenarios, the assumptions behind each one, and a net profit figure that subtracts real costs. That is more than most ROI content gives you.\n\nHere is the short version.\n\nIn a busy, well-placed venue on a 50/50 split, payback in the range of 8 to 10 months is a reasonable illustrative plan. In a venue with low traffic or poor placement, payback stretches toward two years. At that point it may not be worth the floor space at all.\n\nAfter payback, expect a modest monthly income rather than a large one. Gross drop and net profit are different numbers, and the gap between them is wide.\n\nThe most useful habit you can take from this article is the checking habit. Any vendor, operator, or article that will not show you its assumptions is asking for trust. It is trust in a number you cannot check.\n\nSo run your own version. Use your own room and your own split. Then add your own honest read of how many people in your venue are standing around with ten minutes to spare.\n\nIf that math works, an arcade machine is a sound small investment for a bar or event venue. If it does not, no amount of confident marketing will make it work.\n\nAnd if the appeal was never really about the money, that is a fair answer too. Some machines earn their keep in coins. Others earn it in the evenings they make better."
+      }
+    ],
+    "internal_links_used": [
+      "https://jvl.ca/en/echo",
+      "https://jvl.ca/en/home"
+    ],
+    "suggested_visuals": [
+      {
+        "section_heading": "Does an Arcade Machine Actually Pay for Itself in a Bar?",
+        "type": "diagram",
+        "purpose": "Show the reader up front that a payback figure is the output of six named variables, not a fixed number",
+        "alt_text_proposal": "Diagram showing six variables that determine arcade machine payback in a bar: foot traffic, venue type, revenue split, seasonality, maintenance, and electricity",
+        "production_note": "Simple left-to-right flow diagram, six labelled inputs feeding one 'payback period' output box; neutral, non-salesy styling"
+      },
+      {
+        "section_heading": "Comparing the Three Scenarios Side by Side",
+        "type": "chart",
+        "purpose": "Let a skeptical operator see the payback spread between the three labelled scenarios at a glance",
+        "alt_text_proposal": "Bar chart comparing illustrative arcade machine payback periods: 22 months pessimistic, 8 months neutral, 5 months optimistic",
+        "production_note": "Three horizontal bars, months on the x-axis; include an on-chart note that all figures are illustrative planning assumptions"
+      },
+      {
+        "section_heading": "Where a Machine Like the JVL Echo Fits Into the Math",
+        "type": "image",
+        "purpose": "Show the residential context clearly, so the home version is not visually confused with a commercial bar deployment",
+        "alt_text_proposal": "Bartop arcade machine on a home bar counter in a warm basement lounge with two adults playing",
+        "production_note": "Real photo of the ECHO Home unit in an adult residential space; warm evening lighting; no coin slot or bill acceptor visible in frame"
+      }
+    ],
+    "claims_to_verify": [
+      "All dollar figures in the three scenarios are illustrative planning assumptions invented for the model: $4,000 machine cost, $100/$250/$400 weekly gross drop, 50/50 revenue split, $30-$50 monthly maintenance, $5 monthly electricity. None are sourced from industry data and all must be reviewed for real-world plausibility before publication.",
+      "Resulting payback figures (22 months, 8 months, 5 months) and net monthly figures ($182, $502, $812) are arithmetic outputs of the illustrative assumptions above, not measured results.",
+      "The electricity estimate of $5-$10 per month is derived from a rough illustrative power draw and running time; no ECHO power-consumption figure exists in the knowledge base and none is stated.",
+      "The statement that machines with mechanical parts have more failure points than sealed touchscreen machines is a general engineering observation, not a measured reliability comparison; confirm acceptable framing.",
+      "The statement that coin drop typically declines after the first months as novelty fades is a general operating observation, not a sourced statistic.",
+      "No purchase price for ECHO Home or ECHO Commercial is used anywhere in the article, per knowledge base constraints; confirm the business accepts a generic $4,000 placeholder as the worked-example anchor instead."
+    ],
+    "todos": [
+      "TODO: source not confirmed - no purchase price for JVL Echo (Home or Commercial) exists in the knowledge base; the brief's request to anchor the worked example to a real Echo price could not be fulfilled. A generic $4,000 illustrative machine cost was used instead and clearly labelled as such.",
+      "TODO: requires business confirmation - the article mentions ECHO Commercial once, briefly, purely to clarify the Home vs Commercial distinction for reader understanding. Confirm this is acceptable under the B2C/B2B separation rule, or instruct removal.",
+      "TODO: experience anchor needed - the firsthand experience file contains no confirmed entries (all sections empty, no verified_by filled). No customer story, operator quote, production data point, or review aggregate could be used. Flagged inline in the JVL Echo section.",
+      "TODO: requires business confirmation - all illustrative revenue, split, maintenance, and electricity assumptions should be sanity-checked by someone with real US bar/route-operator experience before publishing as market-facing guidance.",
+      "The RePlay Magazine heritage claim was deliberately omitted to stay within the low product-fit mention cap. It can be added to the closing pivot section if the business prefers, using the exact approved wording.",
+      "Note for editor: the year-one return figure implied by the base case (~$6,024 net on a $4,000 machine) is high. It is hedged twice in the text (flat-drop assumption, machine lifespan). Confirm the hedging is strong enough."
+    ]
+  },
+  "final_markdown": "# Arcade Machine for Bar: A Realistic Payback Timeline\n\nAsk a supplier how fast an arcade machine pays for itself in a bar. You will usually get one number. Six months. Nine months. A year. The number sounds precise. It almost never comes with a single stated assumption behind it.\n\nThat is the problem with most arcade ROI content. It gives you an answer without showing the math. You cannot check it. You cannot apply it to your own room. And you certainly cannot plan around it.\n\nThis article does the opposite. It builds three payback scenarios and labels each one: pessimistic, neutral, and optimistic. Every dollar figure below is an illustrative planning assumption, not an industry statistic. None of these numbers are sourced from published data. They are here so you can swap in your own.\n\nThe article also goes one step further than most. It models what the machine earns per month **after** payback, with recurring costs subtracted. Gross coin drop is not profit. The gap between the two is where a lot of bad decisions get made.\n\n## Does an Arcade Machine Actually Pay for Itself in a Bar?\n\nYes, it can. But \"can\" is doing a lot of work in that sentence.\n\nAn arcade machine for a bar is a small capital purchase. You pay once. Then it either earns or it sits there. Nothing about the machine guarantees the earning part. The venue does that. Your foot traffic does that. Your placement does that.\n\nSo the honest question is not \"is arcade profitability real?\" It is \"how long, in my venue, at my traffic level, on my split?\" That question has a different answer in every room.\n\nHere is what this article will and will not do.\n\nIt will state every assumption in plain view. It will show three payback timelines side by side. It will name the recurring costs most content leaves out. It will say clearly which scenario you should plan around.\n\nIt will not give you a single confident figure. It will not cite an industry average, because no verified one is used here. It will not tell you that arcade machines are a reliable income stream. Some are. Many are not.\n\nOne more thing to set expectations. Every dollar amount below is illustrative. That includes the machine price, the weekly drop, the revenue split, the maintenance cost, and the electricity cost. They are planning placeholders, chosen to be plausible and to keep the math readable. They are not measured results from real venues.\n\nIf that sounds like less certainty than you wanted, good. That is the actual state of the information. Anyone offering more certainty is guessing too. They are just not telling you.\n\n> **[VISUAL]** *diagram — the six variables that drive arcade payback (foot traffic, venue type, revenue split, seasonality, maintenance, electricity) feeding into a single payback figure*\n\n## How Arcade Machine Revenue Works in a Bar or Venue\n\nThe money model is simple. People play. Coins and bills go in. Someone collects. Someone splits it.\n\nWhat is not simple is how much goes in. That number moves with six things. Every scenario later in this article is just these six inputs with different values.\n\n- **Foot traffic.** How many people are in the room, and for how long. Dwell time matters more than headcount. A packed room where nobody waits produces less drop than a moderate room where people wait ten minutes for a table.\n- **Venue type.** A sports bar, a family entertainment venue, a brewery taproom, and a late-night cocktail bar all behave differently. So does an event venue that is only busy on booked nights.\n- **Revenue split.** Who owns the machine, and what share the venue keeps.\n- **Seasonality.** Slow months are real. They stretch payback.\n- **Maintenance.** Parts, service calls, cleaning, and your own time.\n- **Electricity.** Small, but not zero, and easy to forget.\n\nPlacement sits underneath all of this. A machine near the restroom line or beside the pool table gets played. A machine in a corner nobody walks past does not. Same machine. Same games. Very different drop.\n\nThe honest way to read any bar arcade machine cost estimate is this. The purchase price is the easy part to know. The revenue is the hard part. Most content flips that around. It treats revenue as a known figure and the rest as detail.\n\nThe next two sections cover the inputs that get skipped most often: the split, and the recurring costs.\n\n### Revenue Split: What Bar Owners and Machine Owners Typically Negotiate\n\nThere are two common setups.\n\nIn the first, the bar owner buys the machine. All the drop is theirs. There is no arcade machine revenue split to negotiate. The trade-off is that they carry the full purchase cost and the full risk.\n\nIn the second, a route operator places the machine in the venue. The operator owns and services it. The venue provides space, power, and customers. The two sides split the drop on an agreed percentage.\n\nThis article models a 50/50 split. That is an illustrative planning assumption. It is not a published industry standard, and this article does not claim one exists. Splits get negotiated. They move with traffic, with who services the machine, and with who wants the deal more.\n\nWhy does this matter so much? Because it halves your revenue line. A 50/50 split doubles your payback period compared with owning the machine outright at the same drop. That is arithmetic, not opinion.\n\nMuch of the published arcade ROI content quietly assumes no split. It still presents itself as general guidance. That is a framing problem, and it makes the numbers look far better than a placement deal would actually deliver.\n\nSo before you compare any two payback claims, ask one question. Who is keeping the money in that example? If the answer is not stated, the figure cannot be compared to anything.\n\nIf you own your venue and buy the machine yourself, run the math below with the split removed. Your payback roughly halves. If you are placing a machine in someone else's room, run it as written.\n\n### Maintenance and Electricity: The Recurring Costs Often Left Out\n\nTwo costs get dropped from almost every arcade ROI article. Both are small. Neither is zero.\n\n**Maintenance.** Machines wear. Some wear faster than others. Machines with mechanical parts have more that can fail. Physical buttons, joysticks, coin mechs, and moving assemblies all take direct abuse from customers. A machine built around a sealed touchscreen has fewer of those failure points.\n\nThis article assumes $30 to $50 a month, averaged across the year. That is an illustrative planning range. It is not a measured figure, and it is not a performance claim about any particular unit. Real maintenance is lumpy. You will have quiet months and then one service call that eats a quarter's worth of budget.\n\nDo not forget your own labour either. Collection, cleaning, screen wipes, and the occasional reset all take time. If you value your time at anything, put it in the model.\n\n**Electricity.** A bartop-size machine running 12 hours a day, seven days a week, uses a modest amount of power. At a rough illustrative draw and a common residential-scale rate, that lands somewhere near $5 to $10 a month. Again, illustrative. Your rate and your hours will differ.\n\nDoes electricity change the ROI answer? Almost never on its own. It shifts payback by a few weeks at most.\n\nSo why include it? Because a model that quietly ignores small costs is training you to ignore the bigger ones. If a payback figure cannot survive $5 a month, it was never a real figure.\n\n## Three Payback Scenarios: Pessimistic, Neutral, and Optimistic\n\nNow the math. Three scenarios, all built on the same skeleton, all clearly labelled.\n\nThese assumptions are shared across all three cases:\n\n- Machine cost: **$4,000**, paid outright, illustrative placeholder only\n- Revenue split: **50/50** with the venue, illustrative\n- Venue open seven days a week, year round\n- Monthly figures use 4.33 weeks per month\n- No financing cost, no interest, no depreciation modelled\n- Electricity: **$5 per month**, illustrative\n\nOne note on the $4,000. It is a round number chosen to make the math easy to follow. It is not a JVL price, and it is not an average market price. If your quote is $2,500 or $6,000, scale everything below accordingly. Payback moves in direct proportion to the purchase price.\n\nWhat changes between the three scenarios is the weekly gross drop and the maintenance line. The drop is the single most powerful variable in the whole model. Everything else is a rounding adjustment by comparison.\n\nA quick word on likelihood before the numbers. These three cases are not equally probable. The neutral case is the one to plan around. The optimistic case describes a strong room with strong placement and steady traffic. It happens. It is not the default outcome, and treating it as one is how operators end up disappointed.\n\nRead each scenario as a sentence, not a promise. It says: *at this level of play, with this split, in this cost structure, the arcade machine payback period looks like this.* Change any input and the answer changes with it.\n\nAll dollar figures below are illustrative planning assumptions.\n\n### Pessimistic Scenario: Low Traffic, Longer Payback\n\nThis is the quiet room. Modest foot traffic. Average placement. A crowd that drinks and talks more than it plays.\n\n**Stated assumptions (illustrative):**\n\n- Weekly gross drop: **$100**\n- Revenue split: 50/50, so the machine owner keeps **$50 per week**\n- Monthly share to machine owner: **$217**\n- Maintenance: **$30 per month**\n- Electricity: **$5 per month**\n- Net monthly: **$182**\n- Machine cost: $4,000\n- **Payback: about 22 months**\n\nTwenty-two months is nearly two years of no return at all. And that is on a machine that is being used lightly.\n\nThere is a small silver lining here. Light use is good for the hardware. But it also means the machine sits in valuable floor space earning very little.\n\nThat second point is the real cost of this scenario. Floor space in a bar is not free. A machine occupying a spot that could hold two more seats has to beat what those seats would earn. At $182 a month net, in many rooms it does not.\n\nThis case is more common than vendor content suggests. It shows up in quiet neighbourhood bars, in venues with low dwell time, and anywhere the machine is placed out of the main traffic path.\n\nIf your honest read of your own room lands here, the answer is not necessarily no. It might be a smaller purchase price, a better placement, or a placement deal where you carry no capital risk at all.\n\n### Neutral / Base Case: What a Realistic Operator Should Plan Around\n\nThis is the working assumption. A reasonably busy venue. Decent placement. A crowd with some waiting time and some competitive streak.\n\n**Stated assumptions (illustrative):**\n\n- Weekly gross drop: **$250**\n- Revenue split: 50/50, so the machine owner keeps **$125 per week**\n- Monthly share to machine owner: **$542**\n- Maintenance: **$35 per month**\n- Electricity: **$5 per month**\n- Net monthly: **$502**\n- Machine cost: $4,000\n- **Payback: about 8 months**\n\nEight months is the raw math. It assumes nothing goes wrong for eight straight months.\n\nSomething usually goes wrong. Add a buffer for a repair, a slow quarter, or a weaker split than you hoped for. A realistic planning number is 8 to 10 months.\n\nThat range is the number to write on your own spreadsheet. Not the fastest case. Not the horror case. This one.\n\nWhy plan here? Because this scenario needs the fewest things to go right. It does not assume a flawless placement. It does not assume a novelty bump that lasts forever. It does not assume every month behaves like your best month.\n\nOne honest caveat on the arcade rate of return here. The drop in many venues falls after the first few months, as novelty fades and the regulars move on. This model holds the drop flat. Treat every figure in it as a ceiling rather than a floor.\n\nIf you want one takeaway from this article, it is this range and the reasoning behind it.\n\n### Optimistic Scenario: High Traffic, Faster Payback\n\nThis is the strong room. High traffic. Prime placement. A crowd that plays, competes, and comes back.\n\n**Stated assumptions (illustrative):**\n\n- Weekly gross drop: **$400**\n- Revenue split: 50/50, so the machine owner keeps **$200 per week**\n- Monthly share to machine owner: **$867**\n- Maintenance: **$50 per month**, higher because heavy use wears parts faster\n- Electricity: **$5 per month**\n- Net monthly: **$812**\n- Machine cost: $4,000\n- **Payback: about 5 months**\n\nFive months is a strong result. It is also the least likely of the three.\n\nNotice that maintenance rises in this case. Heavy play is good for revenue and hard on hardware. Any model that raises the drop without raising the upkeep is not being consistent with itself.\n\nThere is also a ceiling here that is easy to miss. One machine can only be played by one group at a time. Past a certain traffic level, more customers do not mean more drop. The machine is already occupied at peak.\n\nSo the optimistic case is not simply \"busier is better forever.\" It describes a room busy enough to keep the machine in use, but not so busy that people give up and walk away.\n\nTreat this scenario as a description of a good outcome, not a target. If you get it, excellent. If you planned your cash flow around it and landed in the base case instead, you have a problem the machine did not cause.\n\n## Comparing the Three Scenarios Side by Side\n\nHere are the three cases in one place. Every figure is an illustrative planning assumption.\n\n| Scenario | Weekly gross drop | Payback | How likely |\n|---|---|---|---|\n| Pessimistic | $100 | ~22 months | Common in quiet or poorly placed rooms |\n| Neutral / base case | $250 | ~8 months (plan for 8-10) | The realistic planning assumption |\n| Optimistic | $400 | ~5 months | Possible, not typical |\n\nShared across all three: $4,000 machine cost, 50/50 revenue split, $5 monthly electricity, maintenance of $30 to $50 depending on use.\n\nLook at the spread. The same machine, the same price, the same split. Payback runs from five months to nearly two years. The only thing that really changed was the room.\n\nThat spread is the whole point. Any article that gives you a single payback figure without stating its traffic assumption is not telling you much. It is quoting one row of this table and hiding the other two.\n\nOne more caution about reading the fast end of the range. A $4,000 machine that pays back in eight months is a good outcome. That only holds if the machine keeps working for years afterward. Payback speed and durability are separate questions. A cheap machine that breaks in month nine has a lovely payback figure and a terrible return.\n\nSo use the table as a range finder, not as a forecast. Find the row that matches your honest read of your own venue. Then adjust the inputs to your real quote and your real split.\n\n> **[VISUAL]** *chart — simple horizontal bar chart showing illustrative payback in months for the pessimistic, neutral, and optimistic scenarios*\n\n## Why the Base Case - Not the Optimistic One - Should Guide Your Decision\n\nSales content almost always quotes the optimistic case. It rarely labels it that way.\n\nThat is why so many operators feel misled later. Nobody lied to them exactly. They were shown the best row of the table and told it was the whole table.\n\nThere are three reasons to plan on the base case instead.\n\n**First, the base case needs fewer things to go right.** The optimistic case stacks assumptions. Prime placement. Strong steady traffic. A crowd that plays. Every stacked assumption is another chance to be wrong. The base case depends on fewer moving parts. So it is more likely to survive contact with a real year.\n\n**Second, the downside is worse than the upside is good.** If you plan for eight months and get five, you are pleasantly ahead. If you plan for five months and get twenty-two, your cash flow is wrong for a year and a half. Those two errors are not the same size.\n\n**Third, you can always be upgraded by reality.** You cannot easily be rescued by it. A machine that outperforms your plan costs you nothing. A machine that underperforms your plan costs you the difference every single month.\n\nThere is a simple test you can apply to any arcade profitability claim you read, including this one. Ask what traffic level it assumes. Ask what split it assumes. Ask what it subtracts.\n\nOnce you know that, a confident single figure should read differently. With no stated assumptions behind it, it is a warning rather than information.\n\n## Net Monthly Profit After Payback: What's Left Once Costs Are Subtracted\n\nPayback is only half the question. The other half is what the machine earns once it has paid for itself.\n\nThis is where most content stops, or worse, quietly swaps gross for net. Coin drop is not profit. Here is the difference, using the same illustrative assumptions.\n\n| Scenario | Monthly gross drop | Your net after split, maintenance, electricity |\n|---|---|---|\n| Pessimistic | ~$433 | **$182** |\n| Neutral / base case | ~$1,083 | **$502** |\n| Optimistic | ~$1,733 | **$812** |\n\nRead the two columns next to each other. In the base case, a machine taking in roughly $1,083 a month leaves you about $502. Less than half of the headline number reaches you.\n\nThat gap is the most misused number in this whole category. Someone can honestly say a machine earns $1,083 a month. They may be telling the truth about the drop. They may be saying nothing useful about your profit.\n\nOver a full year, the base case nets around $6,024 on a $4,000 machine. That looks like a strong coin-operated arcade profit. Treat it carefully for two reasons.\n\nFirst, the model holds the drop flat all year. In many venues the drop falls after the first few months as novelty fades. Second, it ignores machine lifespan. A return that looks excellent in year one looks different if the unit needs replacing in year three.\n\nSo the fair summary is this. After payback, a well-placed machine can produce a modest, steady monthly income. It is not a large income. It is not passive either. Somebody still has to collect, clean, and service it.\n\n## Key Variables That Can Shift These Numbers Up or Down\n\nYour real venue will not match any of the three scenarios exactly. Here is what moves you between rows.\n\n- **Placement.** The single biggest lever after traffic. A machine in a waiting area or beside another game gets played. A machine in a dead corner does not.\n- **Dwell time.** People play when they are waiting. Long table waits, slow kitchen nights, and busy pool tables all help.\n- **Venue type.** A brewery taproom with families behaves differently from a late-night cocktail bar. An event venue may be dark four nights a week.\n- **Revenue split.** Owning outright roughly halves your payback at the same drop. A 60/40 split against you extends it.\n- **Purchase price.** Payback scales directly with price. A cheaper machine pays back faster if it lasts.\n- **Machine reliability.** Downtime earns nothing. A unit out of service for two weeks loses half a month of drop.\n\nSeasonality deserves its own paragraph. Most venues have slow months. A patio bar in a cold climate can lose most of its traffic for a quarter. That does not change the total annual drop much. It does change when the drop arrives.\n\nIt is a real effect. And it matters most if you buy right before your slow season rather than right before your busy one.\n\nOne last variable is novelty. New machines get attention. Attention fades. Plan on your first two months being better than your sixth. Rotating the machine's position occasionally, or refreshing what is on it, can help. That is a general operating observation, not a measured result.\n\n## A Practical Decision Framework for Bar and Venue Owners\n\nHere is a way to run this decision yourself, in order. It takes about twenty minutes and a notepad.\n\n1. **Count your real traffic.** Not your busiest Saturday. A normal week. How many people are in the room, and how long do they stay?\n2. **Find the spot.** Walk your floor and pick the actual place the machine would go. If you cannot find a good one, stop here. Placement decides the outcome more than the machine does.\n3. **Price the floor space.** What does that square footage earn today as seating or standing room? The machine has to beat that, not just beat zero.\n4. **Decide who owns it.** Buying outright means full risk and full revenue. A placement deal means less risk and a split. Neither is automatically better.\n5. **Pick your row.** Look at the comparison table and choose honestly. Most rooms are base case or pessimistic.\n6. **Run your own numbers.** Use your real quote, your real split, and your real electricity rate. Do not use the illustrative figures in this article as your final inputs.\n7. **Set a review date.** Ninety days out. If the drop is far below your chosen row, move the machine before you write off the investment.\n\nOne extra question is worth asking, and it has nothing to do with money. Does the machine make the room better? A game that gives waiting customers something to do can lift the whole visit. That value is real even when it does not show up in the coin box.\n\nIf the arcade machine for bar ROI math is marginal, that softer benefit can tip the decision. If the math is bad, it should not.\n\n## Where a Machine Like the JVL Echo Fits Into the Math\n\nThe worked example above used a generic $4,000 machine on purpose. A payback model should not lean on one brand's price tag. It should lean on your traffic and your split.\n\n*TODO: source not confirmed - no purchase price is available to anchor this worked example to a real unit. TODO: experience anchor needed - no verified operator or service data exists to cite here.*\n\nThere is one distinction worth knowing before you shop, because it confuses a lot of buyers. Not every arcade machine is built for the same job.\n\nJVL makes two Echo machines for two different buyers. The commercial version includes a bill acceptor and a coin acceptor, and it is built for bars, restaurants, and operators. That is the type of machine the math above describes. Echo Home is the Free Play version. It has no bill acceptor and no coin acceptor. It is made for residential use.\n\nThat matters when you compare quotes. A residential Free Play unit cannot be dropped into a venue and run as a coin-op. If a listing does not make that clear, ask.\n\nAnd if this whole topic has been interesting for personal reasons rather than business ones, the math changes shape entirely. There is no payback period on something you own for your own enjoyment. A home bar, a basement lounge, a den, or a cabin is a different kind of purchase.\n\nFor that reader, [the Echo Home product page](https://jvl.ca/en/echo) covers what the residential version is. It comes with 149 pre-installed games, no downloads and no Wi-Fi needed, and it works fully offline. Each unit is individually tested before shipping. It carries a 1-Year All-Inclusive Manufacturer Warranty, with shipping covered both ways for warranty service. Designed in Canada, made in the USA. The [home arcade overview](https://jvl.ca/en/home) has the wider picture.\n\n> **[VISUAL]** *image — a bartop arcade machine sitting on a home bar counter in a warm, low-lit basement lounge, with two adults playing*\n\n## The Honest Bottom Line on Arcade ROI\n\nYou now have three labelled scenarios, the assumptions behind each one, and a net profit figure that subtracts real costs. That is more than most ROI content gives you.\n\nHere is the short version.\n\nIn a busy, well-placed venue on a 50/50 split, payback in the range of 8 to 10 months is a reasonable illustrative plan. In a venue with low traffic or poor placement, payback stretches toward two years. At that point it may not be worth the floor space at all.\n\nAfter payback, expect a modest monthly income rather than a large one. Gross drop and net profit are different numbers, and the gap between them is wide.\n\nThe most useful habit you can take from this article is the checking habit. Any vendor, operator, or article that will not show you its assumptions is asking for trust. It is trust in a number you cannot check.\n\nSo run your own version. Use your own room and your own split. Then add your own honest read of how many people in your venue are standing around with ten minutes to spare.\n\nIf that math works, an arcade machine is a sound small investment for a bar or event venue. If it does not, no amount of confident marketing will make it work.\n\nAnd if the appeal was never really about the money, that is a fair answer too. Some machines earn their keep in coins. Others earn it in the evenings they make better.\n\n---\n\n## Claims to Verify Before Publishing\n\n- All dollar figures in the three scenarios are illustrative planning assumptions invented for the model: $4,000 machine cost, $100/$250/$400 weekly gross drop, 50/50 revenue split, $30-$50 monthly maintenance, $5 monthly electricity. None are sourced from industry data and all must be reviewed for real-world plausibility before publication.\n- Resulting payback figures (22 months, 8 months, 5 months) and net monthly figures ($182, $502, $812) are arithmetic outputs of the illustrative assumptions above, not measured results.\n- The electricity estimate of $5-$10 per month is derived from a rough illustrative power draw and running time; no ECHO power-consumption figure exists in the knowledge base and none is stated.\n- The statement that machines with mechanical parts have more failure points than sealed touchscreen machines is a general engineering observation, not a measured reliability comparison; confirm acceptable framing.\n- The statement that coin drop typically declines after the first months as novelty fades is a general operating observation, not a sourced statistic.\n- No purchase price for ECHO Home or ECHO Commercial is used anywhere in the article, per knowledge base constraints; confirm the business accepts a generic $4,000 placeholder as the worked-example anchor instead.\n\n## Open TODOs for Human Review\n\n- TODO: source not confirmed - no purchase price for JVL Echo (Home or Commercial) exists in the knowledge base; the brief's request to anchor the worked example to a real Echo price could not be fulfilled. A generic $4,000 illustrative machine cost was used instead and clearly labelled as such.\n- TODO: requires business confirmation - the article mentions ECHO Commercial once, briefly, purely to clarify the Home vs Commercial distinction for reader understanding. Confirm this is acceptable under the B2C/B2B separation rule, or instruct removal.\n- TODO: experience anchor needed - the firsthand experience file contains no confirmed entries (all sections empty, no verified_by filled). No customer story, operator quote, production data point, or review aggregate could be used. Flagged inline in the JVL Echo section.\n- TODO: requires business confirmation - all illustrative revenue, split, maintenance, and electricity assumptions should be sanity-checked by someone with real US bar/route-operator experience before publishing as market-facing guidance.\n- The RePlay Magazine heritage claim was deliberately omitted to stay within the low product-fit mention cap. It can be added to the closing pivot section if the business prefers, using the exact approved wording.\n- Note for editor: the year-one return figure implied by the base case (~$6,024 net on a $4,000 machine) is high. It is hedged twice in the text (flat-drop assumption, machine lifespan). Confirm the hedging is strong enough.",
+  "final_score": 73.3,
+  "target_score": 90.0,
+  "passed": false,
+  "iterations": [
+    {
+      "iteration": 0,
+      "stats": {
+        "flesch_reading_ease": 57.92,
+        "flesch_kincaid_grade": 9.37,
+        "avg_sentence_length": 16.88,
+        "avg_syllables_per_word": 1.558,
+        "word_count": 4574,
+        "sentence_count": 271,
+        "longest_sentences": [
+          {
+            "length_words": 116,
+            "text": "| Scenario | Weekly gross drop (assumed) | Payback period | How to treat it |\n|---|---|---|---|\n| Pessimistic | $30 | ~70 months | Your downside test - plan to survive it |\n| Neutral / base case | $70 | ~24 months | Your planning number |\n|"
+          },
+          {
+            "length_words": 75,
+            "text": "| Scenario | Gross monthly drop | Recurring deductions | Net monthly profit |\n|---|---|---|---|\n| Pessimistic | $130 | Split $65, electricity $7, maintenance $15 | $43 |\n| Neutral / base case | $303 | Split $151, electricity $9, maintenance"
+          },
+          {
+            "length_words": 58,
+            "text": "The math:\nGross monthly drop: $30 × 4.33 = $130\nMachine owner's share after 50/50 split: $65\nLess electricity ($7) and maintenance reserve ($15): $43 net per month\nPayback on $3,000: roughly 70 months - close to six years\n\nAt that pace, the"
+          },
+          {
+            "length_words": 58,
+            "text": "Pulling the thread together: on the illustrative assumptions used throughout this article, an arcade machine in a bar pays for itself in roughly two years in a typical venue, roughly eleven months in a strong one or in an owner-operated set"
+          },
+          {
+            "length_words": 55,
+            "text": "The math:\nGross monthly drop: $70 × 4.33 = $303\nMachine owner's share after 50/50 split: $152\nLess electricity ($9) and maintenance reserve ($15): $128 net per month\nPayback on $3,000: roughly 24 months - two years\n\nTwo years is not a drama"
+          }
+        ],
+        "hardest_words": [
+          {
+            "word": "February",
+            "syllables": 4
+          },
+          {
+            "word": "illustrative",
+            "syllables": 4
+          },
+          {
+            "word": "operator",
+            "syllables": 4
+          },
+          {
+            "word": "pessimistic",
+            "syllables": 4
+          },
+          {
+            "word": "optimistic",
+            "syllables": 4
+          },
+          {
+            "word": "comparison",
+            "syllables": 4
+          },
+          {
+            "word": "actually",
+            "syllables": 4
+          },
+          {
+            "word": "electricity",
+            "syllables": 5
+          },
+          {
+            "word": "scenario",
+            "syllables": 4
+          },
+          {
+            "word": "operator-facing",
+            "syllables": 6
+          },
+          {
+            "word": "analysis",
+            "syllables": 4
+          },
+          {
+            "word": "bill-operated",
+            "syllables": 5
+          },
+          {
+            "word": "separately",
+            "syllables": 4
+          },
+          {
+            "word": "category",
+            "syllables": 4
+          },
+          {
+            "word": "variable",
+            "syllables": 4
+          }
+        ]
+      },
+      "instructions": {
+        "diagnosis": {
+          "summary": "The score is held down mainly by long, multi-clause sentences stitched together with dashes, semicolons, and 'and/so/because' chains, especially in the framing paragraphs (intro, 'Does an Arcade Machine Actually Pay for Itself', 'Why the Base Case', and the closing 'Honest Bottom Line'). A secondary driver is clustering of 4-5 syllable words (illustrative, pessimistic, optimistic, scenario, electricity, operator-facing, analysis) inside already-long sentences, which compounds the penalty. Note that several of the tool's 'longest sentences' are actually markdown tables and stepped math blocks parsed as run-on prose — these are structural GEO elements and should not be rewritten as flowing text.",
+          "primary_problems": [
+            "Frequent 28-58 word sentences containing two or three subordinate clauses joined by commas, dashes, or 'and/so/because'.",
+            "Dash-delimited parenthetical asides ('- because you have a home bar...-') that add a clause mid-sentence instead of becoming their own sentence.",
+            "Clustering of multiple 4+ syllable words (pessimistic, optimistic, illustrative, electricity, scenario, comparison) within single long sentences, especially in the intro and scenario-comparison sections.",
+            "Compound rhetorical sentences ('So the useful question is not X. It is: given A, B, and C, how many D...') that pack a full argument into one sentence.",
+            "Some hedged/qualifying sentences ('That is not a small adjustment - it is the difference between...') that could be split without loosening the hedge."
+          ],
+          "worst_offenders": [
+            {
+              "section": "intro",
+              "excerpt": "A weekly figure appears, a payback period is implied, and the reader is left to guess whether that number describes a busy sports bar on a Saturday night or a quiet neighbourhood pub in February.",
+              "why": "38 words, three independent clauses joined by commas/and, plus passive constructions ('is implied', 'is left to guess') and the 4-syllable word 'February'."
+            },
+            {
+              "section": "intro",
+              "excerpt": "What follows is a three-scenario model - pessimistic, neutral, and optimistic - with a stated payback period in months for each, a comparison table, and a section on what the machine actually clears per month after the venue split, maintenance, and electricity are subtracted.",
+              "why": "44-word sentence with a dash parenthetical, a list embedded mid-sentence, passive voice ('are subtracted'), and three 4-syllable words (pessimistic, optimistic, comparison) plus 'electricity' and 'actually'."
+            },
+            {
+              "section": "Does an Arcade Machine Actually Pay for Itself in a Bar?",
+              "excerpt": "If there is no dwell time in the room - no people waiting for a table, no groups staying past their second drink, no corner where two people can stand and compete for ten minutes - there is nothing for the machine to convert.",
+              "why": "44 words built from a dash-enclosed triple list functioning as one giant subordinate clause before the main clause arrives."
+            },
+            {
+              "section": "Does an Arcade Machine Actually Pay for Itself in a Bar?",
+              "excerpt": "It is: given my traffic, my venue type, and my deal terms, how many months until this thing has returned what I put into it, and what does it clear per month after that?",
+              "why": "A single 33-word rhetorical question stacking three conditions and two sub-questions."
+            },
+            {
+              "section": "The Honest Bottom Line on Arcade ROI",
+              "excerpt": "Pulling the thread together: on the illustrative assumptions used throughout this article, an arcade machine in a bar pays for itself in roughly two years in a typical venue, roughly eleven months in a strong one or in an owner-operated setup with no split, and effectively not at all in a venue with low traffic or poor placement.",
+              "why": "58-word closing summary sentence flagged by the tool as the single longest genuine prose sentence in the draft; three separate outcomes are compressed into one clause chain."
+            },
+            {
+              "section": "Why the Base Case - Not the Optimistic One - Should Guide Your Decision",
+              "excerpt": "If you plan around the optimistic case and land in the pessimistic case, your payback period increases by a factor of six and the equipment may not outlast it.",
+              "why": "29 words combining a conditional clause with a compound consequence, plus two 4-syllable scenario words in close proximity."
+            }
+          ]
+        },
+        "instructions_for_writer": [
+          {
+            "section": "intro",
+            "action": "split",
+            "target_excerpt": "A weekly figure appears, a payback period is implied, and the reader is left to guess whether that number describes a busy sports bar on a Saturday night or a quiet neighbourhood pub in February.",
+            "guidance": "Split into two sentences: one stating that a figure and payback period appear without context, and a second asking the reader to guess which venue type it describes."
+          },
+          {
+            "section": "intro",
+            "action": "split",
+            "target_excerpt": "What follows is a three-scenario model - pessimistic, neutral, and optimistic - with a stated payback period in months for each, a comparison table, and a section on what the machine actually clears per month after the venue split, maintenance, and electricity are subtracted.",
+            "guidance": "Break into two or three short sentences: name the three scenarios in one sentence, then separately state that the article includes a comparison table and a net-profit section."
+          },
+          {
+            "section": "intro",
+            "action": "split",
+            "target_excerpt": "If you are reading out of personal interest rather than as a business decision - because you have a home bar or a basement lounge in mind - the last section addresses that case separately, and none of the revenue math applies to it.",
+            "guidance": "Split at the dash: state the home-bar scenario as its own short sentence, then state separately that the last section covers it and the revenue math does not apply."
+          },
+          {
+            "section": "Does an Arcade Machine Actually Pay for Itself in a Bar?",
+            "action": "split",
+            "target_excerpt": "If there is no dwell time in the room - no people waiting for a table, no groups staying past their second drink, no corner where two people can stand and compete for ten minutes - there is nothing for the machine to convert.",
+            "guidance": "Convert the dash-enclosed triple list into its own short sentence or a three-item bulleted list, then state the conclusion ('there is nothing for the machine to convert') as a separate short sentence."
+          },
+          {
+            "section": "Does an Arcade Machine Actually Pay for Itself in a Bar?",
+            "action": "split",
+            "target_excerpt": "It is: given my traffic, my venue type, and my deal terms, how many months until this thing has returned what I put into it, and what does it clear per month after that?",
+            "guidance": "Break into two questions: one asking how many months until payback given traffic, venue type, and deal terms; a second asking what it clears per month after that."
+          },
+          {
+            "section": "The Honest Bottom Line on Arcade ROI",
+            "action": "split",
+            "target_excerpt": "Pulling the thread together: on the illustrative assumptions used throughout this article, an arcade machine in a bar pays for itself in roughly two years in a typical venue, roughly eleven months in a strong one or in an owner-operated setup with no split, and effectively not at all in a venue with low traffic or poor placement.",
+            "guidance": "Split into three short sentences, one per outcome (typical venue, strong venue/owner-operator, low-traffic venue), keeping all three figures verbatim."
+          },
+          {
+            "section": "The Honest Bottom Line on Arcade ROI",
+            "action": "split",
+            "target_excerpt": "Any vendor, operator, or article that will not show you its assumptions is asking you to trust a number you cannot check - and in a category where the honest range spans eleven months to nearly six years, that is not a small ask.",
+            "guidance": "Split at the dash into two sentences: the trust statement, then the range statement as its own sentence."
+          },
+          {
+            "section": "Why the Base Case - Not the Optimistic One - Should Guide Your Decision",
+            "action": "split",
+            "target_excerpt": "If you plan around the optimistic case and land in the pessimistic case, your payback period increases by a factor of six and the equipment may not outlast it.",
+            "guidance": "Split into two sentences: the payback-period-increases-sixfold statement, then the equipment-may-not-outlast-it statement."
+          },
+          {
+            "section": "Net Monthly Profit After Payback: What's Left Once Costs Are Subtracted",
+            "action": "split",
+            "target_excerpt": "In the base case, gross drop of $303 becomes net profit of $128 - the machine keeps about 42 cents of every dollar it takes in, and the rest goes to the location and to running costs.",
+            "guidance": "Split at the dash: state the $303-to-$128 conversion first, then explain the 42-cents-per-dollar split in a second sentence."
+          },
+          {
+            "section": "Key Variables That Can Shift These Numbers Up or Down",
+            "action": "split",
+            "target_excerpt": "If your slow season runs three months at half your normal takings, your effective annual average drops by roughly 12% against a flat assumption, pushing base-case payback from about 24 months toward about 27.",
+            "guidance": "Split into two sentences: the 12% drop statement, then the payback-shift statement (24 to 27 months)."
+          },
+          {
+            "section": "one note before the math (intro)",
+            "action": "simplify_word",
+            "target_excerpt": "This is an operator-facing analysis of a coin- or bill-operated machine placed in a commercial venue.",
+            "guidance": "Replace 'operator-facing analysis' with a plainer phrase such as 'This section is written for business owners' to remove the 6-syllable compound and the 4-syllable 'analysis'."
+          },
+          {
+            "section": "Where a Machine Like the JVL Echo Fits Into the Math",
+            "action": "split",
+            "target_excerpt": "It is plug-and-play with 149 built-in games, works entirely offline with no downloads or Wi-Fi, is designed in Canada and made in the USA, and each unit is individually tested before shipping.",
+            "guidance": "Split into two sentences: (1) plug-and-play, 149 games, works offline with no downloads or Wi-Fi; (2) designed in Canada, made in the USA, each unit individually tested before shipping — keep every fact verbatim."
+          }
+        ],
+        "tradeoff_notes": [
+          "Several of the tool's 'longest sentences' are markdown tables and stepped math blocks (e.g., the scenario comparison table, the 'The math:' calculation blocks) that the parser reads as one run-on sentence because they lack terminal punctuation between lines. These are structural GEO elements and must be preserved verbatim per the style rules — they cannot be shortened without destroying the table/list format, so no fix is proposed for them.",
+          "Words like 'illustrative', 'pessimistic', 'optimistic', and 'scenario' are deliberate claims-discipline and structural labels (they signal which figures are placeholders and which scenario is being discussed). Removing them would weaken the transparency framing that is central to this article's credibility; the fix is to avoid stacking two or more of them in the same long sentence, not to delete them.",
+          "The article's brand voice is measured and analytical ('understated premium'), which relies on some longer, reasoned sentences (e.g., the asymmetric-risk argument in 'Why the Base Case'). Pushing every sentence below ~12 words to chase a 90+ score risks a curt, listicle tone that undercuts the financial reasoning this piece is built on. Recommend treating 90 as an aspirational ceiling rather than a hard gate for this specific analytical, numbers-led article.",
+          "TODO markers and the firsthand-experience-anchor note in the Maintenance section must not be shortened or removed even though they are somewhat long — they are editorial signals, not prose to simplify."
+        ],
+        "estimated_score_after_fix": 70
+      },
+      "used": true
+    },
+    {
+      "iteration": 1,
+      "stats": {
+        "flesch_reading_ease": 70.39,
+        "flesch_kincaid_grade": 6.37,
+        "avg_sentence_length": 11.8,
+        "avg_syllables_per_word": 1.471,
+        "word_count": 4874,
+        "sentence_count": 413,
+        "longest_sentences": [
+          {
+            "length_words": 104,
+            "text": "Stated assumptions:\nWeekly gross drop: $70 average per operating day across 5 days, or $350 weekly gross — adjusted down to $300 weekly to account for seasonality across the year\nRevenue split: 50/50\nMachine cost: $4,000\nMaintenance and ele"
+          },
+          {
+            "length_words": 101,
+            "text": "| Scenario | Weekly gross drop | Key assumptions | Payback period | Likelihood |\n|---|---|---|---|---|\n| Pessimistic | $100 | 50/50 split, low dwell time, quiet venue | ~22 months | Common in low-traffic venues |\n| Neutral (base case) | $30"
+          },
+          {
+            "length_words": 86,
+            "text": "Stated assumptions:\nWeekly gross drop: $600\nRevenue split: 60/40 in the machine owner's favour\nMachine cost: $4,000\nMaintenance and electricity: $45 per month, higher because heavier use means more wear\n\nThe math:\n\n| Line | Amount |\n|---|--"
+          },
+          {
+            "length_words": 77,
+            "text": "Stated assumptions:\nWeekly gross drop: $100\nRevenue split: 50/50\nMachine cost: $4,000\nMaintenance and electricity: $35 per month\n\nThe math:\n\n| Line | Amount |\n|---|---|\n| Weekly gross drop | $100 |\n| Monthly gross drop (× 4.33) | $433 |\n| M"
+          },
+          {
+            "length_words": 73,
+            "text": "Here is each scenario after payback, using the same illustrative assumptions:\n\n| Scenario | Monthly gross drop | Less venue split | Less maintenance and electricity | Net monthly profit |\n|---|---|---|---|---|\n| Pessimistic | $433 | −$217 |"
+          }
+        ],
+        "hardest_words": [
+          {
+            "word": "February",
+            "syllables": 4
+          },
+          {
+            "word": "illustrative",
+            "syllables": 4
+          },
+          {
+            "word": "pessimistic",
+            "syllables": 4
+          },
+          {
+            "word": "optimistic",
+            "syllables": 4
+          },
+          {
+            "word": "comparison",
+            "syllables": 4
+          },
+          {
+            "word": "actually",
+            "syllables": 4
+          },
+          {
+            "word": "electricity",
+            "syllables": 5
+          },
+          {
+            "word": "bill-operated",
+            "syllables": 5
+          },
+          {
+            "word": "profitable",
+            "syllables": 4
+          },
+          {
+            "word": "scenario",
+            "syllables": 4
+          },
+          {
+            "word": "usually",
+            "syllables": 4
+          },
+          {
+            "word": "operator",
+            "syllables": 4
+          },
+          {
+            "word": "Seasonality",
+            "syllables": 5
+          },
+          {
+            "word": "payback-period",
+            "syllables": 5
+          },
+          {
+            "word": "Operator-placed",
+            "syllables": 5
+          }
+        ]
+      },
+      "instructions": {
+        "diagnosis": {
+          "summary": "The score is held down by two different things: real stacked-clause prose sentences (18-27 words, joined with 'and'/'because'/'so'/comma clauses) scattered through the analytical sections, and a cluster of unavoidable 4-5 syllable domain labels (pessimistic, optimistic, scenario, electricity, seasonality) that repeat dozens of times because they are the article's own structural vocabulary. A third factor is a textstat artifact: markdown assumption blocks and tables have no terminal punctuation between line items, so the tool parses them as single 70-100 word 'sentences,' which is not a real readability problem and cannot be fixed without flattening protected structural elements.",
+          "primary_problems": [
+            "Multiple 18-27 word sentences in prose sections that stack two ideas with a comma + conjunction (and/but/because/so)",
+            "Repeated 4-5 syllable words (pessimistic, optimistic, scenario, seasonality, electricity) that are structural labels used consistently across headings, lists, and tables",
+            "Assumption blocks and comparison tables are counted by textstat as single giant sentences, inflating apparent sentence length without being an actual prose problem",
+            "Occasional hedging/qualifier chains ('may be telling the truth about... and saying nothing useful about...') that add clause depth"
+          ],
+          "worst_offenders": [
+            {
+              "section": "Maintenance and Electricity: The Recurring Costs Often Left Out",
+              "excerpt": "Machines with mechanical parts, such as physical buttons, joysticks, coin mechs, and moving assemblies, have more that can fail than machines built around a sealed touchscreen.",
+              "why": "26 words with a nested 'such as' list plus a trailing comparison clause; two ideas doing the work of one sentence."
+            },
+            {
+              "section": "Comparing the Three Scenarios Side by Side",
+              "excerpt": "A $4,000 machine that pays back in seven months is a good outcome only if the machine keeps working for years afterward.",
+              "why": "21 words with a conditional clause tacked onto a claim; splitting isolates the condition and shortens both halves."
+            },
+            {
+              "section": "The Honest Bottom Line on Arcade ROI",
+              "excerpt": "Use your own room, your own split, and your own honest read on how many people in your venue are standing around with ten minutes to spare.",
+              "why": "27-word closing sentence stacking a three-item list with a long trailing clause; the longest true prose sentence in the article."
+            },
+            {
+              "section": "Three Payback Scenarios: Pessimistic, Neutral, and Optimistic",
+              "excerpt": "Stated assumptions: Weekly gross drop... [full bullet block]",
+              "why": "Textstat parses the unpunctuated assumption block as a single 70-100 word sentence; this is a table/list, not prose, and must not be rewritten as flowing text."
+            },
+            {
+              "section": "global (repeated across all sections)",
+              "excerpt": "pessimistic / optimistic / scenario / seasonality / electricity",
+              "why": "Each is 4-5 syllables and each appears many dozens of times as a required structural label; they cannot be swapped for simpler synonyms without breaking scenario naming consistency."
+            }
+          ]
+        },
+        "instructions_for_writer": [
+          {
+            "section": "Maintenance and Electricity: The Recurring Costs Often Left Out",
+            "action": "split",
+            "target_excerpt": "Machines with mechanical parts, such as physical buttons, joysticks, coin mechs, and moving assemblies, have more that can fail than machines built around a sealed touchscreen.",
+            "guidance": "Split after 'moving assemblies' into two sentences: one naming the mechanical parts, one stating the comparison to sealed touchscreens."
+          },
+          {
+            "section": "Revenue Split: What Bar Owners and Machine Owners Typically Negotiate",
+            "action": "split",
+            "target_excerpt": "Much of the published arcade ROI content quietly assumes no split while presenting itself as general guidance.",
+            "guidance": "Split at 'while' into two sentences: the assumption, then the framing problem."
+          },
+          {
+            "section": "Pessimistic Scenario: Low Traffic, Longer Payback",
+            "action": "split",
+            "target_excerpt": "Twenty-two months is nearly two years of no return at all, on a machine that is being used lightly.",
+            "guidance": "Split at the comma into two shorter sentences instead of one comma-joined clause."
+          },
+          {
+            "section": "Pessimistic Scenario: Low Traffic, Longer Payback",
+            "action": "split",
+            "target_excerpt": "Light use is good for the hardware, but it also means the machine sits in valuable floor space earning very little.",
+            "guidance": "Split at 'but' into two sentences to remove the contrastive clause stack."
+          },
+          {
+            "section": "Neutral / Base Case: What a Realistic Operator Should Plan Around",
+            "action": "split",
+            "target_excerpt": "Add a buffer for a repair, a slow quarter, or a weaker split than you hoped for, and a realistic planning number is 8 to 10 months.",
+            "guidance": "Split into one sentence listing the three risk factors and a second sentence stating the resulting planning number."
+          },
+          {
+            "section": "Optimistic Scenario: High Traffic, Faster Payback",
+            "action": "split",
+            "target_excerpt": "Past a certain traffic level, more customers do not mean more drop, because the machine is already occupied at peak.",
+            "guidance": "Split at 'because' into two sentences: the observation, then the reason."
+          },
+          {
+            "section": "Comparing the Three Scenarios Side by Side",
+            "action": "split",
+            "target_excerpt": "Any article that gives you a single payback figure without stating its traffic assumption is not telling you anything useful.",
+            "guidance": "Split into a shorter conditional sentence and a shorter judgment sentence."
+          },
+          {
+            "section": "Comparing the Three Scenarios Side by Side",
+            "action": "split",
+            "target_excerpt": "A $4,000 machine that pays back in seven months is a good outcome only if the machine keeps working for years afterward.",
+            "guidance": "Split at 'only if' so the condition becomes its own sentence."
+          },
+          {
+            "section": "Why the Base Case - Not the Optimistic One - Should Guide Your Decision",
+            "action": "split",
+            "target_excerpt": "The base case depends on fewer moving parts, so it is more likely to survive contact with a real year.",
+            "guidance": "Split at 'so' into cause and effect sentences."
+          },
+          {
+            "section": "Why the Base Case - Not the Optimistic One - Should Guide Your Decision",
+            "action": "split",
+            "target_excerpt": "Once you know that, a confident single figure with no stated assumptions should read as a warning rather than as information.",
+            "guidance": "Split after 'that,' shortening the lead-in clause and isolating the claim about single figures."
+          },
+          {
+            "section": "Net Monthly Profit After Payback: What's Left Once Costs Are Subtracted",
+            "action": "split",
+            "target_excerpt": "If someone tells you a machine earns $1,300 a month, they may be telling the truth about the drop and saying nothing useful about your profit.",
+            "guidance": "Split at 'and saying' into two sentences: the truth-about-drop claim, then the profit-silence claim."
+          },
+          {
+            "section": "Key Variables That Can Shift These Numbers Up or Down",
+            "action": "split",
+            "target_excerpt": "It is a real effect, and it matters most if you buy right before your slow season rather than right before your busy one.",
+            "guidance": "Split at 'and' into two shorter sentences."
+          },
+          {
+            "section": "The Honest Bottom Line on Arcade ROI",
+            "action": "split",
+            "target_excerpt": "Any vendor, operator, or article that will not show you its assumptions is asking you to trust a number you cannot check.",
+            "guidance": "Split into a shorter subject clause and a shorter consequence clause."
+          },
+          {
+            "section": "The Honest Bottom Line on Arcade ROI",
+            "action": "split",
+            "target_excerpt": "Use your own room, your own split, and your own honest read on how many people in your venue are standing around with ten minutes to spare.",
+            "guidance": "Split into two sentences: 'Use your own room and your own split.' followed by a shorter sentence about reading dwell time."
+          },
+          {
+            "section": "The Honest Bottom Line on Arcade ROI",
+            "action": "split",
+            "target_excerpt": "In a venue with low traffic or poor placement, payback stretches toward two years and may not be worth the floor space at all.",
+            "guidance": "Split at 'and' into two sentences separating the payback fact from the floor-space judgment."
+          }
+        ],
+        "tradeoff_notes": [
+          "Words like 'pessimistic,' 'optimistic,' 'scenario,' 'seasonality,' and 'electricity' are 4-5 syllable but are the article's own naming system for the three scenarios and cost lines; swapping them for simpler synonyms mid-article would break consistency with headings, the comparison table, and reader tracking across sections. Recommend leaving these terms as-is even though they cap how far the Flesch score can rise.",
+          "The assumption blocks (bulleted 'Stated assumptions' lists) and the comparison/math tables are being scored by textstat as single 70-100 word sentences because markdown line breaks carry no terminal punctuation. These are protected structural/GEO elements per policy and must be preserved verbatim — this means a meaningful share of the 'longest sentences' problem is not fixable without violating the no-flatten rule, and the Writer should not attempt to restructure these into prose.",
+          "Several long sentences carry hedging or caveat language ('is not a performance claim about any particular unit,' 'may not be worth the floor space at all') that exists specifically to keep claims discipline intact. Splitting these sentences is fine, but the Writer must not drop the hedge itself when shortening.",
+          "Given the two constraints above (label vocabulary + protected tables), a realistic ceiling for this draft is likely the high-70s to low-80s on Flesch Reading Ease, not 90+, without damaging brand voice, claims discipline, or GEO structure."
+        ],
+        "estimated_score_after_fix": 78
+      },
+      "used": true
+    },
+    {
+      "iteration": 2,
+      "stats": {
+        "flesch_reading_ease": 73.3,
+        "flesch_kincaid_grade": 5.75,
+        "avg_sentence_length": 10.92,
+        "avg_syllables_per_word": 1.447,
+        "word_count": 4041,
+        "sentence_count": 370,
+        "longest_sentences": [
+          {
+            "length_words": 81,
+            "text": "| Scenario | Weekly gross drop | Payback | How likely |\n|---|---|---|---|\n| Pessimistic | $100 | ~22 months | Common in quiet or poorly placed rooms |\n| Neutral / base case | $250 | ~8 months (plan for 8-10) | The realistic planning assumpt"
+          },
+          {
+            "length_words": 56,
+            "text": "These assumptions are shared across all three cases:\nMachine cost: $4,000, paid outright, illustrative placeholder only\nRevenue split: 50/50 with the venue, illustrative\nVenue open seven days a week, year round\nMonthly figures use 4.33 week"
+          },
+          {
+            "length_words": 55,
+            "text": "Stated assumptions (illustrative):\nWeekly gross drop: $400\nRevenue split: 50/50, so the machine owner keeps $200 per week\nMonthly share to machine owner: $867\nMaintenance: $50 per month, higher because heavy use wears parts faster\nElectrici"
+          },
+          {
+            "length_words": 53,
+            "text": "Stated assumptions (illustrative):\nWeekly gross drop: $100\nRevenue split: 50/50, so the machine owner keeps $50 per week\nMonthly share to machine owner: $217\nMaintenance: $30 per month\nElectricity: $5 per month\nNet monthly: $182\nMachine cos"
+          },
+          {
+            "length_words": 48,
+            "text": "Stated assumptions (illustrative):\nWeekly gross drop: $250\nRevenue split: 50/50, so the machine owner keeps $125 per week\nMonthly share to machine owner: $542\nMaintenance: $35 per month\nElectricity: $5 per month\nNet monthly: $502\nMachine co"
+          }
+        ],
+        "hardest_words": [
+          {
+            "word": "usually",
+            "syllables": 4
+          },
+          {
+            "word": "scenarios",
+            "syllables": 4
+          },
+          {
+            "word": "pessimistic",
+            "syllables": 4
+          },
+          {
+            "word": "optimistic",
+            "syllables": 4
+          },
+          {
+            "word": "illustrative",
+            "syllables": 4
+          },
+          {
+            "word": "profitability",
+            "syllables": 6
+          },
+          {
+            "word": "scenario",
+            "syllables": 4
+          },
+          {
+            "word": "reliable",
+            "syllables": 4
+          },
+          {
+            "word": "expectations",
+            "syllables": 4
+          },
+          {
+            "word": "electricity",
+            "syllables": 5
+          },
+          {
+            "word": "information",
+            "syllables": 4
+          },
+          {
+            "word": "variables",
+            "syllables": 4
+          },
+          {
+            "word": "seasonality",
+            "syllables": 5
+          },
+          {
+            "word": "entertainment",
+            "syllables": 4
+          },
+          {
+            "word": "negotiate",
+            "syllables": 4
+          }
+        ]
+      },
+      "instructions": {
+        "diagnosis": {
+          "summary": "The draft's sentence length is already very short (10.9 words/sentence average), so the score is being held down almost entirely by syllable density: repeated 3-4 syllable framing words (illustrative, pessimistic, optimistic, scenario, assumptions, maintenance, electricity, profitability, seasonality) drive the average syllables-per-word to 1.45. A secondary factor is a scattering of prose sentences that stack two or three subordinate/compound clauses with 'and'/'but'/'because', which are longer and denser than the surrounding text even though most sentences are short.",
+          "primary_problems": [
+            "High frequency of unavoidable 3-4 syllable domain/hedging terms (illustrative, scenario, pessimistic, optimistic) that are core to the article's claims-discipline and cannot be swapped for simpler synonyms without losing precision.",
+            "A handful of compound/stacked-clause sentences (joined by 'and', 'but', 'because', or nested 'if...then' structures) that are noticeably longer and harder than the article's typical short sentence.",
+            "Some list-style facts written as one run-on prose sentence (e.g. the Echo Home spec sentence) rather than split into two plain statements.",
+            "textstat is treating markdown table rows as single giant 'sentences' (48-81 words), which inflates the reported longest-sentence figures but is a table-parsing artifact, not a real prose problem — should not be 'fixed' by breaking the tables."
+          ],
+          "worst_offenders": [
+            {
+              "section": "Three Payback Scenarios intro",
+              "excerpt": "It is not the default outcome, and treating it as one is how operators end up disappointed.",
+              "why": "Stacked clause joined by 'and' plus a gerund construction ('treating it as one') adds length and a nominalisation-like phrase in one breath."
+            },
+            {
+              "section": "Optimistic Scenario",
+              "excerpt": "It describes a room busy enough to keep the machine in use, but not so busy that people give up and walk away.",
+              "why": "Two nested comparative subordinate clauses ('busy enough... but not so busy that...') in a single sentence, harder to parse than the surrounding short sentences."
+            },
+            {
+              "section": "Three Payback Scenarios intro",
+              "excerpt": "It says: at this level of play, with this split, in this cost structure, the arcade machine payback period looks like this.",
+              "why": "Three stacked prepositional phrases before the main clause, plus the multisyllabic compound noun 'payback period'."
+            },
+            {
+              "section": "Where a Machine Like the JVL Echo Fits Into the Math",
+              "excerpt": "The commercial version includes a bill acceptor and a coin acceptor, and it is built for bars, restaurants, and operators.",
+              "why": "Compound sentence with two 'and' joins; splitting preserves the same facts in two shorter statements."
+            },
+            {
+              "section": "Where a Machine Like the JVL Echo Fits Into the Math",
+              "excerpt": "It comes with 149 pre-installed games, no downloads and no Wi-Fi needed, and it works fully offline.",
+              "why": "Three facts chained with commas and repeated 'and' inside one sentence increases average sentence length for no clarity gain."
+            },
+            {
+              "section": "Why the Base Case should guide your decision",
+              "excerpt": "If you planned your cash flow around it and landed in the base case instead, you have a problem the machine did not cause.",
+              "why": "Long conditional clause stacked before the main clause; splitting the condition from the consequence would shorten both halves."
+            }
+          ]
+        },
+        "instructions_for_writer": [
+          {
+            "section": "Three Payback Scenarios: Pessimistic, Neutral, and Optimistic",
+            "action": "split",
+            "target_excerpt": "It is not the default outcome, and treating it as one is how operators end up disappointed.",
+            "guidance": "Split into two sentences: 'It is not the default outcome.' and 'Treating it as the default is how operators end up disappointed.'"
+          },
+          {
+            "section": "Optimistic Scenario: High Traffic, Faster Payback",
+            "action": "split",
+            "target_excerpt": "It describes a room busy enough to keep the machine in use, but not so busy that people give up and walk away.",
+            "guidance": "Split at 'but': 'It describes a room busy enough to keep the machine in use. It is not so busy that people give up and walk away.'"
+          },
+          {
+            "section": "Three Payback Scenarios: Pessimistic, Neutral, and Optimistic",
+            "action": "shorten",
+            "target_excerpt": "It says: at this level of play, with this split, in this cost structure, the arcade machine payback period looks like this.",
+            "guidance": "Cut to one or two prepositional phrases, e.g. 'It says: at this traffic level, with this split, payback looks like this' to reduce clause-stacking."
+          },
+          {
+            "section": "Where a Machine Like the JVL Echo Fits Into the Math",
+            "action": "split",
+            "target_excerpt": "The commercial version includes a bill acceptor and a coin acceptor, and it is built for bars, restaurants, and operators.",
+            "guidance": "Split into two sentences: one stating the hardware (bill and coin acceptor), one stating who it is built for — keep both facts verbatim, just separate them."
+          },
+          {
+            "section": "Where a Machine Like the JVL Echo Fits Into the Math",
+            "action": "split",
+            "target_excerpt": "It comes with 149 pre-installed games, no downloads and no Wi-Fi needed, and it works fully offline.",
+            "guidance": "Split into two sentences: 'It comes with 149 pre-installed games.' and 'No downloads or Wi-Fi are needed — it works fully offline.' Keep every spec fact exactly as stated."
+          },
+          {
+            "section": "Why the Base Case - Not the Optimistic One - Should Guide Your Decision",
+            "action": "split",
+            "target_excerpt": "If you planned your cash flow around it and landed in the base case instead, you have a problem the machine did not cause.",
+            "guidance": "Split the condition from the consequence: 'Say you planned your cash flow around the optimistic case and landed in the base case instead. That is a problem the machine did not cause.'"
+          },
+          {
+            "section": "Where a Machine Like the JVL Echo Fits Into the Math",
+            "action": "split",
+            "target_excerpt": "And if this whole topic has been interesting for personal reasons rather than business ones, the math changes shape entirely.",
+            "guidance": "Split into 'Maybe this topic interests you for personal reasons, not business ones.' and 'If so, the math changes shape entirely.'"
+          },
+          {
+            "section": "How Arcade Machine Revenue Works in a Bar or Venue",
+            "action": "shorten",
+            "target_excerpt": "A packed room where nobody waits produces less drop than a moderate room where people wait ten minutes for a table.",
+            "guidance": "Split at 'than': 'A packed room where nobody waits produces less drop. A moderate room where people wait ten minutes for a table can produce more.'"
+          },
+          {
+            "section": "Key Variables That Can Shift These Numbers Up or Down",
+            "action": "split",
+            "target_excerpt": "It shows up in quiet neighbourhood bars, in venues with low dwell time, and anywhere the machine is placed out of the main traffic path.",
+            "guidance": "Convert the three trailing examples into a short bullet list under the sentence 'It shows up in a few common places:' rather than one long clause chain."
+          },
+          {
+            "section": "general / word choice",
+            "action": "simplify_word",
+            "target_excerpt": "expectations",
+            "guidance": "Where 'expectations' appears in non-critical framing (e.g. 'set expectations'), consider 'what to expect' — but leave every instance of illustrative, scenario, pessimistic, optimistic, assumptions, maintenance, electricity, and seasonality untouched, as these are precision/hedging terms required for claims discipline."
+          }
+        ],
+        "tradeoff_notes": [
+          "A Flesch score of 90 is not realistically achievable for this article without damaging claims discipline. Words like 'illustrative', 'scenario', 'pessimistic', 'optimistic', 'assumptions', 'maintenance', and 'electricity' are load-bearing hedges that distinguish invented planning numbers from real data — replacing them with shorter synonyms would blur exactly the distinction the brief requires the article to make.",
+          "The reported 48-81 word 'longest sentences' are markdown table rows and bullet blocks concatenated by the stats tool, not actual run-on prose. Do not restructure or flatten the tables/lists to chase this metric — they are required GEO/structural elements and must stay verbatim.",
+          "Sentence length is already very short overall (10.9 words/sentence), so further splitting has diminishing returns; most of the achievable gain comes from trimming the handful of stacked-clause sentences listed above, not from a wholesale rewrite.",
+          "The TODO experience-anchor markers and the JVL spec sentence (149 games, no Wi-Fi, warranty, shipping) contain necessary multisyllabic words (e.g. 'Manufacturer', 'Warranty') — these must be preserved verbatim; only sentence boundaries may be adjusted, not the facts or wording within them.",
+          "Recommend the QA/business stakeholder treat >=90 as directionally aspirational for this content type and accept a realistic ceiling in the low-to-mid 80s for financial/ROI explainer content without sacrificing hedged precision."
+        ],
+        "estimated_score_after_fix": 79.5
+      },
+      "used": true
+    },
+    {
+      "iteration": 3,
+      "stats": {
+        "flesch_reading_ease": 70.33,
+        "flesch_kincaid_grade": 6.47,
+        "avg_sentence_length": 12.17,
+        "avg_syllables_per_word": 1.468,
+        "word_count": 4782,
+        "sentence_count": 393,
+        "longest_sentences": [
+          {
+            "length_words": 84,
+            "text": "Using the same illustrative assumptions:\n\n| Scenario | Gross monthly drop | Less 50% split | Less $30 costs | Net monthly profit | Net per year |\n|---|---|---|---|---|---|\n| Pessimistic | ~$173 | ~$87 | -$30 | ~$57 | ~$684 |\n| Neutral / bas"
+          },
+          {
+            "length_words": 76,
+            "text": "| Scenario | Gross weekly drop | Net monthly (owner's share) | Payback period | Likelihood |\n|---|---|---|---|---|\n| Pessimistic | $40 | ~$57 | ~53 months | Common in quiet rooms |\n| Neutral / base case | $100 | ~$187 | ~16 months | Plan ar"
+          },
+          {
+            "length_words": 47,
+            "text": "Illustrative assumptions:\nGross weekly drop: $40\nGross monthly drop: about $173 (using 4.33 weeks per month)\nMachine owner's share after 50/50 split: about $87\nLess $30 monthly costs: net about $57 per month\nPayback on a $3,000 illustrative"
+          },
+          {
+            "length_words": 44,
+            "text": "> [VISUAL] diagram — six labelled inputs (foot traffic, venue type, placement, revenue split, seasonality, recurring costs) feeding into a single payback period output\n\nThere are two basic ways an arcade machine ends up in a bar, and they l"
+          },
+          {
+            "length_words": 40,
+            "text": "> [VISUAL] image — ECHO bartop arcade in a residential home bar setting, warm evening light, adult social context\n\nThe short version of this article is that there is no single payback number for an arcade machine in a bar."
+          }
+        ],
+        "hardest_words": [
+          {
+            "word": "pessimistic",
+            "syllables": 4
+          },
+          {
+            "word": "optimistic",
+            "syllables": 4
+          },
+          {
+            "word": "Seasonality",
+            "syllables": 5
+          },
+          {
+            "word": "Electricity",
+            "syllables": 5
+          },
+          {
+            "word": "illustrative",
+            "syllables": 4
+          },
+          {
+            "word": "profitability",
+            "syllables": 6
+          },
+          {
+            "word": "variables",
+            "syllables": 4
+          },
+          {
+            "word": "scenario",
+            "syllables": 4
+          },
+          {
+            "word": "calculated",
+            "syllables": 4
+          },
+          {
+            "word": "scenarios",
+            "syllables": 4
+          },
+          {
+            "word": "operator",
+            "syllables": 4
+          },
+          {
+            "word": "negotiated",
+            "syllables": 5
+          },
+          {
+            "word": "desirable",
+            "syllables": 4
+          },
+          {
+            "word": "automatically",
+            "syllables": 5
+          },
+          {
+            "word": "mechanical",
+            "syllables": 4
+          }
+        ]
+      },
+      "instructions": null,
+      "used": false
+    }
+  ],
+  "best_iteration": 2
+}

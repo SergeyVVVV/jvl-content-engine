@@ -1,0 +1,129 @@
+{
+  "h1": "Arcade Machine for Bar ROI: How Fast Is Payback?",
+  "slug": "arcade-machine-for-bar-roi",
+  "primary_keyword": "arcade machine for bar",
+  "secondary_keywords": [
+    "arcade machine for bar ROI",
+    "arcade ROI",
+    "arcade profitability",
+    "arcade rate of return",
+    "arcade machine payback period",
+    "bar arcade machine cost",
+    "arcade machine revenue split",
+    "arcade machine for event venue",
+    "coin-op arcade profit",
+    "commercial arcade machine cost"
+  ],
+  "search_intent": "commercial_investigation / decision_support",
+  "outline": [
+    {
+      "level": "h2",
+      "heading": "Why Arcade Machine ROI Questions Matter for Bar and Venue Owners",
+      "purpose": "Frame the reader's real decision: is buying a machine for a bar or event venue a sound financial move, and why most online ROI content fails to answer that honestly.",
+      "keywords_to_use": [
+        "arcade machine for bar",
+        "arcade ROI",
+        "arcade machine for event venue"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "How Arcade Machine Revenue Actually Works: Revenue Split, Payment Model, and Venue Type",
+      "purpose": "Explain the mechanics behind arcade earnings before any scenario math - coin/bill acceptor revenue, typical venue-owner vs machine-owner split, and how venue type (bar, event space) changes the picture.",
+      "keywords_to_use": [
+        "arcade machine revenue split",
+        "bar arcade machine cost",
+        "coin-op arcade profit"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "The Three Payback Scenarios Explained: Pessimistic, Neutral, and Optimistic - and How Likely Each One Really Is",
+      "purpose": "Introduce the three-scenario model, explicitly state that the neutral/base case is the realistic planning point rather than treating all three as equally probable, and set reader expectations for transparent, checkable assumptions.",
+      "keywords_to_use": [
+        "arcade machine payback period",
+        "arcade rate of return"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Scenario 1 - Pessimistic Case: Assumptions and Payback Period",
+      "purpose": "Lay out low foot-traffic, low-revenue assumptions and calculate the resulting payback period step by step using the anchor machine price.",
+      "keywords_to_use": [
+        "arcade machine payback period",
+        "arcade profitability"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Scenario 2 - Neutral / Most-Likely Case: Assumptions and Payback Period (What to Plan Around)",
+      "purpose": "Present the base-case assumptions as the most defensible planning figure, with clear arithmetic from weekly revenue to payback timeline.",
+      "keywords_to_use": [
+        "arcade machine for bar ROI",
+        "arcade rate of return"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Scenario 3 - Optimistic Case: Assumptions and Payback Period",
+      "purpose": "Show a high-traffic, favorable-conditions scenario with the same transparent math, while flagging it as the least likely outcome to plan around.",
+      "keywords_to_use": [
+        "arcade ROI",
+        "arcade profitability"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "What the Machine Earns After It Pays for Itself: Net Monthly Profit by Scenario",
+      "purpose": "Move past gross coin-drop numbers to a net-profit view per scenario once payback is complete, keeping every derived figure arithmetically consistent with earlier weekly numbers.",
+      "keywords_to_use": [
+        "coin-op arcade profit",
+        "arcade profitability"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "The Recurring Costs That Quietly Erode Arcade Profit",
+      "purpose": "Detail maintenance, electricity, revenue share, and seasonality as ongoing costs that reduce real profit versus naive gross-revenue assumptions.",
+      "keywords_to_use": [
+        "arcade machine revenue split",
+        "commercial arcade machine cost"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "A Real Machine to Anchor the Math: The JVL ECHO HD3 Commercial Edition",
+      "purpose": "Introduce the Commercial Edition with bill/coin acceptor as the single, checkable price anchor used throughout the scenarios, clearly distinguishing it from the Home Edition, and link naturally to the ECHO product page.",
+      "keywords_to_use": [
+        "commercial arcade machine cost",
+        "bar arcade machine cost"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "How to Plan Realistically Before Buying an Arcade Machine for a Bar or Venue",
+      "purpose": "Give a grounded, non-hype checklist for venue owners to validate their own numbers before purchase, and offer homeowners a natural path to the Home Edition if their interest is personal rather than commercial.",
+      "keywords_to_use": [
+        "arcade machine for bar",
+        "arcade machine for event venue"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Frequently Asked Questions",
+      "purpose": "Placeholder section to be completed by the FAQ Agent, covering monthly earnings potential, payback timelines, revenue split norms, ongoing costs, and profitability factors.",
+      "keywords_to_use": []
+    }
+  ],
+  "internal_link_targets": [
+    "https://jvl.ca/en/echo",
+    "https://jvl.ca/en/home"
+  ],
+  "todos": [
+    "TODO: source not confirmed - weekly revenue-per-machine ranges for each scenario are illustrative and require business sign-off",
+    "TODO: source not confirmed - revenue split percentage between venue and machine owner needs confirmation as a realistic industry norm",
+    "TODO: source not confirmed - recurring cost estimates (maintenance, electricity, service fees) are assumptions pending business approval",
+    "TODO: source not confirmed - probability weighting of scenarios (neutral as most likely) is editorial judgment, not a cited study",
+    "TODO: source not confirmed - confirm approved use of the JVL ECHO HD3 Commercial Edition list price ($4,250 USD) as the sole cost anchor for this article"
+  ]
+}

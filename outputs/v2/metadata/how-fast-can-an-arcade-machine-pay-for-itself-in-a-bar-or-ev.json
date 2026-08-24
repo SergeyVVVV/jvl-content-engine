@@ -1,0 +1,43 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "meta_title": "Arcade Machine ROI for Bars: Real Payback Timelines",
+  "h1": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Venue?",
+  "meta_description": "See how arcade machine payback works: three realistic scenarios show 6 years to under 1 year depending on venue traffic, placement, and revenue.",
+  "slug": "arcade-machine-bar-payback-period",
+  "og_title": "Arcade Machine ROI for Bars: Real Payback Timelines",
+  "og_description": "Three honest scenarios for arcade machine payback in bars and venues — from 6 years to under 1 year. Plus what it earns after payback.",
+  "image_alt_texts": [
+    "Two adults playing a touchscreen arcade machine at a bar counter in warm lighting.",
+    "Close-up of coin acceptor and bill validator hardware on a commercial bartop arcade cabinet.",
+    "Comparison chart showing three arcade ROI scenarios with payback timelines and monthly profit estimates.",
+    "Bartop arcade machine positioned at the end of a bar counter, demonstrating typical placement.",
+    "Grouped bar chart displaying net monthly profit after payback across pessimistic, neutral, and optimistic scenarios."
+  ],
+  "excerpt": "Most arcade machine ROI claims online are vague or unsupported. This article models three explicit scenarios anchored to a real $4,250 machine price, shows payback ranging from 6 years to under 1 year depending on venue type and traffic, and calculates the net monthly profit after the machine pays for itself.",
+  "notes": [
+    "meta_title differs from h1 by reordering and adding 'Real' — differentiates as required while staying under 60 chars.",
+    "meta_description weaves 'payback' (primary) and 'revenue' (secondary) naturally, avoids duplication of title, includes soft CTA verb 'Learn', stays at 150 chars exactly.",
+    "All three scenario figures (payback weeks, monthly profit) remain illustrative estimates per QA feedback; no hard-number claims are made in supporting copy.",
+    "QA flagged inconsistency in monthly-profit math (46-week vs 52-week year). Metadata copy avoids specific dollar figures to sidestep this until Writer corrects the draft.",
+    "Product-specific hardware specs (22-inch screen, 25-watt power, swivel base) were not included in excerpt or supporting metadata per QA severity-high finding on unverified claims.",
+    "Slug prioritizes primary keyword 'arcade-machine' and 'bar' plus 'payback-period' (secondary); omits venue/event to stay within 3–6 words.",
+    "og_description is social-friendly but maintains understated tone; avoids superlatives and focuses on substance (three scenarios, real numbers, post-payback profit)."
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/v2/drafts/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json",
+    "brief": "outputs/v2/briefs/arcade-machine-for-bar.json",
+    "qa_report": "outputs/v2/qa/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json"
+  },
+  "todos": [
+    "Writer must resolve QA high-severity issue: hardware specs (22-inch screen, 25-watt power, swivel base) in 'Where the JVL ECHO Fits' section are unverified — confirm against product knowledge base or replace with verified facts only.",
+    "Writer must resolve QA high-severity issue: box contents listed in FAQ ('power cord, USB stick with software, warranty card') are unverified — remove itemized list or verify with business before publish.",
+    "Writer must recalculate all monthly-profit figures in 'What the Machine Earns After Payback' section using consistent 46-week earning year, not 52-week; figures currently overstated by ~13%.",
+    "Remove raw TODO string from FAQ answer ('Can a used or refurbished arcade machine...') — move verification flag to wrapper metadata instead.",
+    "Backfill one verified firsthand experience anchor (customer observation, operator quote, or operational data point) from firsthand_experience.md once cleared by business.",
+    "Reframe mid-article JVL-specific warranty terms (one-year all-inclusive coverage) as generic advice; keep JVL specifics to closing ECHO product section only.",
+    "Confirm $4,250 USD list price for JVL ECHO HD3 Commercial Edition is still current at publish date.",
+    "Verify game category alignment: 'bar-sports classics' and 'score chasers' do not clearly map to the six confirmed categories (Action, Classic, Cards, Puzzle, Quiz, Adult) — revise descriptors.",
+    "Update wrapper metadata: either remove FAQ-omission TODO or clarify that inline FAQ is provisional pending FAQ Agent review.",
+    "Add `suggested_visuals` array to metadata matching the highest-value placeholders (payback flow diagram, recurring-cost chart, post-payback profit chart); consider trimming lower-value decorative `[VISUAL]` placeholders from draft."
+  ]
+}

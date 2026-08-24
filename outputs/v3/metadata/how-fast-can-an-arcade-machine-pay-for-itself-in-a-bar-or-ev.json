@@ -1,0 +1,40 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "meta_title": "Arcade Machine ROI for Bars: Realistic Payback Timeline",
+  "h1": "How Fast Does an Arcade Machine Pay for Itself in a Bar or Event.",
+  "meta_description": "Learn how long an arcade machine takes to pay for itself with three transparent payback scenarios. Discover the real costs, revenue splits.",
+  "slug": "arcade-machine-bar-payback-roi",
+  "og_title": "Arcade Machine ROI: When Does It Pay for Itself?",
+  "og_description": "Three honest payback scenarios for arcade machines in bars and venues. See the full math: weekly plays, monthly net profit, and payback timeline.",
+  "image_alt_texts": [
+    "Commercial arcade machine with integrated bill and coin acceptor positioned at bar counter height in warm venue lighting",
+    "Close-up detail of coin and bill acceptor hardware on the front panel of a commercial arcade machine",
+    "Compact arcade machine placed in corner of a bar setting, shown at full scale relative to bar furniture and seating",
+    "Interior view of arcade machine control panel showing touchscreen interface and revenue collection hardware"
+  ],
+  "excerpt": "A bartop arcade machine in a busy venue can pay for itself in 6–12 months; in a slower one, 2–3 years. This article shows three transparent payback scenarios with every assumption stated, so you can model your own venue's actual earnings and decide whether the investment makes sense.",
+  "notes": [
+    "Meta description complements title by adding 'transparent payback scenarios' and secondary keyword 'monthly profit' without duplicating the core claim",
+    "H1 preserved as question form to match the topic and search intent; differs from meta_title's declarative framing",
+    "Slug prioritizes primary keyword 'arcade-machine-bar' with secondary 'payback-roi' for compound searchability",
+    "OG title warmed slightly from meta_title ('When Does It' vs 'Payback Timeline') for social context",
+    "Image alt texts describe functional hardware details and venue placement context rather than branding, aligned with draft's emphasis on transparency over product showcase",
+    "Excerpt emphasizes the article's core differentiator: three scenarios with stated assumptions, positioning it against forum guesswork and vendor claims"
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/v3/drafts/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json",
+    "brief": "outputs/v3/briefs/arcade-machine-for-bar.json",
+    "qa_report": "outputs/v3/qa/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json"
+  },
+  "todos": [
+    "QA flagged 1995 founding year and 'eleventh generation' claims as unsupported; confirm both figures with business or replace with approved '30+ years of JVL bartop expertise' framing before publish",
+    "QA noted 7-day production cycle detail lacks verified source; confirm in knowledge base or revert to verified claim 'each unit individually tested before shipping'",
+    "QA identified arithmetic error in placement scenario: recalculate fifty-fifty split + collection costs payback from stated 28 months to correct ~31 months, and adjust 'slightly worse than double' language",
+    "QA flagged all images above product section as branded/captioned ECHO when brief requires generic unbranded visuals until the dedicated product section; swap for unbranded bartop imagery",
+    "QA noted missing verified operator experience anchor; backfill one real placement observation or service data point to strengthen E-E-A-T before publish",
+    "QA flagged acceptor specs (denominations, 500-bill capacity) as unverified; add to claims_to_verify or soften to 'bill and coin acceptors'",
+    "QA noted ~96% and ~207% return figures read close to pitch tone; consider demoting percentages to footnote or relabeling for restraint",
+    "Confirm publishing pipeline strips the '## Claims to Verify' and '## Open TODOs' blocks before live render to avoid raw TODO text in article body",
+    "Review and reconcile the four [VISUAL] placeholders against final rendered images; delete duplicate acceptor close-up if inline-01 image serves that purpose"
+  ]
+}

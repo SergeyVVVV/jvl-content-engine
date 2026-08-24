@@ -1,0 +1,95 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "status": "revise",
+  "summary": "A strong, unusually disciplined draft that closes every major SERP gap and stays clean on product facts: both list prices are edition-attributed, the Commercial-only payment hardware is never generalised to the ECHO line, the warranty is limited to the three permitted facts plus a direction to confirm with JVL, the heritage framing matches the approved wording, and all four experience anchors used (pre-shipment testing, seven-working-day cycle, 1,000+ units, eleventh generation since 1995) are traceable to verified entries. No fabricated specs, testimonials or superiority claims were found, and the modelled revenue figures are labelled as judgement-based and listed in claims_to_verify. Two MEDIUM issues hold it back: an internal arithmetic statement that does not hold (a $35/month replacement reserve does not bring the $177 pessimistic net anywhere near break-even), and an FAQ that makes regulatory/licensing statements the editorial guardrails place off-limits. Several LOW polish items remain, including a stale writer TODO claiming the FAQ was omitted when it is present, a missing suggested_visuals array, and residual first-person voice.",
+  "severity_counts": {
+    "high": 0,
+    "medium": 2,
+    "low": 5
+  },
+  "issues": [
+    {
+      "severity": "medium",
+      "category": "factual",
+      "location": "After payback section — \"setting aside even $35 a month toward the next one turns the pessimistic row into something close to break-even\"",
+      "problem": "The arithmetic does not hold. The pessimistic row nets $177/month; deducting a $35/month replacement reserve leaves $142/month, which is not close to break-even. In an article whose entire credibility rests on visible, checkable working, a figure a reader can disprove in one subtraction is the most damaging kind of error.",
+      "recommended_fix": "Either recalculate honestly (a reserve large enough to matter here is closer to $70–$150/month depending on replacement horizon) or restate as \"a $35 monthly reserve takes the pessimistic row from $177 to roughly $142 a month, which is where the machine stops looking like a meaningful line item at all.\""
+    },
+    {
+      "severity": "medium",
+      "category": "grounding",
+      "location": "FAQ — \"Does a bar need a special license to operate a coin-operated arcade machine?\"",
+      "problem": "The answer makes regulatory assertions (\"Rules vary by city, county, and state, and can cover anything from amusement device permits to how coin income is taxed\"). Legal and compliance statements are listed under Forbidden / do not claim in the editorial guardrails, and no source in the Sources list supports the tax or permit characterisation.",
+      "recommended_fix": "Reduce the answer to a pure deferral with no regulatory detail: state that requirements differ by jurisdiction, that this article does not cover them, and that the operator should confirm with local licensing authorities before installing a payment-enabled machine. Keep the closing line noting a Free Play home machine collects no cash."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Writer TODOs — \"the FAQ section from the outline is omitted here per pipeline rules, for the FAQ Agent to generate\"",
+      "problem": "Stale metadata. The draft does contain a full seven-question FAQ, correctly placed before Sources. Leaving the TODO in risks a downstream FAQ Agent appending a second, duplicate FAQ block.",
+      "recommended_fix": "Delete the stale TODO and replace it with a note that the FAQ is present and positioned before Sources."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Writer wrapper metadata",
+      "problem": "No `suggested_visuals` array is present, although the body contains three well-chosen inline [VISUAL] placeholders (bar-counter footprint photo, placement floor-plan diagram, home-bar photo). The array and the inline count should match.",
+      "recommended_fix": "Add a `suggested_visuals` array with the three existing placeholders described (type, caption, intended section) so the counts align."
+    },
+    {
+      "severity": "low",
+      "category": "tone",
+      "location": "Methodology section (\"harsher or kinder than mine\") and After-payback section (\"I will not invent figures\")",
+      "problem": "First-person singular survives in two places despite a writer TODO stating first-person was converted to impersonal editorial voice. The voice is inconsistent across the piece and reads as a personal blog rather than a manufacturer's editorial.",
+      "recommended_fix": "Rewrite to impersonal: \"If your view of bar traffic is harsher or kinder than this model's, change the percentage\" and \"no source quantified them, and this model does not invent figures.\""
+    },
+    {
+      "severity": "low",
+      "category": "grounding",
+      "location": "FAQ — \"What happens to bar revenue from an arcade machine if it needs repair?\" (\"A manufacturer warranty typically covers the machine and the underlying issue\")",
+      "problem": "Although phrased generically and followed by a direction to confirm with the manufacturer, this sits in an article that has already stated JVL's warranty terms, so a reader may map the generic statement onto JVL's contract. The knowledge base restricts warranty content to term, all-inclusive status and equal treatment of both editions, and forbids inferring any other condition.",
+      "recommended_fix": "Cut the clause about what a warranty typically covers. Keep only: downtime is unmodelled here, and warranty scope, transit and turnaround should be confirmed with the manufacturer before buying."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Scenario-probability section — \"reported splits commonly running somewhere between 50/50 and 70/30\" and Sources list",
+      "problem": "The revenue-split range appears to rest on a vending-machine commission blog and a 2016 arcade forum thread. Both are weak sources for a piece whose differentiator is source discipline, even though the claim is hedged and flagged in claims_to_verify.",
+      "recommended_fix": "Either replace with an arcade-operator source, or attribute in-body as \"operator-community and adjacent-category reports\" so the reader can weigh the evidence, as the article does elsewhere."
+    }
+  ],
+  "strengths": [
+    "Edition discipline is exact throughout: $4,250 Commercial and $3,990 Home are always named with their edition, and the bill/coin acceptors are attributed to the Commercial Edition only, never to the ECHO in general.",
+    "Warranty language stays inside the permitted three facts (one year, all-inclusive, both editions on the same terms) and defers to JVL for current terms — the earlier inference about repair cost coverage has been correctly removed.",
+    "Heritage claim uses the approved framing verbatim, attributes the RePlay recognition to the bartop line rather than the ECHO, and gives no count or year.",
+    "All four experience anchors used are traceable to verified entries: pre-shipment test coverage (with the \"at minimum\" hedge kept), the hours-vs-seven-working-days pairing given in both halves, 1,000+ units as a floor, and the eleventh-generation-since-1995 figure.",
+    "Every scenario calculation checks out ($217/$736/$1,775 monthly, 24/6.1/2.5-month paybacks, $2,124/$8,352/$20,820 annual), and the 15% discount and 4.33-week month are stated as assumptions rather than smuggled in.",
+    "Fills essentially every SERP content gap — payback period, scenario modelling, recurring costs, uncounted goodwill, commercial-vs-home distinction — none of which any top-5 competitor addresses.",
+    "No trademarked game titles, no gamer jargon, no absolute reliability language, no discount framing, and no invented specs (the unapproved 4 GB storage figure is correctly absent).",
+    "Product mentions are contained to two sections and the plays-per-day sanity check gives the reader a genuinely usable self-test, which suits the proof-first persona."
+  ],
+  "recommended_fixes": [
+    "Correct or restate the \"$35 a month … close to break-even\" sentence so the arithmetic is defensible.",
+    "Strip the regulatory detail from the licensing FAQ, leaving a pure deferral to local authorities.",
+    "Remove the clause about what a manufacturer warranty typically covers from the repair FAQ.",
+    "Delete the stale TODO claiming the FAQ was omitted; note instead that it is present before Sources.",
+    "Add a `suggested_visuals` array matching the three inline [VISUAL] placeholders.",
+    "Convert the two remaining first-person passages to impersonal editorial voice.",
+    "Attribute or replace the 50/50–70/30 revenue-split range so its adjacent-category sourcing is visible in the body."
+  ],
+  "claims_to_verify_ok": true,
+  "source_inputs_used": {
+    "draft": "outputs/v5/drafts/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json",
+    "brief": "outputs/v5/briefs/arcade-machine-for-bar.json",
+    "serp_research": "outputs/v5/serp_research/arcade-machine-for-bar.json",
+    "company_insight": "outputs/v5/company_insight/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json"
+  },
+  "todos": [
+    "Human check: the closing home-facing section contains an edition comparison table that names Commercial Edition payment hardware. The brief and company insight explicitly requested this comparison, and the article is not the Echo for Home page, so it reads as compliant — but a human should confirm the B2C/B2B separation rule is satisfied given coin-operation features appear alongside home framing.",
+    "Requires business confirmation — whether JVL covers shipping both ways for warranty service. The company insight asserts it does; the knowledge base flags it unconfirmed. The draft correctly says nothing, and should continue to until this is settled.",
+    "Requires business confirmation — delivery/freight terms, currently excluded from the cost model.",
+    "Requires business confirmation — whether JVL holds any real venue revenue, payback or ROI data. If it exists, it would replace the borrowed FEC benchmarks and materially strengthen the piece.",
+    "Confirm both list prices are current before publication.",
+    "Confirm the Sources block placement at the end works with the site template."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "suggested_visuals": [
+    {
+      "section_heading": "The Three Payback Scenarios Explained — and How Likely Each One Really Is",
+      "type": "chart",
+      "purpose": "Let the reader see the three payback periods against a single break-even line, making the spread between scenarios immediately legible without re-reading the arithmetic.",
+      "alt_text_proposal": "Line chart of cumulative net profit over 36 months for three arcade machine scenarios, crossing the $4,250 break-even line at 6.5, 14 and 36 months.",
+      "production_note": "Simple three-line chart, no branding. X-axis 0-36 months, Y-axis $0-$8,000, horizontal dashed line at $4,250. Label crossings 6.5 / 14.0 / 35.9 months."
+    },
+    {
+      "section_heading": "The Recurring Costs That Quietly Erode Arcade Profit",
+      "type": "diagram",
+      "purpose": "Show visually how gross coin drop becomes net profit, so the reader stops treating the two as interchangeable.",
+      "alt_text_proposal": "Waterfall diagram reducing $325 monthly gross arcade drop by a $16.25 service reserve and $5 electricity to $303.75 net profit.",
+      "production_note": "Unbranded waterfall chart, four bars. Include an optional greyed-out 50% revenue-share bar to show the operator-placement variant."
+    },
+    {
+      "section_heading": "A Real Machine to Anchor the Math: The JVL ECHO HD3 Commercial Edition",
+      "type": "image",
+      "purpose": "Give the price anchor a physical referent and show the bill and coin hardware that makes the venue revenue model possible.",
+      "alt_text_proposal": "JVL ECHO HD3 Commercial Edition bartop arcade machine on a bar counter, with a close-up inset of its bill acceptor and coin slot.",
+      "production_note": "Real product photo in a bar setting, evening lighting. Inset must clearly show the bill acceptor and quarter coin mech. First and only branded image in the article, per the editorial-imagery rule."
+    }
+  ]
+}

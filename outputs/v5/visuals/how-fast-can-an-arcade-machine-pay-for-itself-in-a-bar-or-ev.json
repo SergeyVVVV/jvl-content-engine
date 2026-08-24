@@ -1,0 +1,25 @@
+{
+  "suggested_visuals": [
+    {
+      "section_heading": "The cost baseline: anchoring the analysis to a real machine price",
+      "type": "image",
+      "purpose": "Give the reader a physical sense of what the $4,250 price buys and how much counter space it occupies, which the payback model treats as a real cost.",
+      "alt_text_proposal": "A bartop arcade machine on a bar counter beside glassware and two stools, showing its compact footprint",
+      "production_note": "Real photo of the ECHO Commercial Edition in a working bar setting; include everyday objects for scale rather than a clean studio shot."
+    },
+    {
+      "section_heading": "How probable is each scenario, and which one should an operator actually plan around",
+      "type": "diagram",
+      "purpose": "Show that placement is the single most correctable variable by contrasting a machine in the sightline from the bar with one in a back corner or corridor.",
+      "alt_text_proposal": "Simple bar floor plan comparing a machine placed in view of the bar with one placed in a back corridor",
+      "production_note": "Flat two-panel line diagram, no photography needed. Label the two positions clearly; keep it legible on mobile."
+    },
+    {
+      "section_heading": "Bringing the same machine home: where the ECHO Home edition fits for a private leisure space",
+      "type": "image",
+      "purpose": "Show the Home Edition in a believable adult home setting so the reader can judge scale and whether it suits their own room.",
+      "alt_text_proposal": "ECHO bartop arcade on the counter of a finished basement home bar, lit by warm evening lighting",
+      "production_note": "Real photo, quiet adult home setting (basement bar or den). No neon, no staged party scene, no children."
+    }
+  ]
+}

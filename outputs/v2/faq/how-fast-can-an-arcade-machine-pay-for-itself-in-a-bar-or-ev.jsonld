@@ -1,0 +1,64 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is an arcade machine a better bar investment than a pool table or jukebox?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pool tables have low per-play revenue but almost no upkeep, while jukeboxes have lost pull now that guests carry their own music library in their pocket. An arcade machine sits in between: it's screen-based, easy to track per play, and works for one or two guests at once. There's no universal winner here — the right choice depends on your room's foot traffic and whether guests already gather near a spot where a machine could sit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it better to rent, lease, or buy an arcade machine for a venue?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Buying outright, which is what the payback math in this article assumes, means the machine becomes a fixed asset you fully own once it earns back its cost. Leasing spreads the outlay but usually costs more over time and rarely hands you the full earnings once the term ends. An operator-placement deal — where someone else buys the machine and splits the take with the venue — lets a bar test the format without paying for hardware at all."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does adding a second arcade machine to a venue double the revenue?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rarely. Revenue from one machine is capped by how many guests have spare time to play, and a second unit usually splits that same pool of players rather than doubling it. A second machine tends to help only when the first one is regularly busy and guests are visibly waiting for a turn — otherwise it just adds a second fixed cost against the same traffic."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a used or refurbished arcade machine make sense for a bar or venue?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A lower upfront price could shorten the payback timeline shown in this article's math, but bars put far heavier daily wear on a machine than a home room does, and used units typically arrive without a manufacturer warranty covering that use. Any saving on price has to be weighed against the risk of downtime with no support line to call during a busy shift. TODO: source not confirmed for typical used-market pricing or reliability figures."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do venue owners usually structure a placement deal with a machine operator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most placement deals start with a revenue split, commonly discussed at 50/50, though the exact figure is negotiated case by case and varies by market. Just as important as the percentage are who pays for repairs, who collects the cash, and how often the split gets paid out — settle those details before the machine arrives, not after the first busy month."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is arcade entertainment still relevant in bars given how much gaming has moved to phones and consoles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mobile and console gaming are largely solitary or online experiences, while a bartop arcade machine offers the opposite — a shared screen two people can stand around at the same table. That difference is exactly why the format has held on in bars for decades rather than being displaced by home gaming: it isn't competing with a phone, it's offering something a phone can't."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What comes in the box with a JVL ECHO Commercial Edition, and is it ready to use right away?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each unit ships with the machine itself, a power cord, a USB stick with the software, and a warranty card, and every unit is individually tested before it leaves the factory. For a venue, that means plugging it into a standard outlet is the only setup step required — no technician visit needed before it can start earning."
+      }
+    }
+  ]
+}
+</script>

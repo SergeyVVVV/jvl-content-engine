@@ -1,0 +1,67 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "working_title": "Arcade Machine for Bar ROI: How Fast Is the Payback?",
+  "article_type": "commercial_investigation",
+  "search_intent": "decision_support",
+  "persona": "Mark & Linda Reynolds",
+  "primary_keyword": "arcade machine for bar",
+  "secondary_keywords": [
+    "arcade machine for bar ROI",
+    "arcade ROI",
+    "arcade profitability",
+    "arcade rate of return",
+    "arcade machine payback period",
+    "how much does an arcade machine make",
+    "arcade machine revenue per week",
+    "coin-op arcade profit",
+    "bar entertainment ROI",
+    "arcade machine for venue"
+  ],
+  "audience_summary": "Written for Mark & Linda Reynolds and readers evaluating arcade machines as a real business or venue investment - whether for a home bar they occasionally rent out, a family-owned venue, or simply because they want the same grounded, numbers-first clarity before considering the JVL ECHO for their own space; the piece rewards their preference for proof over hype and honest numbers over marketing gloss.",
+  "article_angle": "Most 'arcade machine ROI' content online is either vague marketing copy or unsupported claims of fast riches. This article treats it as a real small-business decision: it models three explicit, honestly-labeled scenarios (pessimistic, neutral, optimistic), states the probability of each rather than pretending they are equally likely, anchors the math to one real, named machine price ($4,250 USD list price for the JVL ECHO HD3 Commercial Edition) so the arithmetic is checkable, and goes a step further than most competitors by showing what the machine earns in net monthly profit AFTER payback - not just the gross coin-drop number most articles stop at.",
+  "cta_goal": "After finishing the ROI breakdown, the reader should click through to the JVL ECHO product page to review specs, warranty, and commercial-edition details as a concrete next step in evaluating a real machine for their venue or home bar.",
+  "product_fit": "high",
+  "required_sections": [
+    "Why arcade machines are making a comeback in bars and event venues",
+    "How arcade machine ROI actually works: the variables that decide the outcome (foot traffic, venue type, revenue split, seasonality, maintenance, electricity)",
+    "Three honest scenarios: pessimistic, neutral (base case), and optimistic - assumptions and weekly revenue for each",
+    "Comparison table: weekly revenue, key assumptions, payback period, and likelihood for all three scenarios",
+    "What the machine earns after it pays for itself: net monthly profit by scenario, with recurring costs named and subtracted",
+    "Which venue types tend to see the strongest arcade returns",
+    "Practical ways to protect or improve your payback timeline",
+    "Where the JVL ECHO fits into this picture (single dedicated section near the end)",
+    "Frequently asked questions"
+  ],
+  "questions_to_answer": [
+    "How much money does an arcade machine make per week in a bar?",
+    "How long does it take for an arcade machine to pay for itself?",
+    "Is putting an arcade machine in a bar or venue actually profitable?",
+    "What revenue split is typical between a venue and an arcade machine owner?",
+    "How much does it cost to maintain an arcade machine over time?",
+    "Do arcade machines still make money for bars and venues today?",
+    "What type of venue gets the best return on an arcade machine?",
+    "How much electricity does an arcade machine use and does it affect profit?"
+  ],
+  "internal_link_targets": [
+    "https://jvl.ca/en/echo",
+    "https://jvl.ca/en/home"
+  ],
+  "claims_to_verify": [
+    "All weekly revenue figures, foot-traffic assumptions, revenue-split percentages, maintenance costs, and electricity cost estimates used in the three scenarios are illustrative modeling assumptions, not sourced industry statistics - must be clearly labeled as estimates/ranges in the article, not presented as verified data",
+    "Probability weighting assigned to each scenario (pessimistic/neutral/optimistic) is an editorial judgment call and should be reviewed by the business before publishing to ensure it does not overpromise returns",
+    "Confirm the $4,250 USD list price for the JVL ECHO HD3 Commercial Edition is still current at time of publishing, per the knowledge base instruction to re-confirm stale pricing",
+    "Confirm whether JVL or the business has any real operator/customer revenue data that could replace hypothetical assumptions with actual figures before publishing"
+  ],
+  "risks_to_avoid": [
+    "Do not present any of the three scenarios' numbers as verified statistics or cite unsupported sources - they must read as clearly-labeled, reasoned assumptions",
+    "Do not treat the pessimistic and optimistic scenarios as equally likely as the neutral base case - state plainly that neutral is what a typical operator should plan around",
+    "Do not show, name, or caption any branded JVL or ECHO machine in any image above the closing product section - all earlier images must be generic (unbranded cabinet, bar interior, or ROI/data concept visuals) with neutral, non-marketing captions",
+    "Do not let the product appear anywhere in the ROI math itself as if the analysis is specifically about JVL's own machine - the scenario math uses the $4,250 price point as a real, checkable reference, not as a promotional device",
+    "Do not use gamer jargon, esports language, or hype-driven business framing - keep the tone grounded, mature, and numbers-honest throughout",
+    "Do not leave any raw TODO strings in reader-facing prose, headings, or FAQ answers",
+    "Do not omit or blur the named recurring costs (revenue share, maintenance, electricity) in the net-monthly-profit section - each scenario's net figure must show its subtractions clearly",
+    "Do not let the closing JVL ECHO section become a hard sales pitch - it should read as a natural, proof-aware extension of the analysis, consistent with brand tone rules",
+    "Do not frame the $4,250 price as a discount, promotion, or limited-time offer - state once, plainly, as list price",
+    "Do not inflate the persona's business intent - keep language appropriate for a thoughtful homeowner exploring the category, not a professional commercial operator pitch"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "working_title": "Arcade Machine for Bar ROI: How Fast Is Payback?",
+  "article_type": "commercial_investigation",
+  "search_intent": "decision_support",
+  "persona": "Mark & Linda Reynolds",
+  "primary_keyword": "arcade machine for bar",
+  "secondary_keywords": [
+    "arcade machine for bar ROI",
+    "arcade ROI",
+    "arcade profitability",
+    "arcade rate of return",
+    "arcade machine payback period",
+    "bar arcade machine cost",
+    "arcade machine revenue split",
+    "arcade machine for event venue",
+    "coin-op arcade profit",
+    "commercial arcade machine cost"
+  ],
+  "audience_summary": "This article is written for financially careful readers who want an honest, checkable answer before spending money - including small bar and event-venue owners researching real payback math, and proof-oriented homeowners like Mark and Linda who want confirmation that JVL's engineering and business track record hold up under commercial scrutiny before they trust the brand with a premium home purchase.",
+  "article_angle": "Most arcade ROI content online is vague marketing fluff with invented averages presented as certainty. This piece does the opposite: three explicitly labeled scenarios - pessimistic, neutral (base case), optimistic - each with named, transparent assumptions (foot traffic, venue type, revenue split, seasonality, maintenance, electricity), weighted honestly by real-world likelihood rather than treated as equally probable, using one real, checkable machine price throughout so the reader can verify every derived number by hand, followed by a dedicated net-monthly-profit breakdown after payback rather than misleading gross coin-drop figures.",
+  "cta_goal": "Prompt the reader to visit the JVL Echo product page to review the Commercial Edition specifications and confirm current list pricing before running their own venue-specific numbers, while giving homeowners a natural path to the Home Edition overview if their interest is personal rather than commercial.",
+  "product_fit": "medium",
+  "required_sections": [
+    "Why arcade machine ROI questions matter for bar and venue owners",
+    "How arcade machine revenue actually works: revenue split, payment model, and venue type",
+    "The three payback scenarios explained: pessimistic, neutral (base case), optimistic - and how likely each one really is",
+    "Scenario 1 - Pessimistic case: assumptions and payback period",
+    "Scenario 2 - Neutral / most-likely case: assumptions and payback period (what to plan around)",
+    "Scenario 3 - Optimistic case: assumptions and payback period",
+    "What the machine earns after it pays for itself: net monthly profit by scenario",
+    "The recurring costs that quietly erode arcade profit: maintenance, electricity, revenue share, seasonality",
+    "A real machine to anchor the math: the JVL ECHO HD3 Commercial Edition",
+    "How to plan realistically before buying an arcade machine for a bar or venue",
+    "Frequently asked questions"
+  ],
+  "questions_to_answer": [
+    "How much money can an arcade machine make in a bar per month?",
+    "How long does it take for an arcade machine to pay for itself in a bar or venue?",
+    "What is a realistic ROI for a bar arcade machine?",
+    "How is arcade machine revenue typically split between the venue and the machine owner?",
+    "What ongoing costs reduce arcade machine profit after it's installed?",
+    "Is buying an arcade machine for a bar actually profitable?",
+    "What factors affect arcade machine profitability the most: foot traffic, venue type, or season?"
+  ],
+  "internal_link_targets": [
+    "https://jvl.ca/en/echo",
+    "https://jvl.ca/en/home"
+  ],
+  "claims_to_verify": [
+    "Weekly revenue-per-machine ranges assumed for each of the three scenarios are illustrative estimates, not sourced industry statistics - must be reviewed by the business for reasonableness before publishing",
+    "Revenue split percentage between venue and machine owner used in the model needs confirmation as a realistic, defensible industry norm",
+    "Estimated recurring costs (maintenance, electricity, any service fees) used in the net-profit-after-payback section are assumptions and need business sign-off before being presented as typical figures",
+    "Probability weighting language ('neutral case is most likely, pessimistic and optimistic are less likely') reflects editorial judgment, not a cited study, and should be framed as reasoned estimation rather than statistical fact",
+    "Confirm that using the JVL ECHO HD3 Commercial Edition price ($4,250 USD) as the sole machine-cost anchor for a bar/venue ROI article is an approved use of this list price outside the product page context"
+  ],
+  "risks_to_avoid": [
+    "Do not present invented weekly-revenue, split, or cost figures as verified statistics - label them clearly as stated assumptions",
+    "Do not treat the three scenarios as equally likely; the neutral/base case must be explicitly framed as the most probable planning point",
+    "Do not let the product presence exceed the one dedicated section near the end, aside from the price anchor used in the scenario maths",
+    "Do not blur the Home Edition and Commercial Edition - only the Commercial Edition (with bill/coin acceptor) is relevant to a bar revenue model, and this distinction must be stated plainly",
+    "Do not present the $4,250 price as a discount, sale, or promotional offer - state it once, plainly, as a list price",
+    "Do not attribute JVL's RePlay Magazine bartop award history to ECHO specifically",
+    "Do not use gamer jargon, hype language, or inflated promises of profit; keep the tone grounded, numerate, and businesslike throughout",
+    "Do not leave literal 'TODO' text in any reader-facing sentence or FAQ answer",
+    "Do not let recomputed monthly or annual figures drift from the weekly numbers they are derived from - every derived figure must check out arithmetically",
+    "Do not illustrate the article with a branded JVL machine above the dedicated product section, per the editorial-imagery rule for analysis pieces"
+  ]
+}
