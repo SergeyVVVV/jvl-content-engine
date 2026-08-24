@@ -1,0 +1,32 @@
+{
+  "suggested_visuals": [
+    {
+      "section_heading": "Why Arcade Machine ROI Questions Deserve a Clear-Eyed Answer",
+      "type": "image",
+      "purpose": "Ground the topic in a realistic adult venue setting without branding, per the editor requirement that no JVL/ECHO machine appear above the closing product section",
+      "alt_text_proposal": "Bartop arcade machine on the end of a bar counter in a quiet, warmly lit venue",
+      "production_note": "Generic, unbranded bartop-style machine or a tightly cropped angle where no logo is visible. Evening bar lighting, adult setting, no people required."
+    },
+    {
+      "section_heading": "Comparison Table: Weekly Revenue and Payback Period by Scenario",
+      "type": "chart",
+      "purpose": "Let the reader see the seven-fold spread between pessimistic and optimistic payback at a glance",
+      "alt_text_proposal": "Bar chart comparing arcade machine payback period of 41, 12.4 and 5.8 months across pessimistic, base case and optimistic scenarios",
+      "production_note": "Simple horizontal bar chart, three bars, months on the x-axis. Highlight the base-case bar in the brand accent colour and label it 'plan around this'."
+    },
+    {
+      "section_heading": "Net Monthly Profit After Payback: What Happens Next",
+      "type": "chart",
+      "purpose": "Show visually that payback is a crossover point, not an endpoint - the line keeps climbing after month 12",
+      "alt_text_proposal": "Cumulative cash flow chart for a bar arcade machine showing break-even at month 12 and continued profit through month 36",
+      "production_note": "Single line, 0-36 months on x-axis, cumulative net dollars on y-axis, starting at -$4,250. Mark the zero crossing at month 12.4."
+    },
+    {
+      "section_heading": "Where the JVL ECHO Fits Into This Picture",
+      "type": "image",
+      "purpose": "Make the Home vs Commercial Edition distinction concrete by showing the payment hardware that only the Commercial Edition has",
+      "alt_text_proposal": "Close-up of the bill and coin acceptor on a JVL ECHO HD3 Commercial Edition bartop arcade machine",
+      "production_note": "Real product photo of the Commercial Edition acceptor area. This is the first and only place in the article where branded ECHO imagery is permitted."
+    }
+  ]
+}

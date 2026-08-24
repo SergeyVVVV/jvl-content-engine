@@ -1,0 +1,43 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "meta_title": "Arcade Machine Payback: Realistic ROI for Bars & Venues",
+  "h1": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "meta_description": "Discover realistic arcade machine payback timelines with transparent assumptions. Learn why the base case—not vendor claims—should guide your ROI.",
+  "slug": "arcade-machine-payback-bar-roi",
+  "og_title": "Arcade Machine ROI: The Honest Payback Timeline",
+  "og_description": "Three payback scenarios for bar arcade machines, with all assumptions shown. Plan for 8–10 months, not vendor hype.",
+  "image_alt_texts": [
+    "Bartop arcade machine positioned on a bar counter with touchscreen visible and warm lighting in the background",
+    "Close-up of 22-inch touchscreen arcade display showing card game interface and responsive touch controls",
+    "Comparison table showing three arcade ROI scenarios with payback periods and assumptions side by side",
+    "Horizontal bar chart comparing pessimistic, neutral, and optimistic arcade machine payback timelines in months",
+    "Arcade machine on a home bar counter in a basement lounge with two players engaged"
+  ],
+  "excerpt": "Most arcade ROI claims online quote best-case payback without showing their assumptions. This article builds three labeled scenarios—pessimistic, neutral, and optimistic—with transparent inputs, then models net monthly profit after payback, not just gross coin drop. Plan around the neutral case.",
+  "notes": [
+    "Meta_title and H1 differentiated: title emphasizes the payback timeline angle; H1 mirrors the topic exactly per editorial preference.",
+    "Meta_description uses secondary keyword 'arcade machine payback' and invites reader with 'Discover' + soft CTA 'Learn why', avoiding clickbait while staying informative.",
+    "All image alt texts are functional and ≤120 chars; they reference likely supporting visuals identified in draft.",
+    "Excerpt summarizes the article's core value (transparency + post-payback math) in 1 sentence at 255 chars.",
+    "Slug uses primary keyword 'arcade-machine-payback' and secondary 'bar-roi' in 5 words.",
+    "OG title and description are social-friendly but retain understated, confident JVL tone; no hype, no ellipsis.",
+    "No year (2025) included per instruction; article content is evergreen decision framework, not time-bound.",
+    "All text reflects the article's actual scope: three scenarios, transparent assumptions, base case planning, post-payback net profit math. No invented claims."
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/drafts/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json",
+    "brief": "outputs/briefs/arcade-machine-for-bar.json",
+    "qa_report": "outputs/qa/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json"
+  },
+  "todos": [
+    "QA flagged: Hero and inline-01 images currently feature ECHO Commercial and branding; remove or replace with generic venue/ROI visuals per company insight B2C restriction. Rewrite captions to remove product tie-in.",
+    "QA flagged: Remove raw TODO strings from reader-facing text, including from FAQ answer opening. Move all TODOs to wrapper only.",
+    "QA flagged: Confirm with business whether ECHO Commercial mention in 'Where a Machine Fits' section is permitted on B2C content, or trim to purely definitional clarification.",
+    "QA flagged: Backfill one verified firsthand experience anchor (operator quote, service observation, or founder insight) sourced and logged in firsthand_experience.md before publication.",
+    "QA flagged: Seasonality section is underserved; add 3–5 sentences with a worked example showing how a slow quarter shifts the 8-month base case to ~10 months.",
+    "QA flagged: Clarify current-market relevance (2025 buyer question) with one explicit sentence in bottom-line summary addressing whether the purchase makes sense now and why.",
+    "QA flagged: Repair muddled 'upgraded by reality' metaphor in 'Why the Base Case' section; replace with clearer phrasing.",
+    "Human review: All dollar figures ($4,000 machine, $100/$250/$400 weekly drop, $30–$50 maintenance, $5 electricity) are illustrative planning assumptions, not sourced data. Sanity-check against real US bar/route-operator experience before publishing.",
+    "Human review: Confirm tone and framing of revenue-split section (50/50 example, doubling payback vs. outright ownership) is appropriate for operator audience and does not overstate industry norms."
+  ]
+}

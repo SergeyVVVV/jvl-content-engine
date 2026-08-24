@@ -1,0 +1,69 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "working_title": "Arcade Machine for Bar ROI: How Fast Does It Pay Off?",
+  "article_type": "commercial_investigation",
+  "search_intent": "purchase_research",
+  "persona": "Mark & Linda Reynolds",
+  "primary_keyword": "arcade machine for bar",
+  "secondary_keywords": [
+    "arcade machine for bar ROI",
+    "arcade ROI",
+    "arcade profitability",
+    "arcade rate of return",
+    "arcade machine payback period",
+    "how much does an arcade machine make",
+    "commercial arcade machine cost",
+    "bartop arcade for bar",
+    "arcade machine revenue per week",
+    "home arcade machine"
+  ],
+  "audience_summary": "This piece speaks to Mark and Linda's proof-first mindset: they are not running a bar, but a clear-eyed, honestly-labeled financial breakdown of arcade machine economics reassures them that the product category has real, demonstrable value rather than being a novelty. Seeing the numbers worked through openly - including where the model falls short of expectations - builds the kind of trust this audience needs before they will consider the same craftsmanship for their own home.",
+  "article_angle": "Most arcade ROI content quotes optimistic industry averages built on arcade-and-FEC foot traffic, where people show up specifically to play. This article instead builds a bar-specific, deliberately conservative base case - explaining openly why a bar guest's attention is different from an arcade guest's - and shows three transparent, labeled scenarios so a reader can actually check the arithmetic rather than take a marketer's word for it. It closes by being honest about what the calculation cannot capture: the extra round, the returning Friday-night group, the referral that never shows up as a coin in the drop.",
+  "cta_goal": "Reader clicks through to the ECHO product page to compare the Commercial Edition (for venue owners) against the Home Edition, and considers the ECHO Home for their own leisure space with a clear sense of the machine's proven, defensible value.",
+  "product_fit": "medium",
+  "required_sections": [
+    "Why payback period is the right question to ask before buying an arcade machine",
+    "The cost baseline: anchoring the analysis to a real machine price",
+    "How this model is built: methodology and assumptions behind the three scenarios",
+    "Pessimistic scenario: weekly revenue, assumptions, and payback period",
+    "Base case (most likely) scenario: the $170/week figure and why the article assumes it",
+    "Optimistic scenario: weekly revenue, assumptions, and payback period",
+    "How probable is each scenario, and which one should an operator actually plan around",
+    "After payback: net monthly profit by scenario, with recurring costs named and subtracted",
+    "What this model does not count: goodwill, repeat visits, and spend the machine influences but the coin drop never shows",
+    "Bringing the same machine home: where the ECHO Home edition fits for a private leisure space",
+    "Frequently asked questions"
+  ],
+  "questions_to_answer": [
+    "How much does an arcade machine make per week in a bar?",
+    "How long does it take for an arcade machine to pay for itself?",
+    "Is putting an arcade machine in a bar or restaurant actually profitable?",
+    "How much does a commercial arcade machine cost?",
+    "What is a realistic ROI or rate of return for an arcade machine in a small venue?",
+    "Do arcade machines bring in revenue beyond what they collect directly?",
+    "What ongoing costs come with owning an arcade machine in a bar?",
+    "Is there a difference between a commercial arcade machine and a home arcade machine?"
+  ],
+  "internal_link_targets": [
+    "https://jvl.ca/en/echo",
+    "https://jvl.ca/en/home"
+  ],
+  "claims_to_verify": [
+    "The pessimistic and optimistic weekly revenue figures used in the scenarios are not present in the knowledge base and must be sourced from credible, citable industry data (e.g., arcade/FEC operator surveys or trade publications) before publishing, since the SEO rules require all stats to be verified.",
+    "Any recurring monthly costs named in the 'net profit after payback' section (e.g., electricity, maintenance, location revenue share) need real, defensible figures or ranges confirmed by the business before publishing - do not present estimated costs as confirmed facts without a source note.",
+    "The general industry benchmark figures referenced as 'what published sources typically report' for arcade/FEC earnings need an actual citable source before publishing; do not state this as fact without a reference.",
+    "Confirm that JVL is comfortable with the article using the Commercial Edition price ($4,250 USD list) as the cost anchor throughout while the CTA and product section point primarily toward the Home Edition - ensure no reader confusion about which edition the price applies to."
+  ],
+  "risks_to_avoid": [
+    "Do not let ECHO or any JVL product appear anywhere outside the one dedicated section near the end - the rest of the article must read as neutral, honest business analysis.",
+    "Do not blur the Commercial Edition (bill/coin acceptor, $4,250) with the Home Edition (Free Play, no acceptors) - keep pricing and features attributed to the correct edition at all times.",
+    "Do not present the pessimistic or optimistic scenario numbers as sourced fact if they have not been verified - label them clearly as modeled assumptions.",
+    "Do not quantify or invent a dollar figure for the unquantified value (repeat visits, extra rounds, referrals) - state plainly that it is real but not counted in this model.",
+    "Do not let the base-case justification feel defensive - frame the $170/week choice as disciplined and useful for planning, not as a limitation of the product.",
+    "Do not use gamer jargon, esports language, or novelty-gadget framing anywhere in the piece.",
+    "Do not claim the RePlay Magazine award for ECHO specifically - if JVL heritage is mentioned at all, attribute it to JVL's bartop line, not to ECHO.",
+    "Do not render any tables, charts, or numeric comparisons as generated images - all figures belong in markdown tables or plain text.",
+    "Do not open with or lean on luxury-for-status language when introducing the ECHO Home section - keep it grounded in ownership value and craftsmanship.",
+    "Do not let keyword stuffing occur with the required secondary keywords - use natural variations across headings, body copy, and FAQ only."
+  ]
+}

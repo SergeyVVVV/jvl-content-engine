@@ -1,0 +1,105 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "status": "fail",
+  "summary": "Analytically, this is a strong draft: every dollar figure is explicitly labelled illustrative, the arithmetic across all three scenarios is internally consistent and reproducible ($100/$250/$400 weekly drop → 22/8/5 months at $4,000 and a 50/50 split), gross drop is never blurred with net profit, and the article closes almost every SERP content gap (labelled scenarios, comparison table, net-after-payback modelling, base-case reasoning, decision framework, electricity as a real line item). It also correctly refuses to invent industry averages or an Echo price, and logs honest TODOs. The failure is on the product/compliance side, not the analysis. The hero image and first inline image present JVL ECHO Commercial inside a venue with promotional captions ('ECHO Commercial is built for bars and event venues'), which contradicts the company insight's stated B2C/B2B separation rule and the explicit instruction that any Echo mention be a single soft mention confined to the closing section. Those captions also assert specs (22-inch Super Bright LCD touchscreen, halo light) and an absolute performance claim ('in any venue lighting') that are not present in the supplied verified product facts or in claims_to_verify. Secondary issues: no firsthand experience anchor (honestly flagged), raw TODO text left inside reader-facing prose including one FAQ answer, and thin treatment of seasonality/2025 relevance relative to the brief and SERP gaps.",
+  "severity_counts": {
+    "high": 2,
+    "medium": 4,
+    "low": 2
+  },
+  "issues": [
+    {
+      "severity": "high",
+      "category": "factual",
+      "location": "Hero image caption and first inline image caption ('The 22-inch Super Bright LCD touchscreen ensures players can read the game... in any venue lighting'; alt text mentioning 'halo light')",
+      "problem": "Specific product specs — 22-inch screen size, 'Super Bright LCD', 'halo light' — do not appear in the verified product facts supplied by the company insight, and are not listed in claims_to_verify. The caption also makes an absolute performance claim ('ensures players can read the game... in any venue lighting') that is a marketing assertion, not a supported fact.",
+      "recommended_fix": "Either confirm screen size, panel description and halo-light naming against product_echo_home.md and add them to claims_to_verify, or strip the specs from the captions. Replace 'ensures... in any venue lighting' with a neutral descriptive caption (e.g. 'Touchscreen controls with no mechanical joysticks or buttons')."
+    },
+    {
+      "severity": "high",
+      "category": "grounding",
+      "location": "Hero image + caption ('ECHO Commercial is built for bars and event venues') and inline-01 touchscreen image",
+      "problem": "The company insight states ECHO Commercial must not appear on B2C-facing content and that any Echo injection belongs in the closing section only, as a single soft mention. Instead, ECHO Commercial is the visual and captioned anchor of the article's opening and of the revenue-mechanics section — i.e. the product is visually presented as the unit being analysed in the ROI math, which is the exact risk flagged in risks_to_avoid ('the product mentioned must never appear to be the product being analyzed in the ROI math').",
+      "recommended_fix": "Replace the hero and inline-01 images with generic/non-branded venue or ROI-concept visuals (or the residential home-bar image already planned for the closing pivot), and rewrite their captions so no ECHO Commercial venue-revenue framing appears above the closing section. Keep all Echo references textual, soft, and confined to the final product section."
+    },
+    {
+      "severity": "medium",
+      "category": "company_insight",
+      "location": "'Where a Machine Like the JVL Echo Fits Into the Math' — 'The commercial version includes a bill acceptor and a coin acceptor, and it is built for bars, restaurants, and operators. That is the type of machine the math above describes.'",
+      "problem": "This surfaces ECHO Commercial coin-operation and revenue-generating features on B2C-facing content, which the company insight's brief_alignment says claims_constraints.md prohibits — even though the insight's own 'relevant_jvl_angles' permits one brief category-clarity mention. The writer correctly flagged the conflict in TODOs, but the text as written goes slightly beyond neutral clarification by tying the commercial unit to 'the math above'.",
+      "recommended_fix": "Trim to a purely definitional clarification without acceptor detail or ROI linkage (e.g. 'JVL makes two Echo machines: a commercial version for venue operators, and Echo Home, a residential Free Play unit'), and hold publication until the business confirms whether the commercial reference may stay at all."
+    },
+    {
+      "severity": "medium",
+      "category": "grounding",
+      "location": "'Where a Machine Like the JVL Echo Fits Into the Math' — 'TODO: experience anchor needed'",
+      "problem": "The article contains no firsthand experience anchor (no customer story, operator quote, service/production data point, or review aggregate). The Writer honestly flagged this because firsthand_experience.md contains no verified entries, so nothing was fabricated — but the E-E-A-T gap is real and unresolved.",
+      "recommended_fix": "Backfill one verified anchor before publishing — e.g. an approved operator/service observation or a founder/team quote on why sealed touchscreens reduce field service calls — sourced and logged in firsthand_experience.md with verified_by filled."
+    },
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "'Where a Machine Like the JVL Echo Fits Into the Math' (italic TODO paragraph) and FAQ answer 'How long does a commercial-grade arcade machine typically last in a bar...' (opens with 'TODO: source not confirmed')",
+      "problem": "Raw pipeline TODO strings sit inside reader-facing prose, including as the first words of an FAQ answer. This is publication-blocking and, in the FAQ, reads as a broken answer rather than an editorial note.",
+      "recommended_fix": "Move both TODOs into the wrapper todos list only. Rewrite the FAQ answer to open with the hedged general reasoning already present ('build quality and how heavily a unit is played both affect how long it stays reliable...') and drop the inline TODO marker."
+    },
+    {
+      "severity": "medium",
+      "category": "serp",
+      "location": "'Key Variables That Can Shift These Numbers Up or Down' (seasonality paragraph) and article overall",
+      "problem": "SERP research flags month-by-month seasonality impact on payback as a specific content gap, and the brief asks 'Is buying an arcade machine for a bar or event venue worth it in 2025?'. Seasonality gets three sentences and no worked effect on the payback timeline, and the 2025/current-relevance question is only indirectly answered via the phones FAQ. Two of the brief's key questions are therefore underserved.",
+      "recommended_fix": "Add 3–5 sentences (or a short list) under seasonality showing how a slow quarter shifts the base case — e.g. 'three months at half drop pushes ~8 months to ~10' — using the existing illustrative inputs, and add one explicit sentence in the bottom line addressing whether the purchase makes sense in the current market and why the answer is venue-dependent."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "'Why the Base Case... Should Guide Your Decision' — 'Third, you can always be upgraded by reality. You cannot easily be rescued by it.'",
+      "problem": "The metaphor is muddled and the two sentences don't parse cleanly against each other; the point (upside is free, downside is costly) is already made in the preceding paragraph.",
+      "recommended_fix": "Replace with plain phrasing: 'Third, reality can beat your plan for free. It cannot easily bail out a plan that was too optimistic.'"
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Writer wrapper metadata / inline [VISUAL] placeholders",
+      "problem": "The draft contains three inline [VISUAL] placeholders (variables diagram, payback bar chart, home-bar image) but the wrapper metadata contains no suggested_visuals array, so placeholder count cannot be reconciled with a structured visual brief. Wrapper funnel_stage is also empty.",
+      "recommended_fix": "Add a suggested_visuals array with one entry per inline [VISUAL] placeholder (3 entries) and populate funnel_stage as 'commercial_investigation / decision_support' to match the brief."
+    }
+  ],
+  "strengths": [
+    "Radical assumption transparency delivered as promised — every dollar figure is labelled illustrative at the point of use, not just in a footnote.",
+    "All arithmetic checks out and is internally consistent: 4.33-week months, split applied before costs, and payback figures (22 / 8 / 5 months) and net figures ($182 / $502 / $812) all reconcile with the stated inputs.",
+    "Gross coin drop and net profit are never conflated; the post-payback table shows both columns side by side, closing the single biggest SERP gap.",
+    "Scenario likelihood is stated explicitly — neutral is named as the planning case and the optimistic case is called the least likely, satisfying the brief's probability-weighting requirement.",
+    "No invented industry averages, no unnamed studies, no Echo price, no 'best/#1' claims, no trademarked game titles, no get-rich framing.",
+    "Practical differentiators competitors lack: floor-space opportunity cost, one-machine occupancy ceiling, novelty decay treated as a ceiling rather than a floor, a 90-day review date in the decision framework.",
+    "Tone is grounded and business-honest throughout, matching brand voice and the persona's skepticism without forcing home-leisure narrative into the analysis.",
+    "FAQ answers respect grounding limits (refuses to give a weekly earnings figure) and add a genuinely useful second-machine cannibalisation answer.",
+    "Structural variety is good: shared-assumption lists, two tables, a numbered decision framework, and three visual placeholders."
+  ],
+  "recommended_fixes": [
+    "Remove or replace the ECHO Commercial hero and inline-01 images and their captions; keep all Echo presence textual and confined to the closing section per the company insight injection rules.",
+    "Strip unverified specs ('22-inch Super Bright LCD touchscreen', 'halo light') and the absolute 'in any venue lighting' claim from captions, or verify them against product_echo_home.md and add to claims_to_verify.",
+    "Trim the ECHO Commercial paragraph to a neutral Home-vs-Commercial definition with no acceptor detail and no linkage to 'the math above', pending business confirmation on whether the reference may appear at all.",
+    "Move both inline TODO strings out of reader-facing prose into wrapper todos, and rewrite the machine-lifespan FAQ answer so it opens with the hedged general reasoning.",
+    "Add a short worked seasonality effect on the base-case payback and one explicit sentence on current-market ('is it worth it now') framing.",
+    "Backfill one verified firsthand experience anchor into the article once firsthand_experience.md has a confirmed entry.",
+    "Add a suggested_visuals array (3 entries matching the inline placeholders) and populate funnel_stage in the wrapper metadata.",
+    "Fix the 'upgraded by reality / rescued by it' sentence pair for clarity."
+  ],
+  "claims_to_verify_ok": false,
+  "source_inputs_used": {
+    "draft": "outputs/drafts/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json",
+    "brief": "outputs/briefs/arcade-machine-for-bar.json",
+    "serp_research": "outputs/serp_research/arcade-machine-for-bar.json",
+    "company_insight": "outputs/company_insight/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json"
+  },
+  "todos": [
+    "SERP research is mock data ('serp_status': 'mock', no top_results) — coverage and differentiation were evaluated against stated gaps only, not against real ranking competitors. Re-run QA on coverage once live SERP data exists.",
+    "Business confirmation required: may ECHO Commercial be referenced at all on this B2C-facing article, and if so, in what wording?",
+    "Business confirmation required: sanity-check all illustrative revenue, split, maintenance and electricity assumptions against real US bar / route-operator experience before publishing as market-facing guidance.",
+    "Verify the caption specs (screen size, panel type, halo light) against product_echo_home.md; the company insight's relevant_product_facts list does not contain them.",
+    "Editor decision requested by the writer: is the double hedging on the implied ~$6,024 first-year base-case return strong enough, given no sourced market data supports it?",
+    "Editor decision requested by the writer: whether to add the RePlay Magazine heritage claim in the closing pivot using the exact approved wording (currently omitted).",
+    "firsthand_experience.md currently has no verified entries — experience anchoring cannot be satisfied by any agent until it is populated."
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "keyword": "arcade machine for bar",
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "serp_status": "mock",
+  "top_results": [],
+  "dominant_search_intent": "[MOCK] Commercial investigation with a strong transactional undertone — searchers are bar owners, venue managers, or aspiring operators trying to decide whether an arcade machine purchase or placement deal is financially justified before committing capital.",
+  "common_angles": [
+    "[MOCK] Vendor and distributor sales pages framing arcade machines as a 'passive income' or 'low-effort revenue stream' for bar owners",
+    "[MOCK] Operator forum threads (arcade/vending/route operator communities) trading anecdotal weekly earnings figures with heavy variance and no methodology",
+    "[MOCK] Generic 'how much does an arcade machine make' listicles that cite vague industry ranges without showing the underlying math",
+    "[MOCK] Revenue-split explainer content aimed at route operators negotiating placement deals with venue owners, rather than at the venue owner's own investment decision",
+    "[MOCK] Coin-op and amusement industry trade content that assumes B2B operator knowledge and skips basic definitions a first-time buyer would need"
+  ],
+  "common_sections": [
+    "[MOCK] How much can you make with an arcade machine (single blended average figure, no scenario range)",
+    "[MOCK] Best types of arcade machines/games for bars",
+    "[MOCK] Revenue split between venue and machine owner",
+    "[MOCK] Where to place the machine for maximum earnings",
+    "[MOCK] Basic maintenance and troubleshooting tips",
+    "[MOCK] Buy vs lease vs revenue-share placement comparison",
+    "[MOCK] Generic call to action to contact a distributor or route operator"
+  ],
+  "competitor_strengths": [
+    "[MOCK] Route-operator-facing content is usually detailed and credible on how revenue-split deals are structured in practice",
+    "[MOCK] Some vendor pages give concrete example machine prices, which helps ground reader expectations",
+    "[MOCK] Placement and foot-traffic advice (where in the venue to put the machine) tends to be practical and experience-based"
+  ],
+  "competitor_weaknesses": [
+    "[MOCK] Weekly or monthly earnings figures are usually presented as a single confident number with no stated assumptions, making them unverifiable and often misleading",
+    "[MOCK] Almost no ranking content separates the payback period from the ongoing profit that follows it — the two get blurred into one vague 'ROI' claim",
+    "[MOCK] Best-case anecdotes from high-traffic venues are frequently presented as typical, inflating reader expectations",
+    "[MOCK] Maintenance costs and electricity costs are rarely quantified at all, let alone subtracted from revenue before an ROI claim is made",
+    "[MOCK] Seasonality and slow-venue variance are mentioned only in passing, if at all, despite being a major driver of real-world payback timelines",
+    "[MOCK] Content is written for operators already in the amusement business, not for a venue owner evaluating a first-time purchase decision from scratch"
+  ],
+  "content_gaps": [
+    "[MOCK] No transparent, checkable multi-scenario model (pessimistic / base case / optimistic) with stated assumptions the reader can re-run with their own numbers",
+    "[MOCK] No clear treatment of what happens after payback — the ongoing net monthly profit once the machine has paid for itself is essentially absent from ranking content",
+    "[MOCK] No honest discussion of how probable each earnings scenario actually is, versus presenting all outcomes as equally likely",
+    "[MOCK] No worked example tying a real, named list price to a full weekly-to-monthly-to-annual calculation a skeptical reader could verify line by line",
+    "[MOCK] No content distinguishing home-leisure buyers who host events at a secondary property from full-time commercial bar operators, despite this being a real and growing use case",
+    "[MOCK] No clear disclosure of assumptions and limitations, leaving readers unable to judge how much to trust the figures given"
+  ],
+  "differentiation_opportunities": [
+    "Build the article around three explicitly labeled, internally consistent scenarios (pessimistic, base case, optimistic) with every weekly, monthly, and annual figure traceable back to stated assumptions — something typical ranking content never does",
+    "Clearly separate 'time to pay back the machine' from 'ongoing net profit after payback,' framed as two distinct, clearly labeled outputs of the same model",
+    "Anchor the entire model to one real, checkable list price so the reader can substitute their own venue's numbers and re-run the math themselves rather than trusting an opaque average",
+    "Explicitly state which scenario is most probable and should be used for planning purposes, rather than presenting a false sense of equal likelihood across outcomes",
+    "Speak directly to the affluent host-who-also-runs-a-venue persona (lake house, event barn, private bar) that generic operator-forum and vendor content ignores entirely",
+    "Add a dedicated assumptions-and-limitations section for transparency, which almost never appears in this content category and builds meaningful trust with a skeptical, numbers-first reader"
+  ],
+  "paa_answered": [
+    "[MOCK] How much money does an arcade machine make in a bar per week? — typically answered, but usually as one unverified blended figure",
+    "[MOCK] How is revenue usually split between the bar owner and the machine owner? — typically answered reasonably well in operator-facing content",
+    "[MOCK] What ongoing costs and maintenance does an arcade machine in a bar require? — mentioned in passing but rarely quantified"
+  ],
+  "paa_missed": [
+    "[MOCK] What is considered a good ROI for an arcade machine? — rarely given a concrete, defensible benchmark",
+    "[MOCK] How long does it typically take an arcade machine to pay for itself? — usually vague or entirely absent as a distinct calculation",
+    "[MOCK] Does an arcade machine make less money in the off-season or in a slow venue? — seasonality and low-traffic scenarios are typically glossed over",
+    "[MOCK] How much does electricity cost to run an arcade machine continuously? — almost never quantified in ranking content",
+    "[MOCK] Is buying an arcade machine for a bar or event venue actually a good investment? — typically answered with sales-oriented optimism rather than a genuinely weighed, honest assessment"
+  ],
+  "risks_to_avoid": [
+    "[MOCK] Avoid presenting a single average earnings figure as fact the way most vendor and forum content does — it undermines credibility with a numbers-first reader",
+    "[MOCK] Avoid vendor-style enthusiasm ('easy passive income') that typical sales pages lean on, which reads as untrustworthy to a skeptical operator-minded audience",
+    "[MOCK] Avoid burying or omitting maintenance and electricity costs the way most ranking content does — subtracting them is exactly where this article can outperform typical results",
+    "[MOCK] Avoid treating best-case anecdotal earnings as typical, a common distortion in operator-forum-style content",
+    "[MOCK] Avoid gamer or hype-driven language; typical arcade content skews toward enthusiast tone, which conflicts with the grounded business-analysis voice this brief requires"
+  ],
+  "notes_for_writer": [
+    "Lead with the three-scenario model early and keep it the structural spine of the article; typical competitor content buries or omits this entirely, so it is the clearest differentiation lever available",
+    "Show every calculation step (weekly → monthly → annual, revenue minus revenue-split minus electricity minus maintenance) so a skeptical reader can verify the math themselves — this is the single biggest gap in existing content",
+    "Explicitly state that the base case is the one to plan around and that pessimistic/optimistic are not equally probable, per the brief's risk requirements",
+    "Include a distinct, clearly separated section on post-payback net monthly profit — do not let it blend into the payback-period discussion",
+    "Add an assumptions-and-limitations disclosure near the end; this is rare in this content category and will build trust with the target persona",
+    "Keep the JVL ECHO Commercial Edition mention to one soft, honest section near the end, and be explicit that the venue context requires the Commercial (bill/coin acceptor) SKU versus the Home Edition, per the claims-to-verify constraints"
+  ]
+}

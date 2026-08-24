@@ -1,0 +1,152 @@
+{
+  "h1": "Arcade Machine for Bar ROI: How Fast Is the Payback?",
+  "slug": "arcade-machine-for-bar-roi",
+  "primary_keyword": "arcade machine for bar",
+  "secondary_keywords": [
+    "arcade machine for bar ROI",
+    "arcade ROI",
+    "arcade profitability",
+    "arcade rate of return",
+    "arcade machine payback period",
+    "how much does an arcade machine make",
+    "arcade machine revenue per week",
+    "coin-op arcade profit",
+    "bar entertainment ROI",
+    "arcade machine for venue"
+  ],
+  "search_intent": "commercial_investigation / decision_support",
+  "outline": [
+    {
+      "level": "h2",
+      "heading": "Why Arcade Machines Are Making a Comeback in Bars and Event Venues",
+      "purpose": "Set context for why this is a live decision for venue owners now, grounding the reader before the numbers-heavy sections.",
+      "keywords_to_use": [
+        "arcade machine for venue",
+        "bar entertainment ROI"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "How Arcade Machine ROI Actually Works",
+      "purpose": "Explain the real variables that determine payback speed so readers understand the math before seeing scenarios.",
+      "keywords_to_use": [
+        "arcade ROI",
+        "arcade rate of return"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Foot Traffic and Venue Type",
+      "purpose": "Show how customer volume changes weekly revenue potential.",
+      "keywords_to_use": [
+        "arcade machine for venue"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Revenue Split Between Venue and Machine Owner",
+      "purpose": "Explain typical arrangements affecting net earnings, framed as a variable not a fixed fact.",
+      "keywords_to_use": []
+    },
+    {
+      "level": "h3",
+      "heading": "Seasonality, Maintenance, and Electricity Costs",
+      "purpose": "Introduce recurring costs that later get subtracted in the net-profit section.",
+      "keywords_to_use": [
+        "arcade machine payback period"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Three Honest Scenarios: Pessimistic, Neutral, and Optimistic",
+      "purpose": "Present clearly labeled, non-equal-probability scenarios anchored to the $4,250 USD reference price so the math is checkable.",
+      "keywords_to_use": [
+        "arcade machine for bar ROI",
+        "how much does an arcade machine make",
+        "arcade machine revenue per week"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Pessimistic Scenario: Assumptions and Weekly Revenue",
+      "purpose": "Lay out conservative assumptions and resulting weekly revenue estimate.",
+      "keywords_to_use": [
+        "arcade machine revenue per week"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Neutral (Base Case) Scenario: Assumptions and Weekly Revenue",
+      "purpose": "Present the scenario readers should actually plan around, stated plainly as most likely.",
+      "keywords_to_use": [
+        "arcade machine payback period"
+      ]
+    },
+    {
+      "level": "h3",
+      "heading": "Optimistic Scenario: Assumptions and Weekly Revenue",
+      "purpose": "Show the upside case while keeping it clearly labeled as less likely than the base case.",
+      "keywords_to_use": [
+        "coin-op arcade profit"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Comparison Table: Payback Period and Likelihood Across Scenarios",
+      "purpose": "Give a scannable side-by-side view of weekly revenue, assumptions, payback period, and probability for each scenario.",
+      "keywords_to_use": [
+        "arcade machine payback period",
+        "arcade rate of return"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "What the Machine Earns After It Pays for Itself",
+      "purpose": "Go beyond gross coin-drop numbers to show net monthly profit per scenario with recurring costs named and subtracted.",
+      "keywords_to_use": [
+        "arcade profitability",
+        "bar entertainment ROI"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Which Venue Types Tend to See the Strongest Arcade Returns",
+      "purpose": "Help readers assess fit for their own space based on venue characteristics.",
+      "keywords_to_use": [
+        "arcade machine for venue"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Practical Ways to Protect or Improve Your Payback Timeline",
+      "purpose": "Give actionable, honest levers readers can pull to move toward the optimistic end of the range.",
+      "keywords_to_use": [
+        "arcade machine payback period",
+        "arcade ROI"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Where the JVL ECHO Fits Into This Picture",
+      "purpose": "Naturally connect the ROI analysis to the JVL ECHO product page as a concrete next step, without turning the section into a sales pitch.",
+      "keywords_to_use": [
+        "arcade machine for bar"
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Frequently Asked Questions",
+      "purpose": "Placeholder for FAQ Agent to fill with real-user questions on arcade ROI, revenue splits, maintenance costs, and venue fit.",
+      "keywords_to_use": []
+    }
+  ],
+  "internal_link_targets": [
+    "https://jvl.ca/en/echo",
+    "https://jvl.ca/en/home"
+  ],
+  "todos": [
+    "TODO: source not confirmed - reconfirm $4,250 USD list price for JVL ECHO HD3 Commercial Edition is current at time of publishing",
+    "TODO: source not confirmed - confirm whether JVL has real operator/customer revenue data to replace hypothetical scenario assumptions",
+    "TODO: source not confirmed - business review needed on probability weighting assigned to pessimistic/neutral/optimistic scenarios before publishing"
+  ]
+}

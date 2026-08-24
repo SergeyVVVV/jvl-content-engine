@@ -1,0 +1,56 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do arcade machines still make sense in a bar now that everyone has a phone for entertainment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The appeal of a bar arcade machine isn't really about competing with phones - it's about giving people something to do together while they wait or talk, which a phone doesn't offer. Venues with good dwell time (people sitting for a while, in groups) tend to see more use because the machine fills gaps in conversation rather than replacing something else. There's no reliable industry statistic on interest trending up or down; the honest answer depends on whether your crowd already lingers and socialises in the space."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does an arcade machine lose resale value the way other bar equipment does?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, in principle - any specialised equipment depreciates, and a machine with moving mechanical parts (coin acceptors, bill validators) typically depreciates faster than one with fewer wear points. There's no verified data on typical resale value or depreciation curves for arcade machines in commercial settings, so it's safest to treat any future resale value as a bonus rather than build it into your payback math. The scenarios and payback figures elsewhere in this article deliberately exclude depreciation for that reason."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should a venue use a cashless or card payment terminal instead of coins and bills on an arcade machine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cashless payment removes the friction of needing exact change, which can increase play in venues where guests rarely carry cash, but it also introduces per-transaction processing fees that eat into the margin this article's model assumes is untouched. Coin and bill acceptance keeps the arithmetic simple - the money in the box is the money you keep, minus nothing - which is why this article's scenarios are built around cash takings. Whichever route you choose, factor the actual fee structure into your own monthly net before comparing it against the payback figures here."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often does the cash box on a bar arcade machine need to be emptied?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There's no fixed schedule - it depends entirely on play volume and how much cash capacity the machine's bill acceptor holds before it needs clearing. A slow venue might only need a weekly check, while a busy one could need collection several times a week to avoid the acceptor filling up and rejecting further notes. This is one of the unpaid-labour costs the payback model in this article doesn't price, and it's worth timing your own collection routine against your actual traffic rather than a guessed interval."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Would adding a second arcade machine to the same venue double the revenue?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Almost never - a second machine competes for the same pool of players rather than creating a new one, so returns diminish rather than double. It can make sense in a genuinely high-traffic venue where the first machine is regularly occupied and people are visibly waiting to play, but in most single-venue settings a second unit sits underused while the first one earns. Prove out the payback on one machine with real numbers before considering a second."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What comes in the box when you buy a bartop arcade machine like the JVL ECHO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A JVL ECHO ships with the unit itself, a power cord for a standard AC outlet, a USB stick containing the software, and a warranty card. There's no separate installation kit or accessory bundle required - the machine is designed to be plugged in and used without additional setup."
+      }
+    }
+  ]
+}
+</script>

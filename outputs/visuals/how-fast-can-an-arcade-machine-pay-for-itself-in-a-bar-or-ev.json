@@ -1,0 +1,25 @@
+{
+  "suggested_visuals": [
+    {
+      "section_heading": "Does an Arcade Machine Actually Pay for Itself in a Bar?",
+      "type": "diagram",
+      "purpose": "Show the reader up front that a payback figure is the output of six named variables, not a fixed number",
+      "alt_text_proposal": "Diagram showing six variables that determine arcade machine payback in a bar: foot traffic, venue type, revenue split, seasonality, maintenance, and electricity",
+      "production_note": "Simple left-to-right flow diagram, six labelled inputs feeding one 'payback period' output box; neutral, non-salesy styling"
+    },
+    {
+      "section_heading": "Comparing the Three Scenarios Side by Side",
+      "type": "chart",
+      "purpose": "Let a skeptical operator see the payback spread between the three labelled scenarios at a glance",
+      "alt_text_proposal": "Bar chart comparing illustrative arcade machine payback periods: 22 months pessimistic, 8 months neutral, 5 months optimistic",
+      "production_note": "Three horizontal bars, months on the x-axis; include an on-chart note that all figures are illustrative planning assumptions"
+    },
+    {
+      "section_heading": "Where a Machine Like the JVL Echo Fits Into the Math",
+      "type": "image",
+      "purpose": "Show the residential context clearly, so the home version is not visually confused with a commercial bar deployment",
+      "alt_text_proposal": "Bartop arcade machine on a home bar counter in a warm basement lounge with two adults playing",
+      "production_note": "Real photo of the ECHO Home unit in an adult residential space; warm evening lighting; no coin slot or bill acceptor visible in frame"
+    }
+  ]
+}

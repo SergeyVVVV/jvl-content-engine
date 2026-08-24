@@ -1,0 +1,102 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "brief_alignment": "moderate fit — product can be introduced naturally, but only in the dedicated closing section. This article is fundamentally a neutral financial analysis of commercial arcade economics; JVL's product facts are relevant mainly as a real-world price anchor (Commercial Edition) and as a late-stage pivot toward the Home Edition. The persona's proof-first, thin-review-base context makes the disciplined, transparent-modeling approach a strong stylistic match even where ECHO itself is barely present.",
+  "relevant_jvl_angles": [
+    "Use the JVL ECHO HD3 Commercial Edition list price ($4,250 USD) as a real, checkable cost anchor for the payback-period math, rather than a vague industry-average machine cost",
+    "Distinguish commercial vs. home arcade machine economics explicitly using JVL's own two-edition structure (Commercial Edition with bill/coin acceptors vs. Home Edition Free Play with neither) — this directly answers one of the brief's required PAA questions with a real product example",
+    "UVP pillar 'Quietly premium' (30+ years of JVL bartop expertise, designed in Canada/made in USA, individually tested before shipping) supports the authority behind the cost anchor without claiming any specific ROI outcome",
+    "UVP pillar 'Plug and play' and 'Adult-home fit' become relevant only in the final section, when the article pivots from venue economics to a private leisure-space purchase decision for Mark & Linda themselves"
+  ],
+  "relevant_product_facts": [
+    "JVL ECHO HD3 — Commercial Edition: includes bill acceptor ($1, $5, $10, $20; 500-bill capacity) and coin acceptor (quarters); for bars, restaurants, operators; list price $4,250 USD",
+    "JVL ECHO HD3 — Home Edition: Free Play version, no bill validator, no coin acceptor; for residential use; list price $3,990 USD",
+    "Both prices are confirmed list prices in USD and must be used as list price only — never as a discount, sale, or promotional claim",
+    "149 pre-installed, proprietary games; no licensed third-party titles; no downloads, no Wi-Fi required, works 100% offline",
+    "1-Year All-Inclusive Manufacturer Warranty; JVL covers shipping both ways for warranty service",
+    "Each unit is individually tested before shipping, packed in a branded box",
+    "Built on 30+ years of JVL bartop expertise; JVL bartops have been awarded 'Best Bartop Video Game of the Year' by RePlay Magazine multiple times — this is a heritage claim about JVL's bartop line, not an ECHO-specific award",
+    "Designed in Canada, made in the USA",
+    "Touch controls — no mechanical controls to wear out; responsive, with no perceptible lag (relative durability framing only, not an absolute reliability claim)"
+  ],
+  "natural_product_injection_points": [
+    "In the 'cost baseline' section — anchor the payback-period math to the JVL ECHO HD3 Commercial Edition's real list price ($4,250), and clearly state what that price includes (bill acceptor, coin acceptor) so the number is checkable and not a generic industry average",
+    "In the FAQ answering 'Is there a difference between a commercial arcade machine and a home arcade machine?' — use the Commercial Edition vs. Home Edition distinction (acceptors vs. Free Play) as a concrete, sourced example rather than a hypothetical",
+    "In the dedicated closing section 'Bringing the same machine home' — introduce the Home Edition ($3,990, Free Play, no acceptors) for a private leisure space, framed around ownership value and craftsmanship rather than revenue, with a natural link to https://jvl.ca/en/home and the mandatory link to https://jvl.ca/en/echo",
+    "Optionally, in a brief proof-oriented aside near the cost baseline or FAQ — mention the 1-year all-inclusive warranty with two-way shipping coverage and individual pre-shipping testing as a trust signal supporting the price anchor, without turning it into a sales pitch"
+  ],
+  "unique_brand_perspective": [
+    "JVL can own the 'commercial vs. home, clearly separated' framing that no competitor page currently makes explicit — using its own two-edition product structure (acceptors vs. Free Play) as the concrete answer to a genuine buyer confusion point",
+    "JVL's operating rule that proof must compensate for a thin review base (per positioning_uvp.md's current strategic constraint) aligns naturally with this article's disciplined, checkable, non-promotional modeling approach — the brand's honesty-first instinct and this article's differentiation strategy are the same instinct applied to content",
+    "The heritage framing ('30+ years of JVL bartop expertise... multiple RePlay Magazine mentions') gives JVL grounded authority to discuss commercial arcade economics credibly, without needing to claim unverified ROI figures as its own",
+    "JVL's list-price transparency (no discount or promotional framing, edition-specific pricing always named) mirrors the article's own commitment to labeled, non-marketed numbers — this consistency is a brand-level asset a generic e-commerce catalog page cannot replicate"
+  ],
+  "eeat_signals": [
+    "30+ years of JVL bartop expertise, with JVL bartops recognised by RePlay Magazine's 'Best Bartop Video Game of the Year' award multiple times (heritage claim — attribute to JVL's bartop line, not ECHO specifically)",
+    "Designed in Canada, made in the USA — origin/heritage trust signal",
+    "Each unit individually tested before shipping — a manufacturing-quality trust signal",
+    "1-Year All-Inclusive Manufacturer Warranty with JVL covering shipping both ways — a support/ownership-confidence signal",
+    "TODO: requires business confirmation — any real-world venue revenue, payback, or ROI data JVL may have from commercial customers; none is present in the knowledge base and must not be invented",
+    "TODO: source not confirmed — industry benchmark figures for arcade/FEC weekly earnings referenced in the pessimistic/base/optimistic scenarios; these must come from an external, citable source, not from JVL's knowledge base"
+  ],
+  "persona_hooks": [
+    "Mark & Linda are proof-heavy decision-makers who pause at unclear value or unsubstantiated numbers — a transparent, labeled payback model (rather than a marketer's average) is exactly the kind of clarity that builds their trust before considering ECHO for their own home",
+    "Their core fear of 'paying too much for something that feels gimmicky' maps directly onto this article's honest treatment of what a coin-drop revenue model does and does not capture — showing the model's limits reassures rather than oversells",
+    "Their premium model (Apple + Toyota + L.L.Bean + Patagonia — dependable, not flashy) supports using disciplined, non-hyped financial reasoning as a bridge into the ECHO Home pitch, rather than emotional or status-driven language",
+    "Because this audience is not actually running a bar, the commercial ROI analysis functions primarily as third-party proof of the product category's real, demonstrable value — which then transfers credibility to the Home Edition purchase decision"
+  ],
+  "trust_signals": [
+    "Real, edition-specific list pricing stated without discount or promotional framing ($4,250 Commercial Edition, $3,990 Home Edition)",
+    "Clear feature-based distinction between Commercial Edition (bill/coin acceptors) and Home Edition (Free Play, no acceptors) removes buyer confusion",
+    "1-Year All-Inclusive Manufacturer Warranty with shipping both ways covered by JVL",
+    "Each unit individually tested before shipping",
+    "Designed in Canada, made in the USA",
+    "30+ years of JVL bartop expertise with RePlay Magazine recognition (heritage line, not ECHO-specific)",
+    "149 proprietary, pre-installed games requiring no downloads or Wi-Fi — supports a 'ready to generate use' framing for the commercial context, described by gameplay style only"
+  ],
+  "claims_to_verify": [
+    "TODO: requires business confirmation — the pessimistic and optimistic weekly revenue figures used in the scenario modeling are not in JVL's knowledge base and must be sourced from credible, citable industry data before publishing",
+    "TODO: requires business confirmation — any recurring monthly costs named in the 'net profit after payback' section (electricity, maintenance, location revenue share) need real, defensible figures or ranges; do not present estimates as confirmed facts without a source note",
+    "TODO: requires business confirmation — general industry benchmark figures referenced for arcade/FEC earnings need an actual citable external source; do not state as fact without a reference",
+    "TODO: requires business confirmation — confirm JVL is comfortable with the article anchoring its cost analysis to the Commercial Edition price ($4,250) while the CTA and closing section pivot to the Home Edition, and that no reader confusion results about which price applies to which edition"
+  ],
+  "forbidden_claims": [
+    "Do not attribute any ROI, payback period, or weekly revenue figure to JVL as sourced or confirmed fact — all such figures must be modeled assumptions from external, cited sources",
+    "Do not present the Commercial Edition or Home Edition list price as a discount, sale, or limited-time offer",
+    "Do not claim the RePlay Magazine 'Best Bartop Video Game of the Year' award for ECHO directly — it belongs to JVL's bartop line heritage only",
+    "Do not use absolute reliability language such as 'never breaks,' 'cannot fail,' or 'zero downtime' when discussing touchscreen durability or machine dependability",
+    "Do not reference any trademarked arcade game titles (e.g., Pac-Man, Donkey Kong, Galaga, Space Invaders, Frogger) even descriptively",
+    "Do not use '#1,' 'best,' or 'leading' language about ECHO or the arcade category without sourced evidence",
+    "Do not make comparisons against named competitor products or brands without sourced evidence",
+    "Do not surface B2B value propositions (revenue potential, investment framing, coin-operation features) inside the Home Edition / private leisure-space section — keep that section strictly B2C in framing",
+    "Do not invent customer testimonials, reviews, or venue case studies — JVL currently has a thin, unverified review base and none should be fabricated",
+    "Do not make health, safety, legal, compliance, or environmental claims about the machine"
+  ],
+  "risks_to_avoid": [
+    "Blending Commercial Edition features/pricing with Home Edition features/pricing anywhere in the piece — always name which edition a figure applies to",
+    "Letting the ECHO product appear anywhere outside the one dedicated closing section — the rest of the article must read as neutral, non-promotional financial analysis",
+    "Presenting unverified pessimistic/base/optimistic revenue numbers as JVL-sourced or factual rather than clearly labeled external/modeled assumptions",
+    "Framing the B2C-facing Home Edition section with B2B revenue-potential or investment language, which violates the B2C/B2B separation rule",
+    "Using gamer jargon, esports language, or novelty-gadget framing when introducing the ECHO Home section, which conflicts with brand_voice.md",
+    "Opening the ECHO Home section with luxury-for-status language instead of grounded ownership/craftsmanship framing",
+    "Rendering the scenario tables or cost breakdowns as generated images instead of markdown tables or plain text",
+    "Quantifying the 'unquantified value' (repeat visits, referrals, extra rounds) with an invented dollar figure — state plainly that it exists but is not counted"
+  ],
+  "notes_for_writer": [
+    "Anchor the cost-baseline section to the JVL ECHO HD3 Commercial Edition's confirmed list price of $4,250 USD, and explicitly state it includes a bill acceptor ($1/$5/$10/$20, 500-bill capacity) and coin acceptor (quarters) — this is what makes the number checkable rather than a generic industry figure",
+    "When answering the commercial-vs-home PAA question, use the exact distinction: Commercial Edition ($4,250, bill/coin acceptors, for bars/restaurants/operators) vs. Home Edition ($3,990, Free Play, no acceptors, for residential use) — never blur the two",
+    "Do not source any weekly revenue, payback period, or ROI figures from the JVL knowledge base — none exist there; all scenario numbers must come from external, citable industry sources and be labeled as modeled assumptions throughout",
+    "Reserve all ECHO product mentions for the required closing section ('Bringing the same machine home') and the FAQ item on commercial vs. home machines; do not let the product surface in the scenario-modeling or methodology sections per the brief's explicit instruction",
+    "In the closing section, frame the Home Edition around ownership value, craftsmanship, and adult-home fit (den, basement lounge, home bar, cabin) — not around revenue potential or investment logic, to respect the B2C/B2B separation rule",
+    "If heritage is mentioned anywhere (e.g., to support why the Commercial Edition price is credible), use the exact approved framing: 'built on 30+ years of JVL bartop expertise... awarded multiple times by RePlay Magazine' — never attribute the award to ECHO specifically, and never give a count or year"
+  ],
+  "internal_link_targets": [
+    "https://jvl.ca/en/echo",
+    "https://jvl.ca/en/home"
+  ],
+  "todos": [
+    "TODO: source not confirmed — pessimistic and optimistic weekly revenue figures for bar/venue arcade machines",
+    "TODO: source not confirmed — general industry benchmark data for arcade/FEC weekly earnings",
+    "TODO: requires business confirmation — recurring monthly cost figures (electricity, maintenance, location revenue share) for the net-profit-after-payback section",
+    "TODO: requires business confirmation — JVL's comfort with anchoring the article's cost analysis to the Commercial Edition price while the CTA pivots to the Home Edition"
+  ]
+}

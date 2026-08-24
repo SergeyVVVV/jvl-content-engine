@@ -1,0 +1,88 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "brief_alignment": "weak fit — product should appear minimally or not at all. This topic is fundamentally a B2B commercial-investment analysis (foot traffic, revenue split, coin-drop, payback period) built around coin/bill-operated deployment. ECHO Home is explicitly a residential, Free Play unit with no bill acceptor or coin acceptor and is not the product suited to this use case — that functionality belongs to ECHO Commercial, which per claims_constraints.md must not appear on B2C-facing content. The persona connection here is real but secondary: Mark and Linda's numbers-first skepticism toward hype is a useful tone parallel, not a reason to force ECHO Home into a bar-ROI narrative.",
+  "relevant_jvl_angles": [
+    "Brand-voice angle: JVL's 'proof closes the sale' philosophy and aversion to hype-driven claims (brand_voice.md) mirrors this article's own 'radical numeric transparency' differentiation — this is a legitimate tonal alignment, not a product-fit alignment.",
+    "Category-clarity angle: use the ECHO Home vs ECHO Commercial distinction (product_echo_home.md) once, briefly, to help readers understand why a residential machine and a bar-deployment machine are not the same purchase — this serves the reader's understanding rather than pitching a sale.",
+    "Late-stage pivot angle (UVP pillar 4/5 — adult-home fit, quiet premium): after the ROI analysis concludes, a soft pivot toward ECHO Home as a non-commercial, personal-enjoyment purchase for a home bar, den, or basement lounge — explicitly NOT as part of the investment math."
+  ],
+  "relevant_product_facts": [
+    "ECHO Home is the Free Play version — no bill validator, no coin acceptor — built for residential use only (product_echo_home.md)",
+    "ECHO Commercial includes bill acceptor ($1/$5/$10/$20, 500-bill capacity) and coin acceptor (quarters), and is built for bars, restaurants, and operators — this is the product category the article's subject matter actually describes, not ECHO Home",
+    "149 pre-installed, proprietary games — no downloads, no installs, no Wi-Fi required — plug-and-play, works 100% offline",
+    "Each unit is individually tested before shipping",
+    "1-Year All-Inclusive Manufacturer Warranty; JVL covers shipping both ways",
+    "Designed in Canada, made in the USA",
+    "TODO: source not confirmed — no purchase price exists in the knowledge base for either ECHO Home or ECHO Commercial; the brief's request to anchor the worked payback example to 'the Echo's real price' cannot be fulfilled without this figure"
+  ],
+  "natural_product_injection_points": [
+    "In the closing / CTA section only — after the ROI analysis is complete, pivot briefly to ECHO Home as a way for a reader who found the topic personally interesting (rather than as a business decision) to bring a similar arcade experience into their own home, unconnected to the payback math above",
+    "Do NOT inject ECHO Home into the 'three scenarios' section, the revenue-split section, the maintenance/electricity cost section, or the decision-framework section — these are commercial investment contexts that ECHO Home's product facts (Free Play, no acceptors) cannot support without misrepresenting the product"
+  ],
+  "unique_brand_perspective": [
+    "JVL can honestly say it makes two distinct product lines for two distinct buyers (Home vs Commercial) — this is a factual clarification competitors selling a single generic 'arcade machine' cannot offer, and it directly serves a reader who may be confused about which category applies to them",
+    "JVL's brand voice already rejects hype, gimmick framing, and unproven claims (brand_voice.md, positioning_uvp.md) — the article's business-honest, assumption-labeled tone is consistent with how JVL talks about ECHO everywhere else, giving a genuine (not performative) reason for the tonal alignment"
+  ],
+  "eeat_signals": [
+    "Built on 30+ years of JVL bartop expertise (heritage claim — track record across JVL's bartop line, not an ECHO-specific accolade)",
+    "JVL bartops have been awarded 'Best Bartop Video Game of the Year' by RePlay Magazine multiple times — must use exact approved framing and must not attribute the award to ECHO directly",
+    "Each unit individually tested before shipping — an operational quality signal, not a financial-performance signal",
+    "TODO: requires business confirmation — any real-world maintenance cost, electricity cost, or commercial revenue data for ECHO Commercial units in bar deployment, which the knowledge base does not contain"
+  ],
+  "persona_hooks": [
+    "Distrust of gimmicky pitches and vague income claims — the persona's fear of 'something that looks good in ads but disappoints in real life' maps directly onto this article's skeptical, assumption-labeled approach to ROI claims",
+    "Preference for honest proof over hype — 'trust builders: reviews, real-customer proof, written clarity' (persona_echo_home.md) supports the article's own labeled-scenario, non-hype structure",
+    "The persona fear of 'paying too much for something that feels gimmicky or fragile' is the same instinct that should make a bar owner suspicious of unlabeled best-case-only ROI claims — use this shared skepticism honestly, not as a forced bridge to a home-leisure sale",
+    "Only at the very end: the persona's core desire to 'buy something that feels durable, tasteful, and satisfying to own' — for a reader whose interest shifts from investment to personal enjoyment"
+  ],
+  "trust_signals": [
+    "Plug-and-play reliability — touch controls with no mechanical failure and no lag (relevant analogy for discussing machine uptime/maintenance concerns, described generically, not as ECHO Commercial performance data)",
+    "1-Year All-Inclusive Manufacturer Warranty with JVL covering shipping both ways — a genuine ownership-confidence signal, usable only in the closing home-focused pivot, not as commercial ROI support",
+    "Designed in Canada, made in the USA — origin/heritage trust signal, Tier 1 per positioning_uvp.md",
+    "Individually tested before shipping — quality-assurance signal"
+  ],
+  "claims_to_verify": [
+    "TODO: requires business confirmation — no ECHO Home or ECHO Commercial purchase price exists in the knowledge base; a price is required if the article is to use a real JVL unit as a worked payback example, and none can currently be sourced",
+    "TODO: requires business confirmation — whether the business wants ECHO Commercial specifics referenced at all in this content given the B2C/B2B separation rule, or whether the Echo mention should be reframed entirely away from the bar-deployment use case",
+    "TODO: requires business confirmation — all illustrative weekly revenue, revenue-split percentage, foot-traffic, maintenance cost, and electricity cost figures used to build the three scenarios must be reviewed for real-world plausibility; none of these exist in the knowledge base and none may be presented as sourced industry statistics",
+    "TODO: source not confirmed — no industry-average arcade profitability, payback period, or ROI statistic exists in the knowledge base; any such figure used must be independently sourced and cited, not invented"
+  ],
+  "forbidden_claims": [
+    "Do not state or imply that ECHO Home is designed, built, or suitable for coin-operated or bill-operated commercial bar deployment — ECHO Home has no bill acceptor or coin acceptor and is residential-only",
+    "Do not invent or state a purchase price for ECHO Home or ECHO Commercial",
+    "Do not invent or cite an industry-average ROI, payback period, revenue-split percentage, or profitability statistic and present it as verified fact",
+    "Do not attribute the RePlay Magazine 'Best Bartop Video Game of the Year' award to ECHO directly — heritage framing only, exact approved wording required",
+    "Do not use trademarked game names (Pac-Man, Donkey Kong, Galaga, Space Invaders, Frogger, etc.) even descriptively",
+    "Do not use '#1', 'best', or 'leading' without sourced evidence",
+    "Do not make health, safety, legal, compliance, or environmental/sustainability claims",
+    "Do not surface B2B value propositions (revenue potential, investment framing, coin-operation features) in connection with ECHO Home, per the B2C/B2B separation rule in claims_constraints.md",
+    "Do not present pricing, discounts, or promotional claims for any ECHO product"
+  ],
+  "risks_to_avoid": [
+    "Risk of conflating ECHO Home with the commercial bar-deployment use case this article is fundamentally about — the product mentioned must never appear to be the product being analyzed in the ROI math",
+    "Risk of treating pessimistic, neutral, and optimistic scenarios as equally likely — must explicitly state the neutral/base case is the realistic planning assumption",
+    "Risk of blurring gross weekly coin-drop with net monthly profit — every net figure must clearly subtract named recurring costs",
+    "Risk of the single JVL mention reading as a sales pitch, investment endorsement, or category claim beyond what product_echo_home.md supports",
+    "Risk of hype, 'get rich' framing, or gamer/esports jargon anywhere in the piece, which breaks brand_voice.md tone rules and would also misrepresent this as gaming-gear content rather than adult home leisure",
+    "Risk of citing unnamed 'studies' or unsourced industry statistics to manufacture false precision",
+    "Risk of forcing the home-leisure persona narrative onto an operator-facing analytical article beyond the honest, secondary tonal connection the brief itself describes"
+  ],
+  "notes_for_writer": [
+    "Do not build any part of the payback-period math, scenario table, or net-profit calculation around a specific JVL product or price — no such price exists in the knowledge base; use a clearly labeled generic/illustrative machine cost instead, or flag this section as pending business input.",
+    "Keep the single ECHO mention entirely in the closing section, reframed explicitly away from bar/investment use: something like 'if this topic has you thinking about arcade nostalgia for your own home rather than a business decision, ECHO Home is built for exactly that — a residential, plug-and-play machine for a den, home bar, or basement lounge' with a link to https://jvl.ca/en/echo and, if a second link fits naturally, https://jvl.ca/en/home.",
+    "Never say or imply ECHO Home has a bill acceptor, coin acceptor, or revenue-generating capability — those are ECHO Commercial features and must not appear in B2C-facing content per claims_constraints.md.",
+    "Use the RePlay Magazine heritage claim only if it fits naturally in the closing pivot section, using the exact approved wording, and never imply the award applies to ECHO specifically.",
+    "Frame every dollar figure, percentage, and cost estimate used in the scenarios as an explicitly labeled illustrative assumption, not a sourced statistic — this applies to venue foot traffic, revenue split, maintenance, and electricity costs alike.",
+    "Maintain a grounded, non-hype, business-honest tone throughout matching brand_voice.md, since this is also the article's core differentiation strategy against typical vendor-driven ROI content."
+  ],
+  "internal_link_targets": [
+    "https://jvl.ca/en/echo",
+    "https://jvl.ca/en/home"
+  ],
+  "todos": [
+    "TODO: source not confirmed — no ECHO Home or ECHO Commercial purchase price exists in the knowledge base",
+    "TODO: requires business confirmation — clarify whether ECHO Commercial should be referenced at all in this content, or whether the Echo mention should be fully reframed to the home-use case only",
+    "TODO: requires business confirmation — all illustrative revenue, revenue-split, foot-traffic, maintenance, and electricity figures need real-world plausibility review before publishing as US-market guidance",
+    "TODO: source not confirmed — no industry-average arcade profitability, ROI, or payback statistic exists in the knowledge base; any figure used must be independently sourced, not invented"
+  ]
+}

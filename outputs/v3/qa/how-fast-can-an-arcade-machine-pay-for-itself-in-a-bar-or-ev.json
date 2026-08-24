@@ -1,0 +1,118 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "status": "fail",
+  "summary": "This is a strong, unusually disciplined draft: the three-scenario model is internally consistent, every dollar input is openly labelled as a modelling assumption, the Home vs Commercial Edition separation is handled cleanly, and the touchscreen durability point is correctly hedged rather than absolutised. It closes most of the SERP gaps the research identified (post-payback profit, scenario probability weighting, quantified electricity and maintenance, limitations disclosure). However, the closing product section introduces two sets of company facts that do not exist in the claims knowledge base and are not listed in claims_to_verify — 'building bartop machines since 1995', 'the eleventh generation of that line', and a detailed production/QC cycle ('up to seven working days', burn-in, second QC pass). Those are strong factual claims about the business that must be verified or removed. Secondary issues: the fifty-fifty placement payback figure (~28 months) does not reconcile with the article's own stated inputs (~31 months), and every rendered image above the closing product section is a branded, ECHO-captioned visual, which the brief and editor note explicitly forbid.",
+  "severity_counts": {
+    "high": 2,
+    "medium": 3,
+    "low": 5
+  },
+  "issues": [
+    {
+      "severity": "high",
+      "category": "factual",
+      "location": "Where the JVL ECHO Fits Into This Picture — 'JVL has been building bartop machines since 1995 and the ECHO is the eleventh generation of that line.'",
+      "problem": "Neither the founding year (1995) nor the generation count ('eleventh generation') appears in the allowed claims knowledge base or the company insight. The knowledge base permits only the framing '30+ years of JVL bartop expertise' and explicitly discourages attaching counts or years to heritage claims. Neither figure is listed in claims_to_verify.",
+      "recommended_fix": "Replace with the approved framing: 'ECHO is built on 30+ years of JVL bartop expertise' and drop the year and generation number entirely, or move both to claims_to_verify pending business confirmation."
+    },
+    {
+      "severity": "high",
+      "category": "grounding",
+      "location": "Where the JVL ECHO Fits Into This Picture — 'Physical assembly of a unit takes hours... the full cycle to a shippable unit can run up to seven working days - configuration, manual and automated testing, burn-in, a second QC pass, and packing.'",
+      "problem": "This is a specific operational data point about JVL's production process. The knowledge base confirms only 'Each unit individually tested before shipping'; the company insight lists no production-cycle detail and flags real operational data as requiring business confirmation. The claim is not in claims_to_verify, so it currently reads as an unverified experience anchor.",
+      "recommended_fix": "Either cite the verified entry in knowledge/firsthand_experience.md that supports it (and add it to claims_to_verify), or cut back to the confirmed line: 'Each unit is powered on and individually tested before it leaves the factory.'"
+    },
+    {
+      "severity": "medium",
+      "category": "quality",
+      "location": "Revenue Split Between Bar and Machine Owner / Comparison Table section — 'the same play rate stretches payback to somewhere near twenty-eight months'",
+      "problem": "The figure does not reconcile with the article's own stated inputs. Half of base-case monthly gross ($368.33 / 2 = $184.17) less $26.38 recurring and $20 collection travel gives $137.79 net, i.e. ~31 months, not ~28. The accompanying claim that payback 'does slightly worse than double' also understates the effect. In an article whose entire credibility rests on checkable arithmetic, one unreconcilable figure is disproportionately damaging — and it is repeated twice.",
+      "recommended_fix": "Recalculate and restate as approximately 31 months in both places, and adjust 'slightly worse than double' to 'roughly two and a half times longer'."
+    },
+    {
+      "severity": "medium",
+      "category": "product_fit",
+      "location": "Hero image and inline-01 / inline-02 image captions",
+      "problem": "All three rendered images sit above the closing product section and are explicitly branded and captioned as 'JVL ECHO HD3 Commercial Edition', including the hero. The brief risk list and the writer's own editor-check TODO require all imagery above the product section to be generic and unbranded, to protect the article's numbers-first, non-promotional posture.",
+      "recommended_fix": "Swap the hero and the two inline images for unbranded generic bartop visuals with neutral captions, and move any branded ECHO imagery into or below the 'Where the JVL ECHO Fits Into This Picture' section."
+    },
+    {
+      "severity": "medium",
+      "category": "grounding",
+      "location": "Writer todos — 'TODO: experience anchor needed - no verified customer or operator story about real ECHO venue earnings exists'",
+      "problem": "The article contains no verified firsthand experience anchor (no customer story, no named operator, no dated interview quote). The Writer flagged this honestly rather than inventing one, which is correct behaviour, but the gap is real and weakens E-E-A-T on a decision-support topic where a single real venue data point would be the strongest possible differentiator.",
+      "recommended_fix": "Editorial to backfill one verified anchor — e.g. an approved operator placement observation or a JVL service-team note on commercial-venue upkeep — and add it to knowledge/firsthand_experience.md before publishing."
+    },
+    {
+      "severity": "low",
+      "category": "grounding",
+      "location": "Where the JVL ECHO Fits Into This Picture — 'a bill acceptor taking $1, $5, $10, and $20 notes with a 500-bill capacity, and a coin acceptor for quarters'",
+      "problem": "These acceptor specifications come from the company insight document but do not appear in the allowed claims knowledge base, and they are not listed in the article's claims_to_verify block despite being precise hardware figures.",
+      "recommended_fix": "Add the acceptor denominations and 500-bill capacity to claims_to_verify for business confirmation, or reduce to 'includes bill and coin acceptors' until confirmed."
+    },
+    {
+      "severity": "low",
+      "category": "tone",
+      "location": "Net Monthly Profit After Payback — '~96%', '~207%' return column",
+      "problem": "Three-figure percentage returns read closer to investment-pitch content than the brand's restrained, understated register, even though the article immediately qualifies them. The Writer flagged this concern in its own todos.",
+      "recommended_fix": "Lead the table with the dollar figures and either demote the percentage column to a footnote or relabel it 'annual net as a share of purchase price (excludes depreciation and labour)'."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "End of draft — '## Claims to Verify Before Publishing' and '## Open TODOs for Human Review'",
+      "problem": "Internal editorial blocks are rendered inside the draft markdown body. If this markdown flows through to publication unmodified, raw TODO text would appear in the live article, which the brief explicitly prohibits.",
+      "recommended_fix": "Confirm the publishing step strips everything after the FAQ block; keep these sections in the wrapper metadata only."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Visual placeholders across the article",
+      "problem": "No `suggested_visuals` array is present in the writer wrapper metadata, so the required 2–5 entry check and the placeholder-count match could not be performed. In-body there are four `[VISUAL]` placeholders plus three rendered images, and one placeholder ('close-up of the JVL ECHO Commercial Edition bill and coin acceptor area') duplicates the already-rendered inline-01 image.",
+      "recommended_fix": "Add a `suggested_visuals` array matching the inline placeholders, and delete the duplicate acceptor close-up placeholder in the product section."
+    },
+    {
+      "severity": "low",
+      "category": "unsupported_claim",
+      "location": "Revenue Split Between Bar and Machine Owner — 'a fifty-fifty division between operator and location is the arrangement most often described'",
+      "problem": "'Most often described' is a mild claim about market prevalence with no cited source. It is immediately hedged in the next sentence, which limits the risk, but the prevalence framing itself is unsupported.",
+      "recommended_fix": "Change to 'a fifty-fifty division is a commonly cited arrangement, and it is the one this article uses for the placement case' to remove the prevalence assertion."
+    }
+  ],
+  "strengths": [
+    "Every scenario input is explicitly labelled as an illustrative modelling assumption, both up front and again in a dedicated limitations section — precisely the differentiator the SERP research identified as missing from the category.",
+    "The core arithmetic checks out end to end: weekly gross, the 4.333-week monthly conversion, the $26.38 recurring deduction, all three payback figures, the seasonal 31-month case, and the electricity chain (25.2 kWh/wk, $3.78/wk, ~$197/yr) all reconcile.",
+    "Payback period and post-payback ongoing profit are cleanly separated into distinct sections with distinct tables — the single biggest content gap flagged in the research.",
+    "Scenario probability is explicitly ranked with the base case named as the planning figure, satisfying the brief's most important risk requirement.",
+    "The touchscreen durability point stays relative throughout ('lowers the exposure without eliminating it', 'not a guarantee against failure'), correctly avoiding the forbidden absolute-reliability framing.",
+    "The RePlay Magazine heritage sentence uses the exact approved wording, attributed to the bartop line rather than to ECHO.",
+    "Home vs Commercial Edition separation is unusually clear — the article states outright that no payback arithmetic applies to the free-play Home Edition, and links to /en/home for that reader.",
+    "Tone holds a grounded, adult, non-promotional register with no gamer jargon, hype, or affiliate-style enthusiasm; product presence is confined to one late section as required.",
+    "Good structural variety for GEO: two comparison tables, a numbered seven-step method, bulleted limitations, and a substantive FAQ."
+  ],
+  "recommended_fixes": [
+    "Remove or verify 'since 1995' and 'the eleventh generation of that line'; revert to the approved '30+ years of JVL bartop expertise' framing.",
+    "Remove or source the production-cycle paragraph (seven working days, burn-in, second QC pass); if kept, cite the verified firsthand_experience.md entry and add it to claims_to_verify.",
+    "Correct the fifty-fifty placement payback from ~28 months to ~31 months in both locations and adjust the 'slightly worse than double' phrasing.",
+    "Replace all three above-the-product-section images with unbranded generic bartop visuals and neutral captions; move branded ECHO imagery below the product heading.",
+    "Backfill one verified firsthand experience anchor, or accept the gap explicitly at editorial sign-off.",
+    "Add the bill/coin acceptor specifications to claims_to_verify, or soften to 'bill and coin acceptors' pending confirmation.",
+    "Soften or demote the ~96% / ~207% return percentages in favour of the dollar figures.",
+    "Add a `suggested_visuals` array and delete the duplicate acceptor close-up placeholder.",
+    "Confirm the internal 'Claims to Verify' and 'Open TODOs' blocks are stripped before publication."
+  ],
+  "claims_to_verify_ok": false,
+  "source_inputs_used": {
+    "draft": "outputs/v3/drafts/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json",
+    "brief": "outputs/v3/briefs/arcade-machine-for-bar.json",
+    "serp_research": "outputs/v3/serp_research/arcade-machine-for-bar.json",
+    "company_insight": "outputs/v3/company_insight/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json"
+  },
+  "todos": [
+    "knowledge/firsthand_experience.md was not supplied to QA — the production-cycle and pre-shipment testing details could not be traced to a verified entry. Confirm their source before publishing.",
+    "SERP research is flagged as mock data, so coverage and differentiation were assessed against stated gaps rather than live competitor pages.",
+    "The B2C/B2B separation rule in claims_constraints.md prohibits surfacing revenue-potential and coin-operation framing to home buyers. This article is scoped to the Commercial Edition and a secondary-venue persona, and the writer flagged business approval in claims_to_verify — confirm that approval is granted before publication.",
+    "The writer's claims_to_verify block omits the 1995/eleventh-generation heritage claim, the production-cycle detail, and the bill acceptor specifications; add these before sign-off.",
+    "Verify that the article's positioning toward the Commercial Edition SKU and /en/echo is acceptable given the Home Edition is the stated primary B2C priority."
+  ]
+}

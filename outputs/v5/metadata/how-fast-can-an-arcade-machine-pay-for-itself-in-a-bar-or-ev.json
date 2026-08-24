@@ -1,0 +1,40 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "meta_title": "Arcade Machine Payback Period for Bars: 6 Months to 2 Years",
+  "h1": "How Long Does an Arcade Machine Take to Pay for Itself in a Bar?",
+  "meta_description": "See how arcade ROI actually breaks down for bars and restaurants. Discover what payback period to expect based on placement, traffic, and realistic.",
+  "slug": "arcade-machine-payback-period-bar",
+  "og_title": "Arcade Machine for Bar: Real Payback Period & ROI Model",
+  "og_description": "An honest financial breakdown of arcade machine profitability for bars. Model shows 6 months to 2 years payback depending on placement and traffic.",
+  "image_alt_texts": [
+    "Bartop arcade machine positioned on a bar counter next to glassware and seating, showing real-world footprint in a commercial venue.",
+    "Floor plan diagram comparing high-visibility arcade placement near the bar versus low-visibility placement in a corridor or back corner.",
+    "ECHO bartop arcade machine in a finished basement home bar with warm evening lighting and two counter seating positions."
+  ],
+  "excerpt": "An arcade machine in a bar plausibly pays for itself in 6 months to 2 years—not because of the hardware, but because of placement and traffic. This article models three realistic scenarios with visible working so you can check the arithmetic against your own room.",
+  "notes": [
+    "Meta_description uses 'discover' as soft CTA and weaves 'arcade ROI' and 'payback period' naturally without stuffing.",
+    "H1 reframes the topic slightly (from 'how fast' to 'how long') to differentiate from meta_title while remaining ≤65 chars.",
+    "Slug kept to 5 words for clarity; avoids 'ROI' and 'bar' redundancy.",
+    "Article's core finding—a wide bracket driven by venue variables, not hardware—reflected in OG description without clickbait.",
+    "Image alt texts describe three visuals explicitly flagged in draft: bar placement, floor-plan diagram, home-bar setting.",
+    "Excerpt emphasizes the honest modelling angle that differentiates this from vendor-friendly ROI writing, matching the article's tone."
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/v5/drafts/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json",
+    "brief": "outputs/v5/briefs/arcade-machine-for-bar.json",
+    "qa_report": "outputs/v5/qa/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev-revision-1.json"
+  },
+  "todos": [
+    "Verify before publish: both USD list prices ($4,250 Commercial, $3,990 Home) are current; stale prices damage credibility more than no price.",
+    "Verify before publish: the three weekly revenue figures ($50, $170, $410) derive from stated industry sources with a documented 15% bar-context adjustment; confirm business accepts this transparency.",
+    "Verify before publish: $40/month recurring cost is derived from two separate line items (electricity + maintenance) in BusinessDojo general arcade data, not bar-specific; confirm labelling is acceptable.",
+    "Verify before publish: the revenue-share splits (50/50 to 70/30) rest on weaker sources (vending blog, 2016 forum); either upgrade the source or add in-body attribution so reader can weigh evidence.",
+    "Verify before publish: no JVL customer revenue, payback or ROI data exists in knowledge base; confirm whether commercial customer data could replace borrowed FEC benchmarks.",
+    "Human QA: the arithmetic in 'After payback' section stating 'setting aside $35 a month turns pessimistic row close to break-even' does not hold ($177 - $35 = $142, not break-even); rewrite to honest calculation or restate the remainder figure.",
+    "Human QA: two instances of first-person singular survive in final draft ('harsher or kinder than mine' and 'I will not invent figures') despite writer TODO stating conversion to impersonal voice; convert to editorial third person.",
+    "Human QA: FAQ answer on licensing includes regulatory detail ('amusement device permits', 'how coin income is taxed') unsourced and prohibited by guardrails; reduce to pure deferral with no specifics.",
+    "Human QA: FAQ answer on warranty repair mentions 'what a manufacturer warranty typically covers'—generic but may be mapped to JVL's contract by reader; remove the clause and keep only downtime note + direction to confirm.",
+    "Human QA: stale TODO in writer metadata notes 'FAQ section omitted per pipeline rules' but FAQ is present in draft; delete the stale TODO to prevent duplicate FAQ generation downstream."
+  ]
+}

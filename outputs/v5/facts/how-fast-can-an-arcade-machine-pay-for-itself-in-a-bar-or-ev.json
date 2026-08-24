@@ -1,0 +1,284 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "findings": [
+    {
+      "question": "How much revenue does a single arcade machine generate per week in a bar or small venue?",
+      "range": {
+        "low": 50,
+        "typical": 200,
+        "high": 485,
+        "unit": "USD per week per machine"
+      },
+      "sources": [
+        {
+          "title": "Arcade game room: average revenue, profit and margins (2026) – BusinessDojo",
+          "url": "https://dojobusiness.com/blogs/news/tool-revenue-arcade-game-room",
+          "figure": "A well-performing arcade machine generates $200 to $400 in revenue per week... The average benchmark sits around $250 per week per machine",
+          "kind": "industry",
+          "date": "March 7, 2025"
+        },
+        {
+          "title": "What is the profit margin of an arcade game room? – BusinessDojo",
+          "url": "https://dojobusiness.com/blogs/news/arcade-game-room-profit-margin",
+          "figure": "A typical arcade machine in the United States generates between $30 and $70 per day in revenue. On a weekly basis, this translates to approximately $200 to $485 per machine.",
+          "kind": "industry",
+          "date": "October 22, 2025"
+        },
+        {
+          "title": "Average Arcade Revenue and Budget - PartyCenterSoftware",
+          "url": "https://www.partycentersoftware.com/blog/average-arcade-revenue-budget",
+          "figure": "Average arcade game revenues range between $200 to $485 per game per week on an annualized basis.",
+          "kind": "industry"
+        },
+        {
+          "title": "How Much Do Arcade Machines Make Yearly? [Profit Margin] - ProfitableVenture",
+          "url": "https://www.profitableventure.com/income-arcade-machines-make-margin/",
+          "figure": "You can actually make a minimum of $200 per week on a single arcade machine.",
+          "kind": "industry",
+          "date": "August 9, 2023"
+        },
+        {
+          "title": "Are Family Entertainment Centers profitable? - Betson Enterprises",
+          "url": "https://www.betson.com/are-family-entertainment-centers-profitable/",
+          "figure": "The average arcade game will generate $200 per week, based on a facility achieving the average expected volume.",
+          "kind": "vendor",
+          "date": "September 18, 2025"
+        },
+        {
+          "title": "How Much Money Do Arcades Make? - juanminidiy",
+          "url": "https://juanminidiy.com/how-much-money-does-an-arcade-make-arcade-business/",
+          "figure": "a single machine can generate anywhere from $50 to $150 a week, depending on foot traffic",
+          "kind": "unknown",
+          "date": "September 23, 2024"
+        },
+        {
+          "title": "Becoming a Successful Arcade Route Operator: Essential Tips & Insights",
+          "url": "https://arcadeintegrations.com/arcade-route-operator/",
+          "figure": "the average earnings for an arcade machine can be around $20 per week, or $1,040 per year",
+          "kind": "industry",
+          "date": "May 25, 2026"
+        }
+      ],
+      "confidence": "medium",
+      "caveats": "All figures come from general arcade/FEC (family entertainment center) benchmarks where visitors show up specifically to play, not from bar-specific studies. This matches the article's own premise that a bar guest's attention differs from an arcade guest's, so these numbers should be treated as an upper anchor rather than a bar-specific base case. The route-operator source ($20/week) reflects an average across an entire mixed route including weak locations, pulling the low end down; several sources independently converge on ~$200/week as a common 'typical' figure for a reasonably-trafficked single machine."
+    },
+    {
+      "question": "How long does it take for a single arcade/amusement machine to pay for itself (payback period)?",
+      "range": {
+        "low": 5,
+        "typical": 12,
+        "high": 24,
+        "unit": "months per machine"
+      },
+      "sources": [
+        {
+          "title": "Are Ticket Redemption Machines Profitable for Small Arcades? | PALM FUN",
+          "url": "https://www.palm-fun.com/guides/profitability-ticket-redemption-machines-small-arcades.html",
+          "figure": "a machine is considered highly profitable if it pays for its footprint within 6 to 10 months",
+          "kind": "vendor",
+          "date": "May 20, 2026"
+        },
+        {
+          "title": "Are Arcade Racing Games Profitable? A Complete 2026 ROI Analysis - CoinGamesMachine",
+          "url": "https://www.coingamesmachine.com/are-arcade-racing-games-profitable-a-complete-2026-roi-analysis-for-entertainment-venues/",
+          "figure": "The typical payback period per machine ranges from 5 to 14 months.",
+          "kind": "vendor",
+          "date": "May 6, 2026"
+        },
+        {
+          "title": "Amusement Machine Profit: 4 Core Attractions ROI Analysis - gdepark",
+          "url": "https://gdepark.com/amusement-center-return-on-investment-analysis-revenue-contribution-ratios-of-4-core-attractions/",
+          "figure": "most of those units paid for themselves in 14-18 months",
+          "kind": "industry",
+          "date": "July 2, 2026"
+        },
+        {
+          "title": "Arcade Startup Cost in 2026: Budget Guide for Venues | Wahlap",
+          "url": "https://www.wahlap.com/en/news/How-Much-Does-It-Cost-to-Open-an-Arcade-in-2026.html",
+          "figure": "Payback target: often 12-24 months for a well-planned arcade, depending on traffic, rent, machine mix, and operations.",
+          "kind": "vendor",
+          "date": "1 month ago"
+        }
+      ],
+      "confidence": "low",
+      "caveats": "These payback windows are quoted for dedicated arcades/FECs sizing a whole machine mix or a single attraction inside one, not for one machine dropped into an existing bar's foot traffic - the underlying revenue assumptions are not disclosed in most of these sources, so the range should be read as an industry-wide planning benchmark rather than a bar-specific figure. All four sources are vendor or industry-consultancy content with an interest in payback looking achievable; no independent operator-reported payback figure for a bar setting was found."
+    },
+    {
+      "question": "How much does a commercial (coin/bill-acceptor) arcade machine cost to buy?",
+      "range": {
+        "low": 2000,
+        "typical": 5000,
+        "high": 20000,
+        "unit": "USD per machine, one-time"
+      },
+      "sources": [
+        {
+          "title": "How Much Does an Arcade Machine Cost in 2025",
+          "url": "https://www.bdlgame.com/news/how-much-does-an-arcade-machine-cost-in-2025.html",
+          "figure": "Price Range: $5,000 – $10,000+ (Premium titles $15,000+)",
+          "kind": "vendor",
+          "date": "June 12, 2025"
+        },
+        {
+          "title": "How much does an Arcade Machine cost? We break it down. - The Men's Cave",
+          "url": "https://www.themenscave.sg/blog/how-much-does-an-arcade-machine-cost/",
+          "figure": "Estimated price of such arcades will typically start from as low as $2,000, up to $5,000 for a fully featured model",
+          "kind": "unknown",
+          "date": "May 31, 2023"
+        },
+        {
+          "title": "How Much to Invest in an Arcade? Full Startup Cost Breakdown 2025 by MARWEY",
+          "url": "https://www.marweyarcade.com/how-much-to-invest-in-an-arcade-full-startup-cost-breakdown-2025-by-marwey.html",
+          "figure": "Standard Video/Skill Games: $4,000 - $10,000 per unit... Licensed/Redemption Games: $12,000 - $20,000 per unit.",
+          "kind": "vendor",
+          "date": "October 22, 2025"
+        },
+        {
+          "title": "Price Guide: How Much Do Arcade Machines Really Cost? - GM Tech",
+          "url": "https://gm-tech.ltd/blog/price-guide-how-much-do-arcade-machines-cost/",
+          "figure": "New models from reputable manufacturers such as Stern or Jersey Jack typically cost between $4,000 – $10,000",
+          "kind": "vendor",
+          "date": "August 23, 2024"
+        }
+      ],
+      "confidence": "high",
+      "caveats": "Multiple independent vendor and retail sources converge on roughly $4,000-$10,000 for a standard commercial-grade video/skill cabinet, which brackets the article's stated $4,250 anchor price comfortably within the typical range. Premium/licensed or redemption-style cabinets run higher ($12,000-$20,000+); those are not the relevant comparison for a bartop-style unit."
+    },
+    {
+      "question": "What share of arcade machine revenue does the venue keep versus the machine owner/operator?",
+      "range": {
+        "low": "25% to venue (operator keeps 75%)",
+        "typical": "50/50 split",
+        "high": "70% to venue (operator keeps 30%)",
+        "unit": "percent of gross revenue, venue's share"
+      },
+      "sources": [
+        {
+          "title": "Revenue Share or Upfront Purchase: Which Arcade Machine Model Actually Works for Your Business? — JVL",
+          "url": "https://www.jvl.ca/en/blog-and-news/revenue-share-or-upfront-purchase-which-arcade-machine-model-actually-works-for-your-business",
+          "figure": "Most arcade machine revenue-share agreements range from a 70/30 to 50/50 split, with the operator (venue) keeping the larger share in most cases.",
+          "kind": "own_site",
+          "date": "March 17, 2026"
+        },
+        {
+          "title": "Profit split with location owner. | Museum of the Game Forums",
+          "url": "https://forums.arcade-museum.com/threads/profit-split-with-location-owner.385062/",
+          "figure": "I say 75/25 with you getting the 75%",
+          "kind": "forum",
+          "date": "September 1, 2016"
+        },
+        {
+          "title": "The Truth About Vending Machine Commission Splits - DFY Vending",
+          "url": "https://dfyvending.com/vending-machine-commission-splits-negotiation/",
+          "figure": "Typically, commission rates for gross sales range from 10% to 30%, while profit-sharing agreements may reach up to 50%-70% of net profits.",
+          "kind": "industry",
+          "date": "April 3, 2026"
+        }
+      ],
+      "confidence": "low",
+      "caveats": "Only relevant if the machine is placed under a lease/revenue-share arrangement rather than bought outright by the venue, which is the article's actual scenario (the venue owns the machine, per the $4,250 cost anchor) - in an outright-purchase model there is no revenue split at all, so this figure describes a different acquisition model and should not be applied to the base-case math without flagging that distinction. The JVL source is JVL's own site and is not independent evidence; the vending commission data is from an adjacent product category (vending, not arcade), included only as a directional analogy. One forum anecdote goes the opposite direction (75% to the machine owner)."
+    },
+    {
+      "question": "What ongoing monthly costs (electricity, routine maintenance) come with owning one arcade machine?",
+      "range": {
+        "low": 15,
+        "typical": 40,
+        "high": 95,
+        "unit": "USD per month per machine (electricity + routine maintenance combined)"
+      },
+      "sources": [
+        {
+          "title": "What is the profit margin of an arcade game room? – BusinessDojo",
+          "url": "https://dojobusiness.com/blogs/news/arcade-game-room-profit-margin",
+          "figure": "Electricity consumption varies by machine type but typically costs $0.10 to $0.50 per hour of operation. For a machine running 10–12 hours daily, this translates to approximately $20 to $70 per month",
+          "kind": "industry",
+          "date": "October 22, 2025"
+        },
+        {
+          "title": "Arcade Game Room: Break-Even Timeline (2026) – BusinessDojo",
+          "url": "https://dojobusiness.com/blogs/news/arcade-game-room-cost-recovery",
+          "figure": "Machine maintenance averages $100 to $300 per machine annually for routine upkeep, which translates to approximately $8 to $25 per machine monthly.",
+          "kind": "industry",
+          "date": "November 2, 2024"
+        }
+      ],
+      "confidence": "medium",
+      "caveats": "These are per-machine estimates from a general arcade-room cost model, not a bar-specific source; combined low/high bounds were summed from the two line items (electricity $20-$70/mo + maintenance $8-$25/mo) rather than quoted as a single combined figure by either source, so treat the combined range as a derived estimate, not a direct quote. A home-market vendor source (JVL, own_site, excluded from the range above) claims $5-$15/month electricity for a home unit, which is not comparable to commercial-duty-cycle usage."
+    },
+    {
+      "question": "How long does a commercial arcade machine typically last before major refurbishment or replacement?",
+      "range": {
+        "low": 5,
+        "typical": 10,
+        "high": 20,
+        "unit": "years"
+      },
+      "sources": [
+        {
+          "title": "Arcade Game Room: Break-Even Timeline (2026) – BusinessDojo",
+          "url": "https://dojobusiness.com/blogs/news/arcade-game-room-cost-recovery",
+          "figure": "Arcade machines typically last 5 to 8 years before requiring major refurbishment or replacement.",
+          "kind": "industry",
+          "date": "November 2, 2024"
+        },
+        {
+          "title": "How much should I budget for arcade game room repairs? – BusinessDojo",
+          "url": "https://dojobusiness.com/blogs/news/arcade-game-room-budget-maintenance-repairs",
+          "figure": "With proper maintenance and care, most arcade machines last 10–20 years before requiring major refurbishment or replacement.",
+          "kind": "industry",
+          "date": "November 2, 2024"
+        },
+        {
+          "title": "What was the life expectancy of pinball machines BITD? | Museum of the Game Forums",
+          "url": "https://forums.arcade-museum.com/showthread.php?t=227656",
+          "figure": "In commercial use, we kept them on the route for 8 to 10 years.",
+          "kind": "forum",
+          "date": "March 14, 2012"
+        }
+      ],
+      "confidence": "medium",
+      "caveats": "The same publisher (BusinessDojo) gives two different ranges (5-8 years vs. 10-20 years) in two different articles, which is itself the honest finding: lifespan depends heavily on maintenance and machine type, and there is no single agreed figure. The forum figure is decades old and describes electromechanical/early video-era routes, not current hardware."
+    },
+    {
+      "question": "What does a play typically cost the customer (price per credit)?",
+      "range": {
+        "low": 0.5,
+        "typical": 1.0,
+        "high": 5.0,
+        "unit": "USD per play"
+      },
+      "sources": [
+        {
+          "title": "Arcade: Ideal Entry Fee (2026) – BusinessDojo",
+          "url": "https://dojobusiness.com/blogs/news/arcade-game-room-ticket-pricing-guide",
+          "figure": "Pay-Per-Play Model: No entry fee or a minimal cover charge, with games priced individually at $0.50-$1.00 per play.",
+          "kind": "industry",
+          "date": "November 2, 2024"
+        },
+        {
+          "title": "How Much Is It to Play Arcade Games - The Pinball Spot",
+          "url": "https://thepinballspot.com/arcade-machine/how-much-is-it-to-play-arcade-games/",
+          "figure": "Popular arcade games generally charge about $1 per play, while premium titles may cost $1 to $5.",
+          "kind": "unknown",
+          "date": "November 29, 2024"
+        }
+      ],
+      "confidence": "medium",
+      "caveats": "Figures describe general arcade/FEC pricing conventions in the US market today, not a bar-specific survey. A separate forum source (racketboy.com) suggests some operators still price basic titles as low as $0.25, which would pull the low end down further but was not corroborated by a second source, so it was left out of the range."
+    }
+  ],
+  "unanswered": [
+    "What percentage of bar or restaurant customers actually play an arcade machine on a given visit? No survey or operator-reported play-rate figure specific to bars was found; sources described arcade bars qualitatively (nostalgia appeal, social draw) without a play-rate statistic.",
+    "How much additional drink or food spend does an arcade machine generate indirectly (the 'extra round' effect)? Sources confirm qualitatively that games are believed to extend dwell time and support alcohol sales in 'barcade' venues, but no source quantified a dollar or percentage lift attributable to the machine itself, and none should be invented for the article.",
+    "Is there a bar-specific (as opposed to dedicated-arcade or FEC) weekly revenue survey for a single machine? All revenue figures found originate from arcade/FEC-context sources; no study isolating a bar or restaurant location was located within the search budget.",
+    "What is the typical difference in price between a commercial-grade (coin/bill-acceptor) unit and a comparable free-play home unit from the same manufacturer? Only one general source (home-use multi-game units at $500-$1,000 vs. commercial multi-game cabinets at $3,000-$4,500) was found before the search budget was exhausted; this was not pursued further."
+  ],
+  "notes_for_writer": [
+    "The weekly revenue figures in findings are FEC/dedicated-arcade benchmarks, not bar-specific data - this is exactly the gap the article's angle is built to name. It is defensible to state plainly that no bar-specific per-machine revenue study was found, and to use the FEC range as a labeled upper reference point while building a deliberately more conservative bar base case, rather than presenting the FEC figures as if they describe a bar.",
+    "The $4,250 Commercial Edition price sits inside the typical published range ($4,000-$10,000) for a standard commercial video/skill cabinet, which supports using it as a credible, unremarkable cost anchor rather than an outlier.",
+    "The revenue-share/commission figures only apply if a machine is placed on a lease or revenue-share basis; since the article's cost anchor assumes an outright purchase by the venue, that data is not directly usable in the payback math and should not be blended into the base case - flag any use of it as describing a different acquisition model.",
+    "Do not quantify the 'extra round' / repeat-visit / referral value - no source in this research supports a specific number, which matches the brief's own instruction not to invent one.",
+    "Payback-period sources found are for whole arcades or specific attraction categories inside FECs, not single machines in bars; they can support a general statement that published payback benchmarks cluster between roughly 6 months and 2 years for amusement equipment generally, with the explicit caveat that a bar's foot traffic is a different (and by the article's own thesis, likely slower) case."
+  ],
+  "searches_performed": 12
+}

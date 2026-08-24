@@ -1,0 +1,117 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "status": "fail",
+  "summary": "This is a strong, well-differentiated draft: the three-scenario model is transparent, every modelled figure is repeatedly labelled as an illustrative estimate, the neutral case is explicitly weighted as the planning number, recurring costs are named and subtracted line by line, and the closing section correctly pivots the CTA toward the Home Edition per the B2C separation rule. Two ungrounded fact blocks block a pass, however: a set of hardware specifications (22-inch touchscreen, 25-watt four-speaker system with subwoofer, 360-degree swivel base) and an FAQ describing exact box contents, neither of which appears in the supplied company-insight product facts nor in claims_to_verify. There is also a real arithmetic inconsistency in the post-payback profit section (figures are computed on 52 weeks while the text states a 46-week earning year), a raw TODO string left inside a reader-facing FAQ answer, and JVL warranty facts surfaced mid-article before the dedicated product section. Fix the ungrounded specs and the week-count mismatch and this becomes a publishable, credibility-first piece.",
+  "severity_counts": {
+    "high": 2,
+    "medium": 4,
+    "low": 4
+  },
+  "issues": [
+    {
+      "severity": "high",
+      "category": "factual",
+      "location": "Where the JVL ECHO Fits Into This Picture — \"A 22-inch high-definition touchscreen. A 25-watt, four-speaker sound system with a subwoofer. A 360° swivel base...\"",
+      "problem": "These hardware specifications do not appear anywhere in the supplied company insight `relevant_product_facts` (which lists touch controls, reinforced case, 149 games, warranty, offline operation, prices, origin) and are not listed in `claims_to_verify`. As written they read as verified specs and may be invented or mis-remembered.",
+      "recommended_fix": "Either confirm each spec against the ECHO product knowledge base / product page and cite it, or delete the screen size, wattage/speaker count and swivel-base claims and replace with the confirmed facts (touch controls with no mechanical parts, reinforced case, precision-built frame). At minimum add each spec to `claims_to_verify`."
+    },
+    {
+      "severity": "high",
+      "category": "factual",
+      "location": "FAQ — \"What comes in the box with a JVL ECHO Commercial Edition...\" (\"a power cord, a USB stick with the software, and a warranty card... no technician visit needed\")",
+      "problem": "Box contents are stated as fact but are not present in the supplied product facts and are not flagged for verification. This is exactly the kind of specific, checkable product detail a reader will hold the brand to.",
+      "recommended_fix": "Remove the itemised box-contents list and answer only with confirmed facts (plug-and-play, works 100% offline, no Wi-Fi or downloads, each unit individually tested before shipping), or verify the packing list with the business first and add it to `claims_to_verify`."
+    },
+    {
+      "severity": "medium",
+      "category": "factual",
+      "location": "What the Machine Earns After It Pays for Itself — \"All figures above are illustrative estimates based on the weekly numbers earlier in this article, spread across a 46-week earning year.\"",
+      "problem": "The monthly figures are actually derived from a 52-week year, not 46. Neutral: $67.50 x 52 / 12 = $292 (the stated figure); at 46 weeks it would be ~$259. Same for pessimistic ($108 vs ~$96) and optimistic ($682 vs ~$604), and for the $540/month owner-operator figure. This contradicts the article's own stated ground rule and inflates post-payback profit by roughly 13% — damaging in a piece whose whole differentiator is checkable arithmetic.",
+      "recommended_fix": "Recompute all monthly figures at 46 earning weeks (roughly $96 / $259 / $604 gross share, nets ~$58 / ~$216 / ~$551, and revise the 'close to $9,000 over three years' and '$540 a month' lines accordingly), or state plainly that the monthly view uses a full 52-week year and explain why."
+    },
+    {
+      "severity": "medium",
+      "category": "grounding",
+      "location": "FAQ — \"Can a used or refurbished arcade machine make sense for a bar or venue?\" (\"TODO: source not confirmed for typical used-market pricing or reliability figures.\")",
+      "problem": "A raw TODO string is left in reader-facing FAQ prose. Both the brief and the company insight explicitly forbid surfacing unresolved TODOs to the reader.",
+      "recommended_fix": "Delete the TODO sentence from the answer and move the note into the wrapper `todos` / `claims_to_verify` array instead. The answer already stands on its own without it."
+    },
+    {
+      "severity": "medium",
+      "category": "company_insight",
+      "location": "Wrapper metadata / whole article — \"TODO: experience anchor needed\"",
+      "problem": "No firsthand experience anchor (customer story, founder/team quote, operational data point, review aggregate) is present. The Writer flagged this honestly, and only product-fact E-E-A-T signals (30+ years bartop expertise, individually tested units, warranty, designed in Canada / made in USA) were used — but the gap is real and this is a decision-support article where one grounded operator observation would materially raise trust.",
+      "recommended_fix": "Editorial to backfill one verified anchor from firsthand_experience.md once cleared — e.g. a confirmed operator or venue observation about placement or maintenance. Do not invent one; leave the flag until a verified entry exists."
+    },
+    {
+      "severity": "medium",
+      "category": "product_fit",
+      "location": "Seasonality, Maintenance, and Electricity Costs — \"Coverage is a one-year all-inclusive manufacturer warranty, with return shipping covered both ways.\"",
+      "problem": "JVL-specific warranty terms are stated mid-article with no subject attached, so they read as if they describe arcade machines generally. This both pre-empts the dedicated closing product section (against the insight's instruction to keep JVL specifics to the closing section) and risks the reader assuming any machine ships with this coverage.",
+      "recommended_fix": "Reframe generically — e.g. 'Ask what the manufacturer warranty covers and who pays return shipping; year-one coverage moves the repair risk off you' — and keep the specific one-year all-inclusive JVL terms in the closing ECHO section only (where they already appear)."
+    },
+    {
+      "severity": "low",
+      "category": "unsupported_claim",
+      "location": "FAQ — \"Is an arcade machine a better bar investment than a pool table or jukebox?\"",
+      "problem": "Unhedged comparative assertions about other product categories ('Pool tables have low per-play revenue but almost no upkeep', 'jukeboxes have lost pull now that guests carry their own music library') are stated as fact with no grounding.",
+      "recommended_fix": "Hedge both clauses ('tend to', 'in most rooms') or reframe as the writer's reasoning rather than category fact. The answer's honest 'no universal winner' close is good and should stay."
+    },
+    {
+      "severity": "low",
+      "category": "grounding",
+      "location": "Where the JVL ECHO Fits Into This Picture — \"149 pre-installed games across six categories - cards, puzzles, trivia and word games, bar-sports classics, score chasers and more\"",
+      "problem": "Describing games by style is correct per the insight, but 'bar-sports classics' and 'score chasers' do not map cleanly to the six confirmed categories (Action, Classic, Cards, Puzzle, Quiz, Adult) and could read as implying specific licensed titles.",
+      "recommended_fix": "Align the descriptors more closely to the confirmed categories — e.g. 'cards, puzzles, trivia and quiz games, action and classic arcade styles' — while keeping the note that all titles are JVL's own."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Wrapper metadata `todos` — \"FAQ section intentionally omitted - to be generated by the FAQ Agent\"",
+      "problem": "The metadata says the FAQ was omitted, but the draft contains a full seven-question FAQ section. This inconsistency will confuse downstream agents and human editors.",
+      "recommended_fix": "Remove that TODO from the wrapper metadata since the FAQ is present, or clarify that the inline FAQ is provisional and pending FAQ Agent review."
+    },
+    {
+      "severity": "low",
+      "category": "quality",
+      "location": "Wrapper metadata / inline placeholders",
+      "problem": "No `suggested_visuals` array is present in the wrapper metadata, and the article carries six inline `[VISUAL]` placeholders — above the 2–5 guidance. Visual coverage itself is good (three rendered images plus logical diagram/chart placements), so this is cosmetic and a metadata gap rather than a content gap.",
+      "recommended_fix": "Add a `suggested_visuals` array of 2–5 entries matching the highest-value placeholders (payback flow diagram, recurring-cost chart, post-payback profit chart) and trim or consolidate the lower-value decorative placeholders."
+    }
+  ],
+  "strengths": [
+    "Excellent claims discipline on the modelling: every scenario figure is repeatedly and explicitly labelled an illustrative estimate, with the single hard number ($4,250 Commercial Edition list price) named as the fixed anchor — exactly the SERP differentiation opportunity.",
+    "Probability weighting is handled honestly and stated early and repeatedly ('the neutral case is the one to plan around'), closing the gap the SERP research flags as almost universally missed.",
+    "The post-payback net monthly profit section fully covers the strongest content gap, with repairs, cleaning and power subtracted line by line per scenario.",
+    "All weekly scenario arithmetic checks out (40 x $1.25 = $50, 90 x $1.50 = $135, 180 x $1.75 = $315, and the resulting 283 / 74 / 30-week payback figures).",
+    "Electricity and maintenance PAA gaps are answered directly with concrete, hedged ranges instead of hand-waving.",
+    "Tone is disciplined and on-brand: no 'passive income' language, no gamer or esports jargon, no hype, and it openly tells the reader not to buy on the weak case.",
+    "Branding restrictions respected — no branded JVL/ECHO machine appears in imagery or captions above the closing product section, and JVL is reserved for a single dedicated section.",
+    "The RePlay Magazine heritage claim is correctly scoped to the bartop line rather than attributed to ECHO, and the Home vs Commercial edition distinction (acceptors, prices) is stated plainly and accurately.",
+    "The close pivots to the Home Edition and /en/home rather than positioning ECHO as an income vehicle, respecting the B2B/B2C separation rule."
+  ],
+  "recommended_fixes": [
+    "Verify or remove the ungrounded hardware specs (22-inch touchscreen, 25-watt four-speaker system with subwoofer, 360-degree swivel base) in the closing ECHO section.",
+    "Verify or remove the box-contents detail in the 'what comes in the box' FAQ; fall back to confirmed plug-and-play / offline / individually-tested facts.",
+    "Recompute the post-payback monthly figures at 46 earning weeks, or restate the stated week basis so the arithmetic matches the article's own ground rules.",
+    "Delete the raw 'TODO: source not confirmed...' string from the used/refurbished FAQ answer and move it to the wrapper todos.",
+    "Make the mid-article warranty mention generic and keep JVL-specific warranty terms in the closing section only.",
+    "Hedge the pool table / jukebox comparative claims in the FAQ.",
+    "Align the game-category descriptors to the six confirmed categories.",
+    "Add a `suggested_visuals` array (2–5 entries) and reconcile it against the inline `[VISUAL]` placeholders; fix the contradictory 'FAQ omitted' metadata note."
+  ],
+  "claims_to_verify_ok": false,
+  "source_inputs_used": {
+    "draft": "outputs/v2/drafts/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json",
+    "brief": "outputs/v2/briefs/arcade-machine-for-bar.json",
+    "serp_research": "outputs/v2/serp_research/arcade-machine-for-bar.json",
+    "company_insight": "outputs/v2/company_insight/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json"
+  },
+  "todos": [
+    "SERP research was supplied in mock status with no live top_results, so coverage and differentiation were assessed against the mock angles, gaps and PAA lists only — re-check against real SERP data before publishing.",
+    "Business confirmation still outstanding on: current accuracy of both list prices, the scenario probability weightings, and whether any real operator revenue data exists to replace the hypothetical model.",
+    "Legal/brand sign-off still needed on publishing coin-op economics to a home-buyer persona (writer correctly flagged this) and on whether a disclaimer box is required at the top.",
+    "Experience anchor backfill required from a verified entry in knowledge/firsthand_experience.md; writer's honest TODO flag should remain until that entry exists.",
+    "Wrapper metadata `funnel_stage` is an empty string — populate it (commercial investigation / decision support) for downstream metadata generation."
+  ]
+}

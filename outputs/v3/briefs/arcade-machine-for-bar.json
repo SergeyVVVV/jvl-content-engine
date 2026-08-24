@@ -1,0 +1,69 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "working_title": "Arcade Machine for Bar ROI: A Real Payback Timeline",
+  "article_type": "commercial_investigation",
+  "search_intent": "decision_support",
+  "persona": "Mark & Linda Reynolds",
+  "primary_keyword": "arcade machine for bar",
+  "secondary_keywords": [
+    "arcade machine for bar ROI",
+    "arcade ROI",
+    "arcade profitability",
+    "arcade rate of return",
+    "arcade machine payback period",
+    "arcade machine revenue per week",
+    "bar arcade machine investment",
+    "arcade machine monthly profit",
+    "arcade machine cost",
+    "arcade machine for venue"
+  ],
+  "audience_summary": "This article speaks to affluent, home-centred readers like Mark and Linda who host often and may also own or help run a secondary leisure property - a lake house, event barn, or private venue with a bar area - and want a clear-eyed, numbers-first answer to whether an arcade machine there could pay for itself, not just a nostalgia pitch.",
+  "article_angle": "Most 'arcade machine ROI' content online is either operator-forum guesswork or vendor sales copy. This article models three explicitly labeled, honestly-weighted payback scenarios (pessimistic, base case, optimistic) using one real, checkable machine price, shows the full weekly-to-monthly arithmetic so a skeptical reader can verify every number themselves, and separates the payback period from the ongoing net profit that follows it - something almost no existing article does cleanly.",
+  "cta_goal": "After understanding the realistic economics, the reader should click through to the JVL ECHO product page to review the machine's specs, included features, and pricing detail for themselves as part of their own venue or home-bar investment research - not to buy on impulse, but to take the next informed research step.",
+  "product_fit": "high",
+  "required_sections": [
+    "Why arcade machine ROI questions matter and why most online answers are too vague to trust",
+    "What actually drives arcade machine profitability: foot traffic, venue type, revenue split, seasonality, maintenance, electricity",
+    "Three scenario models explicitly labeled pessimistic, neutral/base case, and optimistic, with assumptions stated for each",
+    "Comparison table: weekly revenue, key assumptions, and payback period in months for all three scenarios",
+    "How probable each scenario really is, and why the neutral/base case is what an operator should plan around",
+    "What the machine earns per month after it has paid for itself: net monthly profit by scenario with named recurring costs subtracted",
+    "How this analysis was built: the $4,250 JVL ECHO HD3 Commercial Edition list price as the anchor, and how to re-run the math with your own numbers",
+    "Where the JVL ECHO fits into this picture: a single, honest, soft-touch section near the end",
+    "FAQ block addressing common objections and follow-up questions",
+    "Assumptions and limitations disclosure"
+  ],
+  "questions_to_answer": [
+    "How much money does an arcade machine make in a bar per week?",
+    "What is considered a good ROI for an arcade machine?",
+    "How long does it typically take an arcade machine to pay for itself?",
+    "How is revenue usually split between the bar owner and the machine owner?",
+    "What ongoing costs and maintenance does an arcade machine in a bar require?",
+    "Is buying an arcade machine for a bar or event venue actually a good investment?",
+    "Does an arcade machine make less money in the off-season or in a slow venue?",
+    "How much does electricity cost to run an arcade machine continuously?"
+  ],
+  "internal_link_targets": [
+    "https://jvl.ca/en/echo",
+    "https://jvl.ca/en/home"
+  ],
+  "claims_to_verify": [
+    "Confirm the $4,250 USD JVL ECHO HD3 Commercial Edition list price is still current at time of publishing, and that it is presented strictly as a list price, never as a discount or promotional offer",
+    "Confirm the business is comfortable with an article anchored to the Commercial Edition (bill/coin acceptor SKU) being used to drive traffic toward the /en/echo page, given the primary sales goal is the Home Edition",
+    "Confirm that all weekly revenue figures, revenue-split percentages, foot-traffic assumptions, maintenance costs, and electricity cost estimates used in the three scenarios are clearly labeled as illustrative modeling assumptions for reader-verifiable math, not sourced or cited industry statistics",
+    "Confirm no claim in the article implies the JVL ECHO Home Edition includes a bill or coin acceptor, since only the Commercial Edition includes that hardware",
+    "Confirm the RePlay Magazine 'Best Bartop Video Game of the Year' recognition, if mentioned at all, is framed as JVL's bartop line history and not attributed to ECHO specifically, per knowledge base guidance"
+  ],
+  "risks_to_avoid": [
+    "Do not present the pessimistic, base-case, and optimistic scenarios as equally likely - the base case must be clearly framed as the one to plan around",
+    "Do not cite or imply external market statistics, studies, or sources that cannot be verified; all figures must be openly stated as modeling assumptions",
+    "Do not let any derived monthly or annual figure disagree with the weekly number it was calculated from - every scenario's math must be internally consistent and checkable",
+    "Do not use the $4,250 price anywhere as a sale, discount, or limited-time offer - state it once, plainly, as a list price",
+    "Do not show, name, or caption any branded JVL or ECHO machine in any image above the closing product section; keep all earlier imagery generic and unbranded",
+    "Do not let the ECHO product section balloon beyond one dedicated section near the end - keep product presence soft everywhere else, per editor requirement",
+    "Do not blur the distinction between the Home Edition and Commercial Edition; be explicit that the venue/bar context calls for the Commercial Edition (bill and coin acceptor) while home leisure use calls for the Home Edition",
+    "Do not use gamer, esports, or hype-driven language; keep the tone of a grounded, mature business analysis throughout, consistent with brand voice rules",
+    "Do not force an artificial bridge between the operator-economics topic and the home-buyer persona; keep the framing plausible (e.g., a host who also runs or is considering a small venue) rather than contradictory",
+    "Do not leave any raw TODO placeholder text in the published article body or FAQ answers"
+  ]
+}

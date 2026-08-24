@@ -1,0 +1,39 @@
+{
+  "topic": "How Fast Can an Arcade Machine Pay for Itself in a Bar or Event Venue?",
+  "meta_title": "Arcade Machine Payback Period: Bar ROI in 14 Months",
+  "h1": "How Fast Does an Arcade Machine Pay for Itself in a Bar or Venue?",
+  "meta_description": "Learn how arcade machine payback works in bars and event venues. See realistic ROI timelines, revenue splits, and what a commercial unit actually.",
+  "slug": "arcade-machine-payback-bar-roi",
+  "og_title": "Arcade Machine Payback Period: Bar ROI in 14 Months",
+  "og_description": "Honest arcade machine ROI math for bars: payback timeline, monthly profit, and the variables that actually move the numbers. Compare three realistic scenarios.",
+  "image_alt_texts": [
+    "Bartop arcade machine installed on a bar counter in a pub setting",
+    "Comparison table showing three payback scenarios for arcade machines with revenue, payback period, and monthly profit",
+    "JVL ECHO HD3 Commercial Edition bartop arcade machine with detail of bill acceptor and coin mechanism"
+  ],
+  "excerpt": "Most arcade ROI claims are vague or inflated. This analysis models three explicit scenarios—pessimistic, neutral, and optimistic—with transparent assumptions so you can verify every number. On a base case of $75 weekly drop, a commercial bartop machine pays for itself in roughly 14 months and then nets about $304 monthly.",
+  "notes": [
+    "Meta title and H1 differentiated by question framing vs. outcome focus, per style requirements",
+    "Meta description weaves in 'arcade machine payback' and 'bar ROI' as secondary keywords naturally without stuffing",
+    "Meta description complements title (title gives outcome, description explains what reader will learn) and ends with period, not ellipsis",
+    "Excerpt summarizes the three-scenario approach and base-case result without duplicating the meta language",
+    "Slug uses primary keyword 'arcade machine' with 'payback' and 'bar roi' in natural hyphenated form",
+    "Alt texts cover the hero image, the comparison table, and the product section image with functional descriptions suitable for screen readers",
+    "Tone stays understated and confident throughout (no 'amazing', 'shocking', or 'secret' language)"
+  ],
+  "source_inputs_used": {
+    "draft": "outputs/v4/drafts/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev.json",
+    "brief": "outputs/v4/briefs/arcade-machine-for-bar.json",
+    "qa_report": "outputs/v4/qa/how-fast-can-an-arcade-machine-pay-for-itself-in-a-bar-or-ev-revision-1.json"
+  },
+  "todos": [
+    "Human must verify that the $4,250 USD list price for JVL ECHO HD3 Commercial Edition is current before publication; stale pricing invalidates the entire ROI model",
+    "Human must confirm with business stakeholders that the three weekly-revenue assumptions ($30, $75, $160) are defensible illustrative estimates, not sourced industry data",
+    "Human must resolve the FAQ section contradiction: draft contains FAQ while metadata states it was deliberately omitted for downstream FAQ Agent; either remove FAQ or delete the conflicting TODO bullets",
+    "Human must remove or rewrite two FAQ answers that contain literal 'TODO: source not confirmed' tokens in reader-facing prose ('Do bars need a permit' and 'Is an arcade machine good for occasional venues'); these must be hedged to reasoning or moved to claims_to_verify",
+    "Human must either add the Commercial Edition payment-hardware specification (bill acceptor $1/$5/$10/$20, 500-bill capacity, quarter coin acceptor) to claims_constraints.md before publishing, or strike the spec table row and six-week cash-out paragraph and replace with generic approved language about coin/bill acceptance",
+    "Human must verify the waterfall diagram placeholder: base case assumes 0% revenue share but the illustration brief mentions 'reducing through revenue share'; either clarify that waterfall is operator-placement case or remove revenue-share reference from base-case illustration",
+    "Human must insert 'at minimum' hedge into the pre-shipment test description ('test covering, at minimum, system boot, the touchscreen...')",
+    "Human must resolve FAQ assertion tone: answers assert industry norms ('most bars', 'typically') without the labeled-assumption discipline the body uses throughout; hedge each generalization to reasoning rather than observation, or move to claims_to_verify"
+  ]
+}
