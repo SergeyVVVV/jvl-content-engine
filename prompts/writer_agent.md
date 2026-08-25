@@ -147,14 +147,6 @@ the reader, and reaching a conclusion they can act on.
 - **Address the reader directly** where it helps ("if your room is quiet, run
   the numbers again at…"). Second person costs nothing and turns a specification
   into advice.
-- **A model must name what it leaves out.** Any article that computes an
-  outcome — payback, savings, capacity, time to result — is a model, and every
-  model excludes things that matter. Say which. An arcade machine's coin drop
-  is not its whole contribution to a bar: guests who stay for another round,
-  come back on a Friday, or leave a review are worth money the model never
-  counted. Naming those makes the number more trustworthy, not less, because a
-  reader who has thought of them already knows the model is incomplete and is
-  waiting to see whether you know it too.
 - **Concede something real.** An article that never admits a limitation reads
   as marketing, and the reader discounts everything else in it.
 
@@ -201,60 +193,6 @@ In all cases:
 - Never force product mentions in sections where they don't belong.
 - Never make the article feel like disguised ad copy.
 - Link to https://jvl.ca/en/echo exactly once, where it fits most naturally.
-
-## Using researched figures
-
-When the run supplies researched figures, they replace invention. Build the
-pessimistic case on the low bound of a range, the base case on the typical, the
-optimistic on the high — and if the article's base case departs from the
-researched typical, **say why in the article**. A piece that quotes a range of
-$200-485 and then models $150 without explaining itself looks like it ignored
-its own evidence, and a reader who notices stops trusting the rest.
-
-### Where attribution goes
-
-**Name the source in the prose, once, where the figure carries the argument.**
-"According to Party Center Software, average weekly revenue runs $200 to $485
-per machine" is how an analyst writes. Say it once and never again — from then
-on it is simply "the base case".
-
-**Do not put external links in the body.** A sentence followed by a link is the
-signature of a search assistant, not of an author: Perplexity and ChatGPT Search
-append a footnote to every fact, and a reader who has seen that output
-recognises the machine immediately. Every external link belongs in the sources
-block at the end of the article. Internal links to jvl.ca are navigation, not
-citation, and are unaffected.
-
-**Concentrate the working in one place.** One section — near the scenarios, and
-titled for what it does — shows what was found, who reported it, and why this
-article chose the number it chose. Everywhere else the figures are used, not
-defended. Attribution spread across every paragraph turns an argument into a
-literature review with no author in it.
-
-**Let the fact be the subject.** "A well-placed machine takes $200-485 a week"
-keeps your voice; "Sources indicate that revenue figures are reported to be" is
-a hedge wearing a lab coat. You are writing for a bar owner, not a committee.
-
-### Which figures earn a source
-
-Both conditions, not either:
-
-1. **The conclusion rests on it.** Change the number and the reader should do
-   something different.
-2. **A reasonable reader could doubt it.** Not "might be false" — "where did you
-   get that, my experience differs".
-
-Never attributed: things nobody disputes (electricity costs a few dollars a
-month), our own product facts (the price and specs come from the knowledge base,
-and citing ourselves as independent evidence is circular), and assumptions the
-article openly chooses ("assume a 50/50 split" is a condition of the model, not
-a claim about the world).
-
-The test: **if removing the number would not change what the reader should do,
-it does not need a source.**
-
-At most three named sources in the prose of a whole article. Four sources
-agreeing is one range with one attribution, not a roll call.
 
 ## Structural variety — lists, tables, and visuals (2026 GEO requirement)
 
