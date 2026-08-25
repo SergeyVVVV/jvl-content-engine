@@ -70,7 +70,7 @@
 
 ### Links and pages
 - Product page: https://jvl.ca/en/echo
-- Home overview page: https://jvl.ca/en/home
+- Homepage: https://www.jvl.ca/en
 
 ## Warranty claim rules
 
@@ -133,7 +133,10 @@ broader form. It is the ceiling, not a starting point:
 
 - Content targeting home buyers must NOT surface B2B value propositions (revenue potential, investment framing, coin-operation features)
 - Content targeting business buyers / operators must NOT appear on the Echo for Home B2C page
-- Echo for Home page (https://jvl.ca/en/home) and Amazon listing = B2C only
+- The ECHO product page (https://www.jvl.ca/en/echo) and the Amazon listing = B2C only
+- TODO: requires business confirmation — whether a separate Echo-for-Business
+  page exists and at what URL. This rule names one but none was found; until
+  it is confirmed, do not link to it.
 - Echo for Business page = B2B only (operators, distributors, resellers)
 
 ## Editorial guardrails
