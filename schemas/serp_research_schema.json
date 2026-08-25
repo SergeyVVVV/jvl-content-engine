@@ -29,19 +29,57 @@
     },
     "serp_status": {
       "type": "string",
-      "enum": ["live", "mock", "unavailable"]
+      "enum": [
+        "live",
+        "mock",
+        "unavailable"
+      ]
     },
     "top_results": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["position", "title", "url", "summary"],
+        "required": [
+          "position",
+          "title",
+          "url",
+          "summary"
+        ],
         "properties": {
-          "position": { "type": "integer", "minimum": 1 },
-          "title": { "type": "string" },
-          "url": { "type": "string" },
-          "snippet": { "type": "string" },
-          "summary": { "type": "string" }
+          "position": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "snippet": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "page_type": {
+            "type": "string",
+            "enum": [
+              "article",
+              "commerce",
+              "forum",
+              "video",
+              "other"
+            ],
+            "description": "article = a guide, listicle or explainer. commerce = a product or category page. Only articles are comparable for length: a shop category page's word count measures its footer and product grid."
+          },
+          "word_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Words on the page, or null when the site blocked the fetch."
+          }
         },
         "additionalProperties": false
       }
@@ -52,48 +90,94 @@
     },
     "common_angles": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "minItems": 1
     },
     "common_sections": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "minItems": 1
     },
     "competitor_strengths": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "competitor_weaknesses": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "content_gaps": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "minItems": 1
     },
     "differentiation_opportunities": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "minItems": 1
     },
     "paa_answered": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "paa_missed": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "risks_to_avoid": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "notes_for_writer": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "minItems": 1
+    },
+    "comparable_length": {
+      "type": "object",
+      "description": "Length of the ARTICLES in the top results — never the commerce pages. An article that ranks alongside shop listings earned its place, so its length is what this query rewards. Null when no article ranked or none could be read.",
+      "properties": {
+        "median_words": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "range_words": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "e.g. '1500-2000'"
+        },
+        "sample_size": {
+          "type": "integer"
+        },
+        "note": {
+          "type": "string",
+          "description": "What was counted and what was excluded."
+        }
+      }
     }
   },
   "additionalProperties": false

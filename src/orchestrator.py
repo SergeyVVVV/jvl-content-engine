@@ -249,6 +249,7 @@ def _build_serp_context(serp_data: dict) -> str:
         "competitor_weaknesses": serp_data.get("competitor_weaknesses", []),
         "risks_to_avoid": serp_data.get("risks_to_avoid", []),
         "notes_for_writer": serp_data.get("notes_for_writer", []),
+        "comparable_length": serp_data.get("comparable_length"),
     }
     return json.dumps(fields, indent=2, ensure_ascii=False)
 
