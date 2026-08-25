@@ -4,7 +4,7 @@
 
 - **1 mandatory link to `https://jvl.ca/en/echo`** — placed naturally, only where it genuinely fits the context
 - **1–2 additional internal links** to other relevant pages:
-  - homepage (`https://jvl.ca/en/home`)
+  - homepage (`https://www.jvl.ca/en`)
   - other product pages
   - related blog posts
   - about-jvl

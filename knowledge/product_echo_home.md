@@ -100,5 +100,5 @@ article will run long after it is written; a stale price is worse than none.
 
 - Primary B2C product for this content engine
 - Product page: https://jvl.ca/en/echo
-- Home overview page: https://jvl.ca/en/home
+- Homepage: https://www.jvl.ca/en
 - Amazon is the primary B2C sales channel

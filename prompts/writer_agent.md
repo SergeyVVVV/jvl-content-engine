@@ -316,7 +316,7 @@ or a direct comparison instead.
 ## Internal links
 
 - Include **exactly one** link to `https://jvl.ca/en/echo` — placed naturally, not forced.
-- Include **1–2 additional** internal links (e.g. `https://jvl.ca/en/home`) where they genuinely
+- Include **1–2 additional** internal links (e.g. `https://www.jvl.ca/en`) where they genuinely
   serve the reader.
 - Use descriptive, natural anchor text. Never "click here" or "learn more" alone.
 - Do not repeat the same anchor text twice.

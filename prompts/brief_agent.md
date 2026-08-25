@@ -6,7 +6,7 @@ Create a strong article brief for an SEO-driven blog article that supports JVL E
 Business context:
 - Primary business goal: increase sales of JVL Echo Home
 - Main priority page: https://jvl.ca/en/echo
-- Secondary support page: https://jvl.ca/en/home
+- Secondary support page: https://www.jvl.ca/en
 - The article must support revenue relevance, not just traffic
 
 Audience:
