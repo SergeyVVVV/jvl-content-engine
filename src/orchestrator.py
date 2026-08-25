@@ -30,7 +30,7 @@ from src.serp_research_agent import SerpResearchAgent
 from src.company_insight_agent import CompanyInsightAgent
 from src.seo_structure_agent import SeoStructureAgent
 from src.writer_agent import WriterAgent
-from src.readability_agent import ReadabilityChecker
+from src.readability_agent import ReadabilityChecker, prose_problems, score_markdown
 from src.faq_agent import FAQAgent
 from src import sources_block
 from src.qa_agent import QAAgent
@@ -740,6 +740,23 @@ def run_pipeline(
                 revised_markdown = sources_block.append_to_article(
                     revised_markdown, sources_markdown
                 )
+
+            # The readability loop spends up to three Writer passes getting the
+            # prose into range, and then this step rewrites the whole article
+            # with no prose constraint at all. Observed: the loop finished on
+            # three problems, QA asked for one factual correction, and the
+            # revision came back with four. A careful contour followed by a step
+            # that overwrites its result is not a contour.
+            before_prose = len(prose_problems(score_markdown(draft_markdown)))
+            after_prose = len(prose_problems(score_markdown(revised_markdown)))
+            if after_prose > before_prose:
+                print(
+                    f"QA: revision {attempt} fixed the finding but left the prose "
+                    f"worse ({after_prose} problems against {before_prose}) — "
+                    "rejected. The reviewed draft stands.",
+                    file=sys.stderr,
+                )
+                break
 
             damage = revision_damage(draft_markdown, revised_markdown)
             if damage:

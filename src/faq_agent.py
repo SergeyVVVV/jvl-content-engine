@@ -84,6 +84,8 @@ class FAQAgent:
             "- At least 5 items.\n"
             "- Each answer 2–4 sentences, concrete, no marketing fluff.\n"
             "- Do not repeat questions already answered in the draft's H2/H3 sections.\n"
+            "- Each answer: first sentence answers the question directly, then "
+            "the reasoning. 40-60 words, never over 75.\n"
             "- NEVER write `TODO:` inside an answer. Answers are read by "
             "customers; TODOs are notes to an editor. If an answer needs data "
             "nobody has confirmed, write it without that data — saying plainly "

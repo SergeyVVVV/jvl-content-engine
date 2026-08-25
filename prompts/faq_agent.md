@@ -29,6 +29,17 @@ Hard rules:
   engine while researching the topic? If it is only answerable by our sales page,
   it belongs in the product section of the article, not here.
 - never invent product specs, pricing, warranty, or compliance details
+- **First sentence answers the question.** Directly, in plain words, no
+  preamble. That sentence is what a search engine lifts into a featured answer
+  and what a reader takes away if they read nothing else; everything after it is
+  the reasoning behind it.
+- **40 to 60 words per answer, and never more than 75.** Measured answers ran
+  92 words on average with none under 84 — six of them came to 554 words, which
+  is a page of prose wearing question marks. Featured answers sit at 40 to 60
+  words, so an answer written to that length can be lifted whole. The ceiling of
+  75 exists because some answers must carry a caveat — a warranty answer has to
+  say "confirm current terms with JVL" — and a hard cut at 60 would remove
+  exactly that, since the caveat comes last.
 - never write `TODO:` inside an answer. An answer is read by the customer; a
   TODO is a note to an editor, and one published inside an FAQ reads as a broken
   page. If a confident answer needs data nobody has confirmed, write the answer

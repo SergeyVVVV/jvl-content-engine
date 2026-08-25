@@ -255,6 +255,12 @@ class QAAgent:
             "- No `TODO:` string may survive in reader-facing prose. Editorial notes "
             "belong in the todos array.",
             "- Do not add new claims while fixing old ones.",
+            "- Keep the prose as readable as you found it. A revision that fixes "
+            "the finding and leaves the writing denser is rejected whole, and "
+            "the finding stays unfixed with it. No sentence past 35 words, plain "
+            "words in long sentences rather than short sentences of heavy ones, "
+            "and no stretch of paragraphs running past roughly 350 words without "
+            "a table, list or quote to break it.",
             "- Return the FULL article as JSON in the usual shape — not a diff, not "
             "the changed sections alone.",
         ]
