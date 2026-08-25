@@ -103,7 +103,7 @@ class DeadlineTests(unittest.TestCase):
         os.environ["ANTHROPIC_STREAM_DEADLINE"] = "42"
         self.assertEqual(stream_deadline(), 42.0)
         os.environ["ANTHROPIC_STREAM_DEADLINE"] = "eventually"
-        self.assertEqual(stream_deadline(), 600.0)
+        self.assertEqual(stream_deadline(), 900.0)
 
 
 class WriterFailureTests(unittest.TestCase):
