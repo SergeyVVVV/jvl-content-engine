@@ -58,18 +58,18 @@ class FAQLengthTests(unittest.TestCase):
     def test_the_answer_length_rule_is_where_the_agent_reads_it(self) -> None:
         for rel in ("prompts/faq_agent.md", "src/faq_agent.py"):
             text = read(rel).lower()
-            self.assertIn("75", text, rel)
+            self.assertIn("60", text, rel)
             self.assertIn("40", text, rel)
 
     def test_the_first_sentence_must_answer_the_question(self) -> None:
         self.assertIn("First sentence answers the question", read("prompts/faq_agent.md"))
 
-    def test_the_ceiling_leaves_room_for_a_required_caveat(self) -> None:
-        # A warranty answer has to say "confirm current terms with JVL", and the
-        # caveat comes last — a hard cut at 60 would remove exactly that.
+    def test_a_required_caveat_is_compressed_rather_than_dropped(self) -> None:
+        # The ceiling is tight enough that the hedge is the obvious thing to
+        # cut, and the hedge is the part that must not go.
         prompt = read("prompts/faq_agent.md")
-        self.assertIn("never more than 75", prompt)
-        self.assertIn("caveat", prompt.lower())
+        self.assertIn("never more than 60", prompt)
+        self.assertIn("never a reason to leave it out", prompt)
 
 
 class WallMeasurementTests(unittest.TestCase):
