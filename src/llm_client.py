@@ -63,13 +63,15 @@ _STREAM_AT_OR_ABOVE = 8000
 #: streaming path, that became the common case rather than the exception, and a
 #: Writer call ran thirty-five minutes before anything stopped it.
 #:
-#: This is the ceiling on the whole call, measured from the first byte. A real
-#: 32000-token generation finishes well inside it; nothing legitimate takes ten
-#: minutes. Overridable with ANTHROPIC_STREAM_DEADLINE.
+#: This is the ceiling on the whole call, measured from the first byte, and it
+#: is the real protection: it bounds the call whether the stream trickles or
+#: stops. A measured 22,900-token Writer generation took 325 seconds, so 900
+#: leaves comfortable room for a longer article without letting a runaway call
+#: run all afternoon. Overridable with ANTHROPIC_STREAM_DEADLINE.
 #:
 #: It deliberately raises out of the stream context rather than returning, so
 #: the SDK does not treat it as a retryable transport error and try twice more.
-_DEFAULT_STREAM_DEADLINE = 600.0
+_DEFAULT_STREAM_DEADLINE = 900.0
 
 
 class StreamDeadlineExceeded(TimeoutError):
@@ -109,15 +111,23 @@ def _stream_within_deadline(client: Anthropic, request: dict) -> object:
 
 #: Per-request timeout in seconds, and how many times the SDK may retry.
 #:
-#: Without these the client runs on the SDK's own generous defaults, so a
-#: request that never completes is never abandoned either. That is not
-#: hypothetical: one wedged call held a nine-step pipeline for 47 minutes with
-#: no output and half a second of CPU burnt, and the retries queued up behind it
-#: made it worse rather than better. Bounded, the same failure costs at most
-#: three windows and then says so.
+#: This is a *read* timeout — the longest gap between two chunks — and it exists
+#: to notice a connection that has gone silent. It is not the ceiling on a call;
+#: that is _DEFAULT_STREAM_DEADLINE above, and the two have distinct jobs.
+#:
+#: It was 300 seconds, a number I picked out of the air while fixing a hang, and
+#: it turned out to be the thing breaking runs. A measured Writer call took 325
+#: seconds in total across 497 chunks — with a 152-second gap between two of
+#: them. Opus with adaptive thinking works that way: it reasons in silence and
+#: then emits a passage. Three consecutive runs died at the Writer on a read
+#: timeout while the generation itself was healthy.
+#:
+#: 600 gives roughly four times the observed pause. A genuinely dead connection
+#: now takes ten minutes to notice, which is acceptable because the wall-clock
+#: deadline bounds the call regardless.
 #:
 #: Overridable with ANTHROPIC_TIMEOUT and ANTHROPIC_MAX_RETRIES.
-_DEFAULT_TIMEOUT = 300.0
+_DEFAULT_TIMEOUT = 600.0
 _DEFAULT_MAX_RETRIES = 2
 
 _EFFORT_LEVELS = ("low", "medium", "high", "xhigh", "max")
