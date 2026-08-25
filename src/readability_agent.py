@@ -43,8 +43,8 @@ from typing import Any, Callable
 #: ceiling it has been sanded into staccato. Plain, confident business English
 #: sits between them — the measured article scored 67.0, which is where an
 #: article about payback periods should land.
-TARGET_MIN = 55.0
-TARGET_MAX = 70.0
+TARGET_MIN = 60.0
+TARGET_MAX = 75.0
 
 #: Kept for callers that pass an explicit floor.
 TARGET_SCORE = TARGET_MIN
@@ -59,6 +59,48 @@ MIN_SENTENCE_STDEV = 6.0
 #: Share of sentences under twelve words. Some are good — they land a point.
 #: Most being short is the defect.
 MAX_SHORT_SENTENCE_SHARE = 0.45
+
+#: The tail, not the mean.
+#:
+#: A reader does not experience an average. They experience the sentence they
+#: have to read twice. A draft measured 20.1 words on average and passed every
+#: check while 22% of its sentences ran past thirty words and one reached 77 —
+#: and the passages a reader complained about all came from that tail.
+MAX_SENTENCE_WORDS = 35
+MAX_LONG_SENTENCE_SHARE = 0.10
+
+#: Word difficulty, held separately from sentence length.
+#:
+#: Flesch is one number over two independent things: how long sentences run and
+#: how hard the words are. A band on the combination lets a draft buy length
+#: with vocabulary. That is what happened — lengthening sentences from 14.6 to
+#: 20.1 words also took syllables per word from 1.39 to 1.53 and difficult words
+#: from 9.6% to 13.3%, because nothing was watching the second dimension. Long,
+#: varied sentences made of plain words are the target; these keep the second
+#: half honest while the rhythm checks work on the first.
+MAX_SYLLABLES_PER_WORD = 1.45
+MAX_DIFFICULT_WORD_SHARE = 0.11
+
+#: Words of unbroken prose before something has to break it up.
+#:
+#: Counting tables, lists, quotes and images — not headings. A heading divides
+#: the page without relieving the density beneath it, and a section that runs a
+#: thousand words of paragraphs under one heading is still a wall.
+#:
+#: Measured across runs: an early draft's longest such run was 643 words; four
+#: revisions later it was 979, with five runs past 500. That regression arrived
+#: with the rules that removed a crude list quota, and nothing replaced it.
+MAX_PROSE_RUN_WORDS = 350
+
+#: Share of non-empty lines that are list items.
+#:
+#: Prose is measured as prose — tables and list items are excluded from the
+#: readability numbers, because a five-column table row is not a 77-word
+#: sentence and stripping a bullet leaves lines that merge into one. That
+#: exclusion needs a counterweight, or an article made entirely of bullets
+#: scores beautifully. A draft that read as a checklist had a third of its
+#: lines inside lists.
+MAX_LIST_LINE_SHARE = 0.25
 
 #: How far outside a boundary still counts as inside it.
 #:
@@ -100,12 +142,53 @@ def _strip_markdown(md: str) -> str:
     text = re.sub(r"```.*?```", " ", text, flags=re.DOTALL)
     text = re.sub(r"`[^`]+`", " ", text)
     text = re.sub(r"^\s{0,3}#{1,6}\s+.*$", "", text, flags=re.MULTILINE)
-    text = re.sub(r"^\s*[-*+]\s+", "", text, flags=re.MULTILINE)
+    # Table rows are not prose. Left in, a five-column row reads as one
+    # 77-word sentence, so adding the table an article needed would make its
+    # readability numbers worse — the opposite of what the rules ask for.
+    text = re.sub(r"^\s*\|.*$", "", text, flags=re.MULTILINE)
+    # List items are not prose either, and stripping only the marker leaves
+    # lines with no terminal punctuation that merge into one 104-word
+    # "sentence". Structure is measured separately, by longest_prose_run and
+    # list_line_share; this function measures prose.
+    text = re.sub(r"^\s*(?:[-*+]|\d+\.)\s+.*$", "", text, flags=re.MULTILINE)
     text = re.sub(r"!\[[^\]]*\]\([^)]*\)", " ", text)
     text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
     text = re.sub(r"[*_]{1,3}([^*_]+)[*_]{1,3}", r"\1", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
+
+
+_STRUCTURE_RE = re.compile(r"^(\||[-*]\s|\d+\.\s|>|!\[)")
+
+
+def longest_prose_run(md: str) -> int:
+    """Words of unbroken prose between structural elements.
+
+    Headings do not count. A heading divides the page without relieving the
+    density beneath it — a thousand words of paragraphs under one heading is
+    still a wall, and that is the thing a reader complains about.
+    """
+    run = 0
+    longest = 0
+    for line in md.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if _STRUCTURE_RE.match(stripped):
+            longest = max(longest, run)
+            run = 0
+        else:
+            run += len(stripped.split())
+    return max(longest, run)
+
+
+def list_line_share(md: str) -> float:
+    """Share of non-empty lines that are list items."""
+    lines = [l.strip() for l in md.splitlines() if l.strip()]
+    if not lines:
+        return 0.0
+    items = sum(1 for l in lines if re.match(r"^(?:[-*+]|\d+\.)\s", l))
+    return items / len(lines)
 
 
 def score_markdown(md: str) -> dict[str, Any]:
@@ -123,6 +206,11 @@ def score_markdown(md: str) -> dict[str, Any]:
             "sentence_count": 0,
             "sentence_length_stdev": 0.0,
             "short_sentence_share": 0.0,
+            "long_sentence_share": 0.0,
+            "longest_sentence_words": 0,
+            "difficult_word_share": 0.0,
+            "longest_prose_run": 0,
+            "list_line_share": 0.0,
             "longest_sentences": [],
             "hardest_words": [],
         }
@@ -144,6 +232,11 @@ def score_markdown(md: str) -> dict[str, Any]:
     variance = sum((n - mean_len) ** 2 for n in lengths) / len(lengths)
     stdev = variance ** 0.5
     short_share = sum(1 for n in lengths if n < 12) / len(lengths)
+    long_share = sum(1 for n in lengths if n > 30) / len(lengths)
+    longest_sentence = max(lengths)
+    difficult_share = (
+        textstat.difficult_words(prose) / word_count if word_count else 0.0
+    )
 
     sentences_sorted = sorted(sentences, key=lambda s: len(s.split()), reverse=True)
     longest = [
@@ -175,6 +268,11 @@ def score_markdown(md: str) -> dict[str, Any]:
         "sentence_count": sentence_count,
         "sentence_length_stdev": round(stdev, 2),
         "short_sentence_share": round(short_share, 3),
+        "long_sentence_share": round(long_share, 3),
+        "longest_sentence_words": int(longest_sentence),
+        "difficult_word_share": round(difficult_share, 3),
+        "longest_prose_run": longest_prose_run(md),
+        "list_line_share": round(list_line_share(md), 3),
         "longest_sentences": longest,
         "hardest_words": hardest,
     }
@@ -235,6 +333,59 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
             f"{MIN_SENTENCE_STDEV}). Every sentence being the same size reads as "
             "machine-made however plain each one is. Vary the gear: a long "
             "sentence that develops a point, then a short one that lands it."
+        )
+
+    longest = stats.get("longest_sentence_words", 0)
+    long_share = stats.get("long_sentence_share", 0.0)
+    syllables = stats.get("avg_syllables_per_word", 0.0)
+    difficult = stats.get("difficult_word_share", 0.0)
+    prose_run = stats.get("longest_prose_run", 0)
+
+    if longest > MAX_SENTENCE_WORDS:
+        problems.append(
+            f"One sentence runs {longest} words against a {MAX_SENTENCE_WORDS}-word "
+            "ceiling. Find the sentences past that length and split each at its "
+            "natural joint. A reader does not experience your average sentence, "
+            "they experience the one they have to read twice."
+        )
+
+    if _above(long_share, MAX_LONG_SENTENCE_SHARE):
+        problems.append(
+            f"{round(long_share * 100)}% of sentences run over thirty words, above "
+            f"the {round(MAX_LONG_SENTENCE_SHARE * 100)}% ceiling. Long sentences "
+            "are for developing a point and should be the exception. Split the "
+            "worst offenders; leave the rest alone."
+        )
+
+    if _above(syllables, MAX_SYLLABLES_PER_WORD) or _above(difficult, MAX_DIFFICULT_WORD_SHARE):
+        problems.append(
+            f"The vocabulary is heavier than it needs to be ({syllables} syllables "
+            f"per word, {round(difficult * 100)}% difficult words, against "
+            f"{MAX_SYLLABLES_PER_WORD} and {round(MAX_DIFFICULT_WORD_SHARE * 100)}%). "
+            "This is separate from sentence length — do not shorten sentences to "
+            "fix it. Replace abstract nouns with the verbs they were made from: "
+            "\"quantified a dollar lift attributable to a machine\" becomes "
+            "\"measured what one machine adds\". Keep the sentences long and the "
+            "words plain."
+        )
+
+    if prose_run > MAX_PROSE_RUN_WORDS:
+        problems.append(
+            f"{prose_run} words run without a table, list, quote or image to break "
+            f"them, against a {MAX_PROSE_RUN_WORDS}-word ceiling. Headings do not "
+            "count: a section that runs a thousand words of paragraphs under one "
+            "heading is still a wall. Find the longest stretch and give it what it "
+            "was already asking for — a comparison becomes a table, a set of "
+            "conditions becomes a list, a figure that carries the argument becomes "
+            "a pulled quote."
+        )
+
+    if _above(stats.get("list_line_share", 0.0), MAX_LIST_LINE_SHARE):
+        problems.append(
+            f"{round(stats['list_line_share'] * 100)}% of lines are list items, "
+            f"above the {round(MAX_LIST_LINE_SHARE * 100)}% ceiling. Lists carry "
+            "items; they cannot carry reasoning. Turn the ones whose entries need "
+            "a \"because\" back into sentences."
         )
 
     if _above(short_share, MAX_SHORT_SENTENCE_SHARE):

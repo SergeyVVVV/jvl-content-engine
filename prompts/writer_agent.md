@@ -95,6 +95,13 @@ Tone: warm, mature, grounded, quietly premium.
   sentence is, and a page where most sentences run under twelve words reads as
   a checklist even when nothing is bulleted. Short sentences are for emphasis;
   when they are the default, nothing is emphatic.
+- **No sentence past 35 words, and fewer than one in ten past 30.** A reader
+  does not experience your average sentence; they experience the one they have
+  to read twice.
+- **Long sentences, plain words.** These are separate dials and only one of them
+  should be turned up. Prefer the verb to the noun made from it: not "nothing
+  quantified a dollar lift attributable to a single machine" but "nobody has
+  measured what one machine adds". The first is not long, it is heavy.
 - Avoid walls of text, but do not mistake a developed paragraph for a wall.
 
 DO NOT:
@@ -251,7 +258,14 @@ worse: the reader who came to compare three options now has to assemble the
 table themselves.
 
 So the rule is not a quota either way. **Match the form to what the content
-actually is:**
+actually is — and never let prose run more than 350 words unbroken.**
+
+That ceiling counts tables, lists, quotes and images. It does not count
+headings: a section running a thousand words of paragraphs under one heading is
+still a wall, and a heading only tells the reader the wall has a name. When a
+stretch approaches the limit, it is almost always because something in it was
+already asking to be a table — a comparison, a set of figures, a list of
+conditions. Give it the form it wanted.
 
 - **A comparison is a table. This is not optional.** If the article sets two or
   more options against each other on two or more attributes — scenarios,
