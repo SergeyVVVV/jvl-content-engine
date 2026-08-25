@@ -46,6 +46,17 @@ class SerpProvider(ABC):
         Callers must handle empty string gracefully.
         """
 
+    def fetch_page_detail(self, url: str) -> tuple[str, int]:
+        """Return (text, full word count).
+
+        The text is truncated so a competitor's page cannot swamp the context.
+        The word count is not: it is measured before the cut, because the
+        question "how long is the article ranking above us" cannot be answered
+        from the first three thousand characters of it.
+        """
+        text = self.fetch_page(url)
+        return text, len(text.split())
+
 
 class MockSerpProvider(SerpProvider):
     """Offline mock provider — returns no real results.
@@ -65,6 +76,9 @@ class MockSerpProvider(SerpProvider):
 
     def fetch_page(self, url: str) -> str:
         return ""
+
+    def fetch_page_detail(self, url: str) -> tuple[str, int]:
+        return "", 0
 
 
 class SerpApiProvider(SerpProvider):
@@ -130,6 +144,12 @@ class SerpApiProvider(SerpProvider):
             print(f"SerpAPI search failed: {exc}", file=sys.stderr)
             return []
 
+    def fetch_page_detail(self, url: str) -> tuple[str, int]:
+        """Return (truncated text, full word count of the page)."""
+        self._last_word_count = 0
+        text = self.fetch_page(url)
+        return text, self._last_word_count
+
     def fetch_page(self, url: str) -> str:
         """Fetch a URL and return plain text (basic HTML stripping)."""
         try:
@@ -156,6 +176,7 @@ class SerpApiProvider(SerpProvider):
             # Strip remaining tags
             text = re.sub(r"<[^>]+>", " ", html)
             text = re.sub(r"\s+", " ", text).strip()
+            self._last_word_count = len(text.split())
             return text[: self._MAX_PAGE_CHARS]
         except Exception as exc:
             print(f"fetch_page failed for {url}: {exc}", file=sys.stderr)

@@ -273,7 +273,17 @@ CRITICAL OUTPUT RULES:
                     url = result.get("url", "")
                     if url:
                         print(f"  Fetching page: {url}", file=sys.stderr)
-                        result["page_text"] = self.provider.fetch_page(url)
+                        text, words = self.provider.fetch_page_detail(url)
+                        result["page_text"] = text
+                        # Measured before truncation: the question "how long is
+                        # the article ranking above us" cannot be answered from
+                        # the first three thousand characters of it.
+                        result["page_word_count"] = words
+                        if not words:
+                            print(
+                                "    (blocked or empty — length unknown)",
+                                file=sys.stderr,
+                            )
         else:
             serp_status = "mock"
 

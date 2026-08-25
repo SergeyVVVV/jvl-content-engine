@@ -107,3 +107,26 @@ What common mistakes or bad patterns should the JVL article avoid?
 
 Return a single valid JSON object matching schemas/serp_research_schema.json.
 No markdown. No code fences. No commentary before or after.
+
+## Page type and comparable length
+
+Classify every result you were given. `article` is a guide, listicle or
+explainer; `commerce` is a product or category page; `forum` is a discussion
+thread. Record each result's `word_count` from the page data, or null where the
+site blocked the fetch — Reddit and Facebook routinely do, and a zero there is a
+failed request rather than an empty page.
+
+Then fill `comparable_length` from **the articles only**.
+
+This distinction is the whole point of the field. A live top five for one
+keyword was four commerce pages and a forum thread: a shop category page
+measured 1,349 words and a product page 3,343, but those numbers count product
+grids, review blocks, menus and footers. Matching them would mean nothing. The
+single article among them measured 1,835 words, and that figure means
+something — an article that ranks alongside shop listings earned its place on
+this query, so its length is the length this query rewards.
+
+If no article ranked, or none could be read, set the fields to null and say so
+in `note`. A guess here is worse than an absence: the Writer treats this as
+evidence about the query, and an invented median would send it to a length
+nobody has any reason to believe in.

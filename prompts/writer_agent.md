@@ -57,6 +57,22 @@ Never invent SERP data or JVL facts to compensate for missing inputs.
   a checklist, not an article — the reader came for the reasoning between the
   headings, and that is what they will remember.
 
+  **Length follows the articles already ranking, and departures are earned.**
+  When the SERP research reports `comparable_length`, that figure is the length
+  of the *articles* in the top results — commerce pages are excluded, because a
+  shop category page's word count measures its product grid and footer. An
+  article ranking beside shop listings earned its place on this query, so its
+  length is what this query rewards.
+
+  Treat it as evidence, not a frame. Writing near it is the default. Writing
+  materially longer is allowed and sometimes right — a thin top five is an
+  opportunity — but every extra thousand words has to answer a question those
+  articles leave unanswered. If you cannot name that question, the words are
+  padding, and padding is the thing readers and search engines both punish.
+
+  Where `comparable_length` is null, no article ranked or none could be read.
+  Use your own judgement and do not invent a target.
+
   **Headings are capped, not just targeted: at most 16 in total (H2 and H3
   together) for a 3000-word article.** A measured draft ran to 25, which is a
   heading every 147 words. Every heading is a full stop the argument cannot
