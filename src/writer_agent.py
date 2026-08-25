@@ -88,8 +88,44 @@ class WriterAgent:
     # Prompt construction
     # ------------------------------------------------------------------
 
-    def _build_system_prompt(self) -> str:
+    #: Article types whose rules differ from a plain informational piece.
+    #:
+    #: `article_type` has been in the brief schema since April and read by
+    #: nothing. Every genre got the same instructions, so the rules for building
+    #: a payback model were also being handed to gift guides — along with an
+    #: aside addressed to "a bar owner", which every article was reading.
+    _PROFILES: dict[str, str] = {
+        "commercial_investigation": "analytical",
+        "comparison": "analytical",
+    }
+
+    def _profile_for(self, article_type: str | None, has_facts: bool) -> str | None:
+        """Which profile this article needs, if any.
+
+        Two triggers, because they answer different questions. The article type
+        says what genre this is. Researched facts say there are figures to
+        attribute — which can happen in a genre that does not normally have
+        them, and the attribution rules should follow the figures.
+        """
+        by_type = self._PROFILES.get((article_type or "").strip().lower())
+        if by_type:
+            return by_type
+        return "analytical" if has_facts else None
+
+    def _build_system_prompt(
+        self,
+        article_type: str | None = None,
+        has_facts: bool = False,
+    ) -> str:
         prompt = self._load_file("prompts/writer_agent.md")
+
+        profile = self._profile_for(article_type, has_facts)
+        if profile:
+            try:
+                prompt += "\n\n---\n\n" + self._load_file(f"prompts/profiles/{profile}.md")
+                print(f"Writer profile: {profile}", file=sys.stderr)
+            except FileNotFoundError:
+                print(f"Warning: profile {profile} not found, skipping.", file=sys.stderr)
         schema = self._load_file("schemas/article_draft_schema.json")
 
         knowledge_sections: list[str] = []
@@ -571,7 +607,10 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         """
         print("Writer Agent: loading knowledge files...", file=sys.stderr)
 
-        system_prompt = self._build_system_prompt()
+        system_prompt = self._build_system_prompt(
+            article_type=(brief or {}).get("article_type"),
+            has_facts=bool(facts_context),
+        )
         user_message = self._build_user_message(
             topic=topic,
             brief=brief or {},

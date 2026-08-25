@@ -137,7 +137,10 @@ class WriterRuleTests(unittest.TestCase):
     """
 
     def setUp(self) -> None:
-        self.prompt = (REPO_ROOT / "prompts" / "writer_agent.md").read_text(
+        # These rules moved to the analytical profile: an article with no
+        # researched figures has nothing to attribute, and the rules were
+        # competing for attention in every gift guide the engine wrote.
+        self.prompt = (REPO_ROOT / "prompts" / "profiles" / "analytical.md").read_text(
             encoding="utf-8"
         )
 
@@ -148,13 +151,16 @@ class WriterRuleTests(unittest.TestCase):
         self.assertIn("At most three named sources", self.prompt)
 
     def test_a_departure_from_the_researched_typical_must_be_explained(self) -> None:
-        self.assertIn("say why in the article", self.prompt)
+        self.assertIn("say why", self.prompt)
+        self.assertIn("ignored its own evidence", self.prompt)
 
     def test_the_threshold_needs_both_conditions(self) -> None:
         self.assertIn("Both conditions, not either", self.prompt)
 
     def test_our_own_facts_are_never_attributed(self) -> None:
-        self.assertIn("citing ourselves as independent evidence is circular", self.prompt)
+        # The prompt wraps, so match on the halves rather than the line.
+        self.assertIn("citing ourselves as independent", self.prompt)
+        self.assertIn("evidence is circular", self.prompt)
 
 
 if __name__ == "__main__":
