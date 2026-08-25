@@ -161,16 +161,27 @@ def _strip_markdown(md: str) -> str:
 _STRUCTURE_RE = re.compile(r"^(\||[-*]\s|\d+\.\s|>|!\[)")
 
 
+_FAQ_HEADING_RE = re.compile(r"^##\s+(?:FAQ|Frequently\s+Asked)", re.IGNORECASE)
+
+
 def longest_prose_run(md: str) -> int:
     """Words of unbroken prose between structural elements.
 
     Headings do not count. A heading divides the page without relieving the
     density beneath it — a thousand words of paragraphs under one heading is
     still a wall, and that is the thing a reader complains about.
+
+    The FAQ is the exception and stops the count. A question heading every
+    ninety words is a visual anchor on every screen, so a Q&A block does not
+    read as a wall however the arithmetic adds up; measuring it as one made the
+    number say something about the article that a reader would not recognise.
+    Its length is governed instead by a ceiling on each answer.
     """
     run = 0
     longest = 0
     for line in md.splitlines():
+        if _FAQ_HEADING_RE.match(line.strip()):
+            break
         stripped = line.strip()
         if not stripped:
             continue
