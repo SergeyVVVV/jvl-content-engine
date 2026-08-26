@@ -50,6 +50,7 @@ def resolve(comparable_length: dict | None) -> dict:
         "ceiling": int(median * HARD_MULTIPLE),
         "measured": measured,
         "sample_size": data.get("sample_size") or 0,
+        "positions": [p for p in (data.get("positions") or []) if isinstance(p, int)],
         "note": data.get("note") or "",
     }
 
@@ -72,13 +73,29 @@ def render(target: dict) -> str:
         if sample == 1
         else f"the {sample} articles that ranked"
     )
+    # Where the sample sat matters. The SERP is read to ten because commercial
+    # queries often put nothing but shop pages in the first five, and the guides
+    # start at six — but an article at nine is weaker evidence about this query
+    # than one at two, and the Writer should be told which it got.
+    positions = target["positions"]
+    if positions and min(positions) > 5:
+        rank_note = (
+            f" Every article counted ranked below position 5 (at "
+            f"{', '.join(str(p) for p in sorted(positions))}), so treat the "
+            f"figure as a weaker signal than a top-five article would be."
+        )
+    elif positions:
+        rank_note = f" Ranked at {', '.join(str(p) for p in sorted(positions))}."
+    else:
+        rank_note = ""
+
     lines = [
         "# LENGTH TARGET",
         "",
         f"Write **{target['low']}–{target['high']} words**. The median of "
         f"{basis} on this query is {target['median']} words; commerce pages "
         f"were excluded, because a shop category page's word count measures its "
-        f"product grid and footer.",
+        f"product grid and footer.{rank_note}",
         "",
         "This is a measurement of what this query rewards, not a preference. "
         "Land inside the band unless you can do the following.",

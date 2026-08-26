@@ -126,7 +126,21 @@ single article among them measured 1,835 words, and that figure means
 something — an article that ranks alongside shop listings earned its place on
 this query, so its length is the length this query rewards.
 
-If no article ranked, or none could be read, set the fields to null and say so
-in `note`. A guess here is worse than an absence: the Writer treats this as
-evidence about the query, and an invented median would send it to a length
-nobody has any reason to believe in.
+**You are given the top ten, and that is because of what happened next.** The
+same keyword run again returned five results with no article among them at all —
+every one a shop page or a blocked forum thread — and the measurement came back
+empty. On commercial queries the first five positions are often entirely
+merchant listings, and the guides sit at six through ten. Reading further down
+is what makes the field answerable at all.
+
+Position still carries information, so keep it visible rather than averaging it
+away. Record every article's rank in `positions`, and where the sample comes
+only from the back half say so in `note` — an article at nine is weaker evidence
+about this query than one at two, and the Writer is entitled to know which it
+got. Do not weight or adjust the median for position: report the plain figure
+and let the note carry the caveat.
+
+If no article ranked anywhere in the ten, or none could be read, set the fields
+to null and say so in `note`. A guess here is worse than an absence: the Writer
+treats this as evidence about the query, and an invented median would send it to
+a length nobody has any reason to believe in.

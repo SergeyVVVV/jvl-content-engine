@@ -379,7 +379,7 @@ def run_pipeline(
                 brief=brief,
                 country="us",
                 language="en",
-                top_n=5,
+                top_n=10,
                 paa_questions=brief.get("questions_to_answer", []),
             )
             _save_json(serp_data, serp_path)
@@ -926,7 +926,7 @@ def run_update_pipeline(
             brief=previous_brief or {},
             country="us",
             language="en",
-            top_n=5,
+            top_n=10,
             paa_questions=(previous_brief or {}).get("questions_to_answer", []),
         )
         _save_json(serp_data, update_dir / "serp_research.json")
