@@ -40,7 +40,7 @@
     },
     "length_justification": {
       "type": ["string", "null"],
-      "description": "Why the draft runs past the LENGTH TARGET band, when it does. Name what the extra words carry and which competitor gap they close. Null when the draft lands inside the band. 'The topic is complex' is not a justification; a specific figure, scenario or cost the ranking articles omit is."
+      "description": "Set this when the draft knowingly covers something the ranking articles do not, and cutting to the LENGTH TARGET band would mean cutting that. Name what the extra words carry and which competitor gap they close. The Writer never learns its own word count, so this is not triggered by a measurement it takes; the pipeline measures the finished draft and asks for a revision if it landed long with this empty. 'The topic is complex' is not a justification; a specific figure, scenario or cost the ranking articles omit is."
     },
     "source_inputs_used": {
       "type": "object",

@@ -38,6 +38,8 @@ import sys
 from pathlib import Path
 from typing import Any, Callable
 
+from src import length_target
+
 
 #: Flesch Reading Ease band. Below the floor the prose is hard work; above the
 #: ceiling it has been sanded into staccato. Plain, confident business English
@@ -543,6 +545,12 @@ class ReadabilityChecker:
         """Render ReadabilityChecker output into a user-message addendum
         that the Writer Agent will receive on its next pass."""
         problems = prose_problems(stats)
+        # The loop appended the length verdict to its own problem list; the
+        # feedback the Writer actually reads has to carry it as well, or the
+        # rewrite fixes the prose and leaves the article the same length.
+        length = stats.get("length_check") or {}
+        if length.get("problem"):
+            problems = problems + [length["problem"]]
         lines: list[str] = [
             "# PROSE REVISION REQUEST",
             "",
@@ -613,6 +621,7 @@ class ReadabilityChecker:
         draft_markdown: str,
         rewrite_fn: Callable[[str], dict],
         assemble_markdown_fn: Callable[[dict], str],
+        word_target: dict | None = None,
     ) -> dict:
         """Run the readability feedback loop.
 
@@ -664,6 +673,35 @@ class ReadabilityChecker:
             stats = score_markdown(current_markdown)
             score = stats["flesch_reading_ease"]
             problems = prose_problems(stats)
+
+            # Length is measured here rather than trusted to the Writer, which
+            # never learns its own word count — the number does not exist until
+            # it has stopped writing. Asking it to notice it had overshot was
+            # asking for a measurement it cannot take. It rides the same loop as
+            # the prose problems so it costs no extra call, and it counts toward
+            # convergence like everything else.
+            length = None
+            if word_target:
+                length = length_target.assess(
+                    word_target,
+                    length_target.article_word_count(current_markdown),
+                    (current_result or {}).get("length_justification"),
+                )
+                stats["length_check"] = length
+                if length["problem"]:
+                    problems = problems + [length["problem"]]
+                    print(
+                        f"  Length: {length['word_count']} words against "
+                        f"{word_target['low']}-{word_target['high']} "
+                        f"({length['verdict']})",
+                        file=sys.stderr,
+                    )
+                elif length["verdict"] == "over_band_justified":
+                    print(
+                        f"  Length: {length['word_count']} words, past the band "
+                        "and justified — accepted.",
+                        file=sys.stderr,
+                    )
             print(
                 f"  Iteration {i}: reading ease {score}, sentences avg "
                 f"{stats['avg_sentence_length']} words (spread "
@@ -717,6 +755,7 @@ class ReadabilityChecker:
                     "passed": True,
                     "iterations": iterations,
                     "best_iteration": i,
+                    "length_check": length,
                 }
 
             if i == self.max_iterations:
@@ -768,4 +807,11 @@ class ReadabilityChecker:
             "passed": best_rank[0] == 0,
             "iterations": iterations,
             "best_iteration": best_idx,
+            # The best draft's verdict, not the last one's — the loop can end on
+            # an iteration it then discards.
+            "length_check": (
+                (iterations[best_idx].get("stats") or {}).get("length_check")
+                if best_idx < len(iterations)
+                else None
+            ),
         }

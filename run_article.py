@@ -151,6 +151,14 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  slug     : {metadata.get('slug', '?')}", file=sys.stderr)
     if qa_report:
         print(f"  QA       : {qa_report.get('status', 'unknown')}", file=sys.stderr)
+    # A draft that ends over its target with nothing said about why used to be
+    # visible only by counting the file afterwards.
+    length = results.get("length_check") or {}
+    if length:
+        print(
+            f"  length   : {length.get('word_count')} words ({length.get('verdict')})",
+            file=sys.stderr,
+        )
 
     # stdout is the article itself, so the run can be piped.
     print(results.get("draft_markdown", ""))
