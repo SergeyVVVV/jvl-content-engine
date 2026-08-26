@@ -16,6 +16,8 @@ the Writer is asked to name that information rather than assert it.
 
 from __future__ import annotations
 
+import re
+
 #: How far either side of the median still counts as "written to the target".
 #: The band, not the point, is the instruction: matching a median to the word is
 #: not a thing a writer can do, or should try to.
@@ -122,3 +124,106 @@ def render(target: dict) -> str:
     if target["note"]:
         lines += ["", f"How the measurement was made: {target['note']}"]
     return "\n".join(lines) + "\n"
+
+
+#: Below this share of the band's floor the article is thin against what ranks.
+#: Symmetric with the ceiling and measured the same way; a draft well under the
+#: articles it competes with has left the reader's question half answered.
+THIN_MULTIPLE = 1.0
+
+_FAQ_HEADING = re.compile(r"^##\s+(?:FAQ|Frequently\s+Asked)", re.IGNORECASE | re.MULTILINE)
+_SOURCES_HEADING = re.compile(r"^##\s+Sources\b", re.IGNORECASE | re.MULTILINE)
+
+
+def article_word_count(markdown: str) -> int:
+    """Count the article as the reader meets it, minus the appended blocks.
+
+    Prose, tables, lists and quotes all count — the target measures competitor
+    pages the same way. The FAQ and the sources block do not: both are generated
+    by later steps and shipped as their own units, so counting them would move
+    the target for reasons the Writer has no control over.
+    """
+    body = markdown
+    for pattern in (_FAQ_HEADING, _SOURCES_HEADING):
+        match = pattern.search(body)
+        if match:
+            body = body[: match.start()]
+    stripped = re.sub(r"[#*>`\[\]()|_~-]", " ", body)
+    return len(stripped.split())
+
+
+def assess(target: dict, word_count: int, justification: str | None = None) -> dict:
+    """Judge a finished draft against the target and say what to do about it.
+
+    This exists because the rule it enforces cannot be enforced where it was
+    written. The Writer was told to fill `length_justification` when it ran past
+    the band — but it never learns its own word count, because the count does not
+    exist until it has stopped writing. A measured draft landed 6% over the band
+    with the field empty, which read as disobedience and was closer to an
+    impossible instruction.
+
+    So the trigger moves here, where the number is known.
+    """
+    low, high, ceiling = target["low"], target["high"], target["ceiling"]
+    named = bool(justification and justification.strip())
+
+    if word_count > ceiling:
+        # Past the hard multiple a justification cannot buy the words back. A
+        # draft this far over was scoped too broadly, and the fix is a section
+        # fewer rather than every explanation compressed.
+        return {
+            "verdict": "over_ceiling",
+            "word_count": word_count,
+            "justified": named,
+            "problem": (
+                f"The draft runs {word_count} words against a target band of "
+                f"{low}-{high}, past the {ceiling}-word point where extra length "
+                "stops being a judgement call. Cut a whole section rather than "
+                "compressing every explanation in the article: decide which "
+                "section the reader would miss least, and remove it."
+            ),
+        }
+
+    if word_count > high:
+        if named:
+            return {
+                "verdict": "over_band_justified",
+                "word_count": word_count,
+                "justified": True,
+                "problem": None,
+            }
+        over = round((word_count - high) / high * 100)
+        return {
+            "verdict": "over_band",
+            "word_count": word_count,
+            "justified": False,
+            "problem": (
+                f"The draft runs {word_count} words, {over}% past the top of the "
+                f"{low}-{high} band, and `length_justification` is empty. Either "
+                "cut back into the band, or fill that field with the specific "
+                "thing those words carry that the ranking articles do not — a "
+                "figure none of them publishes, a scenario none of them models. "
+                "Do not write that the topic is complex."
+            ),
+        }
+
+    if word_count < low:
+        short = round((low - word_count) / low * 100)
+        return {
+            "verdict": "thin",
+            "word_count": word_count,
+            "justified": named,
+            "problem": (
+                f"The draft runs {word_count} words, {short}% under the {low}-{high} "
+                "band, so it is thinner than the articles it competes with. Find "
+                "the question the article raises and leaves hanging, and answer "
+                "it. Do not pad an existing section to make up the difference."
+            ),
+        }
+
+    return {
+        "verdict": "inside",
+        "word_count": word_count,
+        "justified": named,
+        "problem": None,
+    }

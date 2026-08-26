@@ -32,7 +32,7 @@ from src.seo_structure_agent import SeoStructureAgent
 from src.writer_agent import WriterAgent
 from src.readability_agent import ReadabilityChecker, prose_problems, score_markdown
 from src.faq_agent import FAQAgent
-from src import sources_block
+from src import length_target, sources_block
 from src.qa_agent import QAAgent
 from src.metadata_copy_agent import MetadataCopyAgent
 from src.article_diagnostic_agent import ArticleDiagnosticAgent
@@ -523,6 +523,7 @@ def run_pipeline(
             draft_markdown=draft_markdown,
             rewrite_fn=_rewrite,
             assemble_markdown_fn=writer_agent.assemble_markdown,
+            word_target=length_target.resolve(comparable_length),
         )
         draft_result = readability_report["final_result"]
         draft_markdown = readability_report["final_markdown"]
@@ -564,7 +565,9 @@ def run_pipeline(
         }
         if readability_report
         else None,
+        "length_check": (readability_report or {}).get("length_check"),
     }
+    results["length_check"] = (readability_report or {}).get("length_check")
     # Visual Agent — generates images and inserts them among the body
     # headings. Runs before the FAQ block is appended so images land in the
     # article, not in the Q&A.
