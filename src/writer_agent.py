@@ -236,12 +236,19 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         facts_context: str = "",
         revision_feedback: str = "",
         original_article: str = "",
+        length_block: str = "",
     ) -> str:
         brief_block = (
             f"# ARTICLE BRIEF\n\n{json.dumps(brief, indent=2, ensure_ascii=False)}"
             if brief
             else "# ARTICLE BRIEF\n\n(no brief provided — write from topic and knowledge base)"
         )
+
+        # The length target goes high in the message, in words, ahead of the
+        # research payloads. Buried in the SERP JSON it lost to a hard-coded
+        # figure in the system prompt; stated plainly here it is the first
+        # instruction the Writer meets after the brief.
+        length_section = f"\n{length_block}" if length_block else ""
 
         serp_block = (
             f"\n# SERP RESEARCH — COMPETITOR PATTERNS AND CONTENT GAPS\n"
@@ -321,6 +328,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         return (
             f"{opening}\n"
             f"{brief_block}"
+            f"{length_section}"
             f"{facts_block}"
             f"{serp_block}"
             f"{insight_block}"
@@ -591,6 +599,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
         facts_context: str = "",
         revision_feedback: str = "",
         original_article: str = "",
+        comparable_length: dict | None = None,
     ) -> dict:
         """Run the Writer Agent and return the raw LLM output dict.
 
@@ -600,12 +609,31 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
             serp_context:          Optional pre-formatted SERP summary string.
             insight_context:       Optional pre-formatted company insight summary string.
             seo_structure_context: Optional SEO outline JSON string from SEO Structure Agent.
+            comparable_length:     Optional `comparable_length` block from SERP
+                                   research. Turned into an explicit word target
+                                   and handed over before the first draft.
 
         Returns:
             Dict with keys: h1, intro, sections, internal_links_used,
             claims_to_verify, todos.
         """
+        from src import length_target
+
         print("Writer Agent: loading knowledge files...", file=sys.stderr)
+
+        target = length_target.resolve(comparable_length)
+        if target["measured"]:
+            print(
+                f"Writer length target: {target['low']}-{target['high']} words "
+                f"(median {target['median']}, {target['sample_size']} article(s))",
+                file=sys.stderr,
+            )
+        else:
+            print(
+                f"Writer length target: {target['low']}-{target['high']} words "
+                "(no article ranked — default, not a measurement)",
+                file=sys.stderr,
+            )
 
         system_prompt = self._build_system_prompt(
             article_type=(brief or {}).get("article_type"),
@@ -620,6 +648,7 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
             facts_context=facts_context,
             revision_feedback=revision_feedback,
             original_article=original_article,
+            length_block=length_target.render(target),
         )
 
         if self.api_key:
