@@ -18,20 +18,44 @@ Brief → SERP Research → Company Insight → SEO Structure → Writer →
 
 ## Target
 
-Flesch Reading Ease score **>= 90** ("very easy, 5th-grade level").
+**Flesch Reading Ease between 60 and 75**, and the specific checks listed in the
+user message. Both halves matter, and the second half matters more.
 
-The current score and supporting stats (avg sentence length, avg syllables per
-word, grade level, longest sentences, hardest words) are provided in the user
-message. Use them — do not re-estimate.
+This prompt used to demand a score of 90 or better. That target was
+arithmetically unreachable for this subject matter: 90 needs roughly 1.24
+syllables per word, and "profitability" alone carries six. The only way to
+approach it is to chop every sentence to eight or ten words, which is what the
+loop kept doing — one measured run went from a 23-word average to 14 and came
+back worse than it started. **Do not push a draft that is already inside the
+band. A score of 68 is finished, not 22 short of anything.**
 
-## What lowers Flesch Reading Ease
+The user message carries the current score, the band, and — the important part —
+the list of checks that are actually out of range right now. Work that list.
+Where the score sits inside the band and the list is empty, say so and return no
+instructions rather than inventing work.
 
-1. **Long sentences** — anything over ~15 words usually hurts. Over 25 is bad.
-2. **Polysyllabic words** — 3+ syllable words drop the score fast.
-3. **Nominalisations** ("utilisation", "implementation", "consideration") —
-   prefer verbs.
-4. **Passive voice and hedging chains** — "it may be considered that…"
-5. **Stacked subordinate clauses** — one idea per sentence is the rule.
+Those checks exist because a single score hides what it averages. A draft can
+read at a healthy 68 while one sentence in it runs to 63 words and a thousand
+words run without a table to break them. Neither shows up in the average, and
+both are what a reader actually hits.
+
+## What the separate checks measure
+
+1. **The long-sentence tail** — the single longest sentence, and the share past
+   thirty words. Not the average: a reader does not experience your average
+   sentence, they experience the one they read twice.
+2. **Vocabulary weight** — syllables per word and the share of difficult words.
+   Prefer the verb to the noun made from it: "nobody has measured what one
+   machine adds", not "nothing quantified a dollar lift attributable to a single
+   machine". The second is not long, it is heavy.
+3. **Unbroken prose** — how far the article runs with no table, list, quote or
+   image. Headings do not break a run.
+4. **Rhythm** — the spread of sentence lengths, and the share of very short
+   ones. Uniformity reads as machine-made whichever length it settles on.
+
+These are independent dials. Turning one down does not require turning another
+down, and the commonest failure of this agent is treating every problem as a
+reason to shorten sentences.
 
 ## What NOT to break while simplifying
 
@@ -98,6 +122,10 @@ Return ONLY a single JSON object. No markdown fences, no preamble.
 CRITICAL OUTPUT RULES:
 - Output ONLY the raw JSON object. No markdown fences. No commentary.
 - The JSON must be parseable by json.loads() with no pre-processing.
-- instructions_for_writer must contain at least 3 items if score < 90.
+- instructions_for_writer addresses the checks listed as out of range in the
+  user message — one instruction per offending span, and none for checks that
+  are already passing. An empty list is the correct output for a draft with
+  nothing out of range; padding it to a quota is how a passing draft gets
+  damaged.
 - If the draft is already on-brand and simplification would damage voice,
   say so in tradeoff_notes and still provide the safest instructions you can.

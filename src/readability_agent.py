@@ -49,6 +49,40 @@ TARGET_MAX = 75.0
 #: Kept for callers that pass an explicit floor.
 TARGET_SCORE = TARGET_MIN
 
+#: Output budget for this agent's own call, covering thinking and answer both.
+#:
+#: Ten of the eleven agents ran on the shared 16000 default. This one is the odd
+#: case: its input is the entire article and its job is analysis rather than
+#: generation, which is the combination that makes deliberation expensive. On a
+#: 3,164-word draft it spent the whole 16000 thinking and emitted no text at
+#: all — output_tokens=16000/16000, stop_reason=max_tokens — and the rewrite
+#: loop stopped with problems still on the board.
+#:
+#: The prompt asking for an unreachable score of 90 was the larger half of that
+#: and is fixed. This is the other half: a step that reads a whole article needs
+#: room to think about it, and the shared default was sized for agents writing
+#: short JSON from short inputs.
+#:
+#: Overridable with READABILITY_MAX_TOKENS.
+_DEFAULT_MAX_TOKENS = 24000
+
+
+def max_tokens() -> int:
+    """Output budget for the instruction-generation call."""
+    raw = os.environ.get("READABILITY_MAX_TOKENS")
+    if not raw:
+        return _DEFAULT_MAX_TOKENS
+    try:
+        value = int(raw)
+    except ValueError:
+        print(
+            f"  READABILITY_MAX_TOKENS={raw!r} is not a number — using "
+            f"{_DEFAULT_MAX_TOKENS}",
+            file=sys.stderr,
+        )
+        return _DEFAULT_MAX_TOKENS
+    return value if value > 0 else _DEFAULT_MAX_TOKENS
+
 #: Sentence rhythm, in words. A mean below the floor is the checklist cadence;
 #: a standard deviation below its floor means every sentence is the same length,
 #: which reads as machine-made however plain each one is.
@@ -477,10 +511,17 @@ class ReadabilityChecker:
     # Auth mode 1: Anthropic (requires ANTHROPIC_API_KEY)
     # ------------------------------------------------------------------
 
-    def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:
+    def _run_via_sdk(
+        self, system_prompt: str, user_message: str, budget: int | None = None
+    ) -> dict:
         from src import llm_client
 
-        raw = llm_client.chat(system_prompt, user_message, tier=self.tier)
+        raw = llm_client.chat(
+            system_prompt,
+            user_message,
+            max_tokens=budget or max_tokens(),
+            tier=self.tier,
+        )
         return self._extract_json(raw)
 
     # ------------------------------------------------------------------
@@ -530,9 +571,26 @@ class ReadabilityChecker:
     def generate_instructions(self, draft_markdown: str, stats: dict) -> dict:
         system_prompt = self._build_system_prompt()
         user_message = self._build_user_message(draft_markdown, stats)
-        if self.api_key:
+        if not self.api_key:
+            return self._run_via_agent_sdk(system_prompt, user_message)
+
+        try:
             return self._run_via_sdk(system_prompt, user_message)
-        return self._run_via_agent_sdk(system_prompt, user_message)
+        except ValueError as exc:
+            # Running out of output budget is the one failure the caller can
+            # actually fix, and abandoning the loop over it is expensive: the
+            # draft in hand still carries problems the next pass would clear.
+            # A measured run lost its third iteration this way. One retry at
+            # double, then it is a real failure.
+            if "max_tokens" not in str(exc):
+                raise
+            raised = max_tokens() * 2
+            print(
+                f"  Instruction generation exhausted its {max_tokens()}-token "
+                f"budget without emitting text. Retrying once at {raised}.",
+                file=sys.stderr,
+            )
+            return self._run_via_sdk(system_prompt, user_message, budget=raised)
 
     # ------------------------------------------------------------------
     # Feedback-loop instruction formatting for WriterAgent
