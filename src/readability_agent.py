@@ -518,13 +518,14 @@ class ReadabilityChecker:
     ) -> dict:
         from src import llm_client
 
-        raw = llm_client.chat(
+        return llm_client.chat_json(
             system_prompt,
             user_message,
+            self._extract_json,
             max_tokens=budget or max_tokens(),
             tier=self.tier,
+            label="Readability Checker",
         )
-        return self._extract_json(raw)
 
     # ------------------------------------------------------------------
     # Auth mode 2: Claude Agent SDK
