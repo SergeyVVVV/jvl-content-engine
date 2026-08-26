@@ -30,7 +30,7 @@ class SerpProvider(ABC):
         keyword: str,
         country: str = "us",
         language: str = "en",
-        top_n: int = 5,
+        top_n: int = 10,
     ) -> list[dict]:
         """Return a list of search result dicts.
 
@@ -70,7 +70,7 @@ class MockSerpProvider(SerpProvider):
         keyword: str,
         country: str = "us",
         language: str = "en",
-        top_n: int = 5,
+        top_n: int = 10,
     ) -> list[dict]:
         return []
 
@@ -110,7 +110,7 @@ class SerpApiProvider(SerpProvider):
         keyword: str,
         country: str = "us",
         language: str = "en",
-        top_n: int = 5,
+        top_n: int = 10,
     ) -> list[dict]:
         """Call SerpAPI and return top_n organic results."""
         params = {

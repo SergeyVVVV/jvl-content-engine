@@ -173,9 +173,16 @@
         "sample_size": {
           "type": "integer"
         },
+        "positions": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "Rank of each article counted, so the Writer can see where the sample came from. An article at 9 is weaker evidence about this query than one at 2. Do not adjust the median for position; record the ranks and put the caveat in note."
+        },
         "note": {
           "type": "string",
-          "description": "What was counted and what was excluded."
+          "description": "What was counted and what was excluded, and whether the sample came only from the back half of the top ten."
         }
       }
     }

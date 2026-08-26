@@ -238,7 +238,7 @@ CRITICAL OUTPUT RULES:
         brief: dict | None = None,
         country: str = "us",
         language: str = "en",
-        top_n: int = 5,
+        top_n: int = 10,
         paa_questions: list[str] | None = None,
     ) -> dict:
         """Run the SERP Research Agent and return a validated research package.
@@ -249,7 +249,7 @@ CRITICAL OUTPUT RULES:
             brief: Optional brief dict from Brief Agent output.
             country: Target country code (default: "us").
             language: Target language code (default: "en").
-            top_n: Number of top results to fetch (default: 5).
+            top_n: Number of top results to fetch (default: 10).
             paa_questions: Optional list of PAA questions from the brief.
 
         Returns:
