@@ -387,6 +387,11 @@ def run_pipeline(
         pass
     results["serp_data"] = serp_data
     results["serp_path"] = serp_path
+
+    # Pulled out here, ahead of the Writer, because it is the one SERP field the
+    # Writer needs before it writes a word rather than after. It stays a plain
+    # measurement; length_target.resolve turns it into a band.
+    comparable_length = (serp_data or {}).get("comparable_length")
     yield _event(steps, "SERP Research", "done")
 
     # Step 3 — Company Insight
@@ -457,6 +462,7 @@ def run_pipeline(
             insight_context=insight_context,
             seo_structure_context=seo_structure_context,
             facts_context=facts_context,
+            comparable_length=comparable_length,
         )
     except Exception as exc:
         # Every other step catches its own failure and lets the run continue;
@@ -476,6 +482,20 @@ def run_pipeline(
         yield {"step": 0, "label": "failed", "status": "failed", "results": results}
         return
     draft_markdown = writer_agent.assemble_markdown(draft_result)
+
+    # Land the Writer's output on disk before anything else touches it.
+    #
+    # It used to be held in memory through readability, images, the FAQ and the
+    # sources block, and only written at the end. So any hang in those four
+    # steps threw away the single most expensive call in the pipeline, and
+    # --resume — built for exactly this — had nothing to resume from. The raw
+    # draft is written here and overwritten in place once the later steps have
+    # enriched it.
+    raw_md_path = root / "drafts" / f"{topic_slug}.md"
+    raw_md_path.parent.mkdir(parents=True, exist_ok=True)
+    raw_md_path.write_text(draft_markdown, encoding="utf-8")
+    _save_json(draft_result, root / "drafts" / f"{topic_slug}.raw.json")
+
     yield _event(steps, "Writer", "done")
 
     # Step 6 — Readability Checker (Flesch Reading Ease >= 90, up to 3 rewrites)
@@ -495,6 +515,7 @@ def run_pipeline(
                 seo_structure_context=seo_structure_context,
                 facts_context=facts_context,
                 revision_feedback=feedback,
+                comparable_length=comparable_length,
             )
 
         readability_report = readability.run(
@@ -714,6 +735,7 @@ def run_pipeline(
                 facts_context=facts_context,
                 revision_feedback=feedback,
                 original_article=draft_markdown,
+                comparable_length=comparable_length,
             )
             revised_markdown = writer_agent.assemble_markdown(revised_result)
 

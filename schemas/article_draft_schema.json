@@ -38,6 +38,10 @@
       "items": { "type": "string" },
       "description": "Claims in the draft requiring business confirmation or external sourcing before publishing."
     },
+    "length_justification": {
+      "type": ["string", "null"],
+      "description": "Why the draft runs past the LENGTH TARGET band, when it does. Name what the extra words carry and which competitor gap they close. Null when the draft lands inside the band. 'The topic is complex' is not a justification; a specific figure, scenario or cost the ranking articles omit is."
+    },
     "source_inputs_used": {
       "type": "object",
       "description": "Which upstream inputs were provided to the Writer Agent.",

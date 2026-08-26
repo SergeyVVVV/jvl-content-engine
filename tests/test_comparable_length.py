@@ -74,14 +74,39 @@ class HandoffTests(unittest.TestCase):
         self.assertIn("comparable_length", context)
         self.assertIn("1835", context)
 
-    def test_the_writer_is_told_it_is_evidence_not_a_frame(self) -> None:
+    def test_the_writer_is_pointed_at_the_length_target_block(self) -> None:
         prompt = read("prompts/writer_agent.md")
-        self.assertIn("Treat it as evidence, not a frame", prompt)
+        self.assertIn("# LENGTH TARGET", prompt)
+        self.assertIn("before you write", prompt)
 
-    def test_going_longer_requires_naming_what_it_answers(self) -> None:
+    def test_going_longer_is_allowed_and_has_to_be_named(self) -> None:
+        """Both halves matter and the rule is useless without either.
+
+        A ceiling alone would forbid the article that genuinely answers what the
+        ranking pages leave open; permission alone is what produced a
+        5,340-word draft against an 1,835-word measurement.
+        """
         prompt = read("prompts/writer_agent.md")
-        self.assertIn("answer a question those", prompt)
-        self.assertIn("the words are\n  padding", prompt)
+        self.assertIn("Writing longer is allowed", prompt)
+        self.assertIn("length_justification", prompt)
+        self.assertIn("padding", prompt)
+
+    def test_the_justification_field_exists_in_the_draft_schema(self) -> None:
+        import json
+
+        schema = json.loads(read("schemas/article_draft_schema.json"))
+        self.assertIn("length_justification", schema["properties"])
+
+    def test_no_hard_coded_article_length_survives_in_the_prompt(self) -> None:
+        """The 3000 outranked the measurement, because it was more concrete.
+
+        A run measuring 1,835 words produced 5,340. Any bare word count written
+        into the shared prompt competes with the figure the SERP actually
+        measured, and wins.
+        """
+        prompt = read("prompts/writer_agent.md")
+        self.assertNotIn("about 3000 words", prompt)
+        self.assertNotIn("3000-word article", prompt)
 
     def test_a_null_target_is_not_invented(self) -> None:
         for rel in ("prompts/writer_agent.md", "prompts/serp_research_agent.md"):

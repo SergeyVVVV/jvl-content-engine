@@ -71,6 +71,17 @@ _STREAM_AT_OR_ABOVE = 8000
 #:
 #: It deliberately raises out of the stream context rather than returning, so
 #: the SDK does not treat it as a retryable transport error and try twice more.
+#:
+#: One more hole had to be closed after that. The check below runs *inside* the
+#: loop over chunks, so it only fires when a chunk arrives — a stream that goes
+#: silent blocks in the loop and never reaches it. The read timeout catches that
+#: after ten minutes, but the SDK then retries the whole call, and each retry
+#: starts a fresh clock. A measured run spent 75 minutes inside one nominally
+#: 900-second call that way, and gave up on a readability rewrite it had already
+#: paid for. So the streaming path now runs its own retry loop with a shared
+#: budget: the SDK's retries are switched off, the deadline is measured once
+#: across every attempt, and each attempt's read timeout is clipped to whatever
+#: remains of it.
 _DEFAULT_STREAM_DEADLINE = 900.0
 
 
@@ -90,23 +101,73 @@ def stream_deadline() -> float:
     return value if value > 0 else _DEFAULT_STREAM_DEADLINE
 
 
-def _stream_within_deadline(client: Anthropic, request: dict) -> object:
-    """Consume a stream, abandoning it if it outruns the wall clock."""
-    limit = stream_deadline()
-    started = time.monotonic()
+def _stream_once(client: Anthropic, request: dict, deadline: float) -> object:
+    """Consume one stream, abandoning it if it outruns `deadline`.
+
+    `deadline` is an absolute `time.monotonic()` value shared across retries,
+    not a per-attempt allowance.
+    """
     with client.messages.stream(**request) as stream:
         for _ in stream:
-            elapsed = time.monotonic() - started
-            if elapsed > limit:
+            if time.monotonic() > deadline:
+                limit = stream_deadline()
                 raise StreamDeadlineExceeded(
-                    f"the response streamed for {elapsed:.0f}s against a "
-                    f"{limit:.0f}s ceiling and was abandoned. Chunks kept "
-                    "arriving, so the HTTP read timeout never fired — this is "
-                    "the ceiling on the whole call. Raise "
-                    "ANTHROPIC_STREAM_DEADLINE if a generation this long is "
-                    "expected."
+                    f"the call outran its {limit:.0f}s ceiling and was "
+                    "abandoned. Chunks kept arriving, so the HTTP read timeout "
+                    "never fired — this is the ceiling on the whole call, "
+                    "retries included. Raise ANTHROPIC_STREAM_DEADLINE if a "
+                    "generation this long is expected."
                 )
         return stream.get_final_message()
+
+
+def _stream_within_deadline(
+    request: dict,
+    api_key: str,
+    client_factory=None,
+) -> object:
+    """Stream a request, retrying transport failures inside one shared budget.
+
+    The SDK's own retries are disabled here on purpose. They are per-attempt and
+    reset the clock, which turned a 900-second ceiling into 75 minutes of silent
+    waiting on a real run.
+    """
+    factory = client_factory or Anthropic
+    limit = stream_deadline()
+    started = time.monotonic()
+    deadline = started + limit
+    attempts = default_max_retries() + 1
+    last: Exception | None = None
+
+    for attempt in range(attempts):
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            break
+        client = factory(
+            api_key=api_key,
+            # Clipped to what is left of the budget, so a silent socket cannot
+            # outlive the ceiling waiting on a read that will never come.
+            timeout=min(default_timeout(), remaining),
+            max_retries=0,
+        )
+        try:
+            return _stream_once(client, request, deadline)
+        except StreamDeadlineExceeded:
+            raise
+        except Exception as exc:  # transport failure — retry inside the budget
+            last = exc
+            print(
+                f"Stream attempt {attempt + 1}/{attempts} failed ({exc}); "
+                f"{max(0.0, deadline - time.monotonic()):.0f}s of budget left.",
+                file=sys.stderr,
+            )
+
+    elapsed = time.monotonic() - started
+    raise StreamDeadlineExceeded(
+        f"the call spent {elapsed:.0f}s against a {limit:.0f}s ceiling across "
+        f"{attempts} attempt(s) and never returned a response. "
+        f"Last transport error: {last}"
+    )
 
 
 #: Per-request timeout in seconds, and how many times the SDK may retry.
@@ -324,11 +385,9 @@ def chat_with_search(
 
     model = resolve_model(tier)
     max_tokens = max_tokens or default_max_tokens()
-    client = Anthropic(
-        api_key=api_key,
-        timeout=default_timeout(),
-        max_retries=default_max_retries(),
-    )
+    # No client here: this path always streams, and _stream_within_deadline
+    # builds its own per-attempt client so it can clip each attempt's timeout to
+    # what is left of the shared budget.
 
     messages: list[dict] = [{"role": "user", "content": user}]
     request = {
@@ -347,7 +406,7 @@ def chat_with_search(
     seen_urls: set[str] = set()
 
     for _ in range(_MAX_PAUSE_RESUMES + 1):
-        message = _stream_within_deadline(client, {**request, "messages": messages})
+        message = _stream_within_deadline({**request, "messages": messages}, api_key)
 
         texts.append(extract_text(message))
         searches += search_count(message)
@@ -397,7 +456,7 @@ def chat(
         request["output_config"] = {"effort": level}
 
     if max_tokens >= _STREAM_AT_OR_ABOVE:
-        message = _stream_within_deadline(client, request)
+        message = _stream_within_deadline(request, api_key)
     else:
         message = client.messages.create(**request)
 
