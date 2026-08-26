@@ -467,26 +467,19 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:
         from src import llm_client
 
-        max_attempts = 2
-        last_exc: Exception | None = None
-        for attempt in range(max_attempts):
-            raw = llm_client.chat(
-                system_prompt, user_message, max_tokens=_max_tokens(), tier=self.tier
-            )
-            try:
-                return self._extract_json(raw)
-            except (json.JSONDecodeError, ValueError) as exc:
-                last_exc = exc
-                if attempt < max_attempts - 1:
-                    print(
-                        f"  Writer JSON parse failed (attempt {attempt + 1}/"
-                        f"{max_attempts}): {exc} — retrying…",
-                        file=sys.stderr,
-                    )
-                    continue
-                raise
-        assert last_exc is not None
-        raise last_exc
+        # This loop used to live here, and it was the only one in the codebase.
+        # Ten other agents parsed once and gave up, which cost two runs their
+        # whole prose-revision pass over a missing comma. It now lives in
+        # llm_client so there is one implementation instead of eleven chances
+        # for them to drift apart.
+        return llm_client.chat_json(
+            system_prompt,
+            user_message,
+            self._extract_json,
+            max_tokens=_max_tokens(),
+            tier=self.tier,
+            label="Writer",
+        )
 
     # ------------------------------------------------------------------
     # Auth mode 2: Claude Agent SDK (Claude Code environment)

@@ -18,9 +18,12 @@ the agents have to know about — they still call chat(system, user, ...):
 
 from __future__ import annotations
 
+import json
 import os
 import sys
 import time
+
+from typing import Callable
 
 from anthropic import Anthropic
 
@@ -423,6 +426,62 @@ def chat_with_search(
     if not text:
         raise ValueError(empty_response_error(message, model, max_tokens))
     return text, sources, searches
+
+
+def chat_json(
+    system: str,
+    user: str,
+    parse: Callable[[str], dict],
+    max_tokens: int | None = None,
+    tier: str = "standard",
+    effort: str | None = None,
+    attempts: int = 3,
+    label: str = "Agent",
+) -> dict:
+    """Ask for JSON and keep asking until it parses.
+
+    Ten of the eleven agents used to call chat() and parse the answer once. A
+    model that drops a comma is ordinary — it is why every agent validates
+    against a schema — but a single missed comma took down a whole pipeline
+    step. Two runs in a row lost their entire prose-revision pass to
+    "Expecting ',' delimiter: line 51 column 6", and the same call succeeded on
+    the first try when made by hand afterwards. Nothing was wrong except that
+    nobody asked twice.
+
+    The Writer already did this and was the only agent that did. This is that
+    loop, shared, with one addition: a retry says what was wrong with the last
+    answer rather than repeating the request verbatim and hoping.
+    """
+    last: Exception | None = None
+    message = user
+
+    for attempt in range(attempts):
+        raw = chat(system, message, max_tokens=max_tokens, tier=tier, effort=effort)
+        try:
+            return parse(raw)
+        except (json.JSONDecodeError, ValueError) as exc:
+            last = exc
+            if attempt >= attempts - 1:
+                break
+            print(
+                f"  {label}: reply was not valid JSON (attempt {attempt + 1}/"
+                f"{attempts}): {exc} — asking again.",
+                file=sys.stderr,
+            )
+            # Telling it what broke beats re-rolling the dice on the same words.
+            message = (
+                f"{user}\n\n"
+                "# YOUR PREVIOUS REPLY COULD NOT BE PARSED\n\n"
+                f"It failed with: {exc}\n\n"
+                "Return the same content as a single valid JSON object. No "
+                "markdown fences, no commentary before or after it. Escape "
+                "every quote and newline inside a string value."
+            )
+
+    raise ValueError(
+        f"{label}: {attempts} replies in a row could not be parsed as JSON. "
+        f"Last error: {last}"
+    )
 
 
 def chat(

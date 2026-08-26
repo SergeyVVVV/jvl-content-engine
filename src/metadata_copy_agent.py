@@ -225,8 +225,13 @@ class MetadataCopyAgent:
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:
         from src import llm_client
 
-        raw = llm_client.chat(system_prompt, user_message, tier=self.tier)
-        return self._extract_json(raw)
+        return llm_client.chat_json(
+            system_prompt,
+            user_message,
+            self._extract_json,
+            tier=self.tier,
+            label="Metadata Copy",
+        )
 
     # ------------------------------------------------------------------
     # Auth mode 2: Claude Agent SDK
@@ -312,7 +317,7 @@ class MetadataCopyAgent:
 
         if self.api_key:
             print(
-                f"Metadata Copy Agent auth: OpenAI (tier: {self.tier})",
+                f"Metadata Copy Agent auth: Anthropic (tier: {self.tier})",
                 file=sys.stderr,
             )
             out = self._run_via_sdk(system_prompt, user_message)

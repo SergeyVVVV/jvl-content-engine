@@ -161,8 +161,13 @@ CRITICAL OUTPUT RULES:
     def _run_via_sdk(self, system_prompt: str, user_message: str) -> dict:
         from src import llm_client
 
-        raw = llm_client.chat(system_prompt, user_message, tier=self.tier)
-        return self._extract_json(raw)
+        return llm_client.chat_json(
+            system_prompt,
+            user_message,
+            self._extract_json,
+            tier=self.tier,
+            label="Company Insight",
+        )
 
     # ------------------------------------------------------------------
     # Auth mode 2: Claude Agent SDK (Claude Code environment)
