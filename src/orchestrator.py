@@ -30,7 +30,12 @@ from src.serp_research_agent import SerpResearchAgent
 from src.company_insight_agent import CompanyInsightAgent
 from src.seo_structure_agent import SeoStructureAgent
 from src.writer_agent import WriterAgent
-from src.readability_agent import ReadabilityChecker, prose_problems, score_markdown
+from src.readability_agent import (
+    ReadabilityChecker,
+    prose_problem_kinds,
+    prose_problems,
+    score_markdown,
+)
 from src.faq_agent import FAQAgent
 from src import length_target, sources_block
 from src.qa_agent import QAAgent
@@ -773,13 +778,20 @@ def run_pipeline(
             # three problems, QA asked for one factual correction, and the
             # revision came back with four. A careful contour followed by a step
             # that overwrites its result is not a contour.
-            before_prose = len(prose_problems(score_markdown(draft_markdown)))
-            after_prose = len(prose_problems(score_markdown(revised_markdown)))
-            if after_prose > before_prose:
+            # The gate used to compare counts, and a count is the wrong thing to
+            # compare. A measured revision traded a fixable sentence for a
+            # 502-word wall and passed at three problems against three: same
+            # number, worse article, and the wall reached the reader. What the
+            # loop earned is a particular set of defects being absent, so that
+            # is what the gate checks.
+            before_kinds = prose_problem_kinds(score_markdown(draft_markdown))
+            after_kinds = prose_problem_kinds(score_markdown(revised_markdown))
+            introduced = after_kinds - before_kinds
+            if introduced:
                 print(
-                    f"QA: revision {attempt} fixed the finding but left the prose "
-                    f"worse ({after_prose} problems against {before_prose}) — "
-                    "rejected. The reviewed draft stands.",
+                    f"QA: revision {attempt} fixed the finding but introduced "
+                    f"{', '.join(sorted(introduced))} — rejected. The reviewed "
+                    "draft stands.",
                     file=sys.stderr,
                 )
                 break
@@ -792,6 +804,24 @@ def run_pipeline(
                     file=sys.stderr,
                 )
                 break
+
+            # The readability loop can spend an iteration getting the Writer to
+            # name why the article runs long, and a measured run did: it ended
+            # "past the band and justified — accepted". Then this step asked for
+            # a factual correction, the Writer returned a fresh result with the
+            # field empty, and the justification the loop had earned was gone
+            # from the companion. The article is still long for the same reason
+            # it was long before, so the reason carries forward unless the
+            # revision supplies its own.
+            if not (revised_result.get("length_justification") or "").strip():
+                carried = (draft_result.get("length_justification") or "").strip()
+                if carried:
+                    revised_result["length_justification"] = carried
+                    print(
+                        "QA: carrying the length justification forward — the "
+                        "revision did not restate it.",
+                        file=sys.stderr,
+                    )
 
             draft_result = revised_result
             draft_markdown = revised_markdown
@@ -815,6 +845,22 @@ def run_pipeline(
     results["qa_history"] = qa_history
     results["draft_markdown"] = draft_markdown
     results["companion"] = companion
+
+    # Re-measure on the article that actually ships. The verdict used to be the
+    # readability loop's parting word, and QA runs after it: a measured run
+    # reported "3619 words, over_band_justified" for a file holding 3,312 words
+    # and no justification at all. A number describing a draft nobody will read
+    # is worse than no number.
+    final_length = length_target.assess(
+        length_target.resolve(comparable_length),
+        length_target.article_word_count(draft_markdown),
+        draft_result.get("length_justification"),
+    )
+    results["length_check"] = final_length
+    companion["length_check"] = final_length
+    companion["length_justification"] = draft_result.get("length_justification")
+    _save_json(companion, draft_json_path)
+
     yield _event(steps, "QA Review", "done")
 
     # Step 9 — Metadata
