@@ -28,6 +28,18 @@ BAND = 0.15
 #: 3000 got there in the first place.
 FALLBACK_WORDS = 2000
 
+#: Words a single H2 section is expected to carry, prose and structure together.
+#:
+#: The section floor in the Writer's prompt is 250 words of prose, and a section
+#: that clears it also carries a table or a list, so 350 is what one costs in
+#: practice. The number matters because sections multiply: three measured runs
+#: produced 10, 13 and 12 H2 sections against outlines offering 7, 9 and 8, and
+#: thirteen sections at the floor is 3,250 words before a single table. The
+#: drafts came in at 4,341, 3,797 and 4,177 against a 2,787-word ceiling — not
+#: because the Writer ignored the target, but because it obeyed two rules whose
+#: product cannot fit inside it.
+WORDS_PER_SECTION = 350
+
 #: Past this multiple of the median, extra length stops being a judgement call.
 #: A draft three times its competitors is not answering an unanswered question;
 #: it is padding, and padding is what the run above produced.
@@ -50,6 +62,10 @@ def resolve(comparable_length: dict | None) -> dict:
         "low": int(median * (1 - BAND)),
         "high": int(median * (1 + BAND)),
         "ceiling": int(median * HARD_MULTIPLE),
+        # Handed over as a number rather than a division to perform. The prompt
+        # used to say "divide the word target by roughly 350"; a model that
+        # cannot count its own words will not hold that quotient either.
+        "sections": max(3, round(median / WORDS_PER_SECTION)),
         "measured": measured,
         "sample_size": data.get("sample_size") or 0,
         "positions": [p for p in (data.get("positions") or []) if isinstance(p, int)],
@@ -120,6 +136,27 @@ def render(target: dict) -> str:
         "Length is prose plus tables, lists and quotes together — the whole "
         "article as the reader meets it, excluding the FAQ, which is generated "
         "separately and does not count toward this target.",
+        "",
+        f"**This target affords {target['sections']} H2 sections.** That is the "
+        "band divided by what a section costs once its prose floor and its table "
+        "or list are counted. It is a cap, not a suggestion, and it is the whole "
+        "budget:",
+        "",
+        "- the outline you were handed spends from it;",
+        "- **any section the requirements ask for spends from it too** — a "
+        "requested section comes out of the allowance, never on top of it;",
+        "- a section you decide to add yourself spends from it as well.",
+        "",
+        "If those three together exceed the allowance, merge until they do not, "
+        "and say in `todos` what you merged.",
+        "",
+        f"The allowance and the band have to agree, and the arithmetic is the "
+        f"check: {target['sections']} sections at 250-350 words of prose each "
+        f"lands inside {target['low']}-{target['high']} with room for the tables "
+        "and lists on top. A draft that keeps its section count and still "
+        "overshoots is writing sections too long, not writing too many — three "
+        "measured drafts did exactly that, holding to 6, 9 and 8 sections while "
+        "running 723, 421 and 522 words in each.",
     ]
     if target["note"]:
         lines += ["", f"How the measurement was made: {target['note']}"]
@@ -227,3 +264,49 @@ def assess(target: dict, word_count: int, justification: str | None = None) -> d
         "justified": named,
         "problem": None,
     }
+
+
+_H2 = re.compile(r"^##\s+(?!#)(.*)$", re.MULTILINE)
+
+
+def count_sections(markdown: str) -> int:
+    """H2 sections in the article body, excluding the appended blocks.
+
+    The FAQ and the sources block arrive from later steps, and the editorial
+    blocks are stripped before publishing, so none of them is a section the
+    Writer chose to spend its allowance on.
+    """
+    body = markdown
+    for pattern in (_FAQ_HEADING, _SOURCES_HEADING):
+        match = pattern.search(body)
+        if match:
+            body = body[: match.start()]
+    skip = ("claims to verify", "open todos", "todos for", "sources")
+    return sum(
+        1
+        for heading in _H2.findall(body)
+        if not heading.strip().lower().startswith(skip)
+    )
+
+
+def section_problem(target: dict, markdown: str) -> str | None:
+    """Say so when the article spent more sections than the target affords.
+
+    Sections are where the length overshoot is actually made. Each one carries a
+    250-word prose floor, so thirteen of them is 3,250 words before a table —
+    which is why three drafts measuring 10, 13 and 12 sections all overshot a
+    2,787-word ceiling. Catching it as prose length alone invites the Writer to
+    compress every explanation, when what is wrong is the number of places it is
+    explaining things in.
+    """
+    allowed = target["sections"]
+    found = count_sections(markdown)
+    if found <= allowed:
+        return None
+    return (
+        f"The article has {found} H2 sections against the {allowed} this target "
+        f"affords. Merge {found - allowed} of them rather than shortening the "
+        "rest: two sections that reach the same conclusion are the usual cause, "
+        "and the pair is usually one from the outline and one added for a "
+        "requirement. Fold the later into the earlier and back-reference it."
+    )
