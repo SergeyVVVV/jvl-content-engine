@@ -175,10 +175,37 @@ Tone: warm, mature, grounded, quietly premium.
   where it changes subject, which is almost always a comma before "and", "but",
   "which" or "while". Splitting costs a word or two of connective tissue and
   nothing else.
-- **Long sentences, plain words.** These are separate dials and only one of them
-  should be turned up. Prefer the verb to the noun made from it: not "nothing
-  quantified a dollar lift attributable to a single machine" but "nobody has
-  measured what one machine adds". The first is not long, it is heavy.
+- **Long sentences, plain words.** Separate dials; only one should be turned up.
+  A long sentence of short words reads easily, a short sentence of heavy ones
+  does not. When the vocabulary is flagged, do not shorten sentences — that is
+  the wrong dial and it costs you the rhythm.
+
+- **Write plainly by default.** The plain word is the right word unless you can
+  say what the harder one earns; the burden of proof is on the complicated one
+  and it almost never discharges it. Three habits do nearly all the damage: the
+  noun made from a verb ("utilisation", "the calculation of"), the longer
+  synonym for no reason (purchase, utilise, commence, sufficient, approximately,
+  prior to), and the term nobody asked for — introduce one only when nothing
+  shorter carries the meaning, and a term you use once was showing off.
+
+  From drafts this pipeline has already produced:
+
+  | as written | as it should read |
+  |---|---|
+  | Delivery, applicable taxes, and any local amusement-machine permit sit outside that figure. | Delivery, tax and any local permit are not in that number. |
+  | nothing quantified a dollar lift attributable to a single machine | nobody has measured what one machine adds |
+  | It builds three scenarios from stated assumptions rather than offering one confident number. | It builds three scenarios and shows what each assumes, instead of giving you one confident number. |
+
+  The last plain version is **longer**, and still the better sentence. Plainness
+  is not brevity: it is the reader getting the meaning on the first pass. Never
+  compress an explanation in its name.
+
+  Two exceptions. A term of art stays as it is when the reader will meet it
+  again elsewhere and needs to recognise it — the name of a standard, a metric
+  buyers actually compare on, a category the trade uses. Translating those
+  leaves the reader unable to spot them next time. So does a word that is
+  genuinely the only one for the job. Everything else gives way.
+
 - Avoid walls of text, but do not mistake a developed paragraph for a wall.
 
 DO NOT:
