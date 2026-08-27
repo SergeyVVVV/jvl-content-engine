@@ -34,6 +34,23 @@ PROMPT = re.sub(
 TARGET = lt.resolve({"median_words": 2424, "sample_size": 2, "positions": [6, 8]})
 
 
+RATIONALE = re.sub(
+    r"\s+", " ",
+    (REPO_ROOT / "prompts" / "writer_agent.rationale.md").read_text(encoding="utf-8"),
+)
+
+
+def kept_in_rationale(case: unittest.TestCase, phrase: str) -> None:
+    """Evidence lives in the rationale file; the prompt keeps the rule.
+
+    A rule whose reason has been forgotten is a rule the next refactor
+    deletes — that is how the section ceiling and the Flesch target were
+    lost. The reason has to survive somewhere; it does not have to spend
+    the Writer's attention.
+    """
+    case.assertTrue(phrase in RATIONALE, f"rationale does not record: {phrase!r}")
+
+
 def says(case: unittest.TestCase, phrase: str) -> None:
     case.assertTrue(phrase in PROMPT, f"prompt does not say: {phrase!r}")
 
@@ -62,7 +79,7 @@ class SectionBudgetTests(unittest.TestCase):
         """The gap that made a requirement read as an extra section."""
         text = lt.render(TARGET)
         self.assertIn("never on top of it", text)
-        says(self, "is not an extra section")
+        says(self, "is one of the ones you were already allowed, not an extra")
 
 
 class SectionCountTests(unittest.TestCase):
@@ -112,11 +129,12 @@ class SectionCeilingTests(unittest.TestCase):
         says(self, "250 to 350 words of prose, and both ends are real")
 
     def test_the_floor_alone_is_named_as_the_cause(self) -> None:
-        says(self, "a floor and no ceiling")
-        says(self, "a floor alone only ever pushes one way")
+        """The prompt keeps the reason in one clause; the file keeps the evidence."""
+        says(self, "A floor alone only ever pushes one way")
+        kept_in_rationale(self, "A floor alone only ever pushes one way")
 
     def test_the_evidence_is_the_per_section_word_count(self) -> None:
-        says(self, "723, 421 and 522 words")
+        kept_in_rationale(self, "723, 421 and 522 words")
 
     def test_the_prompt_no_longer_claims_sections_were_added(self) -> None:
         """The first diagnosis was wrong and must not survive as folklore."""
@@ -140,7 +158,7 @@ class RepetitionTests(unittest.TestCase):
         says(self, "they ask for it to be said")
 
     def test_the_measured_duplicate_is_kept_as_evidence(self) -> None:
-        says(self, "the step every ranking guide skips")
+        kept_in_rationale(self, "the step every ranking guide skips")
 
 
 class LoopTests(unittest.TestCase):

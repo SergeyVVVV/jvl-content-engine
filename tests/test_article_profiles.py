@@ -74,6 +74,17 @@ class SharedPromptTests(unittest.TestCase):
         for fragment in ("$200-485", "$200–485", "coin drop"):
             self.assertNotIn(fragment, self.prompt, fragment)
 
+    def test_no_money_at_all_in_the_shared_prompt(self) -> None:
+        """The hand-written list missed "$170 planned earlier" for two PRs.
+
+        Any figure belongs to the article it came from, and this prompt is read
+        by all of them. A pattern catches the next one without being told.
+        """
+        import re
+
+        found = re.findall(r"\$\s?\d[\d,]*", self.prompt)
+        self.assertEqual(found, [], f"one article's money in the shared prompt: {found}")
+
     def test_the_craft_rules_stayed(self) -> None:
         # Sentence length, walls, structure and voice apply to everything.
         for rule in ("35 words", "350 words", "Vary sentence length"):

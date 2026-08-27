@@ -37,6 +37,23 @@ RAW = (REPO_ROOT / "prompts" / "writer_agent.md").read_text(encoding="utf-8")
 PROMPT = re.sub(r"\s+", " ", RAW)
 
 
+RATIONALE = re.sub(
+    r"\s+", " ",
+    (REPO_ROOT / "prompts" / "writer_agent.rationale.md").read_text(encoding="utf-8"),
+)
+
+
+def kept_in_rationale(case: unittest.TestCase, phrase: str) -> None:
+    """Evidence lives in the rationale file; the prompt keeps the rule.
+
+    A rule whose reason has been forgotten is a rule the next refactor
+    deletes — that is how the section ceiling and the Flesch target were
+    lost. The reason has to survive somewhere; it does not have to spend
+    the Writer's attention.
+    """
+    case.assertTrue(phrase in RATIONALE, f"rationale does not record: {phrase!r}")
+
+
 def assert_says(case: unittest.TestCase, phrase: str) -> None:
     """assertIn without dumping the whole prompt into the failure message."""
     case.assertTrue(phrase in PROMPT, f"prompt does not say: {phrase!r}")
@@ -47,14 +64,14 @@ class ContradictionTests(unittest.TestCase):
         assert_says(self, "meet head-on")
 
     def test_the_ceiling_is_declared_the_winner(self) -> None:
-        assert_says(self, "The ceiling wins")
+        assert_says(self, "the ceiling wins")
 
     def test_a_section_at_the_floor_must_carry_a_break_inside_it(self) -> None:
         """"After it" is not enough — headings do not break a run."""
         assert_says(self, "not merely after it")
 
     def test_the_floor_is_not_a_licence_to_pad(self) -> None:
-        assert_says(self, "should be shorter, not padded to the floor")
+        assert_says(self, "should be shorter, not padded")
 
     def test_the_ceiling_still_states_that_headings_do_not_break_a_run(self) -> None:
         assert_says(self, "It does not count headings")
@@ -90,11 +107,11 @@ class SelfCheckTests(unittest.TestCase):
 
     def test_the_prompt_asks_the_writer_to_count_before_returning(self) -> None:
         assert_says(self, "Before you return the draft")
-        assert_says(self, "Not estimate — count")
+        assert_says(self, "count, do not estimate")
 
     def test_it_shows_why_the_average_cannot_be_trusted(self) -> None:
-        assert_says(self, "63-word sentence")
         assert_says(self, "Averages hide their own tails")
+        kept_in_rationale(self, "63-word sentence")
 
     def test_the_prompt_and_the_checker_agree_on_the_number(self) -> None:
         self.assertEqual(MAX_SENTENCE_WORDS, 35)
