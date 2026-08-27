@@ -270,6 +270,16 @@ CRITICAL OUTPUT RULES:
         )
         serp_results = self.provider.search(primary_keyword, country, language, top_n)
 
+        # Prefer the SERP's own People-also-ask box over anything a caller
+        # guessed. This step used to run after the brief purely so it could
+        # borrow the brief's `questions_to_answer` — questions written before
+        # anyone had seen the results. Reading them here frees the step to run
+        # first, which is what lets the brief be planned against a measurement.
+        live_paa = self.provider.people_also_ask()
+        if live_paa:
+            paa_questions = live_paa
+            print(f"  PAA from the SERP: {len(live_paa)} questions", file=sys.stderr)
+
         # Step 2: Determine status and optionally fetch page content
         if serp_results:
             serp_status = "live"

@@ -29,10 +29,23 @@ class StepRegistryTests(unittest.TestCase):
     def test_default_order(self) -> None:
         self.assertEqual(
             pipeline_steps(),
-            ["Brief", "Fact Research", "SERP Research", "Company Insight",
+            ["SERP Research", "Brief", "Fact Research", "Company Insight",
              "SEO Structure", "Writer", "Readability Checker", "FAQ Agent",
              "QA Review", "Metadata"],
         )
+
+    def test_the_measurement_comes_before_anything_that_plans_against_it(self) -> None:
+        """SERP moved to the front, and that is the whole point of the order.
+
+        The brief used to choose the angle, the audience and the section list
+        with no idea what ranks or how long the ranking articles are. The Writer
+        then inherited a section list that could not fit a target nobody
+        upstream had seen — three drafts overshot by half.
+        """
+        steps = pipeline_steps()
+        serp = steps.index("SERP Research")
+        for planner in ("Brief", "SEO Structure", "Writer"):
+            self.assertLess(serp, steps.index(planner), planner)
 
     def test_visuals_run_before_the_faq_block_is_appended(self) -> None:
         steps = pipeline_steps(with_visuals=True)

@@ -22,6 +22,16 @@ from abc import ABC, abstractmethod
 
 
 class SerpProvider(ABC):
+    #: Questions from the SERP's own People-also-ask box, filled by search().
+    #: Empty when the provider cannot supply them or the query has no box —
+    #: which is a fact about the query, not a failure to paper over.
+    _last_paa: list[str] = []
+
+    def people_also_ask(self) -> list[str]:
+        """PAA questions from the most recent search()."""
+        return list(self._last_paa)
+
+
     """Minimal interface for SERP retrieval."""
 
     @abstractmethod
@@ -112,7 +122,11 @@ class SerpApiProvider(SerpProvider):
         language: str = "en",
         top_n: int = 10,
     ) -> list[dict]:
-        """Call SerpAPI and return top_n organic results."""
+        """Call SerpAPI and return top_n organic results.
+
+        Also records the SERP's own People-also-ask questions, readable through
+        `people_also_ask()`.
+        """
         params = {
             "q": keyword,
             "gl": country.lower(),
@@ -127,6 +141,15 @@ class SerpApiProvider(SerpProvider):
             )
             resp.raise_for_status()
             data = resp.json()
+            # Google's own "People also ask", when the query has one. The brief
+            # used to supply these as guesses, written before anyone had looked
+            # at the SERP, and the SERP agent was asked to check guesses against
+            # what ranks. These are the real questions.
+            self._last_paa = [
+                q.get("question", "")
+                for q in (data.get("related_questions") or [])
+                if q.get("question")
+            ]
             results = []
             for i, item in enumerate(
                 data.get("organic_results", [])[:top_n], start=1

@@ -86,6 +86,48 @@ CRITICAL OUTPUT RULES:
 - claims_to_verify must list any product claims needing business confirmation; write ["none required"] only if there are genuinely none.
 - Never invent product specs, dimensions, pricing, warranty details, or comparison data."""
 
+    @staticmethod
+    def _serp_block(serp_data: dict | None) -> str:
+        """Render what the live SERP says, for the brief to plan against.
+
+        Only the fields that should shape a brief: what the query rewards, what
+        the ranking articles leave open, and how long they run. The length is
+        the one that changes the brief's arithmetic — a section list is a length
+        decision made before anyone calls it one.
+        """
+        if not serp_data:
+            return ""
+
+        from src import length_target
+
+        target = length_target.resolve(serp_data.get("comparable_length"))
+        fields = {
+            "dominant_search_intent": serp_data.get("dominant_search_intent"),
+            "content_gaps": serp_data.get("content_gaps", []),
+            "competitor_weaknesses": serp_data.get("competitor_weaknesses", []),
+            "differentiation_opportunities": serp_data.get(
+                "differentiation_opportunities", []
+            ),
+            "paa_missed": serp_data.get("paa_missed", []),
+        }
+        measured = (
+            f"{target['low']}-{target['high']} words"
+            if target["measured"]
+            else f"about {target['median']} words (no article ranked — a default, not a measurement)"
+        )
+        return (
+            "\n# WHAT THE LIVE SERP SHOWS FOR THIS KEYWORD\n\n"
+            f"{json.dumps(fields, indent=2, ensure_ascii=False)}\n\n"
+            f"**The article this brief describes will be written to "
+            f"{measured}, in about {target['sections']} H2 sections.** Size "
+            "`required_sections` to that: a brief listing more sections than the "
+            "article can afford forces the Writer to merge them, and a merge it "
+            "did not plan loses whatever was distinctive about the pair.\n\n"
+            "Use the gaps and weaknesses to choose the angle. An article that "
+            "answers what the ranking pages leave open is the one worth "
+            "commissioning; one that repeats their coverage is not.\n"
+        )
+
     def _build_user_message(self, **kwargs: str) -> str:
         return (
             f"Create an article brief for the following input.\n\n"
@@ -95,7 +137,8 @@ CRITICAL OUTPUT RULES:
             f"Funnel stage: {kwargs['funnel_stage']}\n"
             f"Audience: {kwargs['audience']}\n"
             f"Country: {kwargs['country']}\n"
-            f"Language: {kwargs['language']}\n\n"
+            f"Language: {kwargs['language']}\n"
+            f"{kwargs.get('serp_block', '')}\n"
             "Return only a valid JSON object. No markdown, no code fences, no commentary."
         )
 
@@ -189,13 +232,22 @@ CRITICAL OUTPUT RULES:
         audience: str,
         country: str,
         language: str,
+        serp_data: dict | None = None,
     ) -> dict:
-        """Run the Brief Agent and return a validated brief dict."""
+        """Run the Brief Agent and return a validated brief dict.
+
+        `serp_data` is what the SERP Research Agent measured for this keyword.
+        The brief used to be written first, so it decided the angle, the
+        audience and the section list with no idea what ranks or how long the
+        ranking articles are — and the Writer inherited a section list that
+        could not fit the target nobody upstream had seen.
+        """
         system_prompt = self._build_system_prompt()
         user_message = self._build_user_message(
             topic=topic,
             primary_keyword=primary_keyword,
             content_goal=content_goal,
+            serp_block=self._serp_block(serp_data),
             funnel_stage=funnel_stage,
             audience=audience,
             country=country,
