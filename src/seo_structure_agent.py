@@ -104,12 +104,34 @@ CRITICAL OUTPUT RULES:
 - Never invent product specs, dimensions, pricing, game titles, or warranty details.
 - Mark anything unsupported as TODO: source not confirmed."""
 
-    def _build_user_message(self, topic: str, brief: dict) -> str:
+    def _build_user_message(
+        self, topic: str, brief: dict, comparable_length: dict | None = None
+    ) -> str:
         brief_block = json.dumps(brief, indent=2, ensure_ascii=False) if brief else "{}"
+        # The outline decides how many sections the article has, which decides
+        # how long it is. It used to make that decision without ever seeing the
+        # measurement — three drafts overshot their target by half.
+        budget = ""
+        if comparable_length is not None:
+            from src import length_target
+
+            target = length_target.resolve(comparable_length)
+            budget = (
+                f"\n# LENGTH BUDGET\n\n"
+                f"The article runs {target['low']}-{target['high']} words in "
+                f"about {target['sections']} H2 sections. Do not outline more "
+                f"than {target['sections']}: every extra one is either merged "
+                f"later by the Writer, which loses what made the pair distinct, "
+                f"or written in full, which puts the article over its target. "
+                f"Fold related headings together at this stage instead — it is "
+                f"the last point where the merge is a decision rather than a "
+                f"repair.\n\n"
+            )
         return (
             f"Build the SEO outline for the following topic and brief.\n\n"
             f"Topic: {topic}\n\n"
-            f"# ARTICLE BRIEF\n\n{brief_block}\n\n"
+            f"# ARTICLE BRIEF\n\n{brief_block}\n"
+            f"{budget}\n"
             "Return only a valid JSON object. No markdown, no code fences, no commentary."
         )
 
@@ -207,6 +229,7 @@ CRITICAL OUTPUT RULES:
         self,
         topic: str,
         brief: dict | None = None,
+        comparable_length: dict | None = None,
     ) -> dict:
         """Run the SEO Structure Agent and return a validated outline.
 
@@ -220,7 +243,7 @@ CRITICAL OUTPUT RULES:
         print("SEO Structure Agent: loading knowledge files...", file=sys.stderr)
 
         system_prompt = self._build_system_prompt()
-        user_message = self._build_user_message(topic, brief or {})
+        user_message = self._build_user_message(topic, brief or {}, comparable_length)
 
         if self.api_key:
             print(f"Auth: Anthropic (tier: {self.tier})", file=sys.stderr)

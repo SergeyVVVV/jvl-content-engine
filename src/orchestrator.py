@@ -140,9 +140,9 @@ def revision_damage(before: str, after: str) -> str | None:
 #: Canonical step order. Callers render progress from this list, so a step can
 #: never be added to the pipeline without appearing in the UI, or vice versa.
 PIPELINE_STEPS = [
+    "SERP Research",
     "Brief",
     "Fact Research",
-    "SERP Research",
     "Company Insight",
     "SEO Structure",
     "Writer",
@@ -315,7 +315,49 @@ def run_pipeline(
     if custom_requirements:
         content_goal += f". Additional requirements from editor: {custom_requirements}"
 
-    # Step 1 — Brief
+    # Step 1 — SERP Research
+    #
+    # First, because everything downstream is a decision about an article whose
+    # shape this step measures. The brief used to run first and chose the angle,
+    # the audience and the section list without knowing what ranks or how long
+    # the ranking articles are; the Writer then inherited a section list that
+    # could not fit a target nobody upstream had seen.
+    #
+    # The only thing that kept this step second was the brief's
+    # `questions_to_answer`, which it borrowed to score PAA coverage. Those were
+    # guesses made before anyone looked at the SERP. It now reads Google's own
+    # People-also-ask box instead.
+    yield _event(steps, "SERP Research", "running")
+    serp_data: dict | None = None
+    serp_path: Path | None = None
+    try:
+        _guard(skip, "SERP Research")
+        serp_path = root / "serp_research" / f"{slugify(primary_keyword)}.json"
+        serp_data = _reuse(serp_path, "SERP Research", reuse)
+        if serp_data is None:
+            serp_agent = SerpResearchAgent()
+            serp_data = serp_agent.run(
+                primary_keyword=primary_keyword,
+                topic=topic,
+                brief=None,
+                country="us",
+                language="en",
+                top_n=10,
+            )
+            _save_json(serp_data, serp_path)
+    except Exception:
+        pass
+    results["serp_data"] = serp_data
+    results["serp_path"] = serp_path
+
+    # Pulled out here because every planning step below is entitled to it: the
+    # brief sizes its section list against it, the outline sizes itself, and the
+    # Writer writes to it. It stays a plain measurement; length_target.resolve
+    # turns it into a band and a section allowance.
+    comparable_length = (serp_data or {}).get("comparable_length")
+    yield _event(steps, "SERP Research", "done")
+
+    # Step 2 — Brief
     yield _event(steps, "Brief", "running")
     brief_agent = BriefAgent()
     brief_path = root / "briefs" / f"{slugify(primary_keyword)}.json"
@@ -329,6 +371,7 @@ def run_pipeline(
             audience="Mark & Linda Reynolds",
             country=country,
             language=language,
+            serp_data=serp_data,
         )
         brief_slug = slugify(brief.get("primary_keyword", primary_keyword))
         brief_path = root / "briefs" / f"{brief_slug}.json"
@@ -339,7 +382,7 @@ def run_pipeline(
 
     topic_slug = slugify(topic)
 
-    # Step 2 — Fact Research
+    # Step 3 — Fact Research
     #
     # What the article's numbers actually are, with sources. Distinct from SERP
     # research, which is about what competitors published. Off by default: it
@@ -368,38 +411,8 @@ def run_pipeline(
     results["facts_path"] = facts_path
     yield _event(steps, "Fact Research", "done")
 
-    # Step 3 — SERP Research
-    yield _event(steps, "SERP Research", "running")
-    serp_data: dict | None = None
-    serp_path: Path | None = None
-    try:
-        _guard(skip, "SERP Research")
-        serp_path = root / "serp_research" / f"{slugify(primary_keyword)}.json"
-        serp_data = _reuse(serp_path, "SERP Research", reuse)
-        if serp_data is None:
-            serp_agent = SerpResearchAgent()
-            serp_data = serp_agent.run(
-                primary_keyword=primary_keyword,
-                topic=topic,
-                brief=brief,
-                country="us",
-                language="en",
-                top_n=10,
-                paa_questions=brief.get("questions_to_answer", []),
-            )
-            _save_json(serp_data, serp_path)
-    except Exception:
-        pass
-    results["serp_data"] = serp_data
-    results["serp_path"] = serp_path
 
-    # Pulled out here, ahead of the Writer, because it is the one SERP field the
-    # Writer needs before it writes a word rather than after. It stays a plain
-    # measurement; length_target.resolve turns it into a band.
-    comparable_length = (serp_data or {}).get("comparable_length")
-    yield _event(steps, "SERP Research", "done")
-
-    # Step 3 — Company Insight
+    # Step 4 — Company Insight
     yield _event(steps, "Company Insight", "running")
     insight_data: dict | None = None
     insight_path: Path | None = None
@@ -435,7 +448,7 @@ def run_pipeline(
     results["insight_path"] = insight_path
     yield _event(steps, "Company Insight", "done")
 
-    # Step 4 — SEO Structure
+    # Step 5 — SEO Structure
     yield _event(steps, "SEO Structure", "running")
     seo_data: dict | None = None
     seo_path: Path | None = None
@@ -445,14 +458,16 @@ def run_pipeline(
         seo_data = _reuse(seo_path, "SEO Structure", reuse)
         if seo_data is None:
             seo_agent = SeoStructureAgent()
-            seo_data = seo_agent.run(topic=topic, brief=brief)
+            seo_data = seo_agent.run(
+                topic=topic, brief=brief, comparable_length=comparable_length
+            )
             _save_json(seo_data, seo_path)
     except Exception:
         pass
     results["seo_data"] = seo_data
     yield _event(steps, "SEO Structure", "done")
 
-    # Step 5 — Writer
+    # Step 6 — Writer
     yield _event(steps, "Writer", "running")
     serp_context = _build_serp_context(serp_data) if serp_data else ""
     insight_context = _build_insight_context(insight_data) if insight_data else ""
@@ -503,7 +518,7 @@ def run_pipeline(
 
     yield _event(steps, "Writer", "done")
 
-    # Step 6 — Readability Checker (Flesch Reading Ease >= 90, up to 3 rewrites)
+    # Step 7 — Readability Checker (band 60-75, plus the tail checks)
     yield _event(steps, "Readability Checker", "running")
     readability_report: dict | None = None
     readability_path: Path | None = None
