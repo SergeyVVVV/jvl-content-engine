@@ -39,17 +39,33 @@ Never invent SERP data or JVL facts to compensate for missing inputs.
   Add H3 sub-sections where a topic needs natural subdivision — do not sub-divide
   for structure's sake alone.
 
-  **Section length: the floor is a rule, the total is measured for you.** Each
-  H2 section carries at least 250 words of prose. A section that would come in
-  under 200 words is not a section: fold it into a neighbour or cut it.
+  **Section length: 250 to 350 words of prose, and both ends are real.** A
+  section under 200 words is not a section — fold it into a neighbour or cut it.
+  A section past 350 has almost always absorbed a point that belonged to a
+  neighbour, or is explaining something twice.
 
-  How many such sections the article gets is arithmetic, not a habit. Divide the
-  word target you were given by roughly 350 and you have the number of H2
-  sections the article can afford. **Never set the section count first and let
-  the length follow** — that is how a 1,800-word target became a 5,300-word
-  draft. If the outline you were handed has more sections than the target
-  affords, merge them, and say which in `length_justification` if the merge
-  changed what the article covers.
+  The upper end matters more than it looks, because it is the only thing
+  standing between a correct section count and a draft half again too long.
+  Three measured drafts kept to their outlines — 6, 9 and 8 sections against
+  outlines offering 7, 9 and 8 — and still came in at 4,341, 3,797 and 4,177
+  words against a 2,787-word ceiling. They did not add sections. They wrote
+  sections of 723, 421 and 522 words, because the rule they were given had a
+  floor and no ceiling, and a floor alone only ever pushes one way.
+
+  How many such sections the article gets is not yours to decide. The
+  `# LENGTH TARGET` block states the number outright — you are not asked to
+  derive it, and you should not revise it upward because the material feels
+  large. **Never set the section count first and let the length follow**; that
+  is how a 1,800-word target became a 5,300-word draft.
+
+  Read the allowance as a budget with three claimants: the outline, the
+  requirements, and your own judgement. All three spend from the same number.
+  The one that catches drafts out is the middle one — a section the
+  requirements ask for is not an extra section, it is one of the ones you were
+  already allowed.
+
+  When the three together exceed the allowance, merge until they do not, and
+  record what you merged in `todos`.
 
   **The floor counts prose only.** Tables, block quotes, code blocks and list
   items do not count toward it — a comparison table or a worked example earns
@@ -352,6 +368,35 @@ not re-explain them in identical or near-identical terms:
   built-in library" without repeating the count.
 - Premium / home-appropriate design → make the case once; do not re-argue it in every
   section.
+
+**The rule above lists product claims, and that is not where the damage is.**
+Those four are the ones that used to be repeated. The ones that get repeated now
+are the article's own arguments, and nothing was watching them.
+
+A measured draft argued twice that published arcade figures were measured in a
+different kind of room — once in its opening section, once again five sections
+later, reaching the same conclusion with the same flourish both times ("the step
+most payback guides skip entirely", then "the step every ranking guide skips").
+Its two headings ended with the same nine words. Six of its ten sections
+explained the machine's price; five explained the base-case figure.
+
+So the rule generalises, and this is the part to apply as you write:
+
+**Every claim the article makes has one home.** The place where it is set out,
+weighed and settled. Anywhere else it is a back-reference in a clause — "for the
+reasons set out above", "at the $170 planned earlier" — and never a second
+argument for the same conclusion.
+
+Before you write a section, ask what it settles that no earlier section settled.
+If the answer is a restatement in a different order, the section is not a
+section: fold what is genuinely new into the one that already owns the claim.
+Two sections arguing one point read as padding even when both are well written,
+and the reader who noticed the first one is now being told they missed it.
+
+Watch the seams especially. A section arriving from the outline and a section
+arriving from the requirements can be the same section wearing two names — that
+is exactly how the duplicate above was written. The requirements do not ask for
+a *new place* to say something; they ask for it to be said.
 
 **Structural variety:** if two or more consecutive sections use the same rhetorical
 pattern (general criterion → weak approach → strong approach → Echo example), break

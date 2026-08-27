@@ -652,6 +652,8 @@ class ReadabilityChecker:
         length = stats.get("length_check") or {}
         if length.get("problem"):
             problems = problems + [length["problem"]]
+        if stats.get("section_check"):
+            problems = problems + [stats["section_check"]]
         lines: list[str] = [
             "# PROSE REVISION REQUEST",
             "",
@@ -791,6 +793,19 @@ class ReadabilityChecker:
                 stats["length_check"] = length
                 if length["problem"]:
                     problems = problems + [length["problem"]]
+                # Counted separately from the words. A draft can hold its
+                # section count and still overshoot by writing each one long,
+                # and it can keep the length while splitting the argument into
+                # too many places — the two fail independently and the fixes
+                # are opposite, so telling the Writer "too long" when the fault
+                # is "too many places" sends it to compress prose that is fine.
+                section_note = length_target.section_problem(
+                    word_target, current_markdown
+                )
+                if section_note:
+                    problems = problems + [section_note]
+                    stats["section_check"] = section_note
+                    print(f"  Sections: {section_note.split('.')[0]}.", file=sys.stderr)
                     print(
                         f"  Length: {length['word_count']} words against "
                         f"{word_target['low']}-{word_target['high']} "
