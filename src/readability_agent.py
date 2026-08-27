@@ -146,6 +146,15 @@ MAX_LIST_LINE_SHARE = 0.25
 #: and paid for a full Writer pass on the heavy tier to close the gap. The pass
 #: overshot to 26.66 and made things worse. Ten percent of the boundary is the
 #: width of the doubt in the boundary itself.
+#:
+#: It applies to every check, and for a while it did not. The longest-sentence
+#: and unbroken-prose counters were added later and compared hard, so a run
+#: reporting a 372-word wall against a 350-word ceiling — six percent, inside
+#: the doubt every other check is granted — spent two full Writer calls chasing
+#: twenty-two words. Worse, the loop's "not converging" verdict is a count of
+#: these problems, so noise did not merely reach the report: it decided when to
+#: stop. Every threshold here is a judgement, and none is sharp enough to
+#: justify an exception.
 _TOLERANCE = 0.10
 
 MAX_ITERATIONS = 3
@@ -388,7 +397,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
     difficult = stats.get("difficult_word_share", 0.0)
     prose_run = stats.get("longest_prose_run", 0)
 
-    if longest > MAX_SENTENCE_WORDS:
+    if _above(longest, MAX_SENTENCE_WORDS):
         problems.append(
             f"One sentence runs {longest} words against a {MAX_SENTENCE_WORDS}-word "
             "ceiling. Find the sentences past that length and split each at its "
@@ -416,7 +425,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
             "words plain."
         )
 
-    if prose_run > MAX_PROSE_RUN_WORDS:
+    if _above(prose_run, MAX_PROSE_RUN_WORDS):
         problems.append(
             f"{prose_run} words run without a table, list, quote or image to break "
             f"them, against a {MAX_PROSE_RUN_WORDS}-word ceiling. Headings do not "
