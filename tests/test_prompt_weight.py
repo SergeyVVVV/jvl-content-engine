@@ -38,7 +38,7 @@ RATIONALE = RATIONALE_PATH.read_text(encoding="utf-8")
 
 #: What the prompt may weigh. Set just above where the split left it, so a
 #: genuine new rule fits and another accumulation of war stories does not.
-MAX_PROMPT_WORDS = 4300
+MAX_PROMPT_WORDS = 3800
 
 
 class WeightTests(unittest.TestCase):
@@ -53,6 +53,10 @@ class WeightTests(unittest.TestCase):
 
     def test_it_is_smaller_than_before_the_split(self) -> None:
         self.assertLess(len(PROMPT.split()), 4592)
+
+    def test_it_is_close_to_where_it_started(self) -> None:
+        """2,977 words before the run of fixes; a session of them added 54%."""
+        self.assertLess(len(PROMPT.split()), 3900)
 
 
 class SplitTests(unittest.TestCase):

@@ -79,7 +79,7 @@ class SectionBudgetTests(unittest.TestCase):
         """The gap that made a requirement read as an extra section."""
         text = lt.render(TARGET)
         self.assertIn("never on top of it", text)
-        says(self, "is not an extra section")
+        says(self, "is one of the ones you were already allowed, not an extra")
 
 
 class SectionCountTests(unittest.TestCase):

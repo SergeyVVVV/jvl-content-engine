@@ -85,15 +85,17 @@ class StructureRuleTests(unittest.TestCase):
         )
 
     def test_a_comparison_must_be_a_table(self) -> None:
-        self.assertIn("A comparison is a table. This is not optional.", self.prompt)
-        self.assertIn("required, not suggested", self.prompt)
+        """Stated once now — it used to be stated twice, in two forms."""
+        self.assertIn("A comparison is a table, and this is not optional.", self.prompt)
+        self.assertIn("has failed its reader", self.prompt)
 
     def test_the_blanket_quota_is_gone(self) -> None:
         # The over-correction that squeezed out tables along with lists.
         self.assertNotIn("one list or table per two H2", self.prompt)
 
     def test_reasoning_still_belongs_in_prose(self) -> None:
-        self.assertIn("A list is for items, not for argument.", self.prompt)
+        self.assertIn("Everything else is prose.", self.prompt)
+        self.assertIn('list entries need a "because" they are reasoning', self.prompt)
 
     def test_sections_still_open_with_prose(self) -> None:
         self.assertIn("Never open a section with a list or a table", self.prompt)
