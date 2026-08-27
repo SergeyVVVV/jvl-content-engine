@@ -341,12 +341,14 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
     to the Writer, which is why they say what to do rather than what is wrong.
     """
     problems: list[str] = []
+    kinds: list[str] = []
     score = stats.get("flesch_reading_ease", 0.0)
     mean = stats.get("avg_sentence_length", 0.0)
     stdev = stats.get("sentence_length_stdev", 0.0)
     short_share = stats.get("short_sentence_share", 0.0)
 
     if _below(score, TARGET_MIN):
+        kinds.append("reading_ease_low")
         problems.append(
             f"Reading ease is {score}, below {TARGET_MIN}. Touch only the densest "
             f"sentences — those over {int(MAX_MEAN_SENTENCE)} words — and split each "
@@ -356,6 +358,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
             "check exists to catch, not the fix for it."
         )
     elif _above(score, TARGET_MAX):
+        kinds.append("reading_ease_high")
         problems.append(
             f"Reading ease is {score}, above {TARGET_MAX}. The prose has been "
             "simplified past plain into choppy. Rejoin adjacent short sentences "
@@ -366,6 +369,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
         )
 
     if _below(mean, MIN_MEAN_SENTENCE):
+        kinds.append("sentences_short")
         problems.append(
             f"Sentences average {mean} words, under {MIN_MEAN_SENTENCE}. That is "
             "checklist cadence: a paragraph of short declaratives reads as a list "
@@ -376,6 +380,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
             "goal is a mixture, not a uniformly longer article."
         )
     elif _above(mean, MAX_MEAN_SENTENCE):
+        kinds.append("sentences_long")
         problems.append(
             f"Sentences average {mean} words, over {MAX_MEAN_SENTENCE}. Split only "
             f"the sentences over {int(MAX_MEAN_SENTENCE) + 6} words, at their "
@@ -384,6 +389,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
         )
 
     if _below(stdev, MIN_SENTENCE_STDEV):
+        kinds.append("rhythm_flat")
         problems.append(
             f"Sentence length barely varies (spread {stdev}, floor "
             f"{MIN_SENTENCE_STDEV}). Every sentence being the same size reads as "
@@ -398,6 +404,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
     prose_run = stats.get("longest_prose_run", 0)
 
     if _above(longest, MAX_SENTENCE_WORDS):
+        kinds.append("sentence_tail")
         problems.append(
             f"One sentence runs {longest} words against a {MAX_SENTENCE_WORDS}-word "
             "ceiling. Find the sentences past that length and split each at its "
@@ -406,6 +413,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
         )
 
     if _above(long_share, MAX_LONG_SENTENCE_SHARE):
+        kinds.append("long_share")
         problems.append(
             f"{round(long_share * 100)}% of sentences run over thirty words, above "
             f"the {round(MAX_LONG_SENTENCE_SHARE * 100)}% ceiling. Long sentences "
@@ -414,6 +422,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
         )
 
     if _above(syllables, MAX_SYLLABLES_PER_WORD) or _above(difficult, MAX_DIFFICULT_WORD_SHARE):
+        kinds.append("vocabulary")
         problems.append(
             f"The vocabulary is heavier than it needs to be ({syllables} syllables "
             f"per word, {round(difficult * 100)}% difficult words, against "
@@ -426,6 +435,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
         )
 
     if _above(prose_run, MAX_PROSE_RUN_WORDS):
+        kinds.append("prose_wall")
         problems.append(
             f"{prose_run} words run without a table, list, quote or image to break "
             f"them, against a {MAX_PROSE_RUN_WORDS}-word ceiling. Headings do not "
@@ -437,6 +447,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
         )
 
     if _above(stats.get("list_line_share", 0.0), MAX_LIST_LINE_SHARE):
+        kinds.append("list_heavy")
         problems.append(
             f"{round(stats['list_line_share'] * 100)}% of lines are list items, "
             f"above the {round(MAX_LIST_LINE_SHARE * 100)}% ceiling. Lists carry "
@@ -445,6 +456,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
         )
 
     if _above(short_share, MAX_SHORT_SENTENCE_SHARE):
+        kinds.append("too_choppy")
         problems.append(
             f"{round(short_share * 100)}% of sentences are under twelve words, over "
             f"the {round(MAX_SHORT_SENTENCE_SHARE * 100)}% ceiling. Short sentences "
@@ -453,7 +465,28 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
             "an argument."
         )
 
+    _LAST_KINDS[:] = kinds
     return problems
+
+
+#: The kind of each problem the last prose_problems() call reported.
+#:
+#: The QA revision step used to compare problem *counts* before and after, and
+#: let a revision through when the count held. A measured run traded a fixable
+#: sentence for a 502-word wall and passed the gate at three problems against
+#: three: the count was identical, the article was worse. Composition is what
+#: matters, so the gate compares kinds.
+_LAST_KINDS: list[str] = []
+
+
+def prose_problem_kinds(stats: dict[str, Any]) -> set[str]:
+    """Which kinds of problem a draft has, ignoring how bad each one is.
+
+    Two drafts with three problems each are not interchangeable. This is what a
+    gate should compare when it asks whether a rewrite made things worse.
+    """
+    prose_problems(stats)
+    return set(_LAST_KINDS)
 
 
 def prose_is_in_range(stats: dict[str, Any]) -> bool:

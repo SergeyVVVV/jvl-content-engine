@@ -37,16 +37,27 @@ class RevisionGateTests(unittest.TestCase):
 
     def test_the_revision_is_measured_for_prose_before_it_is_accepted(self) -> None:
         loop = self.source[self.source.index("revision_damage(draft_markdown") - 2500 :]
-        self.assertIn("prose_problems(score_markdown(draft_markdown))", loop)
-        self.assertIn("prose_problems(score_markdown(revised_markdown))", loop)
+        self.assertIn("prose_problem_kinds(score_markdown(draft_markdown))", loop)
+        self.assertIn("prose_problem_kinds(score_markdown(revised_markdown))", loop)
 
-    def test_a_revision_that_worsens_the_prose_is_rejected(self) -> None:
-        self.assertIn("after_prose > before_prose", self.source)
+    def test_a_revision_that_introduces_a_new_defect_is_rejected(self) -> None:
+        self.assertIn("introduced = after_kinds - before_kinds", self.source)
+        self.assertIn("if introduced:", self.source)
 
-    def test_an_equal_or_better_revision_is_allowed_through(self) -> None:
-        # Only *worse* is rejected. A revision that fixes a finding and leaves
-        # the prose where it was is exactly what we asked for.
-        self.assertNotIn("after_prose >= before_prose", self.source)
+    def test_the_gate_no_longer_compares_counts(self) -> None:
+        """Counting let a fixable sentence be traded for a 502-word wall.
+
+        Three problems before, three after, and the wall shipped. What the
+        readability loop earns is the absence of particular defects, so that is
+        what survives the revision.
+        """
+        self.assertNotIn("after_prose > before_prose", self.source)
+        self.assertNotIn("len(prose_problems(score_markdown(revised_markdown)))", self.source)
+
+    def test_a_revision_that_fixes_without_introducing_is_allowed_through(self) -> None:
+        # Only *new* kinds are rejected. A revision that clears a finding and
+        # leaves the prose where it was is exactly what we asked for.
+        self.assertNotIn("if after_kinds != before_kinds", self.source)
 
     def test_the_writer_is_warned_rather_than_only_judged(self) -> None:
         qa = read("src/qa_agent.py")
