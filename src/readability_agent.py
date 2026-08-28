@@ -301,19 +301,29 @@ def score_markdown(md: str) -> dict[str, Any]:
         if len(s.split()) >= 20
     ]
 
+    # Ranked by what each word actually costs the reader — its length times how
+    # often they meet it. This used to take the first fifteen long words in
+    # document order, which was harmless while nothing read the list and wrong
+    # once the Writer started being handed it: a four-syllable word used once in
+    # the intro outranked one used ten times throughout.
     words = re.findall(r"[A-Za-z][A-Za-z'-]+", prose)
-    seen: set[str] = set()
-    hardest: list[dict[str, Any]] = []
+    counts: dict[str, int] = {}
+    forms: dict[str, str] = {}
     for w in words:
         wl = w.lower()
-        if wl in seen:
-            continue
-        syll = textstat.syllable_count(w)
+        counts[wl] = counts.get(wl, 0) + 1
+        forms.setdefault(wl, w)
+
+    scored = []
+    for wl, n in counts.items():
+        syll = textstat.syllable_count(wl)
         if syll >= 4:
-            hardest.append({"word": w, "syllables": int(syll)})
-            seen.add(wl)
-        if len(hardest) >= 15:
-            break
+            scored.append((syll * n, syll, n, forms[wl]))
+    scored.sort(key=lambda t: (-t[0], -t[1], t[3]))
+    hardest: list[dict[str, Any]] = [
+        {"word": word, "syllables": int(syll), "occurrences": n}
+        for _, syll, n, word in scored[:15]
+    ]
 
     return {
         "flesch_reading_ease": round(flesch, 2),
@@ -423,6 +433,23 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
 
     if _above(syllables, MAX_SYLLABLES_PER_WORD) or _above(difficult, MAX_DIFFICULT_WORD_SHARE):
         kinds.append("vocabulary")
+        # Name the words. Every other check points at something the Writer can
+        # find — "one sentence runs 44 words", "379 words without a break". This
+        # one used to hand over two ratios and a generic example while the list
+        # of actual offenders sat unused in the same stats dict, and it was the
+        # check drafts failed most often and fixed least.
+        offenders = [
+            w.get("word", "")
+            for w in (stats.get("hardest_words") or [])
+            if w.get("word")
+        ][:12]
+        pointer = (
+            f" The heaviest words in this draft: {', '.join(offenders)}. Replace "
+            "the ones carrying no meaning a shorter word would lose. A term the "
+            "brief asked for stays."
+            if offenders
+            else ""
+        )
         problems.append(
             f"The vocabulary is heavier than it needs to be ({syllables} syllables "
             f"per word, {round(difficult * 100)}% difficult words, against "
@@ -431,7 +458,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
             "fix it. Replace abstract nouns with the verbs they were made from: "
             "\"quantified a dollar lift attributable to a machine\" becomes "
             "\"measured what one machine adds\". Keep the sentences long and the "
-            "words plain."
+            f"words plain.{pointer}"
         )
 
     if _above(prose_run, MAX_PROSE_RUN_WORDS):
