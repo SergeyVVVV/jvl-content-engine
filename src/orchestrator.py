@@ -349,6 +349,11 @@ def run_pipeline(
         pass
     results["serp_data"] = serp_data
     results["serp_path"] = serp_path
+    # Surfaced because everything below now plans against this step. A run whose
+    # search timed out fell through to a default word target and section
+    # allowance, wrote the article to them, and said so nowhere except one line
+    # in the middle of the log.
+    results["serp_status"] = (serp_data or {}).get("serp_status", "missing")
 
     # Pulled out here because every planning step below is entitled to it: the
     # brief sizes its section list against it, the outline sizes itself, and the

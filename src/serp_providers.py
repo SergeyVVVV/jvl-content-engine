@@ -18,6 +18,7 @@ from __future__ import annotations
 import os
 import re
 import sys
+import time
 from abc import ABC, abstractmethod
 
 
@@ -100,8 +101,27 @@ class SerpApiProvider(SerpProvider):
     """
 
     _BASE_URL = "https://serpapi.com/search.json"
+
+    #: A page that will not load in fifteen seconds is not worth waiting for —
+    #: there are nine others, and one blocked fetch costs a word count, not the
+    #: step.
     _PAGE_FETCH_TIMEOUT = 15
-    _SEARCH_TIMEOUT = 15
+
+    #: The search is different: it is the only call in the step, and losing it
+    #: loses the measurement every planning step below now depends on. A run
+    #: timed out at fifteen seconds and the whole pipeline fell back to a
+    #: default word target, with nothing in the summary to say so.
+    #:
+    #: SerpAPI itself is doing a live Google query, so seconds of latency are
+    #: normal and a slow one is not a broken one.
+    _SEARCH_TIMEOUT = 60
+
+    #: Transient failures are worth another go for the same reason: this call is
+    #: not one of ten, it is the one. Retried with a short backoff, because a
+    #: service that just timed out will not answer faster if asked immediately.
+    _SEARCH_ATTEMPTS = 3
+    _SEARCH_BACKOFF = 2.0
+
     _MAX_PAGE_CHARS = 3000  # limit per-page text to avoid overloading context
 
     def __init__(self, api_key: str) -> None:
@@ -135,12 +155,31 @@ class SerpApiProvider(SerpProvider):
             "api_key": self.api_key,
             "engine": "google",
         }
+        data = None
+        for attempt in range(1, self._SEARCH_ATTEMPTS + 1):
+            try:
+                resp = self._requests.get(
+                    self._BASE_URL, params=params, timeout=self._SEARCH_TIMEOUT
+                )
+                resp.raise_for_status()
+                data = resp.json()
+                break
+            except Exception as exc:
+                if attempt == self._SEARCH_ATTEMPTS:
+                    print(
+                        f"SerpAPI search failed after {attempt} attempts: {exc}",
+                        file=sys.stderr,
+                    )
+                    return []
+                wait = self._SEARCH_BACKOFF * attempt
+                print(
+                    f"SerpAPI search attempt {attempt}/{self._SEARCH_ATTEMPTS} "
+                    f"failed ({exc}); retrying in {wait:.0f}s.",
+                    file=sys.stderr,
+                )
+                time.sleep(wait)
+
         try:
-            resp = self._requests.get(
-                self._BASE_URL, params=params, timeout=self._SEARCH_TIMEOUT
-            )
-            resp.raise_for_status()
-            data = resp.json()
             # Google's own "People also ask", when the query has one. The brief
             # used to supply these as guesses, written before anyone had looked
             # at the SERP, and the SERP agent was asked to check guesses against
@@ -164,7 +203,7 @@ class SerpApiProvider(SerpProvider):
                 )
             return results
         except Exception as exc:
-            print(f"SerpAPI search failed: {exc}", file=sys.stderr)
+            print(f"SerpAPI response could not be read: {exc}", file=sys.stderr)
             return []
 
     def fetch_page_detail(self, url: str) -> tuple[str, int]:
