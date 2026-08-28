@@ -153,6 +153,15 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  QA       : {qa_report.get('status', 'unknown')}", file=sys.stderr)
     # A draft that ends over its target with nothing said about why used to be
     # visible only by counting the file afterwards.
+    # The measurement everything else was planned against. "mock" means the
+    # search did not answer and the article was written to a default.
+    serp_status = results.get("serp_status")
+    if serp_status and serp_status != "live":
+        print(
+            f"  SERP     : {serp_status} — no live measurement, so the length "
+            "target and section allowance were defaults",
+            file=sys.stderr,
+        )
     length = results.get("length_check") or {}
     if length:
         print(
