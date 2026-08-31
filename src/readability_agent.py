@@ -247,6 +247,27 @@ def list_line_share(md: str) -> float:
     return items / len(lines)
 
 
+#: A paragraph the reader meets as one block: not a heading, a table row, a list
+#: item, a quote or an image line.
+_NOT_PROSE = re.compile(r"^\s*(?:#|\||[-*+>]\s|!\[|\d+[.)]\s)")
+
+
+def longest_paragraph(md: str) -> int:
+    """Words in the longest single paragraph.
+
+    Distinct from longest_prose_run, which measures how far the page goes with
+    nothing to break it. A page can break often and still hand the reader a
+    153-word block, and that block is what they have to hold in their head.
+    """
+    best = 0
+    for block in re.split(r"\n\s*\n", md):
+        block = block.strip()
+        if not block or _NOT_PROSE.match(block):
+            continue
+        best = max(best, len(block.split()))
+    return best
+
+
 def score_markdown(md: str) -> dict[str, Any]:
     """Compute Flesch Reading Ease and supporting stats for an article."""
     import textstat
@@ -266,6 +287,7 @@ def score_markdown(md: str) -> dict[str, Any]:
             "longest_sentence_words": 0,
             "difficult_word_share": 0.0,
             "longest_prose_run": 0,
+            "longest_paragraph": 0,
             "list_line_share": 0.0,
             "longest_sentences": [],
             "hardest_words": [],
@@ -338,6 +360,7 @@ def score_markdown(md: str) -> dict[str, Any]:
         "longest_sentence_words": int(longest_sentence),
         "difficult_word_share": round(difficult_share, 3),
         "longest_prose_run": longest_prose_run(md),
+        "longest_paragraph": longest_paragraph(md),
         "list_line_share": round(list_line_share(md), 3),
         "longest_sentences": longest,
         "hardest_words": hardest,
@@ -490,6 +513,21 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
             "\"quantified a dollar lift attributable to a machine\" becomes "
             "\"measured what one machine adds\". Keep the sentences long and the "
             f"words plain.{pointer}"
+        )
+
+    from src.editorial_style import active
+
+    paragraph_cap = active().max_paragraph_words
+    longest_para = stats.get("longest_paragraph", 0)
+    if paragraph_cap and _above(longest_para, paragraph_cap):
+        kinds.append("paragraph_long")
+        severity.append(longest_para / paragraph_cap)
+        problems.append(
+            f"One paragraph runs {longest_para} words against a {paragraph_cap}-word "
+            "ceiling. Split it where it changes subject — a paragraph is one "
+            "idea developed, and past this length it is usually two ideas that "
+            "were never separated. Do not shorten the sentences inside it; the "
+            "fix is a paragraph break, not a rewrite."
         )
 
     if _above(prose_run, MAX_PROSE_RUN_WORDS):

@@ -117,7 +117,31 @@ class WriterAgent:
         article_type: str | None = None,
         has_facts: bool = False,
     ) -> str:
+        from src.editorial_style import active
+
+        style = active()
         prompt = self._load_file("prompts/writer_agent.md")
+        # The numbers live in editorial_style, not in the file. Three rules used
+        # to be stated in both the prompt and the code, and all three drifted:
+        # "about 3000 words" against a measured 1,835, a section floor against
+        # the prose ceiling, and a Flesch target three months behind.
+        ceiling = (
+            "\n**No paragraph past "
+            f"{style.max_paragraph_words} words.** A paragraph is one idea "
+            "developed. Past that length it is almost always two ideas that "
+            "were never separated, and the reader is holding both at once. The "
+            "fix is a break, not shorter sentences.\n"
+            if style.max_paragraph_words
+            else ""
+        )
+        prompt = (
+            prompt.replace("{SECTION_MIN}", str(style.section_prose_min))
+            .replace("{SECTION_MAX}", str(style.section_prose_max))
+            .replace("{SECTION_UNDER}", str(style.section_prose_min - 50))
+            .replace("{PARAGRAPH_SENTENCES}", style.paragraph_sentences)
+            .replace("{HEADING_HINT}", style.heading_hint)
+            .replace("{PARAGRAPH_CEILING}", ceiling)
+        )
 
         profile = self._profile_for(article_type, has_facts)
         if profile:
