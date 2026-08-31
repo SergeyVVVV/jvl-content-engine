@@ -36,6 +36,7 @@ from src.readability_agent import (
     prose_problems,
     score_markdown,
 )
+from src.editor_agent import EditorAgent
 from src.faq_agent import FAQAgent
 from src import length_target, sources_block
 from src.qa_agent import QAAgent
@@ -531,17 +532,14 @@ def run_pipeline(
         _guard(skip, "Readability Checker")
         readability = ReadabilityChecker()
 
-        def _rewrite(feedback: str) -> dict:
-            return writer_agent.run(
-                topic=topic,
-                brief=brief,
-                serp_context=serp_context,
-                insight_context=insight_context,
-                seo_structure_context=seo_structure_context,
-                facts_context=facts_context,
-                revision_feedback=feedback,
-                comparable_length=comparable_length,
-            )
+        editor = EditorAgent()
+
+        def _rewrite(feedback: str, current_markdown: str) -> dict:
+            # Not the Writer. Its system prompt is 12,000 words of "you produce
+            # first-draft articles from a brief", and a revision sent through it
+            # kept 2% of the draft's sentences. The editor carries 470 words and
+            # no knowledge base, and keeps 93% on the same test.
+            return editor.run(current_markdown, feedback, previous=draft_result)
 
         readability_report = readability.run(
             draft_result=draft_result,
@@ -1067,7 +1065,7 @@ def run_update_pipeline(
     try:
         readability = ReadabilityChecker()
 
-        def _rewrite(feedback: str) -> dict:
+        def _rewrite(feedback: str, current_markdown: str) -> dict:
             return writer_agent.run(
                 topic=topic,
                 brief=previous_brief,
@@ -1075,7 +1073,10 @@ def run_update_pipeline(
                 insight_context=insight_context,
                 seo_structure_context="",
                 revision_feedback=feedback,
-                original_article=original_article,
+                # The draft as it stands after this loop's own edits, not the
+                # article this update started from — otherwise each iteration
+                # reverts the last one.
+                original_article=current_markdown or original_article,
             )
 
         readability_report = readability.run(

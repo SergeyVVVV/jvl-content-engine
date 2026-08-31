@@ -351,6 +351,12 @@ def to_studio_payload(
         article["intro_markdown"] = intro
     if faq:
         article["faq"] = faq
+    # Four lines the site prints above the prose. Optional: where they are
+    # absent the site falls back to its own hard-coded map, and where that has
+    # no entry either the block simply does not render.
+    highlights = [h for h in (metadata.get("highlights") or []) if str(h).strip()]
+    if highlights:
+        article["highlights"] = [str(h).strip() for h in highlights]
 
     out_meta = {
         "slug": slug or metadata.get("slug", ""),

@@ -344,6 +344,28 @@ def score_markdown(md: str) -> dict[str, Any]:
     }
 
 
+#: How far each measurement is past its own limit, filled by prose_problems().
+#: Used to decide what a revision pass works on first.
+_LAST_SEVERITY: list[float] = []
+
+#: How many faults a single revision pass is asked to fix.
+#:
+#: Measured on one draft, one pass, counting sentences that survived verbatim:
+#:
+#:     one fault      95%
+#:     five faults    44%
+#:
+#: Two would cover more of the list inside a three-iteration budget and is the
+#: obvious next thing to try — but the run that would have measured it hit the
+#: workspace API limit, and shipping an unmeasured default is how the 300-second
+#: timeout and the Flesch target of 90 got here. One is what the evidence
+#: supports; the checks are ordered by severity, so the three passes spend
+#: themselves on the three worst things.
+#:
+#: Raise it with READABILITY_FAULTS_PER_PASS once two has a number against it.
+_FAULTS_PER_PASS = int(os.environ.get("READABILITY_FAULTS_PER_PASS", "1"))
+
+
 def prose_problems(stats: dict[str, Any]) -> list[str]:
     """Everything out of range in a draft, phrased as an instruction.
 
@@ -352,6 +374,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
     """
     problems: list[str] = []
     kinds: list[str] = []
+    severity: list[float] = []
     score = stats.get("flesch_reading_ease", 0.0)
     mean = stats.get("avg_sentence_length", 0.0)
     stdev = stats.get("sentence_length_stdev", 0.0)
@@ -359,6 +382,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
 
     if _below(score, TARGET_MIN):
         kinds.append("reading_ease_low")
+        severity.append(TARGET_MIN / max(score, 1e-9))
         problems.append(
             f"Reading ease is {score}, below {TARGET_MIN}. Touch only the densest "
             f"sentences — those over {int(MAX_MEAN_SENTENCE)} words — and split each "
@@ -369,6 +393,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
         )
     elif _above(score, TARGET_MAX):
         kinds.append("reading_ease_high")
+        severity.append(score / TARGET_MAX)
         problems.append(
             f"Reading ease is {score}, above {TARGET_MAX}. The prose has been "
             "simplified past plain into choppy. Rejoin adjacent short sentences "
@@ -380,6 +405,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
 
     if _below(mean, MIN_MEAN_SENTENCE):
         kinds.append("sentences_short")
+        severity.append(MIN_MEAN_SENTENCE / max(mean, 1e-9))
         problems.append(
             f"Sentences average {mean} words, under {MIN_MEAN_SENTENCE}. That is "
             "checklist cadence: a paragraph of short declaratives reads as a list "
@@ -391,6 +417,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
         )
     elif _above(mean, MAX_MEAN_SENTENCE):
         kinds.append("sentences_long")
+        severity.append(mean / MAX_MEAN_SENTENCE)
         problems.append(
             f"Sentences average {mean} words, over {MAX_MEAN_SENTENCE}. Split only "
             f"the sentences over {int(MAX_MEAN_SENTENCE) + 6} words, at their "
@@ -400,6 +427,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
 
     if _below(stdev, MIN_SENTENCE_STDEV):
         kinds.append("rhythm_flat")
+        severity.append(MIN_SENTENCE_STDEV / max(stdev, 1e-9))
         problems.append(
             f"Sentence length barely varies (spread {stdev}, floor "
             f"{MIN_SENTENCE_STDEV}). Every sentence being the same size reads as "
@@ -415,6 +443,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
 
     if _above(longest, MAX_SENTENCE_WORDS):
         kinds.append("sentence_tail")
+        severity.append(longest / MAX_SENTENCE_WORDS)
         problems.append(
             f"One sentence runs {longest} words against a {MAX_SENTENCE_WORDS}-word "
             "ceiling. Find the sentences past that length and split each at its "
@@ -424,6 +453,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
 
     if _above(long_share, MAX_LONG_SENTENCE_SHARE):
         kinds.append("long_share")
+        severity.append(long_share / MAX_LONG_SENTENCE_SHARE)
         problems.append(
             f"{round(long_share * 100)}% of sentences run over thirty words, above "
             f"the {round(MAX_LONG_SENTENCE_SHARE * 100)}% ceiling. Long sentences "
@@ -433,6 +463,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
 
     if _above(syllables, MAX_SYLLABLES_PER_WORD) or _above(difficult, MAX_DIFFICULT_WORD_SHARE):
         kinds.append("vocabulary")
+        severity.append(max(syllables / MAX_SYLLABLES_PER_WORD, difficult / MAX_DIFFICULT_WORD_SHARE))
         # Name the words. Every other check points at something the Writer can
         # find — "one sentence runs 44 words", "379 words without a break". This
         # one used to hand over two ratios and a generic example while the list
@@ -463,6 +494,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
 
     if _above(prose_run, MAX_PROSE_RUN_WORDS):
         kinds.append("prose_wall")
+        severity.append(prose_run / MAX_PROSE_RUN_WORDS)
         problems.append(
             f"{prose_run} words run without a table, list, quote or image to break "
             f"them, against a {MAX_PROSE_RUN_WORDS}-word ceiling. Headings do not "
@@ -475,6 +507,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
 
     if _above(stats.get("list_line_share", 0.0), MAX_LIST_LINE_SHARE):
         kinds.append("list_heavy")
+        severity.append(stats.get("list_line_share", 0.0) / MAX_LIST_LINE_SHARE)
         problems.append(
             f"{round(stats['list_line_share'] * 100)}% of lines are list items, "
             f"above the {round(MAX_LIST_LINE_SHARE * 100)}% ceiling. Lists carry "
@@ -484,6 +517,7 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
 
     if _above(short_share, MAX_SHORT_SENTENCE_SHARE):
         kinds.append("too_choppy")
+        severity.append(short_share / MAX_SHORT_SENTENCE_SHARE)
         problems.append(
             f"{round(short_share * 100)}% of sentences are under twelve words, over "
             f"the {round(MAX_SHORT_SENTENCE_SHARE * 100)}% ceiling. Short sentences "
@@ -492,7 +526,20 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
             "an argument."
         )
 
-    _LAST_KINDS[:] = kinds
+    # Worst first, measured rather than judged. An earlier version ranked these
+    # by hand — walls before sentences, vocabulary near the end — and on a real
+    # draft that put a 21%-over prose wall ahead of a sentence 97% past its
+    # ceiling, and left the vocabulary fourth of five with a three-iteration
+    # budget. Which is to say it never got fixed.
+    #
+    # Severity is the ratio to the check's own limit, so the numbers compare
+    # across checks that measure different things.
+    ranked = sorted(
+        zip(problems, kinds, severity), key=lambda t: -t[2]
+    )
+    problems = [p for p, _, _ in ranked]
+    _LAST_KINDS[:] = [k for _, k, _ in ranked]
+    _LAST_SEVERITY[:] = [v for _, _, v in ranked]
     return problems
 
 
@@ -697,45 +744,51 @@ class ReadabilityChecker:
             "",
         ]
 
+        # One fault per pass. Five at once is a list of things wrong with the
+        # whole article, and a Writer handed that rewrites rather than edits:
+        # 44% of sentences survived a five-fault pass against 71% for a single
+        # one, on the same draft.
+        #
+        # The loop runs up to three times anyway, so nothing is dropped — the
+        # worst problem is fixed first and the next pass measures again. Order
+        # matters: a wall of prose and a 63-word sentence are what a reader
+        # actually trips over, and vocabulary is the one whose fix is a word
+        # swap rather than a restructure.
         if problems:
-            lines += ["## What is out of range", ""]
-            lines += [f"- {p}" for p in problems]
+            take = problems[:_FAULTS_PER_PASS]
+            lines += ["## Fix these, and change nothing else", ""]
+            lines += [f"- {p}" for p in take]
             lines.append("")
+            if len(problems) > len(take):
+                lines += [
+                    f"{len(problems) - len(take)} other measurements are also out of "
+                    "range. They are not your problem on this pass — a later one "
+                    "will report them if they are still true. Fixing several "
+                    "things at once is how a revision turns into a rewrite.",
+                    "",
+                ]
 
-        diagnosis = instructions.get("diagnosis", {})
-        if diagnosis.get("summary"):
-            lines += ["## Diagnosis", "", diagnosis["summary"], ""]
-
-        problems = diagnosis.get("primary_problems") or []
-        if problems:
-            lines.append("**Primary problems:**")
-            lines.extend(f"- {p}" for p in problems)
-            lines.append("")
-
-        offenders = diagnosis.get("worst_offenders") or []
-        if offenders:
-            lines += ["## Worst offenders", ""]
-            for o in offenders:
-                lines.append(
-                    f"- **{o.get('section', '?')}** — {o.get('why', '')}\n"
-                    f"  > {o.get('excerpt', '')}"
-                )
-            lines.append("")
-
-        items = instructions.get("instructions_for_writer") or []
-        if items:
-            lines += ["## Required edits", ""]
-            for i, item in enumerate(items, 1):
-                lines.append(
-                    f"{i}. **{item.get('section', '?')}** "
-                    f"[{item.get('action', 'other')}] — {item.get('guidance', '')}\n"
-                    f"   Target span: > {item.get('target_excerpt', '')}"
-                )
-            lines.append("")
-
+        # Everything the instruction agent produced used to be appended here:
+        # a diagnosis, a list of worst offenders, and fourteen numbered "rewrite
+        # this span" edits — 525 words of plan covering the whole article.
+        #
+        # Measured on one draft, holding everything else: with that block the
+        # revision kept 4% of its sentences verbatim; without it, 44%. A plan
+        # that touches every section reads as a commission for a new article,
+        # and the Writer wrote one. The agent meant to make revision precise was
+        # the largest single cause of it not being a revision at all.
+        #
+        # What survives is the measured problem list above. Each entry is
+        # already written as an instruction — "find the sentences past that
+        # length and split each at its natural joint" — and it names the
+        # offending sentence, stretch or word. The generated edits added
+        # phrasing, not information.
+        #
+        # `tradeoff_notes` stays: it is the one field that says what NOT to
+        # change, which is the opposite of a rewrite plan.
         tradeoffs = instructions.get("tradeoff_notes") or []
         if tradeoffs:
-            lines += ["## Tradeoff notes (preserve brand voice over raw score)", ""]
+            lines += ["## Leave these alone", ""]
             lines.extend(f"- {t}" for t in tradeoffs)
             lines.append("")
 
@@ -749,7 +802,7 @@ class ReadabilityChecker:
         self,
         draft_result: dict,
         draft_markdown: str,
-        rewrite_fn: Callable[[str], dict],
+        rewrite_fn: Callable[[str, str], dict],
         assemble_markdown_fn: Callable[[dict], str],
         word_target: dict | None = None,
     ) -> dict:
@@ -758,8 +811,13 @@ class ReadabilityChecker:
         Args:
             draft_result:          The Writer Agent's structured JSON output.
             draft_markdown:        Assembled markdown of that draft.
-            rewrite_fn:            Callable taking a feedback string and
-                                   returning a new Writer Agent result dict.
+            rewrite_fn:            Callable taking (feedback, current_markdown)
+                                   and returning a new Writer Agent result dict.
+                                   The markdown is the draft being revised — the
+                                   loop used to pass only the feedback, so the
+                                   Writer was handed "one sentence runs 44 words"
+                                   with no article to find it in, and wrote a new
+                                   one each time.
                                    Caller is responsible for wiring it to
                                    WriterAgent.run(...) with the original
                                    topic, brief, serp_context, etc.
@@ -931,7 +989,14 @@ class ReadabilityChecker:
             )
 
             try:
-                current_result = rewrite_fn(feedback)
+                # The draft goes with the feedback. Every instruction in it
+                # points at a place in this text — a sentence, a stretch of
+                # paragraphs, a word — and without the text the Writer can only
+                # start again and try to avoid the same faults. That is what it
+                # did: measured runs went 22.97 -> 14.29 -> 26.66 words per
+                # sentence, which reads as an oscillating correction and was
+                # three unrelated articles.
+                current_result = rewrite_fn(feedback, current_markdown)
             except Exception as exc:
                 print(
                     f"  Writer rewrite failed on iteration {i + 1}: {exc}. "

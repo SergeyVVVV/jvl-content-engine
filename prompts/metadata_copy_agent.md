@@ -77,10 +77,37 @@ Return ONLY a single valid JSON object with exactly these flat keys:
   "og_description": "...",
   "image_alt_texts": ["...", "..."],
   "excerpt": "...",
+  "highlights": ["...", "...", "...", "..."],
   "notes": ["..."],
   "source_inputs_used": { "...": "..." },
   "todos": ["..."]
 }
 ```
+
+## Highlights
+
+Four lines the site prints in a box above the article, before the reader reaches
+a word of prose. They are the article's conclusions, not its table of contents:
+someone who reads only these four should come away with what the piece found.
+
+The rules are the site's, not preferences:
+
+- **Exactly four.** The block is dropped entirely if there are more or fewer,
+  because a box of two reads as a bug rather than as brevity.
+- **69 to 120 characters each**, about 99 being the norm across what is already
+  published. One dense sentence, never a paragraph.
+- **Plain text only.** They are printed inside a span and escaped, so `**bold**`,
+  a link or a leading bullet ships as literal characters on the page.
+- **No full stop at the end.** None of the 184 lines already on the site has one.
+- An em dash is the house move for adding the consequence to a fact — like this.
+
+Write each one as a finding with something in it: a figure, a date, a
+comparison, a conclusion someone could disagree with. "The article explains how
+payback works" is a contents line and fails. "A $4,250 machine at $170 a week
+pays for itself in about six months before running costs" is a highlight.
+
+The last one conventionally lands on the JVL product where the article's
+argument arrives at it — only where that is honest for this piece, never as an
+advert bolted onto four facts.
 
 No markdown fences. No commentary. No extra keys. No nested metadata objects.

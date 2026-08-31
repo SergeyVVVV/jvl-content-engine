@@ -169,6 +169,64 @@ class MetadataCopyAgent:
             return trimmed
         return candidate
 
+    #: The site renders exactly four highlight lines, as plain text inside a
+    #: <span>. React escapes it, so markdown and HTML do not work there — a
+    #: bullet character or a **bold** would ship as literal characters.
+    #:
+    #: Measured across the 46 articles already on the site: every one has four
+    #: points, 69-120 characters each and 99 on average, and none of the 184
+    #: ends in a full stop.
+    HIGHLIGHT_COUNT = 4
+    HIGHLIGHT_MIN_CHARS = 69
+    HIGHLIGHT_MAX_CHARS = 120
+
+    @classmethod
+    def _clean_highlights(cls, raw: Any) -> list[str]:
+        """Make the highlights match what the site can render, deterministically.
+
+        The model gets the rules in its prompt and mostly follows them. This is
+        the part that does not depend on it: strip the markdown it renders as
+        literal text, drop the trailing full stop it adds by habit, and keep
+        the count at four so the block never renders short.
+        """
+        if not isinstance(raw, list):
+            return []
+        cleaned: list[str] = []
+        for item in raw:
+            if not isinstance(item, str):
+                continue
+            text = item.strip()
+            # Leading bullets and numbering the model adds out of habit.
+            text = re.sub(r"^\s*(?:[-*•✓]|\d+[.)])\s*", "", text)
+            # Markdown emphasis and links ship as literal characters.
+            text = re.sub(r"\*\*|__|`", "", text)
+            text = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", text)
+            text = " ".join(text.split()).rstrip(" .")
+            if text:
+                cleaned.append(text)
+
+        if len(cleaned) > cls.HIGHLIGHT_COUNT:
+            cleaned = cleaned[: cls.HIGHLIGHT_COUNT]
+        # Four or nothing: the site hides the block when the key is absent, and
+        # a block of two reads as a mistake rather than as brevity.
+        if len(cleaned) != cls.HIGHLIGHT_COUNT:
+            print(
+                f"Metadata Copy Agent: {len(cleaned)} highlights against "
+                f"{cls.HIGHLIGHT_COUNT} required — dropping the block.",
+                file=sys.stderr,
+            )
+            return []
+
+        long_ones = [h for h in cleaned if len(h) > cls.HIGHLIGHT_MAX_CHARS]
+        if long_ones:
+            print(
+                f"Metadata Copy Agent: {len(long_ones)} highlight(s) over "
+                f"{cls.HIGHLIGHT_MAX_CHARS} chars — the site wraps them onto a "
+                "third line.",
+                file=sys.stderr,
+            )
+        return cleaned
+
     @classmethod
     def _enforce_limits(cls, out: dict) -> dict:
         """Hard-enforce character limits as a deterministic post-processing step.
@@ -187,6 +245,8 @@ class MetadataCopyAgent:
                 file=sys.stderr,
             )
             out["meta_description"] = trimmed
+
+        out["highlights"] = cls._clean_highlights(out.get("highlights"))
 
         h1 = out.get("h1", "")
         if len(h1) > 70:

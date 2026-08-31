@@ -305,17 +305,21 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
 
         if original_article:
             original_block = (
-                "\n# EXISTING PUBLISHED ARTICLE — YOU ARE REVISING THIS TEXT\n"
-                "# Treat this as the baseline. Preserve every section the "
-                "update plan does not explicitly modify. Keep prose verbatim "
-                "where possible. Output the FULL updated article as JSON — "
-                "not a diff, not partial sections.\n\n"
+                "\n# THE ARTICLE YOU ARE REVISING\n"
+                "# This is the baseline and most of it should survive. Change "
+                "only what the instructions name, keep everything else verbatim "
+                "— including headings, structure and any passage nobody "
+                "complained about. Output the FULL article as JSON: not a diff, "
+                "not the changed sections alone.\n\n"
                 f"{original_article.strip()}\n"
             )
             opening = (
-                "Update the existing article below according to the update "
-                "instructions. Preserve everything the diagnostic flagged as "
-                "still strong; only change what the plan asks for.\n\n"
+                "Revise the article below according to the instructions that "
+                "follow it. Every instruction points at a specific place in "
+                "this text; find that place and fix it there. Do not rewrite "
+                "the article, and do not start again from the brief — a fresh "
+                "draft that happens to avoid the faults is not a revision, and "
+                "loses everything that was already right.\n\n"
                 f"Topic: {topic}\n"
             )
         else:
@@ -323,6 +327,30 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
             opening = (
                 f"Write a complete first-draft article for the following topic.\n\n"
                 f"Topic: {topic}\n"
+            )
+
+        if original_article:
+            # A revision gets the article and the faults, and nothing that would
+            # let it write a different one.
+            #
+            # Measured on the same draft and the same single instruction: with
+            # the brief, the outline, the SERP research and the facts attached,
+            # 2% of sentences survived verbatim. With them removed, 87%. The
+            # planning payloads are not neutral background — the brief says
+            # "cover these seven sections and answer these eight questions",
+            # which is a complete commission for a new article, and the Writer
+            # did the thing most of its input asked for. The draft became one
+            # reference among several instead of the text being edited.
+            #
+            # They were needed to write the first draft. They are not needed to
+            # fix a sentence in it, and the knowledge files that carry the claim
+            # rules load with the system prompt either way.
+            return (
+                f"{opening}\n"
+                f"{length_section}"
+                f"{original_block}"
+                f"{revision_block}"
+                "\nReturn only a valid JSON object. No markdown fences, no commentary."
             )
 
         return (
@@ -333,7 +361,6 @@ EXPERIENCE-ANCHOR RULES (E-E-A-T):
             f"{serp_block}"
             f"{insight_block}"
             f"{seo_block}"
-            f"{original_block}"
             f"{revision_block}"
             "\nReturn only a valid JSON object. No markdown fences, no commentary."
         )
