@@ -120,7 +120,11 @@ class WriterAgent:
         from src.editorial_style import active
 
         style = active()
-        prompt = self._load_file("prompts/writer_agent.md")
+        # A style may replace the shared prompt outright rather than adjust it.
+        # STYLE_3 does: it was written from a measurement of ten articles in the
+        # shape it asks for, and building it as edits to a 3,700-word prompt
+        # written for a different shape would have produced neither.
+        prompt = self._load_file(style.prompt_file or "prompts/writer_agent.md")
         # The numbers live in editorial_style, not in the file. Three rules used
         # to be stated in both the prompt and the code, and all three drifted:
         # "about 3000 words" against a measured 1,835, a section floor against
