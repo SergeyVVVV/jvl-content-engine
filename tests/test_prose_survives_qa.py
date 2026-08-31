@@ -59,10 +59,16 @@ class RevisionGateTests(unittest.TestCase):
         # leaves the prose where it was is exactly what we asked for.
         self.assertNotIn("if after_kinds != before_kinds", self.source)
 
-    def test_the_writer_is_warned_rather_than_only_judged(self) -> None:
-        qa = read("src/qa_agent.py")
-        self.assertIn("Keep the prose as readable as you found it", qa)
-        self.assertIn("rejected whole", qa)
+    def test_the_prose_rules_live_where_the_fixing_happens(self) -> None:
+        """They used to be restated in the QA feedback.
+
+        The agent applying the fix now carries them in its own prompt, so
+        repeating them per revision only lengthened an instruction whose length
+        was the problem.
+        """
+        editor = read("prompts/editor_agent.md")
+        self.assertIn("Copy every sentence you are not fixing", editor)
+        self.assertIn("has failed", editor)
 
 
 class FAQLengthTests(unittest.TestCase):

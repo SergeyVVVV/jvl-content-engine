@@ -208,61 +208,32 @@ class QAAgent:
         rank = {"high": 0, "medium": 1, "low": 2}
         actionable.sort(key=lambda i: rank.get(i.get("severity", "low"), 3))
 
-        lines: list[str] = [
-            "# QA REVISION INSTRUCTIONS",
-            "",
-            "A reviewer read the finished draft and found the problems below. You are "
-            "correcting an existing article, not writing a new one. Change only what "
-            "each item asks for and leave every other sentence exactly as it is — "
-            "a rewrite that fixes the arithmetic and quietly restyles four sections "
-            "has failed.",
-            "",
-        ]
-
-        summary = report.get("summary")
-        if summary:
-            lines += ["## Reviewer's summary", "", summary, ""]
-
-        lines += ["## Required edits", ""]
+        # A list, not a report. This block used to open with the reviewer's
+        # 250-word summary and then give every issue a heading, a "Problem"
+        # paragraph and a "Required fix" paragraph — 1,048 words on a measured
+        # run, telling a model to make small corrections at the length of a
+        # commission. The full report is saved as JSON and read by people; the
+        # agent doing the fixing gets only the part it can act on.
+        lines: list[str] = ["# FIX THESE, AND CHANGE NOTHING ELSE", ""]
         for n, issue in enumerate(actionable, 1):
-            severity = issue.get("severity", "unknown").upper()
-            lines.append(f"### {n}. [{severity}] {issue.get('location', 'unspecified location')}")
-            lines.append("")
-            lines.append(f"**Problem:** {issue.get('problem', '(not described)')}")
-            fix = issue.get("recommended_fix")
-            if fix:
-                lines.append(f"**Required fix:** {fix}")
-            lines.append("")
+            where = issue.get("location", "unspecified location")
+            what = str(issue.get("problem", "(not described)")).rstrip(". ")
+            fix = issue.get("recommended_fix") or "correct it in place"
+            lines.append(f"{n}. **{where}** — {what}. Fix: {fix}")
+        lines.append("")
 
         skipped = [i for i in issues if not QAAgent.writer_can_fix(i)]
         if skipped:
             lines += [
-                "## Not yours to fix",
-                "",
-                "These belong to other agents and are listed so you do not try to "
-                "reach them from the article body:",
+                "Not yours, do not touch: "
+                + "; ".join(i.get("location", "unspecified") for i in skipped),
                 "",
             ]
-            lines += [f"- {i.get('location', 'unspecified')}" for i in skipped]
-            lines.append("")
 
         lines += [
-            "## Rules for this pass",
-            "",
-            "- Recompute every figure you touch and check it against the numbers it "
-            "is derived from. A number that contradicts its own inputs is the defect, "
-            "not a rounding preference.",
-            "- No `TODO:` string may survive in reader-facing prose. Editorial notes "
-            "belong in the todos array.",
-            "- Do not add new claims while fixing old ones.",
-            "- Keep the prose as readable as you found it. A revision that fixes "
-            "the finding and leaves the writing denser is rejected whole, and "
-            "the finding stays unfixed with it. No sentence past 35 words, plain "
-            "words in long sentences rather than short sentences of heavy ones, "
-            "and no stretch of paragraphs running past roughly 350 words without "
-            "a table, list or quote to break it.",
-            "- Return the FULL article as JSON in the usual shape — not a diff, not "
-            "the changed sections alone.",
+            "Recompute any figure you touch against the numbers it comes from. "
+            "Do not add claims while fixing old ones. No `TODO:` may survive in "
+            "reader-facing prose. Return the full article as JSON.",
         ]
         return "\n".join(lines)
 

@@ -86,15 +86,30 @@ class FormatForWriterTests(unittest.TestCase):
             issue(location="FAQ — second answer", problem="FAQ ITEM"),
         ]}
         out = QAAgent.format_for_writer(report)
-        self.assertIn("Not yours to fix", out)
+        self.assertIn("Not yours, do not touch", out)
         self.assertIn("FAQ — second answer", out)
         # The FAQ problem text must not appear as a required edit.
         self.assertNotIn("FAQ ITEM", out)
 
     def test_it_asks_for_a_revision_not_a_rewrite(self) -> None:
         out = QAAgent.format_for_writer({"issues": [issue()]})
-        self.assertIn("correcting an existing article", out)
-        self.assertIn("FULL article", out)
+        self.assertIn("CHANGE NOTHING ELSE", out)
+        self.assertIn("full article", out)
+
+    def test_it_is_a_list_rather_than_a_report(self) -> None:
+        """1,048 words told a model to make small corrections at commission length.
+
+        The reviewer's summary is written for a person and is kept in the JSON
+        report; sending it to the agent doing the fixing only competes with the
+        fixes.
+        """
+        out = QAAgent.format_for_writer(
+            {"summary": "A genuinely strong piece that " + "reads well " * 40,
+             "issues": [issue()]}
+        )
+        self.assertNotIn("Reviewer's summary", out)
+        self.assertNotIn("reads well reads well", out)
+        self.assertNotIn("### 1.", out)
 
     def test_the_two_recurring_defects_are_named_every_time(self) -> None:
         out = QAAgent.format_for_writer({"issues": [issue()]})
