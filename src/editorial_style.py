@@ -59,6 +59,12 @@ class EditorialStyle:
     #: None keeps the shared prompt, which is what STYLE_1 and STYLE_2 do.
     prompt_file: str | None = None
 
+    #: How far into the article the first table, list or quote may appear, as a
+    #: share of its length. None means unchecked, which is how a draft put its
+    #: first table at 79% and passed every other check: the walls between its
+    #: headings were all under the 350-word ceiling.
+    first_structure_by: float | None = None
+
 
 STYLE_1 = EditorialStyle(
     name="Editorial_Style_1",
@@ -109,6 +115,7 @@ STYLE_3 = EditorialStyle(
         "— a 2,500-word article carries somewhere between sixteen and twenty "
         "H2 and H3 headings together, and the H3s do most of that work"
     ),
+    first_structure_by=0.25,
     prompt_file="prompts/writer_agent_style3.md",
 )
 

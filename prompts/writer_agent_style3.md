@@ -33,9 +33,10 @@ being compared on two or more attributes. Close only if the section earned a
 conclusion; do not summarise what the reader just read.
 
 Sub-divide with H3 the moment a section covers two things a reader might look
-for separately. In this style H3s outnumber H2s, and that is correct: they are
-what makes a long article navigable, and they are what a search engine reads to
-answer a specific question.
+for separately. There is no cap on how many: in seven of the ten articles
+measured H3s outnumbered H2s, in one they were level and in two there were
+fewer. Let the material decide — an H3 exists because something under it can be
+found on its own, not to hit a ratio.
 
 Every H3 gets a heading someone might actually search for. "Common comorbidities"
 beats "Other considerations", and "What it costs per month" beats "Costs".
@@ -66,6 +67,15 @@ row by row is a table someone forgot to draw.
 
 Never open a section with a list or a table. Open with the sentence that says
 why the section exists.
+
+**Something structural inside the first quarter, and one every section or two
+after it.** A measured draft put its first table at 79% of the article: three
+scenarios, a venue-type breakdown and a buy-versus-lease comparison all sat in
+prose that had nowhere to look. Headings alone do not break a page — they say a
+new topic starts, they give the eye nothing to rest on.
+
+Expect four or more lists and two or more tables in a 2,500-word article. Fewer
+usually means a comparison went unbuilt, not that the material had none.
 
 ## Voice
 

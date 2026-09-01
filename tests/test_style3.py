@@ -117,9 +117,19 @@ class PromptTests(unittest.TestCase):
         shared = (REPO_ROOT / "prompts" / "writer_agent.md").read_text(encoding="utf-8")
         self.assertLess(len(PROMPT.split()), len(shared.split()) / 2)
 
-    def test_h3s_are_expected_to_outnumber_h2s(self) -> None:
-        """The shared prompt forbids that. This shape depends on it."""
-        self.assertIn("H3s outnumber H2s, and that is correct", FLAT)
+    def test_the_h3_cap_is_lifted_without_a_quota_replacing_it(self) -> None:
+        """The shared prompt forbids H3s outnumbering H2s, and that ban is what
+        held earlier drafts to one or two sub-headings.
+
+        The first draft of this file replaced the ban with its mirror — "H3s
+        outnumber H2s, and that is correct" — on a sample where that held in
+        seven of ten. A majority is not a rule, and a rule in the opposite
+        direction is the same mistake twice.
+        """
+        self.assertIn("There is no cap on how many", FLAT)
+        self.assertIn("in two there were fewer", FLAT)
+        self.assertIn("not to hit a ratio", FLAT)
+        self.assertNotIn("and that is correct", FLAT)
 
     def test_headings_are_written_to_be_searched_for(self) -> None:
         self.assertIn("someone might actually search for", FLAT)
