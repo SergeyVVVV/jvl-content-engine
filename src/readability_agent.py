@@ -247,6 +247,54 @@ def list_line_share(md: str) -> float:
     return items / len(lines)
 
 
+#: A paragraph the reader meets as one block: not a heading, a table row, a list
+#: item, a quote or an image line.
+_NOT_PROSE = re.compile(r"^\s*(?:#|\||[-*+>]\s|!\[|\d+[.)]\s)")
+
+
+def first_structure_share(md: str) -> float:
+    """Where the first table, list, quote or image sits, as a share of length.
+
+    Distinct from longest_prose_run, which asks how far the page goes without a
+    break and is satisfied by headings falling either side of a 247-word stretch.
+    This asks when the reader first gets something to look at.
+    """
+    total = 0
+    first: int | None = None
+    for line in md.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        # A [VISUAL] marker is a note to a later agent, not something the reader
+        # is given. Counting it passed a draft whose first real table sat at 79%.
+        if (
+            first is None
+            and re.match(r"^(?:\||[-*+>]\s|\d+[.)]\s|!\[)", stripped)
+            and "[VISUAL]" not in stripped
+        ):
+            first = total
+        total += len(stripped.split())
+    if not total:
+        return 0.0
+    return 1.0 if first is None else first / total
+
+
+def longest_paragraph(md: str) -> int:
+    """Words in the longest single paragraph.
+
+    Distinct from longest_prose_run, which measures how far the page goes with
+    nothing to break it. A page can break often and still hand the reader a
+    153-word block, and that block is what they have to hold in their head.
+    """
+    best = 0
+    for block in re.split(r"\n\s*\n", md):
+        block = block.strip()
+        if not block or _NOT_PROSE.match(block):
+            continue
+        best = max(best, len(block.split()))
+    return best
+
+
 def score_markdown(md: str) -> dict[str, Any]:
     """Compute Flesch Reading Ease and supporting stats for an article."""
     import textstat
@@ -266,6 +314,8 @@ def score_markdown(md: str) -> dict[str, Any]:
             "longest_sentence_words": 0,
             "difficult_word_share": 0.0,
             "longest_prose_run": 0,
+            "longest_paragraph": 0,
+            "first_structure_share": 1.0,
             "list_line_share": 0.0,
             "longest_sentences": [],
             "hardest_words": [],
@@ -338,6 +388,8 @@ def score_markdown(md: str) -> dict[str, Any]:
         "longest_sentence_words": int(longest_sentence),
         "difficult_word_share": round(difficult_share, 3),
         "longest_prose_run": longest_prose_run(md),
+        "longest_paragraph": longest_paragraph(md),
+        "first_structure_share": first_structure_share(md),
         "list_line_share": round(list_line_share(md), 3),
         "longest_sentences": longest,
         "hardest_words": hardest,
@@ -490,6 +542,34 @@ def prose_problems(stats: dict[str, Any]) -> list[str]:
             "\"quantified a dollar lift attributable to a machine\" becomes "
             "\"measured what one machine adds\". Keep the sentences long and the "
             f"words plain.{pointer}"
+        )
+
+    from src.editorial_style import active
+
+    paragraph_cap = active().max_paragraph_words
+    longest_para = stats.get("longest_paragraph", 0)
+    if paragraph_cap and _above(longest_para, paragraph_cap):
+        kinds.append("paragraph_long")
+        severity.append(longest_para / paragraph_cap)
+        problems.append(
+            f"One paragraph runs {longest_para} words against a {paragraph_cap}-word "
+            "ceiling. Split it where it changes subject — a paragraph is one "
+            "idea developed, and past this length it is usually two ideas that "
+            "were never separated. Do not shorten the sentences inside it; the "
+            "fix is a paragraph break, not a rewrite."
+        )
+
+    late_by = active().first_structure_by
+    first_at = stats.get("first_structure_share", 0.0)
+    if late_by and first_at > late_by:
+        kinds.append("late_structure")
+        severity.append(first_at / late_by)
+        problems.append(
+            f"The first table, list or quote arrives {round(first_at * 100)}% of "
+            f"the way in, against {round(late_by * 100)}%. Headings alone do not "
+            "break a page — they say a new topic starts. Find the comparison, "
+            "the set of figures or the list of conditions in the opening "
+            "sections and give it the form it already had."
         )
 
     if _above(prose_run, MAX_PROSE_RUN_WORDS):

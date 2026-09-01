@@ -38,6 +38,14 @@ FALLBACK_WORDS = 2000
 #: drafts came in at 4,341, 3,797 and 4,177 against a 2,787-word ceiling — not
 #: because the Writer ignored the target, but because it obeyed two rules whose
 #: product cannot fit inside it.
+def _words_per_section() -> int:
+    """What one section costs, per the active editorial style."""
+    from src.editorial_style import active
+
+    return active().words_per_section
+
+
+#: Kept for callers that read the module constant directly. Style 1's value.
 WORDS_PER_SECTION = 350
 
 #: Past this multiple of the median, extra length stops being a judgement call.
@@ -65,7 +73,7 @@ def resolve(comparable_length: dict | None) -> dict:
         # Handed over as a number rather than a division to perform. The prompt
         # used to say "divide the word target by roughly 350"; a model that
         # cannot count its own words will not hold that quotient either.
-        "sections": max(3, round(median / WORDS_PER_SECTION)),
+        "sections": max(3, round(median / _words_per_section())),
         "measured": measured,
         "sample_size": data.get("sample_size") or 0,
         "positions": [p for p in (data.get("positions") or []) if isinstance(p, int)],
