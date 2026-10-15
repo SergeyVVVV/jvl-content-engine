@@ -13,10 +13,14 @@ tests pin the guards that stop a sales page becoming evidence.
 
 from __future__ import annotations
 
+import io
 import json
 import sys
+import tempfile
 import unittest
+from contextlib import redirect_stderr
 from pathlib import Path
+from unittest import mock
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
@@ -165,6 +169,109 @@ class PromptTests(unittest.TestCase):
 
     def test_finding_nothing_beats_padding_with_weak_sources(self) -> None:
         self.assertIn("Do not pad `findings`", self.prompt)
+
+
+class RunSurvivesTheSchemaTests(unittest.TestCase):
+    """A paid search run must never be thrown away by the schema check.
+
+    On 2026-10-15 a 14-search run was lost because one finding came back with
+    ``"range": null``: validation raised before anything was written or
+    returned, and the searches had to be bought again.
+    """
+
+    def setUp(self) -> None:
+        self.agent = FactResearchAgent()
+        self.agent.api_key = "test-key"
+
+    def _run(self, payload, **kwargs) -> tuple[dict, str]:
+        raw = payload if isinstance(payload, str) else json.dumps(payload)
+        stub = mock.Mock(return_value=(raw, [{"url": "https://a"}], 14))
+        err = io.StringIO()
+        with mock.patch("src.llm_client.chat_with_search", stub), redirect_stderr(err):
+            result = self.agent.run("weekly take", brief=None, **kwargs)
+        return result, err.getvalue()
+
+    def test_a_null_range_is_filled_and_the_run_is_kept(self) -> None:
+        import jsonschema
+
+        payload = {
+            "topic": "weekly take",
+            "findings": [
+                {
+                    "question": "what does a claw machine take?",
+                    "range": None,
+                    "sources": [{"url": "https://a", "figure": "$100", "kind": "operator"}],
+                    "confidence": "high",
+                },
+                finding(["operator"], question="second"),
+            ],
+            "unanswered": [],
+        }
+        result, log = self._run(payload)
+        self.assertEqual(len(result["findings"]), 2)
+        self.assertEqual(
+            result["findings"][0]["range"],
+            {"low": "n/a", "typical": "n/a", "high": "n/a", "unit": "n/a"},
+        )
+        self.assertEqual(result["searches_performed"], 14)
+        schema = json.loads(
+            (REPO_ROOT / "schemas" / "fact_research_schema.json").read_text(encoding="utf-8")
+        )
+        jsonschema.validate(result, schema)
+        self.assertIn("validation: PASSED", log)
+
+    def test_missing_range_keys_and_source_fields_are_defaulted(self) -> None:
+        payload = {
+            "topic": "t",
+            "findings": [{
+                "question": "q",
+                "range": {"low": 10, "unit": "USD"},
+                "sources": [{"title": "untitled"}],
+            }],
+            "unanswered": None,
+        }
+        result, _ = self._run(payload)
+        f = result["findings"][0]
+        self.assertEqual(f["range"], {"low": 10, "typical": "n/a", "high": "n/a", "unit": "USD"})
+        self.assertEqual(f["confidence"], "medium")
+        self.assertEqual(f["sources"][0], {"title": "untitled", "kind": "unknown", "figure": "", "url": ""})
+        self.assertEqual(result["unanswered"], [])
+
+    def test_a_schema_error_normalisation_cannot_fix_warns_and_still_returns(self) -> None:
+        # A sourceless finding violates minItems; nothing can invent a source
+        # for it. The run is still returned, and the log says what is wrong.
+        payload = {
+            "topic": "t",
+            "findings": [finding([], question="no source"), finding(["operator"])],
+            "unanswered": [],
+        }
+        result, log = self._run(payload)
+        self.assertEqual(len(result["findings"]), 2)
+        self.assertIn("schema validation WARNING", log)
+        self.assertIn("findings/0/sources", log)
+
+    def test_the_raw_model_text_is_saved_before_parsing(self) -> None:
+        payload = {"topic": "t", "findings": [], "unanswered": []}
+        with tempfile.TemporaryDirectory() as tmp:
+            debug = Path(tmp) / "nested" / "debug"
+            self._run(payload, debug_dir=debug)
+            self.assertEqual(
+                json.loads((debug / "facts-raw.txt").read_text(encoding="utf-8")), payload
+            )
+            self.assertEqual(
+                json.loads((debug / "facts-pages-seen.json").read_text(encoding="utf-8")),
+                [{"url": "https://a"}],
+            )
+
+    def test_the_raw_text_survives_even_when_parsing_fails(self) -> None:
+        # The dump exists so a run that breaks later can be recovered by hand.
+        with tempfile.TemporaryDirectory() as tmp:
+            with mock.patch.dict("os.environ", {"FACT_RESEARCH_DEBUG_DIR": tmp}):
+                with self.assertRaises(json.JSONDecodeError):
+                    self._run("this is not json")
+            self.assertEqual(
+                (Path(tmp) / "facts-raw.txt").read_text(encoding="utf-8"), "this is not json"
+            )
 
 
 if __name__ == "__main__":
