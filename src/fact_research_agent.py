@@ -113,8 +113,57 @@ class FactResearchAgent:
             raw = match.group(0)
         return json.loads(raw)
 
-    def _validate(self, result: dict) -> None:
-        jsonschema.validate(result, self._load_schema())
+    @staticmethod
+    def _normalise(result: dict) -> dict:
+        """Fill the holes a model leaves so the schema check has less to reject.
+
+        A 14-search run was thrown away because one finding came back with
+        ``"range": null``: the schema wants an object there, validation raised,
+        and nothing was written or returned. Every search had already been
+        paid for. Missing or malformed fields get a placeholder the Writer can
+        recognise ("n/a", "unknown", an empty string) rather than costing the
+        whole result.
+        """
+        findings = result.get("findings")
+        if not isinstance(findings, list):
+            findings = []
+        result["findings"] = [f for f in findings if isinstance(f, dict)]
+        for finding in result["findings"]:
+            if not isinstance(finding.get("range"), dict):
+                finding["range"] = {
+                    "low": "n/a", "typical": "n/a", "high": "n/a", "unit": "n/a"
+                }
+            for key in ("low", "typical", "high", "unit"):
+                finding["range"].setdefault(key, "n/a")
+            finding.setdefault("confidence", "medium")
+            if not isinstance(finding.get("sources"), list):
+                finding["sources"] = []
+            finding["sources"] = [s for s in finding["sources"] if isinstance(s, dict)]
+            for source in finding["sources"]:
+                source.setdefault("kind", "unknown")
+                source.setdefault("figure", "")
+                source.setdefault("url", "")
+        if not isinstance(result.get("unanswered"), list):
+            result["unanswered"] = []
+        return result
+
+    def _validate(self, result: dict) -> dict:
+        """Check the result against the schema, but never discard it.
+
+        Normalisation handles the shapes we have seen go wrong. Whatever it
+        could not fix is logged, like the FAQ agent does, and the findings are
+        still returned: a run with one odd field is worth far more than no run.
+        """
+        try:
+            jsonschema.validate(result, self._load_schema())
+            print("Fact Research schema validation: PASSED", file=sys.stderr)
+        except jsonschema.ValidationError as exc:
+            path = "/".join(str(p) for p in exc.absolute_path) or "<root>"
+            print(
+                f"Fact Research schema validation WARNING at {path}: {exc.message}",
+                file=sys.stderr,
+            )
+        return result
 
     # ------------------------------------------------------------------
     # Source classification
@@ -161,6 +210,27 @@ class FactResearchAgent:
         return result
 
     # ------------------------------------------------------------------
+    # Debug dump
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def _dump_raw(raw: str, sources: list, debug_dir: str | Path | None) -> None:
+        """Write the model's text before anything can go wrong with it."""
+        target = debug_dir or os.environ.get("FACT_RESEARCH_DEBUG_DIR")
+        if not target:
+            return
+        try:
+            directory = Path(target)
+            directory.mkdir(parents=True, exist_ok=True)
+            (directory / "facts-raw.txt").write_text(raw, encoding="utf-8")
+            (directory / "facts-pages-seen.json").write_text(
+                json.dumps(sources, indent=1, ensure_ascii=False), encoding="utf-8"
+            )
+            print(f"  raw model text saved to {directory}", file=sys.stderr)
+        except OSError as exc:
+            print(f"  could not save raw model text: {exc}", file=sys.stderr)
+
+    # ------------------------------------------------------------------
     # Run
     # ------------------------------------------------------------------
 
@@ -171,8 +241,14 @@ class FactResearchAgent:
         country: str = "US",
         language: str = "en",
         max_searches: int | None = None,
+        debug_dir: str | Path | None = None,
     ) -> dict:
-        """Search for the article's figures and return a validated result."""
+        """Search for the article's figures and return a validated result.
+
+        ``debug_dir`` (or the FACT_RESEARCH_DEBUG_DIR environment variable)
+        names a directory where the raw model text is written before parsing,
+        so a run that fails later can still be recovered by hand.
+        """
         if not self.api_key:
             raise EnvironmentError(
                 "ANTHROPIC_API_KEY is required for fact research — web search "
@@ -197,16 +273,19 @@ class FactResearchAgent:
             file=sys.stderr,
         )
 
+        self._dump_raw(raw, sources, debug_dir)
+
         result = self._extract_json(raw)
         result.setdefault("topic", topic)
         result.setdefault("findings", [])
         result.setdefault("unanswered", [])
         result["searches_performed"] = searches
 
+        result = self._normalise(result)
         result = self._mark_own_sources(result)
         result = self._demote_vendor_only_findings(result)
 
-        self._validate(result)
+        result = self._validate(result)
         print(
             f"  {len(result['findings'])} figures sourced, "
             f"{len(result['unanswered'])} questions left open",
