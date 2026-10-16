@@ -217,15 +217,50 @@ class MetadataCopyAgent:
             )
             return []
 
-        long_ones = [h for h in cleaned if len(h) > cls.HIGHLIGHT_MAX_CHARS]
-        if long_ones:
+        # Trimmed, not warned about. The first live run returned all four at
+        # 136-167 characters against a 120 ceiling: the rule is in the prompt
+        # and the model counts characters about as well as it counts its own
+        # words, which is to say not at all. meta_description has been trimmed
+        # deterministically for the same reason since the agent was written —
+        # that same run delivered it at 175 and it was cut to 108.
+        trimmed = [cls._trim_highlight(h) for h in cleaned]
+        over = [h for h in cleaned if len(h) > cls.HIGHLIGHT_MAX_CHARS]
+        if over:
             print(
-                f"Metadata Copy Agent: {len(long_ones)} highlight(s) over "
-                f"{cls.HIGHLIGHT_MAX_CHARS} chars — the site wraps them onto a "
-                "third line.",
+                f"Metadata Copy Agent trimming {len(over)} highlight(s) to "
+                f"{cls.HIGHLIGHT_MAX_CHARS} chars",
                 file=sys.stderr,
             )
-        return cleaned
+        return trimmed
+
+    @classmethod
+    def _trim_highlight(cls, text: str) -> str:
+        """Cut a highlight to the ceiling at a clause or word boundary.
+
+        Never mid-word and never with an ellipsis: the site prints these as
+        finished statements, and a dangling one reads as a bug rather than as a
+        summary. An em dash or a semicolon is the natural place to stop, because
+        what follows one is usually the elaboration rather than the point.
+        """
+        text = text.strip()
+        if len(text) <= cls.HIGHLIGHT_MAX_CHARS:
+            return text
+
+        head = text[: cls.HIGHLIGHT_MAX_CHARS + 1]
+        # The clause break closest to the limit, if there is a usable one.
+        for sep in ("—", " - ", ";", ","):
+            cut = head.rfind(sep)
+            if cut >= cls.HIGHLIGHT_MIN_CHARS:
+                return head[:cut].rstrip(" ,;—-")
+
+        cut = head.rfind(" ")
+        clipped = head[:cut] if cut > 0 else head[: cls.HIGHLIGHT_MAX_CHARS]
+        dangling = {"a", "an", "the", "and", "or", "but", "to", "of", "for",
+                    "with", "in", "on", "at", "that", "than", "is", "are"}
+        words = clipped.split()
+        while words and words[-1].lower().strip(",;") in dangling:
+            words.pop()
+        return " ".join(words).rstrip(" ,;—-")
 
     @classmethod
     def _enforce_limits(cls, out: dict) -> dict:

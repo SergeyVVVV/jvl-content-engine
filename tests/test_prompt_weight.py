@@ -72,8 +72,9 @@ class SplitTests(unittest.TestCase):
 
     def test_every_rule_it_explains_still_exists(self) -> None:
         """The file documents rules; it must not outlive them."""
-        for rule in ("250 to 350 words", "35 words", "350 words unbroken",
-                     "LENGTH TARGET", "length_justification", "one home"):
+        for rule in ("words of prose, and both ends are real", "35 words",
+                     "350 words unbroken", "LENGTH TARGET",
+                     "length_justification", "one home"):
             self.assertIn(rule, PROMPT, rule)
 
     def test_the_evidence_that_was_moved_survived(self) -> None:

@@ -83,6 +83,74 @@ class CountTests(unittest.TestCase):
         self.assertEqual(Meta._clean_highlights(["", "  ", *GOOD[:2]]), [])
 
 
+class TrimmingTests(unittest.TestCase):
+    """The first live run returned all four between 136 and 167 characters.
+
+    The 120-character ceiling is in the prompt, and the model counts characters
+    about as well as it counts its own words. meta_description has been trimmed
+    deterministically since this agent was written, for the same reason: the
+    same run delivered it at 175 and the code cut it to 108.
+    """
+
+    LONG = (
+        "A machine costing $4,250 at $1 per play and 25 plays per day pays for "
+        "itself in roughly 26 weeks of net revenue—a little over six months"
+    )
+
+    def test_a_long_highlight_is_cut_to_the_ceiling(self) -> None:
+        out = Meta._clean_highlights([self.LONG] + GOOD[1:])[0]
+        self.assertLessEqual(len(out), Meta.HIGHLIGHT_MAX_CHARS)
+
+    def test_it_cuts_at_a_clause_rather_than_mid_word(self) -> None:
+        out = Meta._clean_highlights([self.LONG] + GOOD[1:])[0]
+        self.assertTrue(self.LONG.startswith(out), out)
+        self.assertFalse(out.endswith(("—", "-", ",", ";", " ")))
+
+    def test_the_em_dash_elaboration_is_what_goes(self) -> None:
+        """What follows a dash is usually the gloss, not the point."""
+        text = ("Dwell time without a task drives the play rate—neighbourhood pubs "
+                "and taprooms hit the base case; quiet restaurants fall well below it")
+        out = Meta._clean_highlights([text] + GOOD[1:])[0]
+        self.assertNotIn("quiet restaurants", out)
+        self.assertIn("Dwell time", out)
+
+    def test_no_ellipsis_is_ever_appended(self) -> None:
+        """The site prints these as finished statements."""
+        out = Meta._clean_highlights([self.LONG] + GOOD[1:])[0]
+        self.assertNotIn("…", out)
+        self.assertFalse(out.endswith("..."))
+
+    def test_it_does_not_end_on_a_dangling_word(self) -> None:
+        """A cut landing on "of the" leaves the line hanging mid-thought."""
+        text = ("A payback model is only as honest as the inputs someone is actually "
+                "willing to state and then defend in front of the people who have to "
+                "live with the answer")
+        out = Meta._clean_highlights([text] + GOOD[1:])[0]
+        self.assertLess(len(out), len(text))
+        self.assertNotIn(out.split()[-1].lower(),
+                         {"the", "of", "a", "an", "and", "to", "for", "with", "in"})
+
+    def test_a_line_inside_the_ceiling_is_never_touched(self) -> None:
+        """Even one ending oddly: that is the model's output, not our cut."""
+        short = "A payback model is only as honest as the inputs someone is willing to"
+        self.assertEqual(Meta._trim_highlight(short), short)
+
+    def test_a_short_one_is_left_alone(self) -> None:
+        self.assertEqual(Meta._clean_highlights(GOOD), GOOD)
+
+    def test_the_measured_run_comes_back_inside_the_ceiling(self) -> None:
+        import glob, json
+
+        files = glob.glob(str(REPO_ROOT / "outputs/s1/metadata/*.json"))
+        if not files:
+            self.skipTest("run output not present")
+        raw = json.load(open(files[0])).get("highlights") or []
+        if not raw:
+            self.skipTest("no highlights recorded")
+        for h in Meta._clean_highlights(raw):
+            self.assertLessEqual(len(h), Meta.HIGHLIGHT_MAX_CHARS, h)
+
+
 class PayloadTests(unittest.TestCase):
     MD = "# T\n\nIntro paragraph that the site needs above the first heading.\n\n## One\n\nBody.\n"
 

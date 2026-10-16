@@ -126,7 +126,9 @@ class SectionCeilingTests(unittest.TestCase):
     """The rule that was dropped, and the reason it existed."""
 
     def test_the_section_length_rule_has_both_ends_again(self) -> None:
-        says(self, "250 to 350 words of prose, and both ends are real")
+        """The numbers come from the active style now, the rule does not."""
+        says(self, "words of prose, and both ends are real")
+        says(self, "{SECTION_MIN} to {SECTION_MAX}")
 
     def test_the_floor_alone_is_named_as_the_cause(self) -> None:
         """The prompt keeps the reason in one clause; the file keeps the evidence."""

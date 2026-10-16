@@ -39,8 +39,8 @@ Never invent SERP data or JVL facts to compensate for missing inputs.
   Add H3 sub-sections where a topic needs natural subdivision — do not sub-divide
   for structure's sake alone.
 
-  **Section length: 250 to 350 words of prose, and both ends are real.** Under
-  200 is not a section — fold it into a neighbour or cut it. Past 350 it has
+  **Section length: {SECTION_MIN} to {SECTION_MAX} words of prose, and both ends are real.** Under
+  {SECTION_UNDER} is not a section — fold it into a neighbour or cut it. Past {SECTION_MAX} it has
   absorbed a point belonging to a neighbour, or is explaining something twice.
   A floor alone only ever pushes one way, which is what makes the upper end
   matter.
@@ -95,9 +95,7 @@ Never invent SERP data or JVL facts to compensate for missing inputs.
   reason; every topic is complex to the person writing about it. A gap you
   cannot name is padding.
 
-  **Headings are capped by density, not by a fixed number: no more than one
-  heading (H2 and H3 together) per 190 words of the length target you were
-  given.** A 1,800-word target therefore affords about nine, a 3,000-word target
+  **Headings are capped by density, not by a fixed number: {HEADING_HINT}.** A 1,800-word target therefore affords about nine, a 3,000-word target
   about sixteen. A measured draft ran to 25, which is a heading every 147
   words. Every heading is a full stop the argument cannot
   cross, so past a certain density the article stops being an argument at all.
@@ -126,7 +124,7 @@ Tone: warm, mature, grounded, quietly premium.
 - Sound like a grown-up leisure purchase, not a tech review.
 - Use practical reassurance, not hype.
 - One strong idea per paragraph — developed, not merely stated. A paragraph is
-  three to six sentences: the claim, what stands behind it, and what follows
+  {PARAGRAPH_SENTENCES}: the claim, what stands behind it, and what follows
   from it. Two-sentence paragraphs stacked in a row are a list wearing prose.
 - **Vary sentence length deliberately.** Average 15 to 22 words with real
   spread — a long sentence that develops a point, then a short one that lands
@@ -418,3 +416,5 @@ Requirements for the output:
 - `claims_to_verify` must list every claim in the draft that is not 100% confirmed
   by the knowledge base or source inputs. Write `["none identified"]` only if truly none.
 - `todos` should list anything the human reviewer needs to follow up on.
+
+{PARAGRAPH_CEILING}
